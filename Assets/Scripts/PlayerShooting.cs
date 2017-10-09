@@ -8,6 +8,7 @@ public class PlayerShooting : MonoBehaviour {
     public Transform bulletSpawn;
     private float thrust, startPowerTime, angleSpeed, maxPowerSeconds;
     private int maxPower, maxAngle, minPower;
+    private bool shoot;
 
     // Use this for initialization
     void Start()
@@ -19,52 +20,24 @@ public class PlayerShooting : MonoBehaviour {
         minPower = 3;
         angleSpeed = 0.6f;
         maxPowerSeconds = 3.5f;
+        shoot = false;
 
     }
 
-    //// FixedUpdate call
-    //void FixedUpdate () {
+    // FixedUpdate call
+    void FixedUpdate()
+    {
 
+        // If shoot pressed then fire bullet
+        if (shoot)
+        {
+            Fire();
+            // Shoot done
+            shoot = false;
+        }
 
-    //       // Check fire
-    //       if (Input.GetKeyDown(KeyCode.Space))
-    //       {
+    }
 
-    //           // Perform the fire
-    //           Fire();
-    //       }
-
-    //       // Check rotation of the gun (upwards)
-    //       if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKey(KeyCode.UpArrow))
-    //       {
-    //           var zAngle = gunBase.transform.localEulerAngles.z;
-
-    //           if ((!negativeAngle && zAngle < 50) || negativeAngle)
-    //           {
-    //               gunBase.transform.Rotate(0, 0, 1);
-
-    //               if (negativeAngle && zAngle >= 359)
-    //                   negativeAngle = false;
-    //           }
-    //       }
-
-    //       // Check rotation of the gun (downwards)
-    //       if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKey(KeyCode.DownArrow))
-    //       {
-    //           var zAngle = gunBase.transform.localEulerAngles.z;
-
-    //           //print(zAngle + "   " + negativeAngle);
-
-    //           if ((negativeAngle && (zAngle > 310 || zAngle < 0)) || !negativeAngle)
-    //           {
-    //               gunBase.transform.Rotate(0, 0, -1);
-
-    //               if (!negativeAngle && zAngle < 1 && zAngle >= 0)
-    //                   negativeAngle = true;
-    //           }
-    //       }
-
-    //   }
 
 
     // Update call
@@ -83,7 +56,7 @@ public class PlayerShooting : MonoBehaviour {
         {
             // Time when space pressed
             thrust = Mathf.Min(maxPower * ((Time.time - startPowerTime) / maxPowerSeconds) + minPower, maxPower);
-            Fire();
+            shoot = true;
         }
 
         // Check rotation of the gun (upwards)
