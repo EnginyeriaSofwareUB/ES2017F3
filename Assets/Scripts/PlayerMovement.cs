@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		var horizontal = Input.GetAxis ("Horizontal") * 5f;
 
 		rb.velocity = new Vector3 (horizontal, rb.velocity.y);
