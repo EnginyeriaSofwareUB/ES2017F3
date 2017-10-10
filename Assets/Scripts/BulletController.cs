@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour {
 
+    private float bulletDamage;
+
 	// Use this for initialization
 	void Start () {
-		
+
+        // Init variables
+        bulletDamage = 20f;
+
 	}
 	
 	// Update is called once per frame
@@ -23,13 +28,15 @@ public class BulletController : MonoBehaviour {
             Destroy(col.gameObject);
         }
 
-        if (col.gameObject.tag == "character")
+        // Check Player collision
+        if (col.gameObject.tag == "Player")
         {
             // Call the 'damage' function of the character collided
-
+            col.gameObject.GetComponent<PlayerController>().Damage(bulletDamage);
+            Destroy(this.gameObject);
         }
 
         // Destroy the bullet
-        Destroy(this.gameObject);
+        // Destroy(this.gameObject);
     }
 }

@@ -93,9 +93,11 @@ public class PlayerShooting : MonoBehaviour {
             bulletSpawn.rotation);
 
         // Add force to the bullet (vector = bulletPos - gunPos)
-        bullet.GetComponent<Rigidbody>().AddForce((bullet.transform.position - bulletGun.transform.position) * thrust, ForceMode.Impulse);
+        var shootingVector = (bullet.transform.position - bulletGun.transform.position);
+        shootingVector.z = 0;
+        bullet.GetComponent<Rigidbody>().AddForce(shootingVector.normalized * thrust, ForceMode.Impulse);
 
         // Destroy the bullet after 2 seconds
-        Destroy(bullet, 2.0f);
+        Destroy(bullet, 5.0f);
     }
 }

@@ -55,9 +55,10 @@ GameObject:
   - component: {fileID: 136858779592090904}
   - component: {fileID: 23784245509656606}
   - component: {fileID: 114233442087195366}
+  - component: {fileID: 114464535331402948}
   m_Layer: 0
   m_Name: Player_Shooting_Test
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +102,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1274289695161028}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -1.88, y: 2.82, z: 1.79}
+  m_LocalPosition: {x: -1.88, y: -1.06, z: 1.79}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4887178109439176}
@@ -115,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1270613876117852}
   m_LocalRotation: {x: 0.5, y: 0.5, z: -0.5, w: 0.5}
-  m_LocalPosition: {x: 0.01, y: -0.93, z: -0.08}
+  m_LocalPosition: {x: -0, y: -0.9, z: 1.76}
   m_LocalScale: {x: 8.333338, y: 8.333334, z: 2.2222233}
   m_Children: []
   m_Father: {fileID: 4194607238625674}
@@ -268,6 +269,20 @@ MonoBehaviour:
   bulletGun: {fileID: 1236187477825298}
   gunBase: {fileID: 1539076118593268}
   bulletSpawn: {fileID: 4700392090652134}
+--- !u!114 &114464535331402948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1274289695161028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009ad854c8e63854c8c41be26136e41e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  maxHealth: 100
+  health: 0
 --- !u!135 &135899007796722668
 SphereCollider:
   m_ObjectHideFlags: 1
