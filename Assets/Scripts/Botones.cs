@@ -14,6 +14,7 @@ public class Botones : MonoBehaviour {
 
 	void BotonSalir () {
 		Application.Quit();
+
 	}
 }
 
