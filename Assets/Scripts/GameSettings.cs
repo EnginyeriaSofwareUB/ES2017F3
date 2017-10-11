@@ -9,7 +9,7 @@ public class GameSettings {
 	public int antialiasing;
 	public int vSync;
 	public int resolutionIndex;
-	public float musicVolumne;
+	public float musicVolume;
 		
 
 }
