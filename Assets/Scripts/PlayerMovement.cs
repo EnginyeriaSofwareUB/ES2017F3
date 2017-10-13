@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Check movement Inputs
 		horizontal = Input.GetAxis ("Horizontal") * 5f;
-	    if (Input.GetButtonDown("Jump"))
+	    if (Input.GetKeyDown(KeyCode.W))
 	        jump = true;
 
 	}
@@ -32,7 +32,8 @@ public class PlayerMovement : MonoBehaviour {
         rb.velocity = new Vector3(horizontal, rb.velocity.y);
 
         // If on the ground and jump is pressed...
-        if (Physics.Raycast(transform.position, -Vector3.up, k_GroundRayLength) && jump)
+        var pos = transform.position + Vector3.up;
+        if (Physics.Raycast(pos, -Vector3.up, k_GroundRayLength) && jump)
         {
             // ... add force in upwards.
             rb.AddForce(Vector3.up * m_JumpPower, ForceMode.Impulse);

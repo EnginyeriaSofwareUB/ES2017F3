@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: f56f0c9914e341c4cab0cf67f465f7d2
-timeCreated: 1507837728
+guid: 29806cc7198df1f4f853bdaa21b07c55
+timeCreated: 1507920067
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -43,15 +43,15 @@ ModelImporter:
     3300012: Pupil_right
     3300014: Pupul_left
     3300016: Torso
-    4300000: Hand_right
-    4300002: Mouth
-    4300004: Pupil_right
-    4300006: Pupul_left
-    4300008: Eye_left
-    4300010: Eye_Right
-    4300012: Head
-    4300014: Hand_Left
-    4300016: Torso
+    4300000: Hand_Left
+    4300002: Hand_right
+    4300004: Torso
+    4300006: Mouth
+    4300008: Pupil_right
+    4300010: Pupul_left
+    4300012: Eye_left
+    4300014: Eye_Right
+    4300016: Head
     6400000: Eye_left
     6400002: Eye_Right
     6400004: Hand_Left
