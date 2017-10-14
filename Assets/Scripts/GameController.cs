@@ -13,15 +13,16 @@ public class GameController : MonoBehaviour {
 	};
 
 	public gameStates current = gameStates.none;
-	public GameObject activePlayer = null;
 
-	[Header("Testing Variables Here")]
-	public string testPlayerName;
+    [Header("Testing Variables Here")]
+    public GameObject activePlayer = null;
+
+	
 
 	// Use this for initialization
 	void Start () {
 		//TODO: Set the activePlayer to the Main Player.
-		activePlayer = GameObject.Find(testPlayerName);	
+		//activePlayer = GameObject.Find(testPlayerName);	
 	}
 	
 	// Update is called once per frame

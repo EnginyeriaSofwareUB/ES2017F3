@@ -12,13 +12,16 @@ public class FollowingCamera : MonoBehaviour {
 	void Start () {
 		// Acceso al Controlador y guardamos la referencia al objeto Jugador.
 		controller = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
-		target = controller.activePlayer;
 
-		offset = transform.position - target.transform.position;
+        target = controller.activePlayer;
+        if (target)
+            offset = transform.position - target.transform.position;
+		
 	}
 	
 	// LateUpdate is called once per frame
 	void LateUpdate () {
-		transform.position = target.transform.position + offset;
+        if(target)
+		    transform.position = target.transform.position + offset;
 	}
 }
