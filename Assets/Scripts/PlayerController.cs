@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
+    GameController gameControl;
+
     public enum PlayerState //jumping i falling poder son redundants, ens poden ajudar a fer que al caure el vent influeixi en el moviment que fa el jugador.
     {
         none,
@@ -17,45 +19,69 @@ public class PlayerController : MonoBehaviour {
     public float maxHealth = 100f;
     public float health;
 
+
+    [Space(5)]
+    [Header("TESTIN")]
+    public bool mainPlayer = false;
+
+    //Components
+    Animator animator;
+
     private void Awake()
     {
+        //gameControl = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
+        //if (mainPlayer)
+            //gameControl.activePlayer = this.gameObject;
+
         health = maxHealth;
         currentState = PlayerState.none;
+
+        
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Use this for initialization
     void Start () {
-		
+        
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (health <= 0f)
-            Death();
-	}
+
+
+        /*animations*/
+
+    }
 
 
 
     /*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */
     public void Damage(float value)
     {
+        animator.SetTrigger("hurt");
+
         if (health - value > 0f)
             health = health - value;
         else
-            Death();
+            Dying();
     }
 
 
-    void Death()
+    void Dying()
     {
         //TO DO: Play death animation & sound
         //TO DO: Obtenir/Comunicarse amb el controlador, d'alla treure quans jugadors per cada equip estan vius, si hi han 0 vius, el gameState del controlador es canvia a GameOver i al pasar el check s'executa la rutina de gameover
         currentState = PlayerState.dying;
-
-        Debug.Log(this.name + " dies.");
-        Destroy(this.gameObject); //Quan hi hagi animacions, la mort es cridara desde la funcio InstantDeath, 
-                                  //aquesta funcio es per si es vol executar codi quan estigui morint i 
-                                  //per no destruir el objecte abans que la animacio de mort acabi
+        animator.SetTrigger("death");
     }
+
+    public void Death()
+    {
+        Debug.Log(this.name + " dies.");
+        Destroy(this.gameObject);
+    }
+
+
 }
