@@ -42,13 +42,13 @@ public class PlayerShooting : MonoBehaviour {
 
 
         // Check fire
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             // Time when space pressed
             startPowerTime = Time.time;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             // Time when space pressed
             thrust = Mathf.Min(maxPower * ((Time.time - startPowerTime) / maxPowerSeconds) + minPower, maxPower);
@@ -59,7 +59,7 @@ public class PlayerShooting : MonoBehaviour {
         if (gunBase.name == "Gun Base") {
 
             // Check rotation of the gun (upwards)
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
             {
                 var zAngle = gunBase.transform.localEulerAngles.z;
 
@@ -70,7 +70,7 @@ public class PlayerShooting : MonoBehaviour {
             }
 
             // Check rotation of the gun (downwards)
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
             {
                 var zAngle = gunBase.transform.localEulerAngles.z;
 
@@ -83,7 +83,7 @@ public class PlayerShooting : MonoBehaviour {
 
         else if (gunBase.name == "Cannon Base") {
             // Check rotation of the gun (upwards)
-            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKey(KeyCode.UpArrow))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
             {
                 var xAngle = gunBase.transform.localEulerAngles.x;
 
@@ -94,7 +94,7 @@ public class PlayerShooting : MonoBehaviour {
             }
 
             // Check rotation of the gun (downwards)
-            if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKey(KeyCode.DownArrow))
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
             {
                 var xAngle = gunBase.transform.localEulerAngles.x;
 

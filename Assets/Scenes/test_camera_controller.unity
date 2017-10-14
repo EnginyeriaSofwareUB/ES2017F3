@@ -136,8 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   current: 4
-  activePlayer: {fileID: 0}
-  testPlayerName: Player
+  activePlayer: {fileID: 1876036444}
 --- !u!4 &264585867
 Transform:
   m_ObjectHideFlags: 0
