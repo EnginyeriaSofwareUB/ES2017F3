@@ -960,3 +960,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 54469496262347766}
+  m_JumpPower: 10
+  k_GroundRayLength: 1.2
