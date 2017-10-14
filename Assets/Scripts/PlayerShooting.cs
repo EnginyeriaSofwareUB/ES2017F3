@@ -6,8 +6,9 @@ public class PlayerShooting : MonoBehaviour {
 
     public GameObject bulletPrefab, bulletGun, gunBase;
     public Transform bulletSpawn;
-    private float thrust, startPowerTime, angleSpeed, maxPowerSeconds;
-    private int maxPower, maxAngle, minPower;
+    private float thrust, startPowerTime;
+    public float angleSpeed, maxPowerSeconds;
+    public int maxPower, minPower, maxAngle;
     private bool shoot;
 
     // Use this for initialization
@@ -15,11 +16,6 @@ public class PlayerShooting : MonoBehaviour {
     {
 
         // Init variables
-        maxPower = 40;
-        maxAngle = 50;
-        minPower = 3;
-        angleSpeed = 0.6f;
-        maxPowerSeconds = 3.5f;
         shoot = false;
 
     }
@@ -46,38 +42,66 @@ public class PlayerShooting : MonoBehaviour {
 
 
         // Check fire
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             // Time when space pressed
             startPowerTime = Time.time;
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             // Time when space pressed
             thrust = Mathf.Min(maxPower * ((Time.time - startPowerTime) / maxPowerSeconds) + minPower, maxPower);
             shoot = true;
         }
 
-        // Check rotation of the gun (upwards)
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKey(KeyCode.UpArrow))
-        {
-            var zAngle = gunBase.transform.localEulerAngles.z;
 
-            if (zAngle % 90 < maxAngle || 360 - zAngle < maxAngle)
+        if (gunBase.name == "Gun Base") {
+
+            // Check rotation of the gun (upwards)
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
             {
-                gunBase.transform.Rotate(0, 0, angleSpeed);
+                var zAngle = gunBase.transform.localEulerAngles.z;
+
+                if (zAngle % 90 < maxAngle || 360 - zAngle < maxAngle)
+                {
+                    gunBase.transform.Rotate(0, 0, angleSpeed);
+                }
+            }
+
+            // Check rotation of the gun (downwards)
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
+            {
+                var zAngle = gunBase.transform.localEulerAngles.z;
+
+                if (360 - zAngle < maxAngle || zAngle <= (maxAngle + 1))
+                {
+                    gunBase.transform.Rotate(0, 0, -angleSpeed);
+                }
             }
         }
 
-        // Check rotation of the gun (downwards)
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKey(KeyCode.DownArrow))
-        {
-            var zAngle = gunBase.transform.localEulerAngles.z;
-
-            if (360 - zAngle < maxAngle || zAngle <= (maxAngle + 1))
+        else if (gunBase.name == "Cannon Base") {
+            // Check rotation of the gun (upwards)
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
             {
-                gunBase.transform.Rotate(0, 0, -angleSpeed);
+                var xAngle = gunBase.transform.localEulerAngles.x;
+
+                if (360 - xAngle < maxAngle || xAngle <= (maxAngle + 1))
+                {
+                    gunBase.transform.Rotate(-angleSpeed, 0, 0);
+                }
+            }
+
+            // Check rotation of the gun (downwards)
+            if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
+            {
+                var xAngle = gunBase.transform.localEulerAngles.x;
+
+                if (xAngle % 90 < maxAngle || 360 - xAngle < maxAngle)
+                {
+                    gunBase.transform.Rotate(angleSpeed, 0, 0);
+                }
             }
         }
 
@@ -93,11 +117,11 @@ public class PlayerShooting : MonoBehaviour {
             bulletSpawn.rotation);
 
         // Add force to the bullet (vector = bulletPos - gunPos)
-        var shootingVector = (bullet.transform.position - bulletGun.transform.position);
+        var shootingVector = (bullet.transform.position - gunBase.transform.position);
         shootingVector.z = 0;
         bullet.GetComponent<Rigidbody>().AddForce(shootingVector.normalized * thrust, ForceMode.Impulse);
 
-        // Destroy the bullet after 2 seconds
-        Destroy(bullet, 5.0f);
+        // Destroy the bullet after 2.5 seconds
+        Destroy(bullet, 2.5f);
     }
 }

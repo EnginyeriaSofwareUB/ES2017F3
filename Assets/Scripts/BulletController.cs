@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour {
 
-    private float bulletDamage;
+    public float bulletDamage;
 
 	// Use this for initialization
 	void Start () {
 
         // Init variables
-        bulletDamage = 20f;
 
 	}
 	
