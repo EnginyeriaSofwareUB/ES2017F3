@@ -27,10 +27,10 @@ public class JetpackController : MonoBehaviour {
 				var d = (newPos - transform.position).normalized;
 
 				// Speed is proportional to distance
-				var speed = Vector3.Distance (newPos, transform.position);
+				//var speed = Vector3.Distance (newPos, transform.position);
 
 				// Move the player 
-				GetComponent<Rigidbody>().AddForce(d*speed*75, ForceMode.Impulse);
+				GetComponent<Rigidbody>().AddForce(d*200, ForceMode.Impulse);
 			}
 		}
 	}
