@@ -374,6 +374,11 @@ MonoBehaviour:
   bulletGun: {fileID: 1687135765309158}
   gunBase: {fileID: 1529315988524668}
   bulletSpawn: {fileID: 4874709116104648}
+  angleSpeed: 0.6
+  maxPowerSeconds: 3.5
+  maxPower: 40
+  minPower: 3
+  maxAngle: 48
 --- !u!114 &114708574366113736
 MonoBehaviour:
   m_ObjectHideFlags: 1
