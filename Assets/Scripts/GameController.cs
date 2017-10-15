@@ -42,6 +42,11 @@ public class GameController : MonoBehaviour {
 		changeTurn();
 	}
 
+	void OnShoot() {
+		// disable shooting
+		activePlayer.GetComponent<PlayerShooting>().enabled = false;
+	}
+
 	void changeTurn() {
 		// disable movement and firing to the previous player
 		activePlayer.GetComponent<PlayerMovement>().enabled = false;
@@ -49,6 +54,8 @@ public class GameController : MonoBehaviour {
 
 		// point to the next player
 		turnId = (turnId + 1) % players.Length;
+		// FIXME @rafa: this dummy assignment will lead weird bugs
+		// TODO: pass to next plater with a better way
 
 		if (players.Length < 2) {
 			current = gameStates.gameOver;
@@ -59,6 +66,8 @@ public class GameController : MonoBehaviour {
 		activePlayer.GetComponent<PlayerMovement>().enabled = true;
 		// enable firing shoots
 		activePlayer.GetComponent<PlayerShooting>().enabled = true;
+
+		activePlayer.GetComponent<PlayerShooting>().shootEvent.AddListener(OnShoot);
 
 		// this turn expires in 10 seconds
 		turnRemainingTime = 10.0f;
