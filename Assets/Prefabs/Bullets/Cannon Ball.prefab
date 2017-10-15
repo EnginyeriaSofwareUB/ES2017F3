@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 64310090604898186}
   - component: {fileID: 54042652231621044}
   - component: {fileID: 114209226152167368}
+  - component: {fileID: 136423719383820388}
   m_Layer: 0
   m_Name: Cannon Ball
   m_TagString: Untagged
@@ -124,3 +125,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletDamage: 25
+--- !u!136 &136423719383820388
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253381899178622}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 6.11
+  m_Height: 19.97
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
