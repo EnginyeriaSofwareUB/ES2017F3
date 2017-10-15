@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerShooting : MonoBehaviour {
 
@@ -11,12 +12,17 @@ public class PlayerShooting : MonoBehaviour {
     public int maxPower, minPower, maxAngle;
     private bool shoot;
 
+    public UnityEvent shootEvent; 
+
     // Use this for initialization
     void Start()
     {
 
         // Init variables
         shoot = false;
+
+        if (shootEvent == null)
+            shootEvent = new UnityEvent();
 
     }
 
@@ -107,8 +113,9 @@ public class PlayerShooting : MonoBehaviour {
 
     }
 
-    void Fire()
-    {
+    void Fire() {
+        // notify all listenrs of this shoot
+        if (shootEvent != null) shootEvent.Invoke();
 
         // Create the Bullet from the Bullet Prefab
         var bullet = (GameObject)Instantiate(
