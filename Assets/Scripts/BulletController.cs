@@ -6,6 +6,9 @@ public class BulletController : MonoBehaviour {
 
     public float bulletDamage;
 
+	// It is initialized here in order to prevent a trigger before Start function
+	private List<GameObject> listTrigger = new List<GameObject> ();
+
 	// Use this for initialization
 	void Start () {
 
@@ -22,9 +25,14 @@ public class BulletController : MonoBehaviour {
     void OnCollisionEnter(Collision col)
     {
         // Check DesctructibleCube collision
-        if (col.gameObject.tag == "DestructibleCube")
-        {
-            Destroy(col.gameObject);
+
+		// 
+		if (col.gameObject.tag == "DestructibleCube"){
+
+			// Destroy all the blocks inside the trigger
+			foreach (GameObject g in listTrigger) {
+				Destroy (g);
+			}
         }
 
         // Check Player collision
@@ -36,6 +44,24 @@ public class BulletController : MonoBehaviour {
         }
 
         // Destroy the bullet
-        // Destroy(this.gameObject);
+        Destroy(this.gameObject);
     }
+
+	// Check for blocks to destroy
+	void OnTriggerEnter(Collider col){		
+
+		// Add all the blocks inside the trigger
+		if (col.gameObject.tag=="DestructibleCube" && !listTrigger.Contains (col.gameObject)) {
+			listTrigger.Add (col.gameObject);
+		}
+	}
+
+	// Check for blocks to not destroy
+	void OnTriggerExit(Collider col){		
+
+		// Remove all the blocks that exit the trigger
+		if (col.gameObject.tag=="DestructibleCube" && listTrigger.Contains (col.gameObject)) {
+			listTrigger.Remove (col.gameObject);
+		}
+	}
 }
