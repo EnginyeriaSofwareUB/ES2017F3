@@ -22,16 +22,18 @@ public class FollowingCamera : MonoBehaviour {
 		controller = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
 		camera = GetComponent<Camera>();
 			
+
+	}
+	
+	// LateUpdate is called once per frame
+	void LateUpdate () {
 		// Initial position of the Camera based on activePlayer Position. Initial set of 'offset'.
         target = controller.activePlayer;
 		if (target) {
 			transform.position = new Vector3 (target.transform.position.x, (target.transform.position.y + 2), transform.position.z);
 			offset = transform.position - target.transform.position;
 		}
-	}
-	
-	// LateUpdate is called once per frame
-	void LateUpdate () {
+
 		if (target) {
 
 			// Camera Smooth Damping for a nicer follow.
