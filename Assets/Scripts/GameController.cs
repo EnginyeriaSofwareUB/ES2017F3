@@ -36,9 +36,11 @@ public class GameController : MonoBehaviour {
 			player.GetComponent<PlayerMovement>().enabled = false;
 			// disable firing shoots
 			player.GetComponent<PlayerShooting>().enabled = false;
-		}
+            // attach listener to shootEvent
+            player.GetComponent<PlayerShooting>().shootEvent.AddListener(OnShoot);
+        }
 
-		turnId = -1;
+        turnId = -1;
 		changeTurn();
 	}
 
@@ -66,8 +68,6 @@ public class GameController : MonoBehaviour {
 		activePlayer.GetComponent<PlayerMovement>().enabled = true;
 		// enable firing shoots
 		activePlayer.GetComponent<PlayerShooting>().enabled = true;
-
-		activePlayer.GetComponent<PlayerShooting>().shootEvent.AddListener(OnShoot);
 
 		// this turn expires in 10 seconds
 		turnRemainingTime = 10.0f;
