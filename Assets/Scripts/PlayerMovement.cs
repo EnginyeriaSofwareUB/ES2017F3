@@ -21,7 +21,6 @@ public class PlayerMovement : MonoBehaviour {
 
         // Check movement Inputs
 		horizontal = Input.GetAxis ("Horizontal") * 5f;
-        Debug.Log(horizontal);
 	    if (Input.GetKeyDown(KeyCode.Space))
 	        jump = true;
 

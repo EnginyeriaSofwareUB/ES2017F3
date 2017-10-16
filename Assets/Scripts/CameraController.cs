@@ -32,6 +32,8 @@ public class CameraController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        // Update target
+        f.target = controller.activePlayer; //TODO: Desde el controler, al canvi de torn es pot canviar el active player del following camera; evitem accedir a cada frame
 
 		// Pressing Tab Key makes lock/unlock character
 		if (Input.GetKeyDown(KeyCode.Tab)) {

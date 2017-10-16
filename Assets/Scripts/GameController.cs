@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -13,14 +14,19 @@ public class GameController : MonoBehaviour {
 	};
 
 	public gameStates current = gameStates.none;
+    [Header("Canvas Objects")]
+    public Text turnTimerText;
+
 
     [Header("Testing Variables Here")]
     public GameObject activePlayer = null;
 	public GameObject[] players;
 
+    [Header("Turns")]
 	// points to the current active playe in the players index
 	public int turnId;
-	// in seconds
+    // in seconds
+    public float turnTime = 10.0f;
 	public float turnRemainingTime;
 
 	// Use this for initialization
@@ -32,6 +38,7 @@ public class GameController : MonoBehaviour {
 		players = GameObject.FindGameObjectsWithTag("Player");
 		// initiate
 		foreach (GameObject player in players) {
+            Debug.Log(player);
 			// disable movement
 			player.GetComponent<PlayerMovement>().enabled = false;
 			// disable firing shoots
@@ -64,13 +71,14 @@ public class GameController : MonoBehaviour {
 		}
 
 		activePlayer = players[turnId];
+        Debug.Log("Now active player is: " + activePlayer);
 		// enable movement
 		activePlayer.GetComponent<PlayerMovement>().enabled = true;
 		// enable firing shoots
 		activePlayer.GetComponent<PlayerShooting>().enabled = true;
 
 		// this turn expires in 10 seconds
-		turnRemainingTime = 10.0f;
+		turnRemainingTime = turnTime;
 	}
 	
 	// Update is called once per frame
@@ -79,5 +87,21 @@ public class GameController : MonoBehaviour {
 		if(turnRemainingTime < 0) {
 			changeTurn();
 		}
+
+
+        UpdateCanvas();
 	}
+
+    void UpdateCanvas()
+    {
+        if(turnRemainingTime <= turnTime * 0.2f)
+        {
+            turnTimerText.color = Color.red;
+        }
+        else
+        {
+            turnTimerText.color = Color.blue;
+        }
+        turnTimerText.text = "Remaining time: "+turnRemainingTime.ToString();
+    }
 }
