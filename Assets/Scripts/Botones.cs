@@ -8,7 +8,7 @@ public class Botones : MonoBehaviour {
 
 
 	public void LoadScene() {
-		Application.LoadLevel("BasicShooting_Test");
+		Application.LoadLevel("Test_Game 1");
 	}
 	
 
