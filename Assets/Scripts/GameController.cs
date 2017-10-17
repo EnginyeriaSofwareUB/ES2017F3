@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
@@ -20,7 +22,7 @@ public class GameController : MonoBehaviour {
 
     [Header("Testing Variables Here")]
     public GameObject activePlayer = null;
-	public GameObject[] players;
+	public List<GameObject> players;
 
     [Header("Turns")]
 	// points to the current active playe in the players index
@@ -35,7 +37,7 @@ public class GameController : MonoBehaviour {
 		//activePlayer = GameObject.Find(testPlayerName);	
 
 		// retrieve players
-		players = GameObject.FindGameObjectsWithTag("Player");
+		players = GameObject.FindGameObjectsWithTag("Player").ToList();
 		// initiate
 		foreach (GameObject player in players) {
             Debug.Log(player);
@@ -45,6 +47,8 @@ public class GameController : MonoBehaviour {
 			player.GetComponent<PlayerShooting>().enabled = false;
             // attach listener to shootEvent
             player.GetComponent<PlayerShooting>().shootEvent.AddListener(OnShoot);
+            // attach listener to deathEvent
+            player.GetComponent<PlayerController>().deathEvent.AddListener(OnDeath);
         }
 
         turnId = -1;
@@ -56,29 +60,47 @@ public class GameController : MonoBehaviour {
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
 	}
 
-	void changeTurn() {
+    void OnDeath(int playerId) {
+        // Delete from players dead player
+        players.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
+    }
+
+
+    void changeTurn() {
 		// disable movement and firing to the previous player
 		activePlayer.GetComponent<PlayerMovement>().enabled = false;
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
 
 		// point to the next player
-		turnId = (turnId + 1) % players.Length;
+		turnId = (turnId + 1) % players.Count;
 		// FIXME @rafa: this dummy assignment will lead weird bugs
 		// TODO: pass to next plater with a better way
 
-		if (players.Length < 2) {
-			current = gameStates.gameOver;
-		}
+	    if (players.Count < 2) {
+            // Game finished
 
-		activePlayer = players[turnId];
-        Debug.Log("Now active player is: " + activePlayer);
-		// enable movement
-		activePlayer.GetComponent<PlayerMovement>().enabled = true;
-		// enable firing shoots
-		activePlayer.GetComponent<PlayerShooting>().enabled = true;
+            Debug.Log("Game has ended!");
 
-		// this turn expires in 10 seconds
-		turnRemainingTime = turnTime;
+            current = gameStates.gameOver;
+
+	        //Return to main menu
+	        SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
+	    }
+
+        else {
+            // Game continues
+
+            activePlayer = players[turnId];
+            Debug.Log("Now active player is: " + activePlayer);
+            // enable movement
+            activePlayer.GetComponent<PlayerMovement>().enabled = true;
+            // enable firing shoots
+            activePlayer.GetComponent<PlayerShooting>().enabled = true;
+
+            // this turn expires in 10 seconds
+            turnRemainingTime = turnTime;
+        }
+
 	}
 	
 	// Update is called once per frame
