@@ -9,6 +9,9 @@ public class BulletController : MonoBehaviour {
 	// It is initialized here in order to prevent a trigger before Start function
 	private List<GameObject> listTrigger = new List<GameObject> ();
 
+	// It is initialized here in order to prevent a trigger before Start function
+	private List<GameObject> playersPushback = new List<GameObject> ();
+
 	// Use this for initialization
 	void Start () {
 
@@ -33,14 +36,19 @@ public class BulletController : MonoBehaviour {
 			foreach (GameObject g in listTrigger) {
 				Destroy (g);
 			}
+
+			// Pushback all the players inside the destructible zone
+			foreach (GameObject play in playersPushback) {
+				Debug.Log(play.tag + " force");
+				play.GetComponent<Rigidbody> ().AddForce (new Vector3(100,100,0));
+			}
         }
 
         // Check Player collision
         if (col.gameObject.tag == "Player")
         {
             // Call the 'damage' function of the character collided
-            col.gameObject.GetComponent<PlayerController>().Damage(bulletDamage);
-            Destroy(this.gameObject);
+            col.gameObject.GetComponent<PlayerController>().Damage(bulletDamage);            
         }
 
         // Destroy the bullet
@@ -54,6 +62,12 @@ public class BulletController : MonoBehaviour {
 		if (col.gameObject.tag=="DestructibleCube" && !listTrigger.Contains (col.gameObject)) {
 			listTrigger.Add (col.gameObject);
 		}
+
+		// Add all the players inside the trigger to pushback
+		if (col.gameObject.tag=="Player" && !playersPushback.Contains (col.gameObject)) {
+			Debug.Log("Added: " + col.gameObject.name);
+			playersPushback.Add (col.gameObject);
+		}
 	}
 
 	// Check for blocks to not destroy
@@ -62,6 +76,12 @@ public class BulletController : MonoBehaviour {
 		// Remove all the blocks that exit the trigger
 		if (col.gameObject.tag=="DestructibleCube" && listTrigger.Contains (col.gameObject)) {
 			listTrigger.Remove (col.gameObject);
+		}
+
+		// Remove all the players inside the trigger to pushback
+		if (col.gameObject.tag=="Player" && playersPushback.Contains (col.gameObject)) {
+			playersPushback.Remove (col.gameObject);
+			Debug.Log("Removed: " + col.gameObject.name);
 		}
 	}
 }
