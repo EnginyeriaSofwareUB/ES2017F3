@@ -54,8 +54,11 @@ public class BulletController : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
+
 	// Check for blocks to destroy
 	void OnTriggerEnter(Collider col){		
+
+		Debug.Log (col.tag + ": " + col.name);
 
 		// Add all the blocks inside the trigger
 		if (col.gameObject.tag=="DestructibleCube" && !listTrigger.Contains (col.gameObject)) {
@@ -67,6 +70,7 @@ public class BulletController : MonoBehaviour {
 			playersPushback.Add (col.gameObject);
 		}
 	}
+
 
 	// Check for blocks to not destroy
 	void OnTriggerExit(Collider col){		

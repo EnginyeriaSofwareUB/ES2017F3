@@ -25415,10 +25415,10 @@ MeshCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1381015595}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
+  m_Convex: 0
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4303014, guid: cef82d875d155f1498a488009f3a64a0, type: 3}
@@ -40451,6 +40451,22 @@ Prefab:
     - target: {fileID: 404182, guid: cef82d875d155f1498a488009f3a64a0, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2303060, guid: cef82d875d155f1498a488009f3a64a0, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 404172, guid: cef82d875d155f1498a488009f3a64a0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -18.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 404172, guid: cef82d875d155f1498a488009f3a64a0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 404172, guid: cef82d875d155f1498a488009f3a64a0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.75
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cef82d875d155f1498a488009f3a64a0, type: 3}

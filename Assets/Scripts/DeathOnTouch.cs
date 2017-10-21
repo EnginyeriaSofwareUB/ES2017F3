@@ -14,7 +14,11 @@ public class DeathOnTouch : MonoBehaviour {
 		
 	}
 
-	void OnTriggerEnter(Collider col){
-		Debug.Log ("Sea: "+col.tag+" "+col.name);
+	void OnCollisionEnter(Collision col){
+		if (col.gameObject.tag == "Player") {
+
+			// TODO: Dying should be public
+			col.gameObject.GetComponent<PlayerController> ().Damage (col.gameObject.GetComponent<PlayerController> ().maxHealth);
+		}
 	}
 }
