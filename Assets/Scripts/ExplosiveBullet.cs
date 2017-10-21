@@ -7,22 +7,24 @@ using UnityEngine;
 public class ExplosiveBullet : AbstractBullet
 {
 
-	public CapsuleCollider Collider;
+	public CapsuleCollider ExplosiveArea;
 
 	public float ExplosionDuration = 1f;
 
 	private Rigidbody _rigidbody;
 
 	private MeshRenderer _meshRenderer;
-	private SphereCollider _sphereCollider;
+	private MeshCollider _meshCollider;
 
-	private new void Start()
+	private bool _isExploding;
+
+	new void Start()
 	{
 		base.Start();
-		Collider.enabled = false;
+		ExplosiveArea.enabled = false;
 		_meshRenderer = GetComponent<MeshRenderer>();
 		_rigidbody = GetComponent<Rigidbody>();
-		_sphereCollider = GetComponent<SphereCollider>();
+		_meshCollider = GetComponent<MeshCollider>();
 	}
 
 	protected override void DespawnBullet()
@@ -32,16 +34,13 @@ public class ExplosiveBullet : AbstractBullet
 
 	// Update is called once per frame
 	void Update () {
-	}
-
-	void OnCollisionEnter(Collision col)
-	{
-		if (col.gameObject.CompareTag("Player"))
-			TriggerExplosion();
+		
 	}
 	
-	private void OnTriggerEnter(Collider other)
+	protected void OnTriggerEnter(Collider other)
 	{
+		if (!_isExploding)
+			return;
 		Debug.Log("Colliding with: " + other.tag);
 		if (other.CompareTag("DestructibleCube"))
 			Destroy(other.gameObject);
@@ -52,20 +51,21 @@ public class ExplosiveBullet : AbstractBullet
 		}
 	}
 
-	private float CalculateDamage(GameObject other)
+	protected float CalculateDamage(GameObject other)
 	{
-		return BulletDamage * ((other.transform.position - this.transform.position).magnitude / Collider.radius);
+		return BulletDamage * ((other.transform.position - this.transform.position).magnitude / ExplosiveArea.radius);
 	}
 	
-	private void TriggerExplosion()
+	protected void TriggerExplosion()
 	{
 		Debug.Log("Explosion Position: " + transform.position);
 		// Disable activities of the bullet and enable the explosion
 		_rigidbody.isKinematic = true;
 		_meshRenderer.enabled = false;
-		_sphereCollider.enabled = false;
+		_meshCollider.enabled = false;
 		transform.rotation = Quaternion.Euler(0, 0, 0);
-		Collider.enabled = true;
+		_isExploding = true;
+		ExplosiveArea.enabled = true;
 		// Do animation and stuff in the future
 		Destroy(gameObject, ExplosionDuration);
 	}

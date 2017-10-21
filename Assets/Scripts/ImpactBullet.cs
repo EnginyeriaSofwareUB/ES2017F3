@@ -6,10 +6,7 @@ public class ImpactBullet : AbstractBullet
     {
         if (other.gameObject.CompareTag("Player"))
             other.gameObject.GetComponent<PlayerController>().Damage(BulletDamage);
-        if (other.gameObject.CompareTag("DestructibleCube"))
-            Destroy(other.gameObject);
         DespawnBullet();
-
     }
 
     protected override void DespawnBullet()

@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 23937214615447126}
   - component: {fileID: 64310090604898186}
   - component: {fileID: 54042652231621044}
-  - component: {fileID: 114209226152167368}
-  - component: {fileID: 136423719383820388}
+  - component: {fileID: 114694658231604292}
+  - component: {fileID: 136268073919179278}
   m_Layer: 0
   m_Name: Cannon Ball
   m_TagString: Untagged
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1253381899178622}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 4.158861, y: -1.268, z: -1.0784287}
+  m_LocalPosition: {x: 9.853975, y: 0.24600628, z: -5.4329348}
   m_LocalScale: {x: 0.19168282, y: 0.19168276, z: 0.19168276}
   m_Children: []
   m_Father: {fileID: 0}
@@ -113,7 +113,7 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.06
   m_Mesh: {fileID: 4300000, guid: c285b81c649cdff4bbd10f694cc32a46, type: 3}
---- !u!114 &114209226152167368
+--- !u!114 &114694658231604292
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -121,11 +121,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1253381899178622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85415844167075e499777121676e430a, type: 3}
+  m_Script: {fileID: 11500000, guid: 024635c323444fff9c1f114a551f477a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDamage: 25
---- !u!136 &136423719383820388
+  BulletDamage: 10
+  TimeUntilDespawn: 10
+  Collider: {fileID: 136268073919179278}
+  ExplosionDuration: 1
+--- !u!136 &136268073919179278
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -133,8 +136,8 @@ CapsuleCollider:
   m_GameObject: {fileID: 1253381899178622}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 6.11
-  m_Height: 19.97
-  m_Direction: 2
+  m_Enabled: 0
+  m_Radius: 8
+  m_Height: 120
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
