@@ -14,7 +14,10 @@ public class DeathOnTouch : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter(Collision col){
+	void OnTriggerEnter(Collider col){
+
+		Debug.Log (col.tag + col.name);
+
 		if (col.gameObject.tag == "Player") {
 
 			// TODO: Dying should be public

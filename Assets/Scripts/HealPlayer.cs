@@ -13,13 +13,13 @@ public class HealPlayer : MonoBehaviour {
 	void Update () {
 		
 	}
-
-	// TODO: Medical will be a trigger
-	void OnCollisionEnter(Collision col){
+		
+	void OnTriggerEnter(Collider col){
 		if (col.gameObject.tag == "Player") {
-
-			//TODO: Heal the player
 			Debug.Log(col.gameObject.name +" healed");
+
+			//TODO: Heal the player correctly
+			col.gameObject.GetComponent<PlayerController> ().Damage (-10);
 
 			Destroy (this.gameObject);
 		}

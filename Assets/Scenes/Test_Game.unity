@@ -25408,20 +25408,18 @@ MeshCollider:
 GameObject:
   m_PrefabParentObject: {fileID: 104182, guid: cef82d875d155f1498a488009f3a64a0, type: 3}
   m_PrefabInternal: {fileID: 1762578168}
---- !u!64 &1381015599
-MeshCollider:
+--- !u!65 &1381015599
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1381015595}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4303014, guid: cef82d875d155f1498a488009f3a64a0, type: 3}
+  m_Size: {x: 1.9999999, y: 2.0000005, z: 0.023132006}
+  m_Center: {x: 0, y: -5.1869624e-17, z: -0.0036500013}
 --- !u!114 &1381015600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43281,7 +43279,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4831439831841958, guid: 7f73a7117fddda1438b0709472135198, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 21.6
+      value: 21.5
       objectReference: {fileID: 0}
     - target: {fileID: 4831439831841958, guid: 7f73a7117fddda1438b0709472135198, type: 2}
       propertyPath: m_LocalPosition.y
@@ -43311,37 +43309,9 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114151764617722052, guid: 7f73a7117fddda1438b0709472135198,
-        type: 2}
-      propertyPath: mainPlayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114512466058728472, guid: 7f73a7117fddda1438b0709472135198,
-        type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1863907397133788, guid: 7f73a7117fddda1438b0709472135198, type: 2}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 1656243273278970, guid: 7f73a7117fddda1438b0709472135198, type: 2}
       propertyPath: m_Name
       value: Player_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4831439831841958, guid: 7f73a7117fddda1438b0709472135198, type: 2}
-      propertyPath: m_LocalScale.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114151764617722052, guid: 7f73a7117fddda1438b0709472135198,
-        type: 2}
-      propertyPath: id
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114151764617722052, guid: 7f73a7117fddda1438b0709472135198,
-        type: 2}
-      propertyPath: playerId
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f73a7117fddda1438b0709472135198, type: 2}

@@ -122,6 +122,7 @@ GameObject:
   - component: {fileID: 114014880651091640}
   - component: {fileID: 114363388293594360}
   - component: {fileID: 114580081552263908}
+  - component: {fileID: 136038995605919626}
   m_Layer: 0
   m_Name: Character_Default_Animated
   m_TagString: Player
@@ -905,6 +906,11 @@ MonoBehaviour:
   maxPower: 40
   minPower: 3
   maxAngle: 48
+  shootEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114363388293594360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -917,9 +923,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  playerId: 0
   maxHealth: 100
   health: 0
   mainPlayer: 0
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: IntUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114580081552263908
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -943,3 +955,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654891bbfc6b5cc439f69af6bdca4c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &136038995605919626
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1567118978771868}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.31
+  m_Height: 1.75228
+  m_Direction: 1
+  m_Center: {x: 0.23, y: 0.05011785, z: 0}

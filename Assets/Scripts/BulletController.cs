@@ -37,9 +37,15 @@ public class BulletController : MonoBehaviour {
 				Destroy (g);
 			}
 
-			// Pushback all the players inside the destructible zone
+			// Pushback all the players inside the destructible zone		
+
+			// TODO: Adjust force
+			// TODO: Adjust damage
 			foreach (GameObject play in playersPushback) {
-				play.GetComponent<Rigidbody> ().AddForce (new Vector3(100,100,0));
+				var pushbackDir = (play.transform.position - col.transform.position);
+				pushbackDir.z = 0;
+				play.GetComponent<Rigidbody>().AddForce(pushbackDir.normalized * 10, ForceMode.Impulse);
+				play.GetComponent<PlayerController> ().Damage (bulletDamage);
 			}
         }
 
@@ -57,8 +63,6 @@ public class BulletController : MonoBehaviour {
 
 	// Check for blocks to destroy
 	void OnTriggerEnter(Collider col){		
-
-		Debug.Log (col.tag + ": " + col.name);
 
 		// Add all the blocks inside the trigger
 		if (col.gameObject.tag=="DestructibleCube" && !listTrigger.Contains (col.gameObject)) {
