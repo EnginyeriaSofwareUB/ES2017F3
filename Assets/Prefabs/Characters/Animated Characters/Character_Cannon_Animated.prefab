@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 114504363367419032}
   - component: {fileID: 114151764617722052}
   - component: {fileID: 114512466058728472}
+  - component: {fileID: 136229543302214208}
   m_Layer: 0
   m_Name: Character_Cannon_Animated
   m_TagString: Player
@@ -274,7 +275,7 @@ GameObject:
   - component: {fileID: 4765392300862292}
   m_Layer: 0
   m_Name: Character_Base
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -514,7 +515,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1656243273278970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.74, y: -1.0600004, z: 0}
+  m_LocalPosition: {x: 11.36, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4001059838595960}
@@ -1042,9 +1043,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  playerId: 1
   maxHealth: 100
   health: 0
-  mainPlayer: 0
+  mainPlayer: 1
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: IntUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114504363367419032
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1066,13 +1073,18 @@ MonoBehaviour:
   maxPower: 40
   minPower: 3
   maxAngle: 48
+  shootEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!114 &114512466058728472
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1656243273278970}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35fb90eecfbf37a4fbfc17ae6146e1ec, type: 3}
   m_Name: 
@@ -1089,3 +1101,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654891bbfc6b5cc439f69af6bdca4c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &136229543302214208
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656243273278970}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.11
+  m_Direction: 1
+  m_Center: {x: 0.06, y: 0, z: 0}
