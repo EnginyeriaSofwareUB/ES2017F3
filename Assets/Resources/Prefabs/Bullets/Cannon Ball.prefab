@@ -124,9 +124,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024635c323444fff9c1f114a551f477a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletDamage: 10
+  BulletDamage: 25
   TimeUntilDespawn: 10
-  Collider: {fileID: 136268073919179278}
+  ExplosiveArea: {fileID: 136268073919179278}
   ExplosionDuration: 1
 --- !u!136 &136268073919179278
 CapsuleCollider:
@@ -139,5 +139,5 @@ CapsuleCollider:
   m_Enabled: 0
   m_Radius: 8
   m_Height: 120
-  m_Direction: 1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}

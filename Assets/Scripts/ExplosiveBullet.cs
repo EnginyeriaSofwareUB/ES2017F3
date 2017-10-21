@@ -7,7 +7,7 @@ using UnityEngine;
 public class ExplosiveBullet : AbstractBullet
 {
 
-	public CapsuleCollider ExplosiveArea;
+	private CapsuleCollider ExplosiveArea;
 
 	public float ExplosionDuration = 1f;
 
@@ -18,14 +18,19 @@ public class ExplosiveBullet : AbstractBullet
 
 	private bool _isExploding;
 
+    void Awake() {
+        ExplosiveArea = GetComponent<CapsuleCollider>();
+        ExplosiveArea.enabled = false;
+        _meshRenderer = GetComponent<MeshRenderer>();
+        _rigidbody = GetComponent<Rigidbody>();
+        _meshCollider = GetComponent<MeshCollider>();
+    }
+
 	new void Start()
 	{
 		base.Start();
-		ExplosiveArea.enabled = false;
-		_meshRenderer = GetComponent<MeshRenderer>();
-		_rigidbody = GetComponent<Rigidbody>();
-		_meshCollider = GetComponent<MeshCollider>();
-	}
+        ExplosiveArea.enabled = false;
+    }
 
 	protected override void DespawnBullet()
 	{

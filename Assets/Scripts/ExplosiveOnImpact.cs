@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 
-    public class ExplosiveOnImpact : ExplosiveBullet
+public class ExplosiveOnImpact : ExplosiveBullet
+{
+    void OnCollisionEnter()
     {
-        void OnCollisionEnter()
-        {
-            TriggerExplosion();
-        }
+        TriggerExplosion();
     }
+}
