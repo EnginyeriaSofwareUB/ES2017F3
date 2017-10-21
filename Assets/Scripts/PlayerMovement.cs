@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour {
 
 	public Rigidbody rb;
-    private float horizontal;
+    public float horizontal;
     private bool jump;
     private const float m_JumpPower = 10f; // The force added to the ball when it jumps.
     private const float k_GroundRayLength = 1f; // The length of the ray to check if the ball is grounded.

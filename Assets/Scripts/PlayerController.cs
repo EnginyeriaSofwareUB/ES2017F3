@@ -17,14 +17,17 @@ public class PlayerController : MonoBehaviour {
     public PlayerState currentState;
 
     [Header("Player Stats")]
+    public int TEAM;
     public int playerId;
     public float maxHealth = 100f;
     public float health;
-
+    [Space(5)]
+    //public bool facing_right = false;
+    [HideInInspector] public int last_dir = 0;
 
     [Space(5)]
     [Header("TESTIN")]
-    public bool mainPlayer = false;
+    //public bool active = false;
 
     public IntUnityEvent deathEvent;
 
@@ -33,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Awake()
     {
-        //gameControl = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
+        gameControl = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
         //if (mainPlayer)
             //gameControl.activePlayer = this.gameObject;
 
@@ -63,7 +66,52 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    private void FixedUpdate()
+    {
+        CheckOrientation();
+    }
 
+    void CheckOrientation()
+    {
+        float movement = GetComponent<PlayerMovement>().horizontal; //positive = right, negative = left
+
+        if (movement > 0)
+        {
+            transform.localScale = new Vector3(1f, transform.localScale.y, transform.localScale.z);
+            last_dir = 1;
+        }else if (movement < 0)
+        {
+            transform.localScale = new Vector3(-1f, transform.localScale.y, transform.localScale.z);
+            last_dir = -1;
+        }
+        else
+        {
+            transform.localScale = new Vector3(last_dir, transform.localScale.y, transform.localScale.z);
+        }
+
+        /*if (transform.localScale.x > 0)
+        {
+            facing_right = true;
+            last_dir = 1;
+        }
+        else
+        {
+            facing_right = false;
+            last_dir = -1;
+        }
+
+
+        //If looking left + moving right or looking right + moving left: invert scale
+        if (movement > 0 && !facing_right || movement < 0 && facing_right)
+            transform.localScale = new Vector3(transform.localScale.x * (-1), transform.localScale.y, transform.localScale.z);
+        */
+        //If not moving,
+        if(movement == 0)
+        {
+           // transform.localScale = new Vector3(transform.localScale.x * (last_dir), transform.localScale.y, transform.localScale.z);
+        }
+
+    }
 
     /*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */
     public void Damage(float value)
@@ -75,7 +123,6 @@ public class PlayerController : MonoBehaviour {
         else
             Dying();
     }
-
 
     void Dying()
     {
@@ -95,9 +142,28 @@ public class PlayerController : MonoBehaviour {
         // notify all listeners of this death
         if (deathEvent != null) deathEvent.Invoke(playerId);
 
-        Destroy(this.gameObject);
+        //Delete himself from GControl lists
+        switch (TEAM)
+        {
+            case 1:
+                gameControl.team1.Remove(this.gameObject);
+                break;
+            case 2:
+                gameControl.team2.Remove(this.gameObject);
+                break;
+        }
 
+        Destroy(this.gameObject);
     }
 
+
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(transform.position, this.transform.right.normalized);
+
+    }
 
 }
