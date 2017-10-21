@@ -126,9 +126,6 @@ public class PlayerShooting : MonoBehaviour {
         // Add force to the bullet (vector = bulletPos - gunPos)
         var shootingVector = (bullet.transform.position - gunBase.transform.position);
         shootingVector.z = 0;
-        bullet.GetComponent<Rigidbody>().AddForce(shootingVector.normalized * thrust, ForceMode.Impulse);
-
-        // Destroy the bullet after 2.5 seconds
-        Destroy(bullet, 2.5f);
+        bullet.GetComponent<Rigidbody>().AddForce(shootingVector.normalized * thrust, ForceMode.Impulse);      
     }
 }
