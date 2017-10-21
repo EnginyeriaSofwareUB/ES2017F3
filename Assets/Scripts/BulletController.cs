@@ -39,7 +39,6 @@ public class BulletController : MonoBehaviour {
 
 			// Pushback all the players inside the destructible zone
 			foreach (GameObject play in playersPushback) {
-				Debug.Log(play.tag + " force");
 				play.GetComponent<Rigidbody> ().AddForce (new Vector3(100,100,0));
 			}
         }
@@ -65,7 +64,6 @@ public class BulletController : MonoBehaviour {
 
 		// Add all the players inside the trigger to pushback
 		if (col.gameObject.tag=="Player" && !playersPushback.Contains (col.gameObject)) {
-			Debug.Log("Added: " + col.gameObject.name);
 			playersPushback.Add (col.gameObject);
 		}
 	}
@@ -81,7 +79,6 @@ public class BulletController : MonoBehaviour {
 		// Remove all the players inside the trigger to pushback
 		if (col.gameObject.tag=="Player" && playersPushback.Contains (col.gameObject)) {
 			playersPushback.Remove (col.gameObject);
-			Debug.Log("Removed: " + col.gameObject.name);
 		}
 	}
 }

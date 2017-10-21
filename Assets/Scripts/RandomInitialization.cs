@@ -22,7 +22,6 @@ public class RandomInitialization : MonoBehaviour {
 			var piece = destructiblePieces [Random.Range (0, destructiblePieces.Count)];
 			Destroy (piece.gameObject);
 
-			Debug.Log (piece.name);
 			var med = (GameObject)Instantiate (
 				         medical,
 				         piece.transform.position,
