@@ -181,6 +181,6 @@ public class GameController : MonoBehaviour {
         {
             turnTimerText.color = Color.blue;
         }
-        turnTimerText.text = "Remaining time: "+turnRemainingTime.ToString();
+        turnTimerText.text = turnRemainingTime.ToString("00"); //Remaining time 
     }
 }
