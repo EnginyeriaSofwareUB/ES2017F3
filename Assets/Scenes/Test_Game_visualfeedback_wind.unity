@@ -121,7 +121,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4275957174586344, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.84
+      value: -5.52
       objectReference: {fileID: 0}
     - target: {fileID: 4275957174586344, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
       propertyPath: m_LocalPosition.z
@@ -129,19 +129,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4275957174586344, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4275957174586344, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7011073
       objectReference: {fileID: 0}
     - target: {fileID: 4275957174586344, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 4275957174586344, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7130558
       objectReference: {fileID: 0}
     - target: {fileID: 4275957174586344, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
       propertyPath: m_RootOrder
@@ -338,6 +338,10 @@ Prefab:
       value: 
       objectReference: {fileID: 1429659721519246, guid: b02078ff869733d4ca7d697051830d69,
         type: 2}
+    - target: {fileID: 4275957174586344, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 89.032005
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
   m_IsPrefabParent: 0
@@ -346,6 +350,47 @@ GameObject:
   m_PrefabParentObject: {fileID: 1799340038062380, guid: f1aac2315fae2464b90f557564da521f,
     type: 2}
   m_PrefabInternal: {fileID: 1762578168}
+--- !u!1 &127887864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 127887865}
+  - component: {fileID: 127887866}
+  m_Layer: 0
+  m_Name: BridgeColliderFixPart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &127887865
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 127887864}
+  m_LocalRotation: {x: -0, y: -0, z: -0.1328445, w: 0.9911369}
+  m_LocalPosition: {x: -1.5131807, y: 1.1276999, z: -1.9013165}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1299043689}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -15.268}
+--- !u!65 &127887866
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 127887864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2580209, y: 0.044844717, z: 1}
+  m_Center: {x: 1.0404336, y: -0.4775794, z: 0}
 --- !u!1 &184060854 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1688355458282858, guid: f1aac2315fae2464b90f557564da521f,
@@ -797,6 +842,24 @@ GameObject:
   m_PrefabParentObject: {fileID: 1270984600257208, guid: f1aac2315fae2464b90f557564da521f,
     type: 2}
   m_PrefabInternal: {fileID: 1762578168}
+--- !u!1 &747487218 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1696298175174698, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39,
+    type: 2}
+  m_PrefabInternal: {fileID: 48642540}
+--- !u!182 &747487222
+WindZone:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 747487218}
+  m_Enabled: 1
+  m_Mode: 0
+  m_Radius: 20
+  m_WindMain: 1
+  m_WindTurbulence: 1
+  m_WindPulseMagnitude: 3
+  m_WindPulseFrequency: 3
 --- !u!1 &792928141 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1683388535134728, guid: f1aac2315fae2464b90f557564da521f,
@@ -1034,11 +1097,83 @@ GameObject:
   m_PrefabParentObject: {fileID: 1095217185064402, guid: f1aac2315fae2464b90f557564da521f,
     type: 2}
   m_PrefabInternal: {fileID: 1762578168}
+--- !u!1 &1299043688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1299043689}
+  m_Layer: 0
+  m_Name: BridgeColliderFix
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1299043689
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1299043688}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.1611805, y: -5.7267, z: 1.0213165}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 127887865}
+  - {fileID: 1426563103}
+  - {fileID: 1464201708}
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1306859565 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1469298342424150, guid: f1aac2315fae2464b90f557564da521f,
     type: 2}
   m_PrefabInternal: {fileID: 1762578168}
+--- !u!1 &1426563102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1426563103}
+  - component: {fileID: 1426563104}
+  m_Layer: 0
+  m_Name: BridgeColliderFixPart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1426563103
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426563102}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.8281803, y: 0.7967, z: -1.9013165}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1299043689}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1426563104
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426563102}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.067194, y: 0.041905522, z: 1}
+  m_Center: {x: 2.1610928, y: -0.4790495, z: 0}
 --- !u!1 &1446061654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1072,6 +1207,47 @@ GameObject:
   m_PrefabParentObject: {fileID: 1226169184909828, guid: f1aac2315fae2464b90f557564da521f,
     type: 2}
   m_PrefabInternal: {fileID: 1762578168}
+--- !u!1 &1464201707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1464201708}
+  - component: {fileID: 1464201709}
+  m_Layer: 0
+  m_Name: BridgeColliderFixPart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1464201708
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1464201707}
+  m_LocalRotation: {x: -0, y: -0, z: 0.13917309, w: 0.9902681}
+  m_LocalPosition: {x: 1.2948198, y: 0.8466997, z: -1.9013165}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1299043689}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 16}
+--- !u!65 &1464201709
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1464201707}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8920841, y: 0.044845104, z: 1}
+  m_Center: {x: 0.44604492, y: -0.4775747, z: 0}
 --- !u!1 &1467748984 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1673757296484446, guid: f1aac2315fae2464b90f557564da521f,
