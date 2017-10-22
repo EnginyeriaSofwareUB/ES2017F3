@@ -110,7 +110,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4691768566447078}
   - component: {fileID: 95141338344115000}
-  - component: {fileID: 114836913636803858}
+  - component: {fileID: 54095437093423478}
+  - component: {fileID: 136661420085166004}
+  - component: {fileID: 23325772407637032}
+  - component: {fileID: 64111694256959142}
+  - component: {fileID: 114561472778278852}
   m_Layer: 0
   m_Name: Dinamyte
   m_TagString: Untagged
@@ -465,7 +469,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1226028752044792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.24, y: -0.57, z: -0.057}
+  m_LocalPosition: {x: 14.259363, y: 0.118, z: 0.010758663}
   m_LocalScale: {x: 0.20768948, y: 0.20768948, z: 0.20768948}
   m_Children:
   - {fileID: 4689102343561916}
@@ -631,6 +635,38 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 98f26e3835e14a34f971fcccc55b9bee, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!23 &23325772407637032
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1226028752044792}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: 6c251056fe05b3441ac5a97aa3535980, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1144,6 +1180,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1216776018045570}
   m_Mesh: {fileID: 4300016, guid: 068b5f9663703034da0676fa4182584b, type: 3}
+--- !u!54 &54095437093423478
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1226028752044792}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 8
+  m_CollisionDetection: 0
 --- !u!64 &64005773148620362
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -1186,6 +1237,20 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300026, guid: 068b5f9663703034da0676fa4182584b, type: 3}
+--- !u!64 &64111694256959142
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1226028752044792}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 0}
 --- !u!64 &64143913548245938
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -1385,7 +1450,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114836913636803858
+--- !u!114 &114561472778278852
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1393,9 +1458,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 1226028752044792}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1db5ba9e92c8b046ad2197c178fc3b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 66679527d5c427e47a573defa8e1e7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BulletDamage: 10
+  TimeUntilDespawn: 3
+  ExplosionDuration: 0
+--- !u!136 &136661420085166004
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1226028752044792}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  m_Radius: 8
+  m_Height: 120
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137729990383697212
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

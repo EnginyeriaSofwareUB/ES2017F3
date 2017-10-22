@@ -54,7 +54,9 @@ public class ExplosiveBullet : AbstractBullet
 			Debug.Log("Doing " + CalculateDamage(other.gameObject) + " damage to player");
 			other.GetComponent<PlayerController>().Damage(CalculateDamage(other.gameObject));
 		}
-	}
+
+        Destroy(gameObject, ExplosionDuration);
+    }
 
 	protected float CalculateDamage(GameObject other)
 	{
@@ -68,10 +70,10 @@ public class ExplosiveBullet : AbstractBullet
 		_rigidbody.isKinematic = true;
 		_meshRenderer.enabled = false;
 		_meshCollider.enabled = false;
-		transform.rotation = Quaternion.Euler(0, 0, 0);
+		//transform.rotation = Quaternion.Euler(0, 0, 0);
 		_isExploding = true;
 		ExplosiveArea.enabled = true;
 		// Do animation and stuff in the future
-		Destroy(gameObject, ExplosionDuration);
+		//Destroy(gameObject, ExplosionDuration);
 	}
 }
