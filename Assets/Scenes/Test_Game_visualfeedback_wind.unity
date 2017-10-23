@@ -842,24 +842,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1270984600257208, guid: f1aac2315fae2464b90f557564da521f,
     type: 2}
   m_PrefabInternal: {fileID: 1762578168}
---- !u!1 &747487218 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1696298175174698, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39,
-    type: 2}
-  m_PrefabInternal: {fileID: 48642540}
---- !u!182 &747487222
-WindZone:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 747487218}
-  m_Enabled: 1
-  m_Mode: 0
-  m_Radius: 20
-  m_WindMain: 1
-  m_WindTurbulence: 1
-  m_WindPulseMagnitude: 3
-  m_WindPulseFrequency: 3
 --- !u!1 &792928141 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1683388535134728, guid: f1aac2315fae2464b90f557564da521f,
