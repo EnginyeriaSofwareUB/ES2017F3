@@ -97,7 +97,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 8
+  m_Constraints: 56
   m_CollisionDetection: 0
 --- !u!64 &64424666152134596
 MeshCollider:
@@ -126,7 +126,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletDamage: 10
   TimeUntilDespawn: 10
-  ExplosiveArea: {fileID: 136934981517129130}
   ExplosionDuration: 1
 --- !u!136 &136934981517129130
 CapsuleCollider:
