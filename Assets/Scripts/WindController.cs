@@ -13,17 +13,72 @@ public class WindController : MonoBehaviour {
     //public string[] tagsToApplyWind = { "Player", "Bullet" };
     [Space(5)]
     public List<GameObject> objectsWind = new List<GameObject>();
+    [Space(5)]
+
+    [Header("UI")]
+    public Transform[] windBars;
+    public Transform currentBar ;
+    public int currentBarIdx = 0;
+    public float barPopDistance = 0.5f;
+    public float barPopDuration = 0.25f;
+    //public float barPopChangeTime = 0.25f;
 
     // Use this for initialization
     void Start () {
         /* foreach (string tag in tagsToApplyWind){objectsWind.AddRange(GameObject.FindGameObjectsWithTag(tag));} */
 
         objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        BarEffect();
+    }
+
+    void Update()
+    {
 
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    void BarEffect()
+    {
+        if (windDirection.x > 0)
+        {
+            currentBar = windBars[currentBarIdx];
+            StimulateCurrentBar();
+            if (currentBarIdx + 1 >= windBars.Length)
+                currentBarIdx = 0;
+            else
+                currentBarIdx++;
+        }
+        else if(windDirection.x < 0)
+        {
+            currentBar = windBars[currentBarIdx];
+            StimulateCurrentBar();
+            if (currentBarIdx - 1 < 0)
+                currentBarIdx = windBars.Length-1;
+            else
+                currentBarIdx--;
+        }
+        else
+        {
+
+        }
+        
+    }
+
+
+    void StimulateCurrentBar() //move a lil bit up
+    {
+        currentBar.position = new Vector3(currentBar.position.x, currentBar.position.y + barPopDistance, currentBar.position.z);
+        Invoke("DestimulateCurrentBar", barPopDuration);
+    }
+
+    void DestimulateCurrentBar() //move lil bit down
+    {
+        currentBar.position = new Vector3(currentBar.position.x, currentBar.position.y - barPopDistance, currentBar.position.z);
+        Invoke("BarEffect", 0f);
+    }
+
+
+    // Update is called once per frame
+    void FixedUpdate () {
         if (windActive)
         {
             //agafem la municio en aquet frame
