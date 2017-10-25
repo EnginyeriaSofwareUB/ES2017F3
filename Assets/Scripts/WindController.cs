@@ -16,6 +16,8 @@ public class WindController : MonoBehaviour {
     [Space(5)]
 
     [Header("UI")]
+    public bool bars = false;
+
     public Transform[] windBars;
     public Transform currentBar ;
     public int currentBarIdx = 0;
@@ -25,46 +27,95 @@ public class WindController : MonoBehaviour {
     float[] bar_sizes = new float[5];
     //public float barPopChangeTime = 0.25f;
 
+    [Space(10)]
+    public GameObject fan_UI;
+    public GameObject arrow_UI;
+    Vector3 arrow_scale;
+    Vector3 fan_scale;
+
+    
+
     // Use this for initialization
     void Start () {
         /* foreach (string tag in tagsToApplyWind){objectsWind.AddRange(GameObject.FindGameObjectsWithTag(tag));} */
 
-        bar_startScale = windBars[0].localScale.y;
-
-        int i = 0;
-        foreach(float scale in bar_sizes)
+        if (bars)
         {
-            bar_sizes[i] = bar_startScale * i;
-            i++;
+            bar_startScale = windBars[0].localScale.y;
+
+            int i = 0;
+            foreach (float scale in bar_sizes)
+            {
+                bar_sizes[i] = bar_startScale * i;
+                i++;
+            }
+
+            BarEffect();
         }
+        else
+        {
+            arrow_scale = arrow_UI.transform.localScale;
+            fan_scale = fan_UI.transform.localScale;
+        }
+        
 
         objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-        BarEffect();
+        
     }
 
     void Update()
     {
-        //will get better, dont panic
-        if(windForce <= 0)
+        if (bars)
         {
-            BarScale(0f);
-        }else if(windForce == 1)
-        {
-            BarScale(1f);
-        }else if(windForce == 2)
-        {
-            BarScale(2f);
-        }else if(windForce == 3)
-        {
-            BarScale(3f);
-        }else if(windForce == 4)
-        {
-            BarScale(4f);
+            //will get better, dont panic
+            if (windForce <= 0)
+            {
+                BarScale(0f);
+            }
+            else if (windForce == 1)
+            {
+                BarScale(1f);
+            }
+            else if (windForce == 2)
+            {
+                BarScale(2f);
+            }
+            else if (windForce == 3)
+            {
+                BarScale(3f);
+            }
+            else if (windForce == 4)
+            {
+                BarScale(4f);
+            }
+            else
+            {
+                BarScale(5f);
+            }
         }
         else
-        {
-            BarScale(5f);
+        {            
+
+            if(windDirection.x > 0)
+            {
+                arrow_UI.SetActive(true);
+                arrow_UI.transform.localScale = arrow_scale;
+                fan_UI.transform.localScale = fan_scale;
+                fan_UI.transform.Rotate(0f, 0f, -30f * windForce * Time.deltaTime);
+            }
+            else if(windDirection.x < 0)
+            {
+                arrow_UI.SetActive(true);
+                arrow_UI.transform.localScale = new Vector3(arrow_scale.x * -1f, arrow_scale.y, arrow_scale.z);
+                fan_UI.transform.localScale = new Vector3(fan_scale.x * -1f, fan_scale.y, fan_scale.z);
+                fan_UI.transform.Rotate(0f, 0f, 30f * windForce * Time.deltaTime);
+            }
+            else
+            {
+                arrow_UI.SetActive(false);
+            }
         }
+        
 
     }
 
