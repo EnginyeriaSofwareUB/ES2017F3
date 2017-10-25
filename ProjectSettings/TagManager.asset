@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GM
   - DestructibleCube
+  - Death
   layers:
   - Default
   - TransparentFX

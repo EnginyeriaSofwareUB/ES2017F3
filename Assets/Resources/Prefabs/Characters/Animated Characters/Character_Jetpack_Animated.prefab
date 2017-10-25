@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 114979342253691028}
   - component: {fileID: 54985280900913882}
   - component: {fileID: 114430649175129102}
+  - component: {fileID: 136898945259752434}
   m_Layer: 0
   m_Name: Character_Jetpack_Animated
   m_TagString: Player
@@ -1029,15 +1030,21 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1831102113579692}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 009ad854c8e63854c8c41be26136e41e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+  playerId: 0
   maxHealth: 100
   health: 0
   mainPlayer: 0
+  deathEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: IntUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!136 &136359166930301936
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1051,3 +1058,16 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &136898945259752434
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831102113579692}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.31
+  m_Height: 1.75228
+  m_Direction: 1
+  m_Center: {x: 0.23, y: 0.05011785, z: 0}
