@@ -7,7 +7,7 @@ public class WindController : MonoBehaviour {
     public bool windActive;
     public bool ignoreMass = false; //bool per determinar si la força del vent s'aplica tenin en conte la massa o no
     [Space(5)]
-    public float windForce;
+    public float windForce; //min 0 max 5;
     public Vector2 windDirection;
     //[Space(5)]
     //public string[] tagsToApplyWind = { "Player", "Bullet" };
@@ -21,11 +21,22 @@ public class WindController : MonoBehaviour {
     public int currentBarIdx = 0;
     public float barPopDistance = 0.5f;
     public float barPopDuration = 0.25f;
+    float bar_startScale;
+    float[] bar_sizes = new float[5];
     //public float barPopChangeTime = 0.25f;
 
     // Use this for initialization
     void Start () {
         /* foreach (string tag in tagsToApplyWind){objectsWind.AddRange(GameObject.FindGameObjectsWithTag(tag));} */
+
+        bar_startScale = windBars[0].localScale.y;
+
+        int i = 0;
+        foreach(float scale in bar_sizes)
+        {
+            bar_sizes[i] = bar_startScale * i;
+            i++;
+        }
 
         objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
         BarEffect();
@@ -33,7 +44,36 @@ public class WindController : MonoBehaviour {
 
     void Update()
     {
+        //will get better, dont panic
+        if(windForce <= 0)
+        {
+            BarScale(0f);
+        }else if(windForce == 1)
+        {
+            BarScale(1f);
+        }else if(windForce == 2)
+        {
+            BarScale(2f);
+        }else if(windForce == 3)
+        {
+            BarScale(3f);
+        }else if(windForce == 4)
+        {
+            BarScale(4f);
+        }
+        else
+        {
+            BarScale(5f);
+        }
 
+    }
+
+    void BarScale(float scale)
+    {
+        foreach(Transform bar in windBars)
+        {
+            bar.localScale = new Vector3(bar.localScale.x, scale, bar.localScale.z);
+        }
     }
 
     void BarEffect()
