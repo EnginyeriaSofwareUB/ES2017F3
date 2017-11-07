@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 8843c2fccf8c3964c8a3301af82d2554
+timeCreated: 1510073297
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Cloister Black
+  fontNames:
+  - Cloister Black
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 64d65f12cd2f48d49ad18df11be8a1e2, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
