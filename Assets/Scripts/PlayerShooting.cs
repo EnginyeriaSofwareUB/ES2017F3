@@ -28,6 +28,12 @@ public class PlayerShooting : MonoBehaviour
             instanceGun.name = Guns[i].name;
             instanceGun.gameObject.SetActive(false);
             Guns[i] = instanceGun;
+
+            // Adjustments on certain guns
+            if (instanceGun.name == "Cannon Base") {
+                instanceGun.transform.localPosition = new Vector3(0.2f, -0.2f, -0.5f);
+            }
+
         }
 
     }
@@ -43,7 +49,6 @@ public class PlayerShooting : MonoBehaviour
 
         shoot = false;
 
-        _currentGun = Guns[0];
         ChangeGunTo(0);
 
         if (shootEvent == null)
@@ -147,9 +152,10 @@ public class PlayerShooting : MonoBehaviour
 
     }
 
-    void setCurrentGunActive(bool boolean)
-    {
-        transform.Find(BaseGunPath + _currentGun.name).gameObject.SetActive(boolean);
+    void setCurrentGunActive(bool boolean) {
+        if (_currentGun != null) {
+            transform.Find(BaseGunPath + _currentGun.name).gameObject.SetActive(boolean);
+        }
     }
     
     void ChangeGunTo(int gunIndex) {
@@ -163,13 +169,11 @@ public class PlayerShooting : MonoBehaviour
             
             // Empty hands
             case 0:
-
                 RestoreShootingParam();
                 break;
 
             // Cannon gun
             case 1:
-
                 RestoreShootingParam();
                 break;
 
