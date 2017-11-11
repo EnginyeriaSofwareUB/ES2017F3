@@ -2,32 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun {
+public class Gun : MonoBehaviour
+{
 
+    public Transform SpawnPoint;
+    public GameObject BulletPrefab;
+    
+    public void Shoot(float thrust)
+    {
+        var bullet = (GameObject)Instantiate(
+            BulletPrefab,
+            SpawnPoint.position,
+            Quaternion.Euler(0, 0, SpawnPoint.rotation.z));
 
-    // Properties //
-    public GameObject gameObject { get; private set; }
+        // Add force to the bullet (vector = bulletPos - gunPos)
+        var shootingVector = bullet.transform.position - transform.position;
+        shootingVector.z = 0;
+        bullet.GetComponent<Rigidbody>().AddForce(shootingVector.normalized * thrust, ForceMode.Impulse);
 
-    public Transform transform {
-        get { return gameObject.transform; }
     }
-
-    private Quaternion initAngle;
-    //************//
-
-    public Gun(GameObject gameObject) {
-        this.gameObject = gameObject;
-
-        var angles = gameObject.transform.rotation.eulerAngles;
-        initAngle = Quaternion.Euler(angles.x, angles.y, angles.z);
-    }
-
-    public void SetActive(bool activate) {
-        gameObject.SetActive(activate);
-    }
-
-    public void RestoreGunAngle() {
-        gameObject.transform.rotation = initAngle;
-    }
-
 }

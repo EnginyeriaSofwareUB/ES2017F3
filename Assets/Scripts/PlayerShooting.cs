@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerShooting : MonoBehaviour {
-
-    private Gun currentGun;
-    private GameObject bulletPrefab;
-    private Transform bulletSpawn;
-    private List<Gun> guns = new List<Gun>();
+public class PlayerShooting : MonoBehaviour
+{
+    private const string BaseGunPath = "Animator/Model/Character_Hands/";
+    private Gun _currentGun;
+    public List<Gun> Guns = new List<Gun>();
 
     private float thrust, startPowerTime;
     public float angleSpeed, maxPowerSeconds;
@@ -18,13 +18,16 @@ public class PlayerShooting : MonoBehaviour {
 
     public UnityEvent shootEvent;
 
-    void Awake() {
+    private void Awake()
+    {
 
+        var hands = transform.Find(BaseGunPath);
         // Fill all the guns from the model and select empty hands
-        for (int i = 0; i < transform.GetChild(0).GetChild(0).GetChild(0).childCount; i++)
+        foreach (var gun in Guns)
         {
-            guns.Add(new Gun(transform.GetChild(0).GetChild(0).GetChild(0).GetChild(i).gameObject));
-            Debug.Log("Gun called: '" + transform.GetChild(0).GetChild(0).GetChild(0).GetChild(i).gameObject.name + "' equipped");
+            var instanceGun = Instantiate(gun, hands);
+            instanceGun.name = gun.name;
+            instanceGun.gameObject.SetActive(false);
         }
 
     }
@@ -40,7 +43,8 @@ public class PlayerShooting : MonoBehaviour {
 
         shoot = false;
 
-        currentGun = guns[0];
+        _currentGun = Guns[0];
+        ChangeGunTo(0);
 
         if (shootEvent == null)
             shootEvent = new UnityEvent();
@@ -74,23 +78,15 @@ public class PlayerShooting : MonoBehaviour {
     }
 
     bool GunEquipped() {
-        return currentGun != guns[0];
+        return _currentGun != Guns[0];
     }
 
     void Fire() {
         // notify all listenrs of this shoot
         if (shootEvent != null) shootEvent.Invoke();
 
-        var bullet = (GameObject)Instantiate(
-            bulletPrefab,
-            bulletSpawn.position,
-            Quaternion.Euler(0, 0, bulletSpawn.rotation.z));
-
-        // Add force to the bullet (vector = bulletPos - gunPos)
-        var shootingVector = (bullet.transform.position - currentGun.transform.position);
-        shootingVector.z = 0;
-        bullet.GetComponent<Rigidbody>().AddForce(shootingVector.normalized * thrust, ForceMode.Impulse);
-
+        _currentGun.Shoot(thrust);
+        
         // Reset to empty hands and reset angle of the gun fired
         ResetGun();
 
@@ -118,22 +114,22 @@ public class PlayerShooting : MonoBehaviour {
         // Upwards rotation
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
         {
-            var xAngle = currentGun.transform.localEulerAngles.x;
+            var xAngle = _currentGun.transform.localEulerAngles.x;
 
             if ((360 - xAngle < maxAngle || xAngle <= (maxAngle + 1)) && (maxAngle > 0))
             {
-                currentGun.transform.Rotate(-angleSpeed, 0, 0);
+                _currentGun.transform.Rotate(-angleSpeed, 0, 0);
             }
         }
 
         // Check rotation of the gun (downwards)
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
         {
-            var xAngle = currentGun.transform.localEulerAngles.x;
+            var xAngle = _currentGun.transform.localEulerAngles.x;
 
             if (xAngle % 90 < maxAngle || 360 - xAngle < maxAngle)
             {
-                currentGun.transform.Rotate(angleSpeed, 0, 0);
+                _currentGun.transform.Rotate(angleSpeed, 0, 0);
             }
         }
         
@@ -151,11 +147,16 @@ public class PlayerShooting : MonoBehaviour {
 
     }
 
+    void setCurrentGunActive(bool boolean)
+    {
+        transform.Find(BaseGunPath + _currentGun.name).gameObject.SetActive(boolean);
+    }
+    
     void ChangeGunTo(int gunIndex) {
 
-        currentGun.SetActive(false);
-        currentGun = guns[gunIndex];
-        currentGun.SetActive(true);
+        setCurrentGunActive(false);
+        _currentGun = Guns[gunIndex];
+        setCurrentGunActive(true);
 
         // Select configurations of the gun
         switch (gunIndex) {
@@ -164,19 +165,12 @@ public class PlayerShooting : MonoBehaviour {
             case 0:
 
                 RestoreShootingParam();
-
-                bulletSpawn = null;
-                bulletPrefab = null;
                 break;
 
             // Cannon gun
             case 1:
 
                 RestoreShootingParam();
-
-                bulletSpawn = currentGun.transform.GetChild(0).GetChild(0);
-                bulletPrefab = Resources.Load("Prefabs/Bullets/Cannon Ball", typeof(GameObject)) as GameObject;
-
                 break;
 
             // Dynamite
@@ -184,9 +178,6 @@ public class PlayerShooting : MonoBehaviour {
 
                 maxAngle = 0;
                 maxPower = minPower = 0;
-
-                bulletSpawn = currentGun.transform.GetChild(0);
-                bulletPrefab = Resources.Load("Prefabs/Bullets/Dynamite", typeof(GameObject)) as GameObject;
                 break;
         }
     }
@@ -194,7 +185,7 @@ public class PlayerShooting : MonoBehaviour {
     void ResetGun() {
         
         // Reset the current gun angle
-        currentGun.RestoreGunAngle();
+        //_currentGun.RestoreGunAngle();
 
         // Set gun to empty hands
         ChangeGunTo(0);
