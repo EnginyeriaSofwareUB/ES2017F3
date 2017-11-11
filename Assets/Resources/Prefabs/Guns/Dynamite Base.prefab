@@ -46,6 +46,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1201324633975158
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4060242094667068}
+  m_Layer: 0
+  m_Name: Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1270261740005664
 GameObject:
   m_ObjectHideFlags: 1
@@ -78,7 +93,7 @@ GameObject:
   - component: {fileID: 64585279291878810}
   - component: {fileID: 114202814101363920}
   m_Layer: 0
-  m_Name: Dinamyte
+  m_Name: Dynamite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -344,6 +359,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4140739077213366}
+  - component: {fileID: 114311834838564246}
   m_Layer: 0
   m_Name: Dynamite Base
   m_TagString: Untagged
@@ -369,6 +385,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4060242094667068
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1201324633975158}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.107, y: -0.251, z: -0.316}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4140739077213366}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4065621128236638
 Transform:
   m_ObjectHideFlags: 1
@@ -402,12 +431,13 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1914818921021976}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.436428, y: -1.0639151, z: 5.390445}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4860190995198168}
   - {fileID: 4154620463687672}
   - {fileID: 4456689393495288}
+  - {fileID: 4060242094667068}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1647,6 +1677,20 @@ MonoBehaviour:
   BulletDamage: 10
   TimeUntilDespawn: 3
   ExplosionDuration: 0
+--- !u!114 &114311834838564246
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1914818921021976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a1d846733cf99c438871a011ea0d4e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpawnPoint: {fileID: 4060242094667068}
+  BulletPrefab: {fileID: 1226028752044792, guid: b1b4636a3b5dee34ba9e16e376a3877a,
+    type: 2}
 --- !u!136 &136081204608322260
 CapsuleCollider:
   m_ObjectHideFlags: 1
