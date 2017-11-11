@@ -9,7 +9,6 @@ public class PlayerShooting : MonoBehaviour
     private const string BaseGunPath = "Animator/Model/Character_Hands/";
     private Gun _currentGun;
     public List<Gun> Guns = new List<Gun>();
-
     private float thrust, startPowerTime;
     public float angleSpeed, maxPowerSeconds;
     public int maxPower, minPower, maxAngle;
@@ -23,11 +22,12 @@ public class PlayerShooting : MonoBehaviour
 
         var hands = transform.Find(BaseGunPath);
         // Fill all the guns from the model and select empty hands
-        foreach (var gun in Guns)
+        for (var i = 0; i < Guns.Count; i++)
         {
-            var instanceGun = Instantiate(gun, hands);
-            instanceGun.name = gun.name;
+            var instanceGun = Instantiate(Guns[i], hands);
+            instanceGun.name = Guns[i].name;
             instanceGun.gameObject.SetActive(false);
+            Guns[i] = instanceGun;
         }
 
     }
