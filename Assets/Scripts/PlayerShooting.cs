@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,6 +8,7 @@ using UnityEngine.Events;
 public class PlayerShooting : MonoBehaviour
 {
     private const string BaseGunPath = "Animator/Model/Character_Hands/";
+    private Transform hands;
     private Gun _currentGun;
     public List<Gun> Guns = new List<Gun>();
     private float thrust, startPowerTime;
@@ -20,7 +22,7 @@ public class PlayerShooting : MonoBehaviour
     private void Awake()
     {
 
-        var hands = transform.Find(BaseGunPath);
+        hands = transform.Find(BaseGunPath);
         // Fill all the guns from the model and select empty hands
         for (var i = 0; i < Guns.Count; i++)
         {
@@ -29,9 +31,13 @@ public class PlayerShooting : MonoBehaviour
             instanceGun.gameObject.SetActive(false);
             Guns[i] = instanceGun;
 
+            // Attach listener to bulletFired
+            instanceGun.bulletFired.AddListener(ResetGun);
+
             // Adjustments on certain guns
             if (instanceGun.name == "Cannon Base") {
-                instanceGun.transform.localPosition = new Vector3(0.2f, -0.2f, -0.5f);
+                instanceGun.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                instanceGun.transform.localPosition = new Vector3(0.4f, 0, 0);
             }
 
         }
@@ -90,10 +96,7 @@ public class PlayerShooting : MonoBehaviour
         // notify all listenrs of this shoot
         if (shootEvent != null) shootEvent.Invoke();
 
-        _currentGun.Shoot(thrust);
-        
-        // Reset to empty hands and reset angle of the gun fired
-        ResetGun();
+        _currentGun.Shoot(thrust, maxPower);
 
     }
 
@@ -116,25 +119,23 @@ public class PlayerShooting : MonoBehaviour
 
 
         ///////////// Check rotation of the gun /////////////////
+
+        var rotAngle = hands.eulerAngles.z;
+
         // Upwards rotation
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
         {
-            var xAngle = _currentGun.transform.localEulerAngles.x;
-
-            if ((360 - xAngle < maxAngle || xAngle <= (maxAngle + 1)) && (maxAngle > 0))
+            if ((360 - rotAngle < maxAngle || rotAngle + angleSpeed <= (maxAngle-0.2f)) && (maxAngle > 0))
             {
-                _currentGun.transform.Rotate(-angleSpeed, 0, 0);
+                hands.Rotate(0, 0, angleSpeed);
             }
         }
 
         // Check rotation of the gun (downwards)
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
-        {
-            var xAngle = _currentGun.transform.localEulerAngles.x;
-
-            if (xAngle % 90 < maxAngle || 360 - xAngle < maxAngle)
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S)) {
+            if ((rotAngle < maxAngle) || (360 - rotAngle + angleSpeed <= (maxAngle-0.2f) && rotAngle >= 360 - maxAngle))
             {
-                _currentGun.transform.Rotate(angleSpeed, 0, 0);
+                hands.Rotate(0, 0, -angleSpeed);
             }
         }
         
@@ -184,13 +185,13 @@ public class PlayerShooting : MonoBehaviour
                 maxPower = minPower = 0;
                 break;
         }
+
+        // Reset hands angle
+        hands.rotation = Quaternion.Euler(0,0,0);
+
     }
 
     void ResetGun() {
-        
-        // Reset the current gun angle
-        //_currentGun.RestoreGunAngle();
-
         // Set gun to empty hands
         ChangeGunTo(0);
     }
