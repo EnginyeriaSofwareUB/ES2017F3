@@ -223,3 +223,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnPoint: {fileID: 4053174438211808}
   BulletPrefab: {fileID: 0}
+  minShootSpeed: 0.3
+  bulletFired:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
