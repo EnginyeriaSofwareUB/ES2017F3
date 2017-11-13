@@ -4,8 +4,8 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
 	private GameController _controller;
-	private FollowingCamera _f;
-	private MovementCamera _m;
+	private FollowingCamera _followingMode;
+	private MovementCamera _mapMode;
 	private Matrix4x4 _perspectiveMatrix, _orthographicMatrix;
 	private float _transitionStartTime;
 	private Vector3 _perspectivePoint;
@@ -18,10 +18,10 @@ public class CameraController : MonoBehaviour {
 	private void Awake () {
 		// Acceso al Controlador, Camara y guardamos la referencia al objeto Jugador.
 		_controller = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
-		_f = Camera.main.GetComponent<FollowingCamera> ();
-		_m = Camera.main.GetComponent<MovementCamera> ();
+		_followingMode = Camera.main.GetComponent<FollowingCamera> ();
+		_mapMode = Camera.main.GetComponent<MovementCamera> ();
 
-		_f.target = _controller.activePlayer;
+		_followingMode.target = _controller.activePlayer;
 		_orthographicMatrix = Matrix4x4.Ortho(
 			-MinimapXSize, MinimapXSize, -MinimapYSize, MinimapYSize,
 			Camera.main.nearClipPlane, Camera.main.farClipPlane);
@@ -31,11 +31,11 @@ public class CameraController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		if (Follow) {
-			_m.enabled = false;
-			_f.enabled = true;
+			_mapMode.enabled = false;
+			_followingMode.enabled = true;
 		} else {
-			_m.enabled = true;
-			_f.enabled = false;
+			_mapMode.enabled = true;
+			_followingMode.enabled = false;
 		}
 	}
 
@@ -48,6 +48,7 @@ public class CameraController : MonoBehaviour {
 		// even though the official documentation specifies that SmoothDamp will take
 		// approximately T time to get there
 		var actualTransitionTime = 4 * transitionTime;
+		// Essentially matrix interpolation until we reach the target
 		while (Time.time < startTime + actualTransitionTime)
 		{
 			var mat = new Matrix4x4();
@@ -66,20 +67,20 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	private void Update () {
         // Update target
-        _f.target = _controller.activePlayer; //TODO: Desde el controler, al canvi de torn es pot canviar el active player del following camera; evitem accedir a cada frame
+        _followingMode.target = _controller.activePlayer; //TODO: Desde el controler, al canvi de torn es pot canviar el active player del following camera; evitem accedir a cada frame
 
 		// Pressing Tab Key makes lock/unlock character
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
-			if (_m.enabled)
-				StartCoroutine(TransitionCameraPerspective(_perspectiveMatrix, _perspectivePoint, PerspectiveTransitionTime/4, _f, _m));
+			if (_mapMode.enabled)
+				StartCoroutine(TransitionCameraPerspective(_perspectiveMatrix, _perspectivePoint, PerspectiveTransitionTime/4, _followingMode, _mapMode));
 			else
 			{
 				_perspectiveMatrix = Camera.main.projectionMatrix;
 				_perspectivePoint = Camera.main.transform.position;
-				_f.enabled = false; // foloowing camera is always updating the position, impedes the lerp to minimap point
+				_followingMode.enabled = false; // foloowing camera is always updating the position, impedes the lerp to minimap point
 				Camera.main.ResetProjectionMatrix();
-				StartCoroutine(TransitionCameraPerspective(_orthographicMatrix, _minimapPoint, PerspectiveTransitionTime, _m, _f));
+				StartCoroutine(TransitionCameraPerspective(_orthographicMatrix, _minimapPoint, PerspectiveTransitionTime, _mapMode, _followingMode));
 
 			}
 		}

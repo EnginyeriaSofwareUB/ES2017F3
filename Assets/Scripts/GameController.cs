@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour {
     public float turnTime = 10.0f;
 	public float turnRemainingTime;
 
+	[Header("Guns")] public List<Gun> AvailableGuns;
 	// Use this for initialization
 	void Start () {
 		//TODO: Set the activePlayer to the Main Player.
