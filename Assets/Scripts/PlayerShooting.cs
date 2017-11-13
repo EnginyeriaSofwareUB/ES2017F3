@@ -10,7 +10,7 @@ public class PlayerShooting : MonoBehaviour
     private const string BaseGunPath = "Animator/Model/Character_Hands/";
     private Transform hands;
     private Gun _currentGun;
-    public List<Gun> Guns = new List<Gun>();
+    private List<Gun> _guns;
     private float thrust, startPowerTime;
     public float angleSpeed, maxPowerSeconds;
     public int maxPower, minPower, maxAngle;
@@ -21,15 +21,15 @@ public class PlayerShooting : MonoBehaviour
 
     private void Awake()
     {
-
+        _guns = new List<Gun>(GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().AvailableGuns);
         hands = transform.Find(BaseGunPath);
         // Fill all the guns from the model and select empty hands
-        for (var i = 0; i < Guns.Count; i++)
+        for (var i = 0; i < _guns.Count; i++)
         {
-            var instanceGun = Instantiate(Guns[i], hands);
-            instanceGun.name = Guns[i].name;
+            var instanceGun = Instantiate(_guns[i], hands);
+            instanceGun.name = _guns[i].name;
             instanceGun.gameObject.SetActive(false);
-            Guns[i] = instanceGun;
+            _guns[i] = instanceGun;
 
             // Attach listener to bulletFired
             instanceGun.bulletFired.AddListener(ResetGun);
@@ -89,7 +89,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
     bool GunEquipped() {
-        return _currentGun != Guns[0];
+        return _currentGun != _guns[0];
     }
 
     void Fire() {
@@ -162,7 +162,7 @@ public class PlayerShooting : MonoBehaviour
     void ChangeGunTo(int gunIndex) {
 
         setCurrentGunActive(false);
-        _currentGun = Guns[gunIndex];
+        _currentGun = _guns[gunIndex];
         setCurrentGunActive(true);
 
         // Select configurations of the gun

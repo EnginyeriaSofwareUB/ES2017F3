@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 4892263425820710}
   m_Layer: 0
   m_Name: Character_Base
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -261,7 +261,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1271816781568750}
   m_LocalRotation: {x: -0, y: 0.0018702752, z: -0, w: 0.9999983}
-  m_LocalPosition: {x: 0, y: 0.936, z: -0.7}
+  m_LocalPosition: {x: 4.62, y: 1.9293387, z: -0.64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4192321590983322}
@@ -760,10 +760,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7223287cf2a9de44482071287b383632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Guns:
-  - {fileID: 114965324328097152, guid: 5b9bf882cc85a76469650f905e06eef9, type: 2}
-  - {fileID: 114727934429342124, guid: 9be5a490636abea42a9be5c1a90afd4d, type: 2}
-  - {fileID: 114311834838564246, guid: 61f001341212f9b4fad937ffa4259e23, type: 2}
   angleSpeed: 0.6
   maxPowerSeconds: 3.5
   maxPower: 40
