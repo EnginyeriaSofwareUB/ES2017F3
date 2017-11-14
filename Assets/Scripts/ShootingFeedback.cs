@@ -36,18 +36,23 @@ public class ShootingFeedback : MonoBehaviour {
             bar.transform.position = gunBase.transform.position;
 
             float movement = GetComponent<PlayerMovement>().horizontal; //positive = right, negative = left
+            
             if (movement > 0)
+            {
                 last_dir = 1;
-            else if (movement < 0)
-                last_dir = -1;
+            }else if (movement < 0)
+            {
+                last_dir = -1;  
+            }
 
             bar.transform.localScale = new Vector3(last_dir, bar.transform.localScale.y, bar.transform.localScale.z);
-            bar.transform.eulerAngles = new Vector3(bar.transform.eulerAngles.x, bar.transform.eulerAngles.y, -last_dir * gunBase.transform.eulerAngles.x);
-
+            //bar.transform.eulerAngles = new Vector3(bar.transform.eulerAngles.x, bar.transform.eulerAngles.y, -last_dir * gunBase.transform.eulerAngles.z);
+            bar.transform.rotation = gunBase.transform.rotation;
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                //bar.gameObject.SetActive(true);
+                bar.enabled = true;
+
                 time += Time.deltaTime;
                 bar.transform.localScale = new Vector3(last_dir + time, bar.transform.localScale.y, bar.transform.localScale.z);
 
@@ -85,7 +90,10 @@ public class ShootingFeedback : MonoBehaviour {
                 time = 0f;
 
                 UI_bar.rectTransform.sizeDelta = new Vector2(1f, UI_bar.rectTransform.sizeDelta.y);
-                // bar.gameObject.SetActive(false);
+                //UI_bar.color = new Color(UI_bar.color.r, UI_bar.color.g, UI_bar.color.b, 0f); //set invisible
+                //bar.gameObject.SetActive(false);
+                bar.enabled = false;
+                print("shot");
             }
             
 
@@ -116,7 +124,10 @@ public class ShootingFeedback : MonoBehaviour {
             bar.gameObject.SetActive(false);
         }
 
+
         
 
     }
+
+
 }
