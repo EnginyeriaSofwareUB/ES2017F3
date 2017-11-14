@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour {
 		none,
 	};
 
+	public GameObject completeLevelUI; //elemento para poder poner gameOver image
+
 	public gameStates current = gameStates.none;
     [Header("Canvas Objects")]
     public Text turnTimerText;
@@ -43,6 +45,7 @@ public class GameController : MonoBehaviour {
     public float turnTime = 10.0f;
 	public float turnRemainingTime;
 
+	[Header("Guns")] public List<Gun> AvailableGuns;
 	// Use this for initialization
 	void Start () {
         //TODO: Set the activePlayer to the Main Player.
@@ -122,6 +125,10 @@ public class GameController : MonoBehaviour {
         players.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
     }
 
+	public void CompleteLevel() //activar pantalla GameOver
+	{
+		completeLevelUI.SetActive (true);
+	}
 
     void changeTurn() {
 		// disable movement and firing to the previous player
@@ -140,8 +147,10 @@ public class GameController : MonoBehaviour {
 
             current = gameStates.gameOver;
 
+			CompleteLevel ();//activar pantalla GameOver
+
 	        //Return to main menu
-	        SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
+	        //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
 	    }
 
         else {

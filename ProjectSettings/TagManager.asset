@@ -12,6 +12,7 @@ TagManager:
   - WindUI_bar
   - ShootUI_bar
   - ShootUI_text
+  - Minimap Point
   layers:
   - Default
   - TransparentFX
