@@ -506,7 +506,7 @@ Prefab:
       propertyPath: AvailableGuns.Array.data[2]
       value: 
       objectReference: {fileID: 114311834838564246, guid: 61f001341212f9b4fad937ffa4259e23,
-        type: 2}
+        type: 2
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
   m_IsPrefabParent: 0
