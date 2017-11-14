@@ -46,6 +46,11 @@ public class GameController : MonoBehaviour {
 	public float turnRemainingTime;
     public float afterShootTime = 3f;
 
+	// Sudden Death (Reduces HP of all plyers to 1)
+	public int turnsTillSudden = 10;
+	private bool suddenDeath = false;
+	private int turnCount;
+
 	[Header("Guns")] public List<Gun> AvailableGuns;
 	// Use this for initialization
 	void Start () {
@@ -55,6 +60,7 @@ public class GameController : MonoBehaviour {
         //Spawn players
         InitGame();
 
+        turnCount = 0;
         // retrieve players
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
 		// initiate
@@ -165,6 +171,14 @@ public class GameController : MonoBehaviour {
         if(players.Count >= 2) {
             // Game continues
 
+			if (!suddenDeath) {
+				if (turnCount >= turnsTillSudden) {
+					SuddenDeath ();
+					suddenDeath = true;
+				}
+				turnCount += 1;
+			}
+				
             activePlayer = players[turnId];
             Debug.Log("Now active player is: " + activePlayer);
             // enable movement
@@ -203,4 +217,11 @@ public class GameController : MonoBehaviour {
         }
         turnTimerText.text = turnRemainingTime.ToString("00"); //Remaining time 
     }
+
+	void SuddenDeath() {
+		Debug.Log("Sudden Death ON ::: All players at 1HP");
+		foreach (GameObject player in players) {
+			player.GetComponent<PlayerController> ().Damage ((player.GetComponent<PlayerController> ().health - 1));
+		}
+	}
 }
