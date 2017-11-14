@@ -116,32 +116,6 @@ public class PlayerController : MonoBehaviour {
 
     }
 
-    private void FixedUpdate()
-    {
-        CheckOrientation();
-    }
-
-
-    /*Check player movement direction to apply scale mirror or not*/
-    void CheckOrientation()
-    {
-        float movement = GetComponent<PlayerMovement>().horizontal; //positive = right, negative = left
-
-        if (movement > 0)
-        {
-            playerModel.localScale = new Vector3(1f, playerModel.localScale.y, playerModel.localScale.z);
-            last_dir = 1;
-        }else if (movement < 0)
-        {
-            playerModel.localScale = new Vector3(-1f, playerModel.localScale.y, playerModel.localScale.z);
-            last_dir = -1;
-        }
-        else
-        {
-            playerModel.localScale = new Vector3(last_dir, playerModel.localScale.y, playerModel.localScale.z);
-        }
-    }
-
     /*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */
     public void Damage(float value)
     {
