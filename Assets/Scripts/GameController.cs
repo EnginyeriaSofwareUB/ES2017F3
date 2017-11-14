@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour {
     // in seconds
     public float turnTime = 10.0f;
 	public float turnRemainingTime;
+    public float afterShootTime = 3f;
 
 	// Sudden Death (Reduces HP of all plyers to 1)
 	public int turnsTillSudden = 10;
@@ -124,7 +125,8 @@ public class GameController : MonoBehaviour {
     void OnShoot() {
 		// disable shooting
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
-	}
+        turnRemainingTime = afterShootTime;
+    }
 
     void OnDeath(int playerId) {
         // Delete from players dead player
@@ -137,29 +139,36 @@ public class GameController : MonoBehaviour {
 	}
 
     void changeTurn() {
-		// disable movement and firing to the previous player
-		activePlayer.GetComponent<PlayerMovement>().enabled = false;
-		activePlayer.GetComponent<PlayerShooting>().enabled = false;
-
-		// point to the next player
-		turnId = (turnId + 1) % players.Count;
-		// FIXME @rafa: this dummy assignment will lead weird bugs
-		// TODO: pass to next plater with a better way
-
-	    if (players.Count < 2) {
+        if (players.Count < 2)
+        {
             // Game finished
 
             Debug.Log("Game has ended!");
 
             current = gameStates.gameOver;
 
-			CompleteLevel ();//activar pantalla GameOver
+            CompleteLevel();//activar pantalla GameOver
 
-	        //Return to main menu
-	        //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
-	    }
+            //Return to main menu
+            //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
+        }
 
-        else {
+        // disable movement and firing to the previous player
+        if (activePlayer)
+        {
+            activePlayer.GetComponent<PlayerMovement>().enabled = false;
+            activePlayer.GetComponent<PlayerShooting>().enabled = false;
+        }
+        
+
+		// point to the next player
+		turnId = (turnId + 1) % players.Count;
+		// FIXME @rafa: this dummy assignment will lead weird bugs
+		// TODO: pass to next plater with a better way
+
+	    
+
+        if(players.Count >= 2) {
             // Game continues
 
 			if (!suddenDeath) {
@@ -181,6 +190,8 @@ public class GameController : MonoBehaviour {
             turnRemainingTime = turnTime;
         }
 
+
+        GetComponent<WindController>().ChangeWindRandom();
 	}
 	
 	// Update is called once per frame
