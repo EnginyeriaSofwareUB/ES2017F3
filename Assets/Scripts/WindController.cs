@@ -9,6 +9,7 @@ public class WindController : MonoBehaviour {
     [Space(5)]
     public float windForce; //min 0 max 5;
     public Vector2 windDirection;
+    public int dir = 0;
     //[Space(5)]
     //public string[] tagsToApplyWind = { "Player", "Bullet" };
     [Space(5)]
@@ -16,16 +17,8 @@ public class WindController : MonoBehaviour {
     [Space(5)]
 
     [Header("UI")]
-    public bool bars = false;
-
-    public Transform[] windBars;
-    public Transform currentBar ;
-    public int currentBarIdx = 0;
-    public float barPopDistance = 0.5f;
-    public float barPopDuration = 0.25f;
+    public RectTransform[] windBars;
     float bar_startScale;
-    float[] bar_sizes = new float[5];
-    //public float barPopChangeTime = 0.25f;
 
     [Space(10)]
     public GameObject fan_UI;
@@ -33,139 +26,155 @@ public class WindController : MonoBehaviour {
     Vector3 arrow_scale;
     Vector3 fan_scale;
 
-    
+  
 
-    // Use this for initialization
-    void Start () {
-        /* foreach (string tag in tagsToApplyWind){objectsWind.AddRange(GameObject.FindGameObjectsWithTag(tag));} */
 
-        if (bars)
+    void Start()
+    {
+        arrow_scale = arrow_UI.transform.localScale;
+        fan_scale = fan_UI.transform.localScale;
+        bar_startScale = windBars[0].localScale.y;
+
+        objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+
+        if(windDirection.x < 0)
         {
-            bar_startScale = windBars[0].localScale.y;
-
-            int i = 0;
-            foreach (float scale in bar_sizes)
+            dir = -1;
+            foreach (Transform bar in windBars)
             {
-                bar_sizes[i] = bar_startScale * i;
-                i++;
-            }
+                if (bar.gameObject.activeSelf)
+                {
+                    bar.localScale = new Vector3(bar_startScale * dir, bar_startScale, bar_startScale);
 
-            BarEffect();
+                }
+            }
         }
         else
         {
-            arrow_scale = arrow_UI.transform.localScale;
-            fan_scale = fan_UI.transform.localScale;
-        }
-        
+            dir = 1;
+            foreach (Transform bar in windBars)
+            {
+                if (bar.gameObject.activeSelf)
+                {
+                    bar.localScale = new Vector3(bar_startScale * dir, bar_startScale, bar_startScale);
 
-        objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
-        
+                }
+            }
+        }
     }
+
+
 
     void Update()
     {
-        if (bars)
-        {
-            //will get better, dont panic
-            if (windForce <= 0)
-            {
-                BarScale(0f);
-            }
-            else if (windForce == 1)
-            {
-                BarScale(1f);
-            }
-            else if (windForce == 2)
-            {
-                BarScale(2f);
-            }
-            else if (windForce == 3)
-            {
-                BarScale(3f);
-            }
-            else if (windForce == 4)
-            {
-                BarScale(4f);
-            }
-            else
-            {
-                BarScale(5f);
-            }
-        }
-        else
-        {            
-
-            if(windDirection.x > 0)
-            {
-                arrow_UI.SetActive(true);
-                arrow_UI.transform.localScale = arrow_scale;
-                fan_UI.transform.localScale = fan_scale;
-                fan_UI.transform.Rotate(0f, 0f, -30f * windForce * Time.deltaTime);
-            }
-            else if(windDirection.x < 0)
-            {
-                arrow_UI.SetActive(true);
-                arrow_UI.transform.localScale = new Vector3(arrow_scale.x * -1f, arrow_scale.y, arrow_scale.z);
-                fan_UI.transform.localScale = new Vector3(fan_scale.x * -1f, fan_scale.y, fan_scale.z);
-                fan_UI.transform.Rotate(0f, 0f, 30f * windForce * Time.deltaTime);
-            }
-            else
-            {
-                arrow_UI.SetActive(false);
-            }
-        }
         
-
-    }
-
-    void BarScale(float scale)
-    {
-        foreach(Transform bar in windBars)
-        {
-            bar.localScale = new Vector3(bar.localScale.x, scale, bar.localScale.z);
-        }
-    }
-
-    void BarEffect()
-    {
         if (windDirection.x > 0)
         {
-            currentBar = windBars[currentBarIdx];
-            StimulateCurrentBar();
-            if (currentBarIdx + 1 >= windBars.Length)
-                currentBarIdx = 0;
-            else
-                currentBarIdx++;
+            arrow_UI.SetActive(true);
+            //arrow_UI.transform.localScale = arrow_scale;
+            //SetBarsDirection(1);
+
+            foreach (Transform bar in windBars)
+            {
+                bar.localScale = new Vector3(1f, bar_startScale, bar_startScale);//Mathf.Abs(bar_startScale) *
+            }
+            Canvas.ForceUpdateCanvases();
+
+            fan_UI.transform.localScale = fan_scale;
+            fan_UI.transform.Rotate(0f, 0f, -30f * windForce * Time.deltaTime);
         }
-        else if(windDirection.x < 0)
+        else if (windDirection.x < 0)
         {
-            currentBar = windBars[currentBarIdx];
-            StimulateCurrentBar();
-            if (currentBarIdx - 1 < 0)
-                currentBarIdx = windBars.Length-1;
-            else
-                currentBarIdx--;
+            arrow_UI.SetActive(true);
+            //arrow_UI.transform.localScale = new Vector3(arrow_scale.x * -1f, arrow_scale.y, arrow_scale.z);
+            //SetBarsDirection(-1);
+            foreach (Transform bar in windBars)
+            {
+                bar.localScale = new Vector3(-1f, bar_startScale, bar_startScale);//Mathf.Abs(bar_startScale) *
+            }
+            Canvas.ForceUpdateCanvases();
+
+            fan_UI.transform.localScale = new Vector3(fan_scale.x * -1f, fan_scale.y, fan_scale.z);
+            fan_UI.transform.Rotate(0f, 0f, 30f * windForce * Time.deltaTime);
         }
         else
         {
-
+            arrow_UI.SetActive(false);
         }
-        
+
+        SetNumberBars(Mathf.RoundToInt(windForce));
+        GarbageClean();
+
+        /* For testing purposes
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            windDirection = new Vector2(0f, 1f);
+            //int lastdir = dir;
+            windForce = Random.Range(0f, 4.9f);
+            float r = Random.Range(0f, 1.1f);
+            if (r > 0.5f)
+                dir = 1;
+            if (r <= 0.5f)
+                dir = -1;
+
+            windDirection = new Vector2(dir, 1f);
+            //if (lastdir != dir)
+            //print("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            //SetBarsDirection(dir);
+            print("[WIND] Random change dir " + dir + ", force " + windForce);
+        }*/
     }
 
-
-    void StimulateCurrentBar() //move a lil bit up
+    void GarbageClean()
     {
-        currentBar.position = new Vector3(currentBar.position.x, currentBar.position.y + barPopDistance, currentBar.position.z);
-        Invoke("DestimulateCurrentBar", barPopDuration);
+        foreach (GameObject o in objectsWind)
+        {
+            if (o == null)
+                Destroy(o);
+        }
     }
 
-    void DestimulateCurrentBar() //move lil bit down
+
+    void SetNumberBars(int n)
     {
-        currentBar.position = new Vector3(currentBar.position.x, currentBar.position.y - barPopDistance, currentBar.position.z);
-        Invoke("BarEffect", 0f);
+        int j = 0;
+        foreach( Transform bar in windBars)
+        {
+            if (j < n)
+            {
+                bar.gameObject.SetActive(true);
+                print("[WIND] n Bars changed");
+            }
+            else
+            {
+                bar.gameObject.SetActive(false);
+            }
+            j++;
+        }
+
+        //SetBarsDirection(dir);
     }
+
+    /*
+    void SetBarsDirection(int d)
+    {
+
+        //print(d + " <> " + dir);
+        if (d != dir)
+        {
+            foreach (Transform bar in windBars)
+            {
+                //if (bar.gameObject.activeSelf)
+                //{
+                print("[WIND] Changed direction to "+d);
+                bar.localScale = new Vector3( d, bar_startScale, bar_startScale);//Mathf.Abs(bar_startScale) *
+
+                //}
+            }
+            dir = d;
+        }
+
+    }*/
 
 
     // Update is called once per frame
@@ -173,7 +182,13 @@ public class WindController : MonoBehaviour {
         if (windActive)
         {
             //agafem la municio en aquet frame
-            objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Bullet"));
+            foreach(GameObject bullet in GameObject.FindGameObjectsWithTag("Bullet"))
+            {
+                if (!objectsWind.Contains(bullet))
+                {
+                    objectsWind.Add(bullet);
+                }
+            }
 
             foreach(GameObject obj in objectsWind)
             {
@@ -196,6 +211,28 @@ public class WindController : MonoBehaviour {
         }
 
 	}
+
+
+    public void ChangeWindRandom()
+    {
+        windDirection = new Vector2(0f, 1f);
+        //int lastdir = dir;
+        windForce = Random.Range(0f, 4.9f);
+        float r = Random.Range(0f, 1.1f);
+        if (r > 0.5f)
+            dir = 1;
+        if (r <= 0.5f)
+            dir = -1;
+        
+        windDirection = new Vector2(dir, 1f);
+        //if (lastdir != dir)
+            //print("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        //SetBarsDirection(dir);
+        print("[WIND] Random change dir "+dir+", force "+windForce);
+    }
+
+
+
 
     private void OnDrawGizmos()
     {

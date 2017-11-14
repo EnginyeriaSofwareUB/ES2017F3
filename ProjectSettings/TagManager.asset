@@ -8,6 +8,10 @@ TagManager:
   - DestructibleCube
   - Death
   - ReferencePoint
+  - Bullet
+  - WindUI_bar
+  - ShootUI_bar
+  - ShootUI_text
   layers:
   - Default
   - TransparentFX
