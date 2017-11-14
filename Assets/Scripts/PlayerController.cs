@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     GameController gameControl;
@@ -15,16 +16,26 @@ public class PlayerController : MonoBehaviour {
         dying,
     }
     public PlayerState currentState;
+    public Transform playerModel;
 
     [Header("Player Stats")]
+    public int TEAM;
     public int playerId;
     public float maxHealth = 100f;
     public float health;
-
+    [Space(5)]
+    [HideInInspector] public int last_dir = 0;
 
     [Space(5)]
-    [Header("TESTIN")]
-    public bool mainPlayer = false;
+
+    [Header("PlayerCanvas")]
+    public bool healthInNumber = false;
+    public Slider healthbar;
+    public Image healthbar_fill;
+    public Text healthtext;
+    public Text damageText;
+    Canvas playerCanvas;
+
 
     public IntUnityEvent deathEvent;
 
@@ -33,16 +44,58 @@ public class PlayerController : MonoBehaviour {
 
     private void Awake()
     {
-        //gameControl = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
-        //if (mainPlayer)
-            //gameControl.activePlayer = this.gameObject;
+        gameControl = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
+        animator = GetComponentInChildren<Animator>();
+        playerCanvas = GetComponentInChildren<Canvas>();
 
         health = maxHealth;
-        currentState = PlayerState.none;
 
-        
-        animator = GetComponentInChildren<Animator>();
+        InitPlayerCanvas();
+
+        currentState = PlayerState.none;
     }
+
+
+    void InitPlayerCanvas()
+    {
+        //init health bar / text
+        healthbar.minValue = 0f;
+        healthbar.maxValue = maxHealth;
+        healthbar.value = health;
+        healthtext.text = health.ToString() + "%";
+
+        if (healthInNumber)
+            healthbar.gameObject.SetActive(false);
+        else
+            healthtext.enabled = false;
+
+        SetHealthColor();
+    }
+
+    void SetHealthColor()
+    {
+        if(health >= 80f)
+        {
+            healthtext.color = Color.green;
+            healthbar_fill.color = Color.green;
+        }
+        else if(health < 80f && health >= 50f)
+        {
+            healthtext.color = Color.yellow;
+            healthbar_fill.color = Color.yellow;
+        }
+        else if(health < 50f && health >= 30f)
+        {
+            healthtext.color = Color.red;
+            healthbar_fill.color = Color.red;
+        }
+        else
+        {
+            healthtext.color = Color.magenta;
+            healthbar_fill.color = Color.magenta;
+        }
+    }
+
 
     // Use this for initialization
     void Start () {
@@ -63,19 +116,53 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+    private void FixedUpdate()
+    {
+        CheckOrientation();
+    }
 
+
+    /*Check player movement direction to apply scale mirror or not*/
+    void CheckOrientation()
+    {
+        float movement = GetComponent<PlayerMovement>().horizontal; //positive = right, negative = left
+
+        if (movement > 0)
+        {
+            playerModel.localScale = new Vector3(1f, playerModel.localScale.y, playerModel.localScale.z);
+            last_dir = 1;
+        }else if (movement < 0)
+        {
+            playerModel.localScale = new Vector3(-1f, playerModel.localScale.y, playerModel.localScale.z);
+            last_dir = -1;
+        }
+        else
+        {
+            playerModel.localScale = new Vector3(last_dir, playerModel.localScale.y, playerModel.localScale.z);
+        }
+    }
 
     /*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */
     public void Damage(float value)
     {
         animator.SetTrigger("hurt");
+        damageText.text = "-"+value.ToString();
+
 
         if (health - value > 0f)
+        {
             health = health - value;
-        else
-            Dying();
-    }
 
+            healthbar.value = health;
+            healthtext.text = health.ToString() + "%";
+
+            SetHealthColor();
+        }
+        else
+        {
+            Dying();
+        }
+    }
 
     void Dying()
     {
@@ -95,9 +182,28 @@ public class PlayerController : MonoBehaviour {
         // notify all listeners of this death
         if (deathEvent != null) deathEvent.Invoke(playerId);
 
-        Destroy(this.gameObject);
+        //Delete himself from GControl lists
+        switch (TEAM)
+        {
+            case 1:
+                gameControl.team1.Remove(this.gameObject);
+                break;
+            case 2:
+                gameControl.team2.Remove(this.gameObject);
+                break;
+        }
 
+        Destroy(this.gameObject);
     }
 
+
+
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(transform.position, this.transform.right.normalized);
+
+    }
 
 }
