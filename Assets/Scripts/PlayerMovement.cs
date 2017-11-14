@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	public Rigidbody rb;
 
-    private float horizontal;
+    public float horizontal;
     private bool jump;
 	private bool isGrounded;
     private const float m_JumpPower = 6f; // The force added to the ball when it jumps.
@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour {
 
         // Check movement Inputs
 		horizontal = Input.GetAxis ("Horizontal") * 5f;
-	    if (Input.GetKeyDown(KeyCode.Space) && canJump)
+	    if (Input.GetKeyDown(KeyCode.Space))
 	        jump = true;
 	}
 
