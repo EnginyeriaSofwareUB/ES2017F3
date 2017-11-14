@@ -325,7 +325,7 @@ Prefab:
     - target: {fileID: 114239620988300414, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39,
         type: 2}
       propertyPath: turnsTillSudden
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f2f7c32e678dcdb4a909cfdf5c0cbe39, type: 2}
@@ -560,9 +560,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   current: 1
-  frequency: 10
-  cloudTimeCloudy: 1.3
-  cloudTimeStormy: 0.6
+  cloudSpawnTimeCloudy: 1.3
+  cloudSpawnTimeStormy: 0.4
   cloudModels:
   - {fileID: 1729408854447226, guid: aaf87087f46af2445a038e0e05040877, type: 2}
   - {fileID: 1798508338171708, guid: b6c203be6f8fea34ba2d26c7581e81d9, type: 2}
@@ -660,6 +659,18 @@ Prefab:
     - target: {fileID: 4765392300862292, guid: 7f73a7117fddda1438b0709472135198, type: 2}
       propertyPath: m_LocalPosition.y
       value: -0.86
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831439831841958, guid: 7f73a7117fddda1438b0709472135198, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831439831841958, guid: 7f73a7117fddda1438b0709472135198, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831439831841958, guid: 7f73a7117fddda1438b0709472135198, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f73a7117fddda1438b0709472135198, type: 2}
@@ -1093,6 +1104,18 @@ Prefab:
     - target: {fileID: 1656243273278970, guid: 7f73a7117fddda1438b0709472135198, type: 2}
       propertyPath: m_Name
       value: Player_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831439831841958, guid: 7f73a7117fddda1438b0709472135198, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831439831841958, guid: 7f73a7117fddda1438b0709472135198, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4831439831841958, guid: 7f73a7117fddda1438b0709472135198, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f73a7117fddda1438b0709472135198, type: 2}

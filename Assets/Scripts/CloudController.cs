@@ -29,7 +29,7 @@ public class CloudController : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		if (transform.position.x <= endX) {
 			rb.velocity = new Vector3(velocity, 0, 0);
 		} else {

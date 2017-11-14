@@ -11,9 +11,8 @@ public class WeatherController : MonoBehaviour {
 	}; 
 
 	public weatherState current = weatherState.CALM;
-	public int frequency = 100000;
-	public float cloudTimeCloudy = 1.3f;
-	public float cloudTimeStormy = 0.4f;
+	public float cloudSpawnTimeCloudy = 1.3f;
+	public float cloudSpawnTimeStormy = 0.4f;
 
 	private float cloudDelay = 0.0f;
 	public List<GameObject> cloudModels;
@@ -47,7 +46,7 @@ public class WeatherController : MonoBehaviour {
 				if (clouds.Count <= 5) {
 
 					cloudDelay += Time.deltaTime;
-					if (cloudDelay >= cloudTimeCloudy) {
+					if (cloudDelay >= cloudSpawnTimeCloudy) {
 						cloudDelay = 0.0f;
 
 						// Spawn a Cloud (instantiate CloudController, rigidbody and GameObject).
@@ -66,7 +65,7 @@ public class WeatherController : MonoBehaviour {
 				if (clouds.Count <= 25) {
 					
 					cloudDelay += Time.deltaTime;
-					if (cloudDelay >= cloudTimeStormy) {
+					if (cloudDelay >= cloudSpawnTimeStormy) {
 						cloudDelay = 0.0f;
 
 						// Spawn a Cloud (instantiate CloudController, rigidbody and GameObject).
