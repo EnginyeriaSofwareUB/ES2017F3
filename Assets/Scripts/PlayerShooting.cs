@@ -1,25 +1,61 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerShooting : MonoBehaviour {
-
-    public GameObject bulletPrefab, bulletGun, gunBase;
-    public Transform bulletSpawn;
+public class PlayerShooting : MonoBehaviour
+{
+    private const string BaseGunPath = "Animator/Model/Character_Hands/";
+    private Transform hands;
+    private Gun _currentGun;
+    private List<Gun> _guns;
     private float thrust, startPowerTime;
     public float angleSpeed, maxPowerSeconds;
     public int maxPower, minPower, maxAngle;
+    private int initMaxPower, initMinPower, initMaxAngle;
     private bool shoot;
 
-    public UnityEvent shootEvent; 
+    public UnityEvent shootEvent;
+
+    private void Awake()
+    {
+        _guns = new List<Gun>(GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().AvailableGuns);
+        hands = transform.Find(BaseGunPath);
+        // Fill all the guns from the model and select empty hands
+        for (var i = 0; i < _guns.Count; i++)
+        {
+            var instanceGun = Instantiate(_guns[i], hands);
+            instanceGun.name = _guns[i].name;
+            instanceGun.gameObject.SetActive(false);
+            _guns[i] = instanceGun;
+
+            // Attach listener to bulletFired
+            instanceGun.bulletFired.AddListener(ResetGun);
+
+            // Adjustments on certain guns
+            if (instanceGun.name == "Cannon Base") {
+                instanceGun.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+                instanceGun.transform.localPosition = new Vector3(0.4f, 0, 0);
+            }
+
+        }
+
+    }
 
     // Use this for initialization
     void Start()
     {
 
         // Init variables
+        initMaxPower = maxPower;
+        initMinPower = minPower;
+        initMaxAngle = maxAngle;
+
         shoot = false;
+
+        ChangeGunTo(0);
 
         if (shootEvent == null)
             shootEvent = new UnityEvent();
@@ -31,7 +67,7 @@ public class PlayerShooting : MonoBehaviour {
     {
 
         // If shoot pressed then fire bullet
-        if (shoot)
+        if (shoot && GunEquipped())
         {
             Fire();
             // Shoot done
@@ -40,20 +76,39 @@ public class PlayerShooting : MonoBehaviour {
 
     }
 
-
-
     // Update call
-    void Update()
-    {
+    void Update() {
+
+        // If gun equipped then check inputs related to gun interactions (fire and angle)
+        if (GunEquipped()) {
+            CheckGunInputs();
+        }
+
+        CheckChangeGun();
+
+    }
+
+    bool GunEquipped() {
+        return _currentGun != _guns[0];
+    }
+
+    void Fire() {
+        // notify all listenrs of this shoot
+        if (shootEvent != null) shootEvent.Invoke();
+
+        _currentGun.Shoot(thrust, maxPower);
+
+    }
 
 
-        // Check fire
+    void CheckGunInputs() {
+
+        //////////// Check fire /////////////
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             // Time when space pressed
             startPowerTime = Time.time;
         }
-
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             // Time when space pressed
@@ -62,73 +117,91 @@ public class PlayerShooting : MonoBehaviour {
         }
 
 
-        if (gunBase.name == "Gun Base") {
 
-            // Check rotation of the gun (upwards)
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
+        ///////////// Check rotation of the gun /////////////////
+
+        var rotAngle = hands.eulerAngles.z;
+
+        // Upwards rotation
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
+        {
+            if ((360 - rotAngle < maxAngle || rotAngle + angleSpeed <= (maxAngle-0.2f)) && (maxAngle > 0))
             {
-                var zAngle = gunBase.transform.localEulerAngles.z;
-
-                if (zAngle % 90 < maxAngle || 360 - zAngle < maxAngle)
-                {
-                    gunBase.transform.Rotate(0, 0, angleSpeed);
-                }
-            }
-
-            // Check rotation of the gun (downwards)
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
-            {
-                var zAngle = gunBase.transform.localEulerAngles.z;
-
-                if (360 - zAngle < maxAngle || zAngle <= (maxAngle + 1))
-                {
-                    gunBase.transform.Rotate(0, 0, -angleSpeed);
-                }
+                hands.Rotate(0, 0, angleSpeed);
             }
         }
 
-        else if (gunBase.name == "Cannon Base") {
-            // Check rotation of the gun (upwards)
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
+        // Check rotation of the gun (downwards)
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S)) {
+            if ((rotAngle < maxAngle) || (360 - rotAngle + angleSpeed <= (maxAngle-0.2f) && rotAngle >= 360 - maxAngle))
             {
-                var xAngle = gunBase.transform.localEulerAngles.x;
-
-                if (360 - xAngle < maxAngle || xAngle <= (maxAngle + 1))
-                {
-                    gunBase.transform.Rotate(-angleSpeed, 0, 0);
-                }
-            }
-
-            // Check rotation of the gun (downwards)
-            if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
-            {
-                var xAngle = gunBase.transform.localEulerAngles.x;
-
-                if (xAngle % 90 < maxAngle || 360 - xAngle < maxAngle)
-                {
-                    gunBase.transform.Rotate(angleSpeed, 0, 0);
-                }
+                hands.Rotate(0, 0, -angleSpeed);
             }
         }
+        
+    }
+
+
+    void CheckChangeGun() {
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            ChangeGunTo(0);
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+            ChangeGunTo(1);
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+            ChangeGunTo(2);
 
     }
 
-    void Fire() {
-        // notify all listenrs of this shoot
-        if (shootEvent != null) shootEvent.Invoke();
-
-        // Create the Bullet from the Bullet Prefab
-        var bullet = (GameObject)Instantiate(
-            bulletPrefab,
-            bulletSpawn.position,
-            bulletSpawn.rotation);
-
-        // Add force to the bullet (vector = bulletPos - gunPos)
-        var shootingVector = (bullet.transform.position - gunBase.transform.position);
-        shootingVector.z = 0;
-        bullet.GetComponent<Rigidbody>().AddForce(shootingVector.normalized * thrust, ForceMode.Impulse);
-
-        // Destroy the bullet after 2.5 seconds
-        Destroy(bullet, 2.5f);
+    void setCurrentGunActive(bool boolean) {
+        if (_currentGun != null) {
+            transform.Find(BaseGunPath + _currentGun.name).gameObject.SetActive(boolean);
+        }
     }
+    
+    void ChangeGunTo(int gunIndex) {
+
+        setCurrentGunActive(false);
+        _currentGun = _guns[gunIndex];
+        setCurrentGunActive(true);
+
+        // Select configurations of the gun
+        switch (gunIndex) {
+            
+            // Empty hands
+            case 0:
+                RestoreShootingParam();
+                break;
+
+            // Cannon gun
+            case 1:
+                RestoreShootingParam();
+                break;
+
+            // Dynamite
+            case 2:
+
+                maxAngle = 0;
+                maxPower = minPower = 0;
+                break;
+        }
+
+        // Reset hands angle
+        hands.rotation = Quaternion.Euler(0,0,0);
+
+    }
+
+    void ResetGun() {
+        // Set gun to empty hands
+        ChangeGunTo(0);
+    }
+
+    void RestoreShootingParam() {
+
+        maxAngle = initMaxAngle;
+        maxPower = initMaxPower;
+        minPower = initMinPower;
+
+    }
+
 }
