@@ -984,8 +984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Follow: 1
   PerspectiveTransitionTime: 0.4
-  MinimapXSize: 20
-  MinimapYSize: 10
+  MinimapWidth: 22
 --- !u!1 &240257886
 GameObject:
   m_ObjectHideFlags: 0

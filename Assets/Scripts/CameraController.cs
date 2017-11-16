@@ -6,14 +6,14 @@ public class CameraController : MonoBehaviour {
 	private GameController _controller;
 	private FollowingCamera _followingMode;
 	private MovementCamera _mapMode;
-	private Matrix4x4 _perspectiveMatrix, _orthographicMatrix;
+	private Matrix4x4 _perspectiveMatrix;
 	private float _transitionStartTime;
 	private Vector3 _perspectivePoint;
 	
 	public bool Follow = true;
 	public float PerspectiveTransitionTime = 0.4f;
 	private Vector3 _minimapPoint;
-	public float MinimapXSize, MinimapYSize;
+	public float MinimapWidth;
 
 	private void Awake () {
 		// Acceso al Controlador, Camara y guardamos la referencia al objeto Jugador.
@@ -22,9 +22,6 @@ public class CameraController : MonoBehaviour {
 		_mapMode = Camera.main.GetComponent<MovementCamera> ();
 
 		_followingMode.target = _controller.activePlayer;
-		_orthographicMatrix = Matrix4x4.Ortho(
-			-MinimapXSize, MinimapXSize, -MinimapYSize, MinimapYSize,
-			Camera.main.nearClipPlane, Camera.main.farClipPlane);
 		_minimapPoint = GameObject.FindGameObjectWithTag("Minimap Point").GetComponent<Transform>().position;
 	}
 
@@ -73,16 +70,30 @@ public class CameraController : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
 			if (_mapMode.enabled)
-				StartCoroutine(TransitionCameraPerspective(_perspectiveMatrix, _perspectivePoint, PerspectiveTransitionTime/4, _followingMode, _mapMode));
+			{
+				// We divide by 4 because the zoom back goes far quicker for some reason, so it takes less time
+				StartCoroutine(TransitionCameraPerspective(_perspectiveMatrix, _perspectivePoint, PerspectiveTransitionTime / 4,
+					_followingMode, _mapMode));
+			}
 			else
 			{
 				_perspectiveMatrix = Camera.main.projectionMatrix;
 				_perspectivePoint = Camera.main.transform.position;
-				_followingMode.enabled = false; // foloowing camera is always updating the position, impedes the lerp to minimap point
+				_followingMode.enabled =
+					false; // following camera is always updating the position, impedes the lerp to minimap point
 				Camera.main.ResetProjectionMatrix();
-				StartCoroutine(TransitionCameraPerspective(_orthographicMatrix, _minimapPoint, PerspectiveTransitionTime, _mapMode, _followingMode));
+				StartCoroutine(TransitionCameraPerspective(GetOrtographicMatrix(), _minimapPoint, PerspectiveTransitionTime, _mapMode,
+					_followingMode));
 
 			}
 		}
+	}
+
+	private Matrix4x4 GetOrtographicMatrix()
+	{
+		var aspectRatio = Camera.main.aspect;
+		return Matrix4x4.Ortho(
+			-MinimapWidth, MinimapWidth, -MinimapWidth / aspectRatio, MinimapWidth / aspectRatio,
+			Camera.main.nearClipPlane, Camera.main.farClipPlane);
 	}
 }
