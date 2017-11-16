@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+using UnityEngine;
 
 public class ExplosiveBullet : AbstractBullet
 {
@@ -54,9 +55,21 @@ public class ExplosiveBullet : AbstractBullet
         Destroy(gameObject, ExplosionDuration);
     }
 
-	protected float CalculateDamage(GameObject other)
-	{
-		return BulletDamage * ((other.transform.position - this.transform.position).magnitude / ExplosiveArea.radius);
+	protected float CalculateDamage(GameObject other) {
+	    var playerBase = other.transform.Find("Animator/Model").transform.position;
+        var playerPos = new Vector3(playerBase.x, playerBase.y);
+        var bulletPos = new Vector3(transform.position.x, transform.position.y);
+	    var radius = ExplosiveArea.radius * ExplosiveArea.transform.localScale.x;
+	    var modulus = (playerPos - bulletPos).magnitude;
+
+        //print("Explosion Radius " + radius);
+        //print("Magnitude "+ (playerPos - bulletPos).magnitude);
+        //print("Bullet at: " + bulletPos + " // Player at: " + playerPos);
+        //print("Ratio damage: " + ((radius-modulus)/radius) );
+	    if (radius < modulus) {
+            return BulletDamage * 0.075f;
+        }
+		return BulletDamage * Mathf.Max(((radius - modulus) / radius), 0.075f);
 	}
 	
 	protected void TriggerExplosion()

@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024635c323444fff9c1f114a551f477a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletDamage: 25
+  BulletDamage: 15
   TimeUntilDespawn: 10
   ExplosionDuration: 1
 --- !u!136 &136268073919179278
