@@ -10,17 +10,17 @@ public class ExplosiveBullet : AbstractBullet
 
 	private Rigidbody _rigidbody;
 
-	private MeshRenderer _meshRenderer;
-	private MeshCollider _meshCollider;
+	private MeshRenderer[] _meshRenderer;
+	private MeshCollider[] _meshCollider;
 
 	private bool _isExploding;
 
     void Awake() {
         ExplosiveArea = GetComponent<CapsuleCollider>();
         ExplosiveArea.enabled = false;
-        _meshRenderer = GetComponent<MeshRenderer>();
+        _meshRenderer = GetComponentsInChildren<MeshRenderer>();
         _rigidbody = GetComponent<Rigidbody>();
-        _meshCollider = GetComponent<MeshCollider>();
+        _meshCollider = GetComponentsInChildren<MeshCollider>();
     }
 
 	new void Start()
@@ -51,8 +51,6 @@ public class ExplosiveBullet : AbstractBullet
 			Debug.Log("Doing " + CalculateDamage(other.gameObject) + " damage to player");
 			other.GetComponent<PlayerController>().Damage(CalculateDamage(other.gameObject));
 		}
-
-        Destroy(gameObject, ExplosionDuration);
     }
 
 	protected float CalculateDamage(GameObject other) {
@@ -77,12 +75,17 @@ public class ExplosiveBullet : AbstractBullet
 		Debug.Log("Explosion Position: " + transform.position);
 		// Disable activities of the bullet and enable the explosion
 		_rigidbody.isKinematic = true;
-		_meshRenderer.enabled = false;
-		_meshCollider.enabled = false;
-		//transform.rotation = Quaternion.Euler(0, 0, 0);
+//		foreach (var meshCollider in _meshCollider)
+//		{
+//			meshCollider.enabled = false;
+//		}
+//		foreach (var meshRenderer in _meshRenderer)
+//		{
+//			meshRenderer.enabled = false;
+//		}
 		_isExploding = true;
 		ExplosiveArea.enabled = true;
-		// Do animation and stuff in the future
-		//Destroy(gameObject, ExplosionDuration);
+		
+		Destroy(gameObject, ExplosionDuration);
 	}
 }
