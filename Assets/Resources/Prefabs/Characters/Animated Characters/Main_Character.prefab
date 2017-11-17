@@ -1146,10 +1146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 866d695917904ab4a9c1a2270748e6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunBase: {fileID: 1475461193249788}
-  bar: {fileID: 114867285091978104}
   UI_bar: {fileID: 0}
   UI_text: {fileID: 0}
+  barVelocity: 1
   time: 0
   bar_colors:
   - {r: 1, g: 0.95486814, b: 0.3455882, a: 0.584}
