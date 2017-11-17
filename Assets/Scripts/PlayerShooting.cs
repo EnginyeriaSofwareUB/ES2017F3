@@ -116,29 +116,62 @@ public class PlayerShooting : MonoBehaviour
             shoot = true;
         }
 
-
-
         ///////////// Check rotation of the gun /////////////////
+        /// (only when gun aiming is possible)
+        if (maxAngle > 0) {
+            if (gameObject.transform.localScale.x > 0)
+            {
+                CheckPositiveRotation(hands.eulerAngles.z);
+            }
+            else
+            {
+                CheckNegativeRotation(hands.eulerAngles.z);
+            }
+        }
+        
+    }
 
-        var rotAngle = hands.eulerAngles.z;
+    void CheckPositiveRotation(float rotAngle) {
 
         // Upwards rotation
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
         {
-            if ((360 - rotAngle < maxAngle || rotAngle + angleSpeed <= (maxAngle-0.2f)) && (maxAngle > 0))
+            if ((360 - rotAngle + angleSpeed < maxAngle || rotAngle + angleSpeed <= (maxAngle - 0.2f)) && (maxAngle > 0))
             {
                 hands.Rotate(0, 0, angleSpeed);
             }
         }
 
         // Check rotation of the gun (downwards)
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S)) {
-            if ((rotAngle < maxAngle) || (360 - rotAngle + angleSpeed <= (maxAngle-0.2f) && rotAngle >= 360 - maxAngle))
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
+        {
+            if ((rotAngle - angleSpeed < maxAngle) || (360 - rotAngle + angleSpeed <= (maxAngle - 0.2f) && rotAngle >= 360 - maxAngle))
             {
                 hands.Rotate(0, 0, -angleSpeed);
             }
         }
-        
+    }
+
+    void CheckNegativeRotation(float rotAngle) {
+
+        // Scale < 0 => rotations inverted
+        // Upwards rotation
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
+        {
+            if (360 - rotAngle - angleSpeed < maxAngle || rotAngle + angleSpeed <= (maxAngle - 0.2f))
+            {
+                hands.Rotate(0, 0, -angleSpeed);
+            }
+        }
+
+        // Check rotation of the gun (downwards)
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
+        {
+            if ((rotAngle - angleSpeed < maxAngle) || (360 - rotAngle + angleSpeed <= (maxAngle - 0.2f) && rotAngle >= 360 - maxAngle))
+            {
+                hands.Rotate(0, 0, angleSpeed);
+            }
+        }
     }
 
 
@@ -160,6 +193,9 @@ public class PlayerShooting : MonoBehaviour
     }
     
     void ChangeGunTo(int gunIndex) {
+
+        // Change gun only when changing to another one
+        if (_currentGun == _guns[gunIndex]) return;
 
         setCurrentGunActive(false);
         _currentGun = _guns[gunIndex];
