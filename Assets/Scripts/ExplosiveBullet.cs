@@ -8,6 +8,7 @@ public class ExplosiveBullet : AbstractBullet
 
 	public float ExplosionDuration = 1f;
 
+	public GameObject ExplosionEffect;
 	private Rigidbody _rigidbody;
 
 	private MeshRenderer[] _meshRenderer;
@@ -75,17 +76,18 @@ public class ExplosiveBullet : AbstractBullet
 		Debug.Log("Explosion Position: " + transform.position);
 		// Disable activities of the bullet and enable the explosion
 		_rigidbody.isKinematic = true;
-//		foreach (var meshCollider in _meshCollider)
-//		{
-//			meshCollider.enabled = false;
-//		}
-//		foreach (var meshRenderer in _meshRenderer)
-//		{
-//			meshRenderer.enabled = false;
-//		}
+		foreach (var meshCollider in _meshCollider)
+		{
+			meshCollider.enabled = false;
+		}
+		foreach (var meshRenderer in _meshRenderer)
+		{
+			meshRenderer.enabled = false;
+		}
 		_isExploding = true;
 		ExplosiveArea.enabled = true;
-		
+		var go = Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
+		Destroy(go, 1f);
 		Destroy(gameObject, ExplosionDuration);
 	}
 }

@@ -127,6 +127,8 @@ MonoBehaviour:
   BulletDamage: 15
   TimeUntilDespawn: 10
   ExplosionDuration: 1
+  ExplosionEffect: {fileID: 1090855516486484, guid: 64f102e164cbc40ceb5dfdd2f9a5c929,
+    type: 2}
 --- !u!136 &136268073919179278
 CapsuleCollider:
   m_ObjectHideFlags: 1
