@@ -4,27 +4,36 @@ using UnityEngine;
 
 public class RandomInitialization : MonoBehaviour {
 
+	// List of pieces that can be destroyed
 	public List<GameObject> destructiblePieces;
+
+	// Num of mdeical objects in the scenario
 	public int numMedicalObjects;
+
+	// Game object to replace pieces
 	public GameObject medical;
 
 	private List<GameObject> removedPiece;
 	private List<GameObject> medicalAdded;
 
-	// Use this for initialization
 	void Start () {		
 
 		removedPiece = new List<GameObject> ();
 		medicalAdded = new List<GameObject> ();
 
 		for (int i = 0; i < numMedicalObjects; i++) {
-			
+
+			// Pick a random piece and destoy it
 			var piece = destructiblePieces [Random.Range (0, destructiblePieces.Count)];
 			Destroy (piece.gameObject);
 
+			// Bring the medical to the front
+			Vector3 pos = piece.transform.position;
+			pos.z -= 0.5f;
+
 			var med = (GameObject)Instantiate (
 				         medical,
-				         piece.transform.position,
+				         pos,
 				         piece.transform.rotation);
 		
 			destructiblePieces.Remove (piece);
