@@ -7,7 +7,8 @@ public class PlayerMovement : MonoBehaviour {
 	public Rigidbody rb;
 
     public float horizontal;
-    private bool jump;
+	public Transform model;
+	private bool jump;
 	private bool isGrounded;
     private const float m_JumpPower = 6f; // The force added to the ball when it jumps.
 	private bool facingRight = false;
@@ -38,7 +39,7 @@ public class PlayerMovement : MonoBehaviour {
     void FixedUpdate()
     {
 		// Fixing rotation of the player so it's always facing forward
-		Vector3 scale = rb.transform.localScale;
+		Vector3 scale = model.localScale;
 		if (horizontal < 0 && !facingRight) {
 			scale.x = scale.x * -1.0f;
 			facingRight = true;
@@ -46,7 +47,7 @@ public class PlayerMovement : MonoBehaviour {
 			scale.x = scale.x * -1.0f;
 			facingRight = false;
 		}
-		rb.transform.localScale = scale;
+		model.localScale = scale;
 
         // Update horizontal movement
        	rb.velocity = new Vector3(horizontal, rb.velocity.y);
