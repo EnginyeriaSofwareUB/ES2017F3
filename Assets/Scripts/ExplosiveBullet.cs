@@ -51,7 +51,15 @@ public class ExplosiveBullet : AbstractBullet
 		{
 			Debug.Log("Doing " + CalculateDamage(other.gameObject) + " damage to player");
 			other.GetComponent<PlayerController>().Damage(CalculateDamage(other.gameObject));
+
+			// Pushback the players inside the trigger
+			var pushbackDir = (gameObject.transform.position - other.transform.position);
+			pushbackDir.z = 0;
+			other.GetComponent<Rigidbody>().AddForce(pushbackDir.normalized * 10, ForceMode.Impulse);
 		}
+
+
+
     }
 
 	protected float CalculateDamage(GameObject other) {
