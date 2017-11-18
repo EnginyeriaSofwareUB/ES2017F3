@@ -138,7 +138,7 @@ public class GameController : MonoBehaviour {
 		completeLevelUI.SetActive (true);
 	}
 
-    void changeTurn() {
+    public void changeTurn() {
         if (players.Count < 2)
         {
             // Game finished
