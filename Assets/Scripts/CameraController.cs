@@ -86,8 +86,10 @@ public class CameraController : MonoBehaviour {
 				StartCoroutine(TransitionCameraPerspective(_perspectiveMatrix, _perspectivePoint, PerspectiveTransitionTime / 4,
 					_followingMode, _mapMode));
 
-				foreach (GameObject flag in flags) {
-					Destroy (flag);
+				if (activateFlags) {					
+					foreach (GameObject flag in flags) {
+						Destroy (flag);
+					}
 				}
 			}
 			else
@@ -100,27 +102,29 @@ public class CameraController : MonoBehaviour {
 				StartCoroutine(TransitionCameraPerspective(GetOrtographicMatrix(), _minimapPoint, PerspectiveTransitionTime, _mapMode,
 					_followingMode));
 
-				// Get all the players
-				foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player")){	
+				if (activateFlags) {
+					// Get all the players
+					foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {	
 
-					GameObject flag;
+						GameObject flag;
 
-					// We 
-					if (player.GetComponent<PlayerController> ().TEAM == 1) {						
-						flag = (GameObject)Instantiate (
-							           flagTeam1,
-							           player.transform.position + new Vector3 (0, 1, 0),
-							           player.transform.rotation);
+						// We 
+						if (player.GetComponent<PlayerController> ().TEAM == 1) {						
+							flag = (GameObject)Instantiate (
+								flagTeam1,
+								player.transform.position + new Vector3 (0, 1, 0),
+								player.transform.rotation);
 						
-					} else {
-						flag = (GameObject)Instantiate (
-							flagTeam2,
-							player.transform.position + new Vector3 (0, 1, 0),
-							player.transform.rotation);
-					}
+						} else {
+							flag = (GameObject)Instantiate (
+								flagTeam2,
+								player.transform.position + new Vector3 (0, 1, 0),
+								player.transform.rotation);
+						}
 
-					flag.transform.parent = player.transform;
-					flags.Add (flag);
+						flag.transform.parent = player.transform;
+						flags.Add (flag);
+					}
 				}
 			}
 		}
