@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class PlayerShooting : MonoBehaviour
 {
-    private const string BaseGunPath = "Animator/Model/Character_Hands/", Model = "Animator/Model/";
+    private const string BaseGunPath = "Animator/Model_Center/Model/Character_Hands/", Model = "Animator/Model_Center/Model/";
     private Transform hands, model;
     private Gun _currentGun;
     private List<Gun> _guns;
