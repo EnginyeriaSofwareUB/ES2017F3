@@ -19,8 +19,8 @@ public class CameraController : MonoBehaviour {
 	[Space(5)]
 	[Header("Flags")]
 	public bool activateFlags = true;
-	public GameObject flagObject1;
-	public GameObject flagObject2;
+	public GameObject flagTeam1;
+	public GameObject flagTeam2;
 	private List<GameObject> flags;
 
 
@@ -100,20 +100,21 @@ public class CameraController : MonoBehaviour {
 				StartCoroutine(TransitionCameraPerspective(GetOrtographicMatrix(), _minimapPoint, PerspectiveTransitionTime, _mapMode,
 					_followingMode));
 
-				// Flags to all the players (?)
+				// Get all the players
 				foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player")){	
 
 					GameObject flag;
 
+					// We 
 					if (player.GetComponent<PlayerController> ().TEAM == 1) {						
 						flag = (GameObject)Instantiate (
-							           flagObject1,
+							           flagTeam1,
 							           player.transform.position + new Vector3 (0, 1, 0),
 							           player.transform.rotation);
 						
 					} else {
 						flag = (GameObject)Instantiate (
-							flagObject2,
+							flagTeam2,
 							player.transform.position + new Vector3 (0, 1, 0),
 							player.transform.rotation);
 					}
