@@ -7,8 +7,8 @@ using UnityEngine.Events;
 
 public class PlayerShooting : MonoBehaviour
 {
-    private const string BaseGunPath = "Animator/Model/Character_Hands/";
-    private Transform hands;
+    private const string BaseGunPath = "Animator/Model/Character_Hands/", Model = "Animator/Model/";
+    private Transform hands, model;
     private Gun _currentGun;
     private List<Gun> _guns;
     private float thrust, startPowerTime;
@@ -23,6 +23,8 @@ public class PlayerShooting : MonoBehaviour
     {
         _guns = new List<Gun>(GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().AvailableGuns);
         hands = transform.Find(BaseGunPath);
+        model = transform.Find(Model);
+        
         // Fill all the guns from the model and select empty hands
         for (var i = 0; i < _guns.Count; i++)
         {
@@ -119,7 +121,7 @@ public class PlayerShooting : MonoBehaviour
         ///////////// Check rotation of the gun /////////////////
         /// (only when gun aiming is possible)
         if (maxAngle > 0) {
-            if (gameObject.transform.localScale.x > 0)
+            if (model.localScale.x > 0)
             {
                 CheckPositiveRotation(hands.eulerAngles.z);
             }
