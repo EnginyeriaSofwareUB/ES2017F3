@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
@@ -14,6 +15,14 @@ public class CameraController : MonoBehaviour {
 	public float PerspectiveTransitionTime = 0.4f;
 	private Vector3 _minimapPoint;
 	public float MinimapWidth;
+
+	[Space(5)]
+	[Header("Flags")]
+	public bool activateFlags = true;
+	public GameObject flagObject1;
+	public GameObject flagObject2;
+	private List<GameObject> flags;
+
 
 	private void Awake () {
 		// Acceso al Controlador, Camara y guardamos la referencia al objeto Jugador.
@@ -34,6 +43,8 @@ public class CameraController : MonoBehaviour {
 			_mapMode.enabled = true;
 			_followingMode.enabled = false;
 		}
+
+		flags = new List<GameObject> ();
 	}
 
 	private static IEnumerator TransitionCameraPerspective(Matrix4x4 to, Vector3 position, float transitionTime, Behaviour cameraMode, Behaviour oldCameraMode)
@@ -74,6 +85,10 @@ public class CameraController : MonoBehaviour {
 				// We divide by 4 because the zoom back goes far quicker for some reason, so it takes less time
 				StartCoroutine(TransitionCameraPerspective(_perspectiveMatrix, _perspectivePoint, PerspectiveTransitionTime / 4,
 					_followingMode, _mapMode));
+
+				foreach (GameObject flag in flags) {
+					Destroy (flag);
+				}
 			}
 			else
 			{
@@ -85,6 +100,27 @@ public class CameraController : MonoBehaviour {
 				StartCoroutine(TransitionCameraPerspective(GetOrtographicMatrix(), _minimapPoint, PerspectiveTransitionTime, _mapMode,
 					_followingMode));
 
+				// Flags to all the players (?)
+				foreach(GameObject player in GameObject.FindGameObjectsWithTag("Player")){	
+
+					GameObject flag;
+
+					if (player.GetComponent<PlayerController> ().TEAM == 1) {						
+						flag = (GameObject)Instantiate (
+							           flagObject1,
+							           player.transform.position + new Vector3 (0, 1, 0),
+							           player.transform.rotation);
+						
+					} else {
+						flag = (GameObject)Instantiate (
+							flagObject2,
+							player.transform.position + new Vector3 (0, 1, 0),
+							player.transform.rotation);
+					}
+
+					flag.transform.parent = player.transform;
+					flags.Add (flag);
+				}
 			}
 		}
 	}

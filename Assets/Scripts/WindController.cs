@@ -143,7 +143,7 @@ public class WindController : MonoBehaviour {
             if (j < n)
             {
                 bar.gameObject.SetActive(true);
-                print("[WIND] n Bars changed");
+                //print("[WIND] n Bars changed");
             }
             else
             {
@@ -204,7 +204,7 @@ public class WindController : MonoBehaviour {
                         else
                             rig.AddForce(force, ForceMode.Acceleration);
 
-                        Debug.Log(" > Applying wind force to: " + obj.name);
+                        //Debug.Log(" > Applying wind force to: " + obj.name);
                     }
                 }
             }
@@ -228,7 +228,7 @@ public class WindController : MonoBehaviour {
         //if (lastdir != dir)
             //print("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
         //SetBarsDirection(dir);
-        print("[WIND] Random change dir "+dir+", force "+windForce);
+        //print("[WIND] Random change dir "+dir+", force "+windForce);
     }
 
 
