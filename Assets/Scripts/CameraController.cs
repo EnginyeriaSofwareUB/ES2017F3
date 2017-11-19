@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour {
@@ -10,6 +11,7 @@ public class CameraController : MonoBehaviour {
 	private Matrix4x4 _perspectiveMatrix;
 	private float _transitionStartTime;
 	private Vector3 _perspectivePoint;
+	private IEnumerator _transitionCoroutine = TransitionCameraPerspective(Matrix4x4.identity, Vector3.back, 0, null, null);
 	
 	public bool Follow = true;
 	public float PerspectiveTransitionTime = 0.4f;
@@ -49,6 +51,8 @@ public class CameraController : MonoBehaviour {
 
 	private static IEnumerator TransitionCameraPerspective(Matrix4x4 to, Vector3 position, float transitionTime, Behaviour cameraMode, Behaviour oldCameraMode)
 	{
+		cameraMode.enabled = true;
+		oldCameraMode.enabled = false;
 		var startTime = Time.time;
 		float[] currentTransitionSpeed = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		var startPos = Camera.main.transform.position;
@@ -68,8 +72,6 @@ public class CameraController : MonoBehaviour {
 			Camera.main.transform.position = Vector3.Slerp(startPos, position, (Time.time - startTime)/actualTransitionTime);
 			yield return null;
 		}
-		cameraMode.enabled = true;
-		oldCameraMode.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -80,11 +82,13 @@ public class CameraController : MonoBehaviour {
 		// Pressing Tab Key makes lock/unlock character
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
+			StopCoroutine(_transitionCoroutine);
 			if (_mapMode.enabled)
 			{
 				// We divide by 4 because the zoom back goes far quicker for some reason, so it takes less time
-				StartCoroutine(TransitionCameraPerspective(_perspectiveMatrix, _perspectivePoint, PerspectiveTransitionTime / 4,
-					_followingMode, _mapMode));
+				_transitionCoroutine = TransitionCameraPerspective(_perspectiveMatrix, _perspectivePoint,
+					PerspectiveTransitionTime / 4, _followingMode, _mapMode);
+				StartCoroutine(_transitionCoroutine);
 
 				if (activateFlags) {					
 					foreach (GameObject flag in flags) {
@@ -99,8 +103,9 @@ public class CameraController : MonoBehaviour {
 				_followingMode.enabled =
 					false; // following camera is always updating the position, impedes the lerp to minimap point
 				Camera.main.ResetProjectionMatrix();
-				StartCoroutine(TransitionCameraPerspective(GetOrtographicMatrix(), _minimapPoint, PerspectiveTransitionTime, _mapMode,
-					_followingMode));
+				_transitionCoroutine = TransitionCameraPerspective(GetOrtographicMatrix(), _minimapPoint, PerspectiveTransitionTime,
+					_mapMode, _followingMode);
+				StartCoroutine(_transitionCoroutine);
 
 				if (activateFlags) {
 					// Get all the players
