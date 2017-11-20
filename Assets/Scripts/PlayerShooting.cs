@@ -157,7 +157,6 @@ public class PlayerShooting : MonoBehaviour
         // Upwards rotation
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
         {
-            print(rotAngle);
             if ((360 - rotAngle + angleSpeed < maxAngle || rotAngle + angleSpeed <= (maxAngle - angleSpeed)) && (maxAngle > 0))
             {
                 hands.Rotate(0, 0, angleSpeed);
@@ -181,7 +180,6 @@ public class PlayerShooting : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
         {
-            print(rotAngle);
             if (360 - rotAngle - angleSpeed < maxAngle || rotAngle + angleSpeed <= (maxAngle - angleSpeed))
             {
                 hands.Rotate(0, 0, angleSpeed);
@@ -191,7 +189,6 @@ public class PlayerShooting : MonoBehaviour
         // Check rotation of the gun (downwards)
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
         {
-            print(rotAngle);
             if ((rotAngle - angleSpeed < maxAngle) || (360 - rotAngle + angleSpeed <= (maxAngle - angleSpeed) && rotAngle >= 360 - maxAngle))
             {
                 hands.Rotate(0, 0, -angleSpeed);
