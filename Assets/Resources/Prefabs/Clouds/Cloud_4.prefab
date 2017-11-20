@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33802823117735000}
   - component: {fileID: 23895319297010904}
   - component: {fileID: 95975704471802970}
+  - component: {fileID: 135016601557293974}
+  - component: {fileID: 114741704548491968}
   m_Layer: 0
   m_Name: Cloud_4
   m_TagString: Untagged
@@ -36,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1841474646252920}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 32.986374, y: 12.900466, z: -29.004204}
   m_LocalScale: {x: 0.460719, y: 0.460719, z: 0.460719}
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,7 +92,7 @@ Animator:
   m_GameObject: {fileID: 1841474646252920}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2f447a205966726458f6692e40b7cb35, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7dd42fc49a116b04f9d71085f3130b79, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -98,3 +100,33 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114741704548491968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1841474646252920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e822a7bf3307f646896e9f314dbbca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 12
+  startPosition: {x: -40, y: 9, z: 0}
+  dir: 0
+  minZ: -10
+  maxZ: 10
+  endX: 40
+  fade: 0
+--- !u!135 &135016601557293974
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1841474646252920}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 4.1041036
+  m_Center: {x: 0.104762554, y: 0.114968404, z: 0.23605344}

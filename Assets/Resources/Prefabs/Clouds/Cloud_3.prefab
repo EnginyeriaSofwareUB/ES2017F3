@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 33165473184239488}
   - component: {fileID: 23474910797771672}
   - component: {fileID: 95487471411454286}
+  - component: {fileID: 135386087093421752}
+  - component: {fileID: 114603679941569166}
   m_Layer: 0
   m_Name: Cloud_3
   m_TagString: Untagged
@@ -36,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1823961010199206}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 37.50265, y: 13.3736, z: -27.32973}
   m_LocalScale: {x: 0.40805483, y: 0.40805483, z: 0.40805483}
   m_Children: []
   m_Father: {fileID: 0}
@@ -90,7 +92,7 @@ Animator:
   m_GameObject: {fileID: 1823961010199206}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 83ce48baf2020f244b33a5b3ecc84a9c, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7dd42fc49a116b04f9d71085f3130b79, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -98,3 +100,33 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114603679941569166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1823961010199206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e822a7bf3307f646896e9f314dbbca8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: 12
+  startPosition: {x: -40, y: 9, z: 0}
+  dir: 0
+  minZ: -10
+  maxZ: 10
+  endX: 40
+  fade: 0
+--- !u!135 &135386087093421752
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1823961010199206}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5.422247
+  m_Center: {x: -0.2573235, y: -0.10763548, z: 1.3743029}
