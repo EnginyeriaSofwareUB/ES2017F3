@@ -7,8 +7,8 @@ using UnityEngine.Events;
 
 public class PlayerShooting : MonoBehaviour
 {
-    private const string ModelCenter = "Animator/Model_Center/", Model = ModelCenter + "Model/", BaseGunPath = Model + "Character_Hands/", ModelHands = Model + "Character_Base/";
-    private Transform hands, modelCenter, model, mdlHandLeft, mdlHandRight;
+    private const string ModelCenter = "Animator/Model_Center/", BaseGunPath = ModelCenter + "Model/Character_Hands/", ModelHands = ModelCenter + "Model/Character_Base/";
+    private Transform hands, modelCenter, mdlHandLeft, mdlHandRight;
     private Gun _currentGun;
     private List<Gun> _guns;
     private float thrust, startPowerTime;
@@ -23,7 +23,6 @@ public class PlayerShooting : MonoBehaviour
     {
         _guns = new List<Gun>(GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().AvailableGuns);
         hands = transform.Find(BaseGunPath);
-        model = transform.Find(Model);
         modelCenter = transform.Find(ModelCenter);
         mdlHandLeft = transform.Find(ModelHands+"Hand_Left_001");
         mdlHandRight = transform.Find(ModelHands + "Hand_right_001");
@@ -128,12 +127,12 @@ public class PlayerShooting : MonoBehaviour
         //////////// Check fire /////////////
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            // Time when space pressed
+            // Time when fire pressed
             startPowerTime = Time.time;
         }
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            // Time when space pressed
+            // Time when fire released
             thrust = Mathf.Min(maxPower * ((Time.time - startPowerTime) / maxPowerSeconds) + minPower, maxPower);
             shoot = true;
         }
@@ -141,7 +140,7 @@ public class PlayerShooting : MonoBehaviour
         ///////////// Check rotation of the gun /////////////////
         /// (only when gun aiming is possible)
         if (maxAngle > 0) {
-            if (model.localScale.x > 0)
+            if ( (hands.localScale.z > 0 && modelCenter.localScale.z > 0) || (hands.localScale.z > 0 && modelCenter.localScale.z < 0) )
             {
                 CheckPositiveRotation(hands.eulerAngles.z);
             }
@@ -158,7 +157,8 @@ public class PlayerShooting : MonoBehaviour
         // Upwards rotation
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
         {
-            if ((360 - rotAngle + angleSpeed < maxAngle || rotAngle + angleSpeed <= (maxAngle - 0.2f)) && (maxAngle > 0))
+            print(rotAngle);
+            if ((360 - rotAngle + angleSpeed < maxAngle || rotAngle + angleSpeed <= (maxAngle - angleSpeed)) && (maxAngle > 0))
             {
                 hands.Rotate(0, 0, angleSpeed);
             }
@@ -167,7 +167,7 @@ public class PlayerShooting : MonoBehaviour
         // Check rotation of the gun (downwards)
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
         {
-            if ((rotAngle - angleSpeed < maxAngle) || (360 - rotAngle + angleSpeed <= (maxAngle - 0.2f) && rotAngle >= 360 - maxAngle))
+            if ((rotAngle - angleSpeed < maxAngle) || (360 - rotAngle + angleSpeed <= (maxAngle - angleSpeed) && rotAngle >= 360 - maxAngle))
             {
                 hands.Rotate(0, 0, -angleSpeed);
             }
@@ -178,20 +178,23 @@ public class PlayerShooting : MonoBehaviour
 
         // Scale < 0 => rotations inverted
         // Upwards rotation
+        
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKey(KeyCode.S))
         {
-            if (360 - rotAngle - angleSpeed < maxAngle || rotAngle + angleSpeed <= (maxAngle - 0.2f))
+            print(rotAngle);
+            if (360 - rotAngle - angleSpeed < maxAngle || rotAngle + angleSpeed <= (maxAngle - angleSpeed))
             {
-                hands.Rotate(0, 0, -angleSpeed);
+                hands.Rotate(0, 0, angleSpeed);
             }
         }
 
         // Check rotation of the gun (downwards)
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKey(KeyCode.W))
         {
-            if ((rotAngle - angleSpeed < maxAngle) || (360 - rotAngle + angleSpeed <= (maxAngle - 0.2f) && rotAngle >= 360 - maxAngle))
+            print(rotAngle);
+            if ((rotAngle - angleSpeed < maxAngle) || (360 - rotAngle + angleSpeed <= (maxAngle - angleSpeed) && rotAngle >= 360 - maxAngle))
             {
-                hands.Rotate(0, 0, angleSpeed);
+                hands.Rotate(0, 0, -angleSpeed);
             }
         }
     }
@@ -214,7 +217,7 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    void EmptyHands() {
+    public void EmptyHands() {
         //Set gun to empty hands (animated hands)
         setCurrentGunActive(false);
         _currentGun = null;

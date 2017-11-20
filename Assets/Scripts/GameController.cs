@@ -158,6 +158,7 @@ public class GameController : MonoBehaviour {
         {
             activePlayer.GetComponent<PlayerMovement>().enabled = false;
             activePlayer.GetComponent<PlayerShooting>().enabled = false;
+            activePlayer.GetComponent<PlayerShooting>().EmptyHands();
         }
         
 
