@@ -41,10 +41,10 @@ public class PlayerMovement : MonoBehaviour {
 		// Fixing rotation of the player so it's always facing forward
 		Vector3 scale = model.localScale;
 		if (horizontal < 0 && !facingRight) {
-			scale.x = scale.x * -1.0f;
+			scale.z = scale.z * -1.0f;
 			facingRight = true;
 		} else if (horizontal > 0 && facingRight) {
-			scale.x = scale.x * -1.0f;
+			scale.z = scale.z * -1.0f;
 			facingRight = false;
 		}
 		model.localScale = scale;

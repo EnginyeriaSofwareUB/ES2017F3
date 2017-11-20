@@ -178,7 +178,7 @@ public class GameController : MonoBehaviour {
 				}
 				turnCount += 1;
 			}
-				
+
             activePlayer = players[turnId];
             Debug.Log("Now active player is: " + activePlayer);
             // enable movement

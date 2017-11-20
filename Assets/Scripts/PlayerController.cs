@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour {
     {
         gameControl = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
         animator = GetComponentInChildren<Animator>();
-        print(animator!=null);
         playerCanvas = GetComponentInChildren<Canvas>();
 
         health = maxHealth;
