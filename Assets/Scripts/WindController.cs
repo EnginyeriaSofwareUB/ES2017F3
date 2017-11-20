@@ -6,6 +6,7 @@ public class WindController : MonoBehaviour {
 
     public bool windActive;
     public bool ignoreMass = false; //bool per determinar si la força del vent s'aplica tenin en conte la massa o no
+    public bool affectPlayers = true;
     [Space(5)]
     public float windForce; //min 0 max 5;
     public Vector2 windDirection;
@@ -35,7 +36,8 @@ public class WindController : MonoBehaviour {
         fan_scale = fan_UI.transform.localScale;
         bar_startScale = windBars[0].localScale.y;
 
-        objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        if(affectPlayers)   
+            objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
 
         if(windDirection.x < 0)
         {
@@ -154,27 +156,6 @@ public class WindController : MonoBehaviour {
 
         //SetBarsDirection(dir);
     }
-
-    /*
-    void SetBarsDirection(int d)
-    {
-
-        //print(d + " <> " + dir);
-        if (d != dir)
-        {
-            foreach (Transform bar in windBars)
-            {
-                //if (bar.gameObject.activeSelf)
-                //{
-                print("[WIND] Changed direction to "+d);
-                bar.localScale = new Vector3( d, bar_startScale, bar_startScale);//Mathf.Abs(bar_startScale) *
-
-                //}
-            }
-            dir = d;
-        }
-
-    }*/
 
 
     // Update is called once per frame
