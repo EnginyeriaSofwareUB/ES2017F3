@@ -7,8 +7,8 @@ using UnityEngine.Events;
 
 public class PlayerShooting : MonoBehaviour
 {
-    private const string BaseGunPath = "Animator/Model_Center/Model/Character_Hands/", Model = "Animator/Model_Center/Model/";
-    private Transform hands, model;
+    private const string ModelCenter = "Animator/Model_Center/", Model = ModelCenter + "Model/", BaseGunPath = Model + "Character_Hands/", ModelHands = Model + "Character_Base/";
+    private Transform hands, modelCenter, model, mdlHandLeft, mdlHandRight;
     private Gun _currentGun;
     private List<Gun> _guns;
     private float thrust, startPowerTime;
@@ -24,7 +24,10 @@ public class PlayerShooting : MonoBehaviour
         _guns = new List<Gun>(GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().AvailableGuns);
         hands = transform.Find(BaseGunPath);
         model = transform.Find(Model);
-        
+        modelCenter = transform.Find(ModelCenter);
+        mdlHandLeft = transform.Find(ModelHands+"Hand_Left_001");
+        mdlHandRight = transform.Find(ModelHands + "Hand_right_001");
+
         // Fill all the guns from the model and select empty hands
         for (var i = 0; i < _guns.Count; i++)
         {
@@ -34,13 +37,30 @@ public class PlayerShooting : MonoBehaviour
             _guns[i] = instanceGun;
 
             // Attach listener to bulletFired
-            instanceGun.bulletFired.AddListener(ResetGun);
+            instanceGun.bulletFired.AddListener(EmptyHands);
 
-            // Adjustments on certain guns
-            if (instanceGun.name == "Cannon Base") {
-                instanceGun.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                instanceGun.transform.localPosition = new Vector3(0.4f, 0, 0);
+            // Dynamic adjustments on each gun (position and scale)
+            Vector3 newPos, newScale;
+
+            switch (instanceGun.name) {
+                case "Cannon Base":
+                    newScale = Vector3.one * 0.4f;
+                    newPos = new Vector3(0.78f, 0, -0.15f);
+                    break;
+
+                case "Dynamite Base":
+                    newScale = Vector3.one * 1.9f;
+                    newPos = new Vector3(-0.019f, 0.426f, -0.448f);
+                    break;
+                    
+                default:
+                    newScale = newPos = Vector3.one;
+                    break;
             }
+
+            instanceGun.transform.localScale = newScale;
+            instanceGun.transform.localPosition = newPos;
+
 
         }
 
@@ -57,7 +77,7 @@ public class PlayerShooting : MonoBehaviour
 
         shoot = false;
 
-        ChangeGunTo(0);
+        EmptyHands();
 
         if (shootEvent == null)
             shootEvent = new UnityEvent();
@@ -91,7 +111,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
     bool GunEquipped() {
-        return _currentGun != _guns[0];
+        return _currentGun != null;
     }
 
     void Fire() {
@@ -180,11 +200,11 @@ public class PlayerShooting : MonoBehaviour
     void CheckChangeGun() {
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
-            ChangeGunTo(0);
+            EmptyHands();
         else if (Input.GetKeyDown(KeyCode.Alpha2))
-            ChangeGunTo(1);
+            ChangeGunTo(0);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
-            ChangeGunTo(2);
+            ChangeGunTo(1);
 
     }
 
@@ -193,11 +213,25 @@ public class PlayerShooting : MonoBehaviour
             transform.Find(BaseGunPath + _currentGun.name).gameObject.SetActive(boolean);
         }
     }
-    
+
+    void EmptyHands() {
+        //Set gun to empty hands (animated hands)
+        setCurrentGunActive(false);
+        _currentGun = null;
+        SetHandsAnimation(true);
+    }
+
+    void SetHandsAnimation(bool boolean) {
+        mdlHandRight.gameObject.SetActive(boolean);
+        mdlHandLeft.gameObject.SetActive(boolean);
+    }
+
     void ChangeGunTo(int gunIndex) {
 
         // Change gun only when changing to another one
         if (_currentGun == _guns[gunIndex]) return;
+
+        if (!GunEquipped()) SetHandsAnimation(false);
 
         setCurrentGunActive(false);
         _currentGun = _guns[gunIndex];
@@ -206,22 +240,26 @@ public class PlayerShooting : MonoBehaviour
         // Select configurations of the gun
         switch (gunIndex) {
             
-            // Empty hands
+            // Cannon gun
             case 0:
                 RestoreShootingParam();
                 break;
 
-            // Cannon gun
-            case 1:
-                RestoreShootingParam();
-                break;
-
             // Dynamite
-            case 2:
+            case 1:
 
                 maxAngle = 0;
                 maxPower = minPower = 0;
                 break;
+        }
+
+        // If facing left then reverse hands
+        if (modelCenter.localScale.z < 0) {
+            if (hands.localScale.z > 0) ReverseHands();
+        }
+        // If facing right after facing left reverse hands
+        else {
+            if (hands.localScale.z < 0) ReverseHands();
         }
 
         // Reset hands angle
@@ -229,9 +267,13 @@ public class PlayerShooting : MonoBehaviour
 
     }
 
-    void ResetGun() {
-        // Set gun to empty hands
-        ChangeGunTo(0);
+    void ReverseHands() {
+        var scale = hands.localScale;
+
+        scale.x *= -1;
+        scale.z *= -1;
+
+        hands.localScale = scale;
     }
 
     void RestoreShootingParam() {
