@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour {
 	};
 
 	public GameObject completeLevelUI; //elemento para poder poner gameOver image
+	public GameObject pauseScreenUI;
 
 	public gameStates current = gameStates.none;
     [Header("Canvas Objects")]
@@ -132,12 +133,7 @@ public class GameController : MonoBehaviour {
         // Delete from players dead player
         players.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
     }
-
-	public void CompleteLevel() //activar pantalla GameOver
-	{
-		completeLevelUI.SetActive (true);
-	}
-
+		
     public void changeTurn() {
         if (players.Count < 2)
         {
@@ -147,7 +143,7 @@ public class GameController : MonoBehaviour {
 
             current = gameStates.gameOver;
 
-            CompleteLevel();//activar pantalla GameOver
+			completeLevelUI.SetActive (true);//activar pantalla GameOver
 
             //Return to main menu
             //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
@@ -201,6 +197,16 @@ public class GameController : MonoBehaviour {
 			changeTurn();
 		}
 
+		if (Input.GetKey (KeyCode.Escape)) {
+			if (current.Equals("pause")) {
+				pauseScreenUI.SetActive(false);
+				current = gameStates.gameOn;
+			} else {
+				pauseScreenUI.SetActive(true);
+				current = gameStates.pause;
+			}
+
+		}
 
         UpdateCanvas();
 	}
@@ -223,5 +229,10 @@ public class GameController : MonoBehaviour {
 		foreach (GameObject player in players) {
 			player.GetComponent<PlayerController> ().Damage ((player.GetComponent<PlayerController> ().health - 1));
 		}
+	}
+
+	public void BotonResumPause() {
+		pauseScreenUI.SetActive(false);
+		current = gameStates.gameOn;
 	}
 }
