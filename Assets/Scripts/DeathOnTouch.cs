@@ -18,7 +18,7 @@ public class DeathOnTouch : MonoBehaviour {
 
 		Debug.Log (col.tag + col.name);
 
-		if (col.gameObject.tag == "Player") {
+		if (col.gameObject.CompareTag("Player")) {
 			col.gameObject.GetComponent<PlayerController> ().Damage(100f);
 
 			//TODO: Set a delay
