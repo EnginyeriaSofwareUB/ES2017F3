@@ -6,28 +6,25 @@ public class AnimationFunctions : MonoBehaviour
 {
 
     private Animator anim;
+    private PlayerMovement pm;
 
     // Use this for initialization
-    void Start()
-    {
+    void Start() {
         anim = GetComponent<Animator>();
+        pm = GetComponentInParent<PlayerMovement>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void CallDeath()
-    {
+    public void CallDeath() {
         GetComponentInParent<PlayerController>().Death();
     }
 
-    public void RandomizeIdle()
-    {
+    public void RandomizeIdle() {
         //print("Idle randomized");
         anim.SetFloat("IdleBlend", Random.Range(0, 3));
+    }
+
+    public void PerformJump() {
+        pm.Jump();
     }
 
 }

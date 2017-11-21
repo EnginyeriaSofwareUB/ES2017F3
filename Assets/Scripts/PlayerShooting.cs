@@ -208,7 +208,7 @@ public class PlayerShooting : MonoBehaviour
 
     }
 
-    void setCurrentGunActive(bool boolean) {
+    void SetCurrentGunActive(bool boolean) {
         if (_currentGun != null) {
             transform.Find(BaseGunPath + _currentGun.name).gameObject.SetActive(boolean);
         }
@@ -216,7 +216,7 @@ public class PlayerShooting : MonoBehaviour
 
     public void EmptyHands() {
         //Set gun to empty hands (animated hands)
-        setCurrentGunActive(false);
+        SetCurrentGunActive(false);
         _currentGun = null;
         SetHandsAnimation(true);
     }
@@ -233,9 +233,9 @@ public class PlayerShooting : MonoBehaviour
 
         if (!GunEquipped()) SetHandsAnimation(false);
 
-        setCurrentGunActive(false);
+        SetCurrentGunActive(false);
         _currentGun = _guns[gunIndex];
-        setCurrentGunActive(true);
+        SetCurrentGunActive(true);
 
         // Select configurations of the gun
         switch (gunIndex) {

@@ -34,8 +34,11 @@ public class PlayerMovement : MonoBehaviour {
 
         // Check movement Inputs
 		horizontal = Input.GetAxis ("Horizontal") * 5f;
-	    if (Input.GetKeyDown(KeyCode.Space))
-	        jump = true;
+
+        // If jump pressed and in ground and not jumping
+	    if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !anim.GetBool("jump"))
+            // Perform jumping animation
+            anim.SetBool("jump", true);
 
         if (horizontal != 0) {
             // Perform walking animation
@@ -64,12 +67,22 @@ public class PlayerMovement : MonoBehaviour {
         // Update horizontal movement
        	rb.velocity = new Vector3(horizontal, rb.velocity.y);
 
-		// If on the ground and jump is pressed...
-		if (jump && isGrounded) {
-			// ... add force in upwards.
-			rb.AddForce(Vector3.up * m_JumpPower, ForceMode.Impulse);
-			// Jump done
-			jump = false;
-		}
     }
+
+    public void Idle() {
+        if (anim == null) return;
+
+        // Return to Idle
+        anim.SetBool("walking", false);
+    }
+
+    public void Jump() {
+        if (anim == null) return;
+
+        anim.SetBool("jump", false);
+
+        // ... add force in upwards.
+        rb.AddForce(Vector3.up * m_JumpPower, ForceMode.Impulse);
+    }
+
 }
