@@ -14,8 +14,9 @@ public class PlayerShooting : MonoBehaviour
     private float thrust, startPowerTime;
     public float angleSpeed, maxPowerSeconds;
     public int maxPower, minPower, maxAngle;
-    private int initMaxPower, initMinPower, initMaxAngle;
+    private int initMaxPower, initMinPower, initMaxAngle, lastGunEquipped;
     private bool shoot;
+    private AnimationFunctions animFunc;
 
     public UnityEvent shootEvent;
 
@@ -26,6 +27,8 @@ public class PlayerShooting : MonoBehaviour
         modelCenter = transform.Find(ModelCenter);
         mdlHandLeft = transform.Find(ModelHands+"Hand_Left_001");
         mdlHandRight = transform.Find(ModelHands + "Hand_right_001");
+        animFunc = GetComponentInChildren<AnimationFunctions>();
+        lastGunEquipped = -1;
 
         // Fill all the guns from the model and select empty hands
         for (var i = 0; i < _guns.Count; i++)
@@ -36,7 +39,7 @@ public class PlayerShooting : MonoBehaviour
             _guns[i] = instanceGun;
 
             // Attach listener to bulletFired
-            instanceGun.bulletFired.AddListener(EmptyHands);
+            instanceGun.bulletFired.AddListener(FireAnimation);
 
             // Dynamic adjustments on each gun (position and scale)
             Vector3 newPos, newScale;
@@ -208,16 +211,36 @@ public class PlayerShooting : MonoBehaviour
 
     }
 
+    public void StashGun(bool stash) {
+        if (lastGunEquipped == -1) return;
+
+        if (stash) {
+            _currentGun = null;
+            VisibleGun(false);
+        }
+        else {
+            if (_currentGun == _guns[lastGunEquipped]) return;
+            _currentGun = _guns[lastGunEquipped];
+            VisibleGun(true);
+        }
+    }
+
     void SetCurrentGunActive(bool boolean) {
         if (_currentGun != null) {
             transform.Find(BaseGunPath + _currentGun.name).gameObject.SetActive(boolean);
         }
     }
 
+    void VisibleGun(bool value) {
+        SetCurrentGunActive(value);
+        SetHandsAnimation(!value);
+    }
+
     public void EmptyHands() {
         //Set gun to empty hands (animated hands)
         SetCurrentGunActive(false);
         _currentGun = null;
+        lastGunEquipped = -1;
         SetHandsAnimation(true);
     }
 
@@ -235,6 +258,7 @@ public class PlayerShooting : MonoBehaviour
 
         SetCurrentGunActive(false);
         _currentGun = _guns[gunIndex];
+        lastGunEquipped = gunIndex;
         SetCurrentGunActive(true);
 
         // Select configurations of the gun
@@ -265,6 +289,21 @@ public class PlayerShooting : MonoBehaviour
         // Reset hands angle
         hands.rotation = Quaternion.Euler(0,0,0);
 
+    }
+
+    void FireAnimation() {
+        // Firing animation
+        switch (_currentGun.name) {
+
+            case "Cannon Base":
+                animFunc.FireCannon();
+                break;
+
+            // If no firing animation then empty hands
+            default:
+                EmptyHands();
+                break;
+        }
     }
 
     void ReverseHands() {

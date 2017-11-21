@@ -159,7 +159,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Cannon
       takeName: Cannon
-      firstFrame: -1
+      firstFrame: 27
       lastFrame: 89
       wrapMode: 0
       orientationOffsetY: 0
