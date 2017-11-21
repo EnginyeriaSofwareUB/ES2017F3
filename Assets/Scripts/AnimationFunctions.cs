@@ -26,7 +26,7 @@ public class AnimationFunctions : MonoBehaviour
 
     public void RandomizeIdle()
     {
-        print("Idle randomized");
+        //print("Idle randomized");
         anim.SetFloat("IdleBlend", Random.Range(0, 3));
     }
 

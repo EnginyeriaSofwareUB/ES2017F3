@@ -12,11 +12,13 @@ public class PlayerMovement : MonoBehaviour {
 	private bool isGrounded;
     private const float m_JumpPower = 6f; // The force added to the ball when it jumps.
 	private bool facingRight = false;
+    private Animator anim;
 
     // Use this for initialization
     void Start () {
 		rb = GetComponent<Rigidbody> ();
-	}
+        anim = GetComponentInChildren<Animator>();
+    }
 
 	// If any character is touching any "destructibleCube", it will allow them to jump.
 	void OnCollisionStay() {
@@ -34,7 +36,17 @@ public class PlayerMovement : MonoBehaviour {
 		horizontal = Input.GetAxis ("Horizontal") * 5f;
 	    if (Input.GetKeyDown(KeyCode.Space))
 	        jump = true;
-	}
+
+        if (horizontal != 0) {
+            // Perform walking animation
+            anim.SetBool("walking", true);
+        }
+        else {
+            // Return to Idle
+            anim.SetBool("walking", false);
+        }
+
+    }
 
     void FixedUpdate()
     {
