@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ExplosiveBullet : AbstractBullet
 {
-
+    WindController wind; //for deleting itself from wind objects list
 	private CapsuleCollider ExplosiveArea;
 
 	public float ExplosionDuration = 1f;
@@ -26,7 +26,9 @@ public class ExplosiveBullet : AbstractBullet
 
 	new void Start()
 	{
-		base.Start();
+        wind = GameObject.FindGameObjectWithTag("GM").GetComponent<WindController>();
+
+        base.Start();
         ExplosiveArea.enabled = false;
     }
 
@@ -81,6 +83,10 @@ public class ExplosiveBullet : AbstractBullet
 	
 	protected void TriggerExplosion()
 	{
+        //delete itself from wind objects
+        if(wind.objectsWind.Contains(this.gameObject))
+            wind.objectsWind.Remove(this.gameObject);
+
 		Debug.Log("Explosion Position: " + transform.position);
 		// Disable activities of the bullet and enable the explosion
 		_rigidbody.isKinematic = true;
