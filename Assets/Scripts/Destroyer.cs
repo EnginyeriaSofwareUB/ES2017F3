@@ -13,10 +13,11 @@ public class Destroyer : MonoBehaviour {
 	void Update () {
 		
 	}
+    
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("[DESTROY] "+collision.name + " get lost too far.. ");
-        Destroy(collision.gameObject);
+        Debug.Log("[DESTROY] "+collider.gameObject.name + " get lost too far.. ");
+        Destroy(collider.gameObject);
     }
 }

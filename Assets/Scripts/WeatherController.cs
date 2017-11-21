@@ -69,18 +69,22 @@ public class WeatherController : MonoBehaviour {
                         // Set the speed of the new cloud, with a lil variance
                         float vel = Random.Range(cloudVelocity - cloudVelocity * cloudVelocityVariance, cloudVelocity + cloudVelocity * cloudVelocityVariance);
                         cc.velocity = vel;
-                        
+
+                        Debug.Log(" WIND DIRECTION IS : " + GetComponent<WindController>().direction);
                         //Choose where to spawn the cloud, based on wind direction
                         if(GetComponent<WindController>().direction == 1)
                         {
-                            cc.startPosition = new Vector3(leftSpawn.position.x, Random.Range(leftSpawn.position.y- 1.2f, leftSpawn.position.y + 1.2f), leftSpawn.position.z);
+                            //cc.startPosition = new Vector3(leftSpawn.position.x, Random.Range(leftSpawn.position.y- 1.2f, leftSpawn.position.y + 1.2f), leftSpawn.position.z);
+                            cloud.transform.position = new Vector3(leftSpawn.position.x, Random.Range(leftSpawn.position.y - 1.2f, leftSpawn.position.y + 1.2f), leftSpawn.position.z); 
                             cc.dir = 1;
                         }
                         else
                         {
-                            cc.startPosition = new Vector3(rightSpawn.position.x, Random.Range(rightSpawn.position.y - 1.2f, rightSpawn.position.y+ 1.2f), rightSpawn.position.z); ;
+                            //cc.startPosition = new Vector3(rightSpawn.position.x, Random.Range(rightSpawn.position.y - 1.2f, rightSpawn.position.y+ 1.2f), rightSpawn.position.z); 
+                            cloud.transform.position = new Vector3(rightSpawn.position.x, Random.Range(rightSpawn.position.y - 1.2f, rightSpawn.position.y + 1.2f), rightSpawn.position.z);
                             cc.dir = -1;
                         }
+                        
 
                         rig.useGravity = false;
 

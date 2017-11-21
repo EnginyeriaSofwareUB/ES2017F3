@@ -12,7 +12,7 @@ public class WindController : MonoBehaviour {
     [Space(5)]
     public float windForce; //min 0 max 6;
     public Vector2 windDirection;
-    public int direction = 0;
+    public int direction = 1;
     //[Space(5)]
     //public string[] tagsToApplyWind = { "Player", "Bullet" };
     [Space(5)]
@@ -24,7 +24,7 @@ public class WindController : MonoBehaviour {
     Vector3 fan_scale;
     public Text windForceText;
 
-  
+    bool firsttime = true;
 
 
     void Start()
@@ -146,8 +146,20 @@ public class WindController : MonoBehaviour {
             dir = 1;
         if (r <= 0.5f)
             dir = -1;
-        windDirection = new Vector2(dir, 1f);
-        direction = Mathf.RoundToInt(dir);
+        
+
+        if (firsttime) //ugly fix
+        {
+            dir = 1;
+            windDirection = new Vector2(dir, 1f);
+            direction = Mathf.RoundToInt(dir);
+            firsttime = false;
+        }
+        else
+        {
+            windDirection = new Vector2(dir, 1f);
+            direction = Mathf.RoundToInt(dir);
+        }
 
         //tell the actual clouds to die
         if(GetComponent<WeatherController>().clouds.Count > 0)
@@ -155,7 +167,12 @@ public class WindController : MonoBehaviour {
             foreach (GameObject cloud in GetComponent<WeatherController>().clouds)
             {
                 Debug.Log(cloud);
-                cloud.GetComponent<CloudController>().fade = true;
+                //cloud.GetComponent<CloudController>().fade = true; //this is to trigger fade away animation on clouds (destroys them on end)
+
+                if(cloud.GetComponent<CloudController>().dir != dir)
+                {
+                    cloud.GetComponent<CloudController>().dir = dir;
+                }
             }
         }
         

@@ -25,7 +25,7 @@ public class CloudController : MonoBehaviour {
 
 	// Awake call
 	void Awake () {
-		startPosition = new Vector3(startPosition.x, Random.Range(minY, maxY), Random.Range(minZ, maxZ));
+		//startPosition = new Vector3(startPosition.x, Random.Range(minY, maxY), Random.Range(minZ, maxZ));
 	}
 
 	// Use this for initialization
