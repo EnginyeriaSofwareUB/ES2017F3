@@ -63,13 +63,14 @@ public class CameraController : MonoBehaviour {
 		// Essentially matrix interpolation until we reach the target
 		while (Time.time < startTime + actualTransitionTime)
 		{
+			var t = (Time.time - startTime) / actualTransitionTime;
 			var mat = new Matrix4x4();
 			for (var i = 0; i < 16; i++)
 			{
 				mat[i] = Mathf.SmoothDamp(Camera.main.projectionMatrix[i], to[i], ref currentTransitionSpeed[i], transitionTime);
 			}
 			Camera.main.projectionMatrix = mat;
-			Camera.main.transform.position = Vector3.Slerp(startPos, position, (Time.time - startTime)/actualTransitionTime);
+			Camera.main.transform.position = Vector3.Slerp(startPos, position, t);
 			yield return null;
 		}
 	}
