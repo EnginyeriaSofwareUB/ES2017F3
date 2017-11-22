@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2106,7 +2106,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &792928141 stripped
 GameObject:
@@ -3740,12 +3740,17 @@ MonoBehaviour:
   current: 1
   cloudSpawnTimeCloudy: 1.3
   cloudSpawnTimeStormy: 0.4
+  cloudVelocity: 7
+  cloudVelocityVariance: 0.2
+  windForceMultiplier: 1.2
   cloudModels:
   - {fileID: 1650792384207558, guid: 148b3e398a0ec0641b84e54ad8e038de, type: 2}
   - {fileID: 1036564581839932, guid: 90728d86b7d3f954097c699ed26bc0bb, type: 2}
   - {fileID: 1823961010199206, guid: 8d136c82ce63bac47b53145ff3a7da42, type: 2}
   - {fileID: 1841474646252920, guid: 18d792deb0af76048978eed10c3bec84, type: 2}
   clouds: []
+  leftSpawn: {fileID: 0}
+  rightSpawn: {fileID: 0}
 --- !u!1 &1551019302 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1374655718531318, guid: f1aac2315fae2464b90f557564da521f,
@@ -3943,7 +3948,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4824254762037636, guid: 3b3b1db07589546c6a9e7dd453df54a6, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4669577230920358, guid: 3b3b1db07589546c6a9e7dd453df54a6, type: 2}
       propertyPath: m_LocalRotation.x
