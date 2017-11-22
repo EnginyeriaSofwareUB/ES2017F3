@@ -81,8 +81,12 @@ public class PlayerMovement : MonoBehaviour {
 
         anim.SetBool("jump", false);
 
+        Vector3 v;
+        if (model.localScale.z > 0) v = Vector3.right;
+        else v = Vector3.left;
+
         // ... add force in upwards.
-        rb.AddForce(Vector3.up * m_JumpPower, ForceMode.Impulse);
+        rb.AddForce(( (v + Vector3.up)/Mathf.Sqrt(2) )* m_JumpPower, ForceMode.Impulse);
     }
 
 }
