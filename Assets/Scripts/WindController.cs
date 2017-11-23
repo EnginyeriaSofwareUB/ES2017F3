@@ -59,7 +59,7 @@ public class WindController : MonoBehaviour {
         }
 
         weather.cloudVelocity = windForce * weather.windForceMultiplier;
-        Debug.Log("[WIND] Setting clouds speed to: " + windForce + "*"+ weather.windForceMultiplier);
+        //Debug.Log("[WIND] Setting clouds speed to: " + windForce + "*"+ weather.windForceMultiplier);
         windForceText.text = windForce.ToString("0.0");
 
         GarbageClean();

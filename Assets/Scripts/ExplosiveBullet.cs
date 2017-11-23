@@ -65,7 +65,7 @@ public class ExplosiveBullet : AbstractBullet
     }
 
 	protected float CalculateDamage(GameObject other) {
-	    var playerBase = other.transform.Find("Animator/Model").transform.position;
+	    var playerBase = other.transform.Find("Animator/Model_Center/Model/Character_Hands").transform.position;
         var playerPos = new Vector3(playerBase.x, playerBase.y);
         var bulletPos = new Vector3(transform.position.x, transform.position.y);
 	    var radius = ExplosiveArea.radius * ExplosiveArea.transform.localScale.x;

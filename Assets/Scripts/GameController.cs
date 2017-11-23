@@ -152,6 +152,8 @@ public class GameController : MonoBehaviour {
         // disable movement and firing to the previous player
         if (activePlayer)
         {
+            activePlayer.GetComponent<PlayerShooting>().EmptyHands();
+            activePlayer.GetComponent<PlayerMovement>().Idle();
             activePlayer.GetComponent<PlayerMovement>().enabled = false;
             activePlayer.GetComponent<PlayerShooting>().enabled = false;
         }
@@ -174,7 +176,7 @@ public class GameController : MonoBehaviour {
 				}
 				turnCount += 1;
 			}
-				
+
             activePlayer = players[turnId];
             Debug.Log("Now active player is: " + activePlayer);
             // enable movement
