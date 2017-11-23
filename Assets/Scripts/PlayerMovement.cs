@@ -33,12 +33,19 @@ public class PlayerMovement : MonoBehaviour {
 	// If any character is touching any "destructibleCube", it will allow them to jump.
 	void OnCollisionStay() {
 		isGrounded = true;
-        jump = false;
 	}
 
 	void OnCollisionExit() {
 		isGrounded = false;
 	}
+
+    void OnCollisionEnter(Collision collision) {
+        if (jump == true)
+        {
+            jump = false;
+            //print("Player Landed");
+        }
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -50,7 +57,6 @@ public class PlayerMovement : MonoBehaviour {
 	    if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !anim.GetBool("jump")) {
             // Perform jumping animation
             anim.SetBool("jump", true);
-            jump = true;
         }
 
         if (horizontal != 0) {
@@ -148,6 +154,8 @@ public class PlayerMovement : MonoBehaviour {
 
         // ... add force in upwards.
         rb.AddForce(( (v + Vector3.up)/Mathf.Sqrt(2) )* m_JumpPower, ForceMode.Impulse);
-	}
+
+        jump = true;
+    }
 
 }

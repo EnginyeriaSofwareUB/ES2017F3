@@ -70,7 +70,7 @@ public class WeatherController : MonoBehaviour {
                         float vel = Random.Range(cloudVelocity - cloudVelocity * cloudVelocityVariance, cloudVelocity + cloudVelocity * cloudVelocityVariance);
                         cc.velocity = vel;
 
-                        Debug.Log(" WIND DIRECTION IS : " + GetComponent<WindController>().direction);
+                        //Debug.Log(" WIND DIRECTION IS : " + GetComponent<WindController>().direction);
                         //Choose where to spawn the cloud, based on wind direction
                         if(GetComponent<WindController>().direction == 1)
                         {
