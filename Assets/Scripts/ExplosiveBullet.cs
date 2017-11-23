@@ -24,11 +24,10 @@ public class ExplosiveBullet : AbstractBullet
         _meshCollider = GetComponentsInChildren<MeshCollider>();
     }
 
-	new void Start()
+	public new void Start()
 	{
-        wind = GameObject.FindGameObjectWithTag("GM").GetComponent<WindController>();
-
         base.Start();
+        wind = GameObject.FindGameObjectWithTag("GM").GetComponent<WindController>();
         ExplosiveArea.enabled = false;
     }
 
