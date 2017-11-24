@@ -111,21 +111,19 @@ public class CameraController : MonoBehaviour {
 				if (activateFlags) {
 					// Get all the players
 					foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {	
-
+						
 						GameObject flag;
-
-						// We 
 						if (player.GetComponent<PlayerController> ().TEAM == 1) {						
 							flag = (GameObject)Instantiate (
 								flagTeam1,
-								player.transform.position + new Vector3 (0, 1, 0),
-								player.transform.rotation);
+								player.transform.position + new Vector3 (0, 1.5f, 0),
+								Quaternion.identity);
 						
 						} else {
 							flag = (GameObject)Instantiate (
 								flagTeam2,
-								player.transform.position + new Vector3 (0, 1, 0),
-								player.transform.rotation);
+								player.transform.position + new Vector3 (0, 1.5f, 0),
+								Quaternion.identity);
 						}
 
 						flag.transform.parent = player.transform;
