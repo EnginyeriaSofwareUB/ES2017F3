@@ -8,12 +8,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public float horizontal;
 	public Transform model;
-	public float timeInterval = 0.5f; // Default backJump time detect.
 	private bool jump;
 	private bool isGrounded;
-	private bool firstPress = false;
-	private float timePress;
-	private bool reset = false;
 	private bool backJump = false;
     private const float m_JumpPower = 5f; // The force added to the ball when it jumps.
 	private bool facingRight = false;
@@ -26,8 +22,7 @@ public class PlayerMovement : MonoBehaviour {
     void Start () {
 		rb = GetComponent<Rigidbody> ();
         anim = GetComponentInChildren<Animator>();
-		jump_force = new Vector3 (1.0f, 1.0f, 0.0f);
-		backJump_force = new Vector3 (-0.5f, 1.5f, 0.0f);
+
     }
 
 	// If any character is touching any "destructibleCube", it will allow them to jump.
@@ -43,6 +38,7 @@ public class PlayerMovement : MonoBehaviour {
         if (jump == true)
         {
             jump = false;
+			backJump = false;
             //print("Player Landed");
         }
     }
@@ -57,7 +53,8 @@ public class PlayerMovement : MonoBehaviour {
 	    if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !anim.GetBool("jump")) {
             // Perform jumping animation
             anim.SetBool("jump", true);
-        }
+			jump = true;
+		}
 
         if (horizontal != 0) {
             // Perform walking animation
@@ -67,34 +64,6 @@ public class PlayerMovement : MonoBehaviour {
             // Return to Idle
             anim.SetBool("walking", false);
         }
-		if (isGrounded) {
-			if (Input.GetKeyDown(KeyCode.Space) && firstPress) {
-				if (Time.time - timePress <= timeInterval) {
-					Debug.Log("BackJump");
-					backJump = true;
-				} else {
-					Debug.Log("Jump");
-				}
-
-				jump = true;
-				reset = true;
-			}
-
-			if (Time.time - timePress > timeInterval && firstPress) {
-				jump = true;
-				reset = true;
-			}
-
-			if (Input.GetKeyDown(KeyCode.Space) && !firstPress) {
-				firstPress = true;
-				timePress = Time.time;
-			}
-
-			if(reset) {
-				firstPress = false;
-				reset = false;
-			}
-		}
     }
 
     void FixedUpdate()
@@ -114,15 +83,15 @@ public class PlayerMovement : MonoBehaviour {
 		//rb.velocity = new Vector3(horizontal, rb.velocity.y);
 
 		// Update horizontal movement (but lock the horizontal movement while in air)
-		if (isGrounded && !jump) {
+		if ((isGrounded && !jump) || !backJump) {
 			rb.velocity = new Vector3(horizontal, rb.velocity.y);
 		}
 
-
-			if (backJump) {
-				//do BackJump()...
-				BackJump();
-			}
+		if (Input.GetKeyDown (KeyCode.Space) && backJump) { //!anim.GetBool("backjump"))
+			//anim.SetBool("backjump", true);
+			//do BackJump()...
+			BackJump ();
+		}
 	}
 
 
@@ -135,12 +104,11 @@ public class PlayerMovement : MonoBehaviour {
    
     void BackJump() {
 		//The addforce that makes the Player jump slightly higher.
-		//rb.AddForce ((backJump_force + m_JumpPower * model.localScale) * m_JumpPower, ForceMode.Impulse); NEEDS A LITTLE MORE WORK
-		rb.AddForce(Vector3.up * 1.5f * m_JumpPower, ForceMode.Impulse);
+		rb.AddForce(Vector3.up * 2f * m_JumpPower, ForceMode.Impulse);
 
 		//Jump Done
 		backJump = false;
-		jump = false;
+		jump = true;
 	}
     
     public void Jump() {
@@ -156,6 +124,7 @@ public class PlayerMovement : MonoBehaviour {
         rb.AddForce(( (v + Vector3.up)/Mathf.Sqrt(2) )* m_JumpPower, ForceMode.Impulse);
 
         jump = true;
+		backJump = true;
     }
 
 }
