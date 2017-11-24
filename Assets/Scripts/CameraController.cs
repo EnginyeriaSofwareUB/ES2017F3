@@ -110,6 +110,7 @@ public class CameraController : MonoBehaviour {
 
 				if (activateFlags) {
 					// Get all the players
+								
 					foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {	
 						
 						GameObject flag;
@@ -128,6 +129,10 @@ public class CameraController : MonoBehaviour {
 
 						flag.transform.parent = player.transform;
 						flags.Add (flag);
+
+						if (player.Equals(_controller.activePlayer)){
+							player.GetComponentInChildren<FlagMainPlayer> ().enabled = true;
+						}
 					}
 				}
 			}

@@ -26,8 +26,6 @@ public class MovementCamera : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 
-		Vector3 direction = new Vector3(0,0,0);
-
 		// Check if on the right edge
 		if ((Input.mousePosition.x >= Screen.width - mDelta) && (transform.position.x<max_X)) {
 			// Move the camera
