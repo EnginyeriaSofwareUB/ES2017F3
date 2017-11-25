@@ -156,6 +156,12 @@ public class GameController : MonoBehaviour {
             activePlayer.GetComponent<PlayerMovement>().Idle();
             activePlayer.GetComponent<PlayerMovement>().enabled = false;
             activePlayer.GetComponent<PlayerShooting>().enabled = false;
+
+			// disable flag
+			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null){
+				activePlayer.GetComponentInChildren<FlagMainPlayer>().EnableMain(false);
+			}
+
         }
         
 
@@ -183,6 +189,11 @@ public class GameController : MonoBehaviour {
             activePlayer.GetComponent<PlayerMovement>().enabled = true;
             // enable firing shoots
             activePlayer.GetComponent<PlayerShooting>().enabled = true;
+
+			// enable flag
+			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null){
+				activePlayer.GetComponentInChildren<FlagMainPlayer>().EnableMain(true);
+			}
 
             // this turn expires in 10 seconds
             turnRemainingTime = turnTime;
