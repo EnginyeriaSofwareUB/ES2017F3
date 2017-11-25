@@ -152,8 +152,12 @@ public class GameController : MonoBehaviour {
 
 	public int GetGunUsagesLeft(int team, int index)
 	{
-		Debug.Log(_teamGunUses[team - 1][index]);
 		return _teamGunUses[team - 1][index];
+	}
+
+	public IEnumerable<int> GetGunUsagesLeft(int team)
+	{
+		return _teamGunUses[team - 1];
 	}
 
 	public void AddGunUsages(int team, int index, int usages)
