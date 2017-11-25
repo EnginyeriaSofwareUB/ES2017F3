@@ -242,7 +242,6 @@ GameObject:
   - component: {fileID: 4330375019281978}
   - component: {fileID: 136707112983457374}
   - component: {fileID: 136333531779280298}
-  - component: {fileID: 114575285828781622}
   - component: {fileID: 198824190603476770}
   - component: {fileID: 199138825887716484}
   m_Layer: 0
@@ -418,7 +417,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1444491789241680}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.34, y: -4.54, z: -0.7961611}
+  m_LocalPosition: {x: 6.306796, y: -2.4574084, z: -1.124074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4618728880974734}
@@ -1021,21 +1020,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114575285828781622
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1772068059165750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 024635c323444fff9c1f114a551f477a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletDamage: 10
-  TimeUntilDespawn: 10
-  ExplosionDuration: 1
-  ExplosionEffect: {fileID: 0}
 --- !u!114 &114870639887352798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1141,7 +1125,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1901738478
+  randomSeed: -614868863
   InitialModule:
     serializedVersion: 3
     enabled: 1
