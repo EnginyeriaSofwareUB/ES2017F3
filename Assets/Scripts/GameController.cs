@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -223,8 +223,8 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		turnRemainingTime -= Time.deltaTime;
-		if(turnRemainingTime < 0) {
+		if (current == gameStates.gameOn) turnRemainingTime -= Time.deltaTime;
+		if (turnRemainingTime < 0) {
 			changeTurn();
 		}
 
