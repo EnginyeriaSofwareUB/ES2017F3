@@ -18,10 +18,11 @@ public class DeathOnTouch : MonoBehaviour {
 
 		Debug.Log (col.tag + col.name);
 
-		if (col.gameObject.tag == "Player") {
+		if (col.gameObject.CompareTag("Player")) {
+			col.gameObject.GetComponent<PlayerController> ().Damage(100f);
 
-			// TODO: Dying should be public
-			col.gameObject.GetComponent<PlayerController> ().Damage (col.gameObject.GetComponent<PlayerController> ().maxHealth);
+			//TODO: Set a delay
+			GameObject.FindGameObjectWithTag ("GM").GetComponent<GameController> ().changeTurn ();
 		}
 	}
 }

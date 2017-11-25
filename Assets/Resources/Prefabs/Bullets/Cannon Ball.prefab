@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 136268073919179278}
   m_Layer: 0
   m_Name: Cannon Ball
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1253381899178622}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 9.853975, y: 0.24600628, z: -5.4329348}
+  m_LocalPosition: {x: 71.90277, y: 45.590893, z: -28.270824}
   m_LocalScale: {x: 0.19168282, y: 0.19168276, z: 0.19168276}
   m_Children: []
   m_Father: {fileID: 0}
@@ -124,9 +124,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 024635c323444fff9c1f114a551f477a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletDamage: 25
+  BulletDamage: 15
   TimeUntilDespawn: 10
   ExplosionDuration: 1
+  ExplosionEffect: {fileID: 1090855516486484, guid: 64f102e164cbc40ceb5dfdd2f9a5c929,
+    type: 2}
 --- !u!136 &136268073919179278
 CapsuleCollider:
   m_ObjectHideFlags: 1
