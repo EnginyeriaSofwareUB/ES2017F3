@@ -4,17 +4,17 @@ using UnityEngine;
 public class ExplosiveBullet : AbstractBullet
 {
     WindController wind; //for deleting itself from wind objects list
-	private CapsuleCollider ExplosiveArea;
+	protected CapsuleCollider ExplosiveArea;
 
 	public float ExplosionDuration = 1f;
 
 	public GameObject ExplosionEffect;
-	private Rigidbody _rigidbody;
+	protected Rigidbody _rigidbody;
 
-	private MeshRenderer[] _meshRenderer;
-	private MeshCollider[] _meshCollider;
+	protected MeshRenderer[] _meshRenderer;
+	protected MeshCollider[] _meshCollider;
 
-	private bool _isExploding;
+	protected bool _isExploding;
 
     void Awake() {
         ExplosiveArea = GetComponent<CapsuleCollider>();
@@ -99,8 +99,11 @@ public class ExplosiveBullet : AbstractBullet
 		}
 		_isExploding = true;
 		ExplosiveArea.enabled = true;
-		var go = Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
-		Destroy(go, 1f);
+		if (ExplosionEffect != null)
+		{
+			var go = Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
+			Destroy(go, 1f);
+		}
 		Destroy(gameObject, ExplosionDuration);
 	}
 }

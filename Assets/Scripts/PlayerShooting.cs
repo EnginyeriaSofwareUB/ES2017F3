@@ -49,12 +49,14 @@ public class PlayerShooting : MonoBehaviour
                     newScale = Vector3.one * 0.4f;
                     newPos = new Vector3(0.78f, 0, -0.15f);
                     break;
-
                 case "Dynamite Base":
                     newScale = Vector3.one * 1.9f;
                     newPos = new Vector3(-0.019f, 0.426f, -0.448f);
                     break;
-                    
+                case "Bow and Arrow":
+                    newPos = new Vector3(2f, 1.5f, -1.5f);
+                    newScale = Vector3.one;
+                    break;
                 default:
                     newScale = newPos = Vector3.one;
                     break;
@@ -208,6 +210,8 @@ public class PlayerShooting : MonoBehaviour
             ChangeGunTo(0);
         else if (Input.GetKeyDown(KeyCode.Alpha3))
             ChangeGunTo(1);
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+            ChangeGunTo(2);
 
     }
 
@@ -274,6 +278,9 @@ public class PlayerShooting : MonoBehaviour
 
                 maxAngle = 0;
                 maxPower = minPower = 0;
+                break;
+            default:
+                RestoreShootingParam();
                 break;
         }
 
