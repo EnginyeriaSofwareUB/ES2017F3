@@ -23,12 +23,10 @@ public class GameController : MonoBehaviour {
     [Header("Canvas Objects")]
     public Text turnTimerText;
 
-
     [Header("Testing Variables Here")]
     public GameObject activePlayer = null;
     public GameObject testPlayerPrefab; //seleccionar per script al carregar desde la escena anterior
     public List<GameObject> players; //mirar de eliminar! 
-
 
     [Header("TEAM variables")]
     public Transform spawnPoint1;
@@ -38,7 +36,6 @@ public class GameController : MonoBehaviour {
     public List<GameObject> team2;
     int spawned1 = 0;
     int spawned2 = 0;
-
 
     [Header("Turns")]
 	// points to the current active playe in the players index
@@ -183,7 +180,6 @@ public class GameController : MonoBehaviour {
 			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null){
 				activePlayer.GetComponentInChildren<FlagMainPlayer>().EnableMain(false);
 			}
-
         }
         
 		// point to the next player
@@ -192,11 +188,11 @@ public class GameController : MonoBehaviour {
 		// TODO: pass to next plater with a better way
 
         // Game continues
-        if(players.Count >= 2) {
+        if(players.Count > 1) {
             // Sudden death
 			if (!suddenDeath) {
 				if (turnCount >= turnsTillSudden) {
-					SuddenDeath ();
+					SuddenDeath();
 					suddenDeath = true;
 				}
 				turnCount += 1;
@@ -216,9 +212,9 @@ public class GameController : MonoBehaviour {
 
             // this turn expires in 10 seconds
             turnRemainingTime = turnTime;
-        }
 
-        GetComponent<WindController>().ChangeWindRandom();
+            GetComponent<WindController>().ChangeWindRandom();
+        }
 	}
 	
 	// Update is called once per frame
