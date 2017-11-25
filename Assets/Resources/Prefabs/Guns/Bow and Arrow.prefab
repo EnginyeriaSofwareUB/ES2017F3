@@ -1035,6 +1035,7 @@ MonoBehaviour:
   BulletPrefab: {fileID: 1471985357550334, guid: 4340230a8ad7c4e4b8ccfdd4f8a757ab,
     type: 2}
   minShootSpeed: 5
+  InitialUsagesLeft: 2
   bulletFired:
     m_PersistentCalls:
       m_Calls: []
