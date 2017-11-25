@@ -415,7 +415,7 @@ Prefab:
         type: 2}
       propertyPath: destructiblePieces.Array.data[2]
       value: 
-      objectReference: {fileID: 1298024071}
+      objectReference: {fileID: 1259346246}
     - target: {fileID: 114473329320602040, guid: 091cdace88c5d6240802da7332fe3ffa,
         type: 2}
       propertyPath: destructiblePieces.Array.data[3]
@@ -1282,6 +1282,11 @@ Prefab:
       value: 
       objectReference: {fileID: 1753187005233192, guid: c56543d2c5bbfc54bbd2b5e793045688,
         type: 2}
+    - target: {fileID: 114473329320602040, guid: 091cdace88c5d6240802da7332fe3ffa,
+        type: 2}
+      propertyPath: minDistance
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 091cdace88c5d6240802da7332fe3ffa, type: 2}
   m_IsPrefabParent: 0
@@ -4150,6 +4155,11 @@ GameObject:
 --- !u!1 &1253527818 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1726640621773178, guid: f1aac2315fae2464b90f557564da521f,
+    type: 2}
+  m_PrefabInternal: {fileID: 997812162}
+--- !u!1 &1259346246 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1017207923991122, guid: f1aac2315fae2464b90f557564da521f,
     type: 2}
   m_PrefabInternal: {fileID: 997812162}
 --- !u!1 &1293926981 stripped

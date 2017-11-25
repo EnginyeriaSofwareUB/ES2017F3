@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class DeathOnTouch : MonoBehaviour {
 
-	private GameObject g;
-
+	private bool isDrown;
+	private IEnumerator coroutine;
 
 	// Use this for initialization
 	void Start () {
-
+		isDrown = false;
 	}
 
 	void Update () {
@@ -18,21 +18,29 @@ public class DeathOnTouch : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 
-		Debug.Log (col.tag + col.name);
-
-		if (col.gameObject.CompareTag("Player")) {
-
-			g = col.gameObject;
+		if (col.gameObject.CompareTag("Player") && !isDrown) {
+			Debug.Log ("A");
+			isDrown = true;
+			GameObject g = col.gameObject;
 
 			g.transform.GetComponent<Rigidbody> ().isKinematic = true;
+			g.GetComponentInChildren<Animator> ().SetTrigger ("drown");
 
-			//g.transform.position -= new Vector3 (0, 0.5f, 0);
+			//set a delay
+			coroutine = DelayToDeath(g);
+			StartCoroutine (coroutine);
 
-			col.gameObject.GetComponent<PlayerController> ().Damage(100f);
-
-			//TODO: Set a delay
-			//GameObject.FindGameObjectWithTag ("GM").GetComponent<GameController> ().changeTurn ();
 		}
+	}
+
+	IEnumerator DelayToDeath(GameObject g){
+		print ("COR" + g);
+		yield return new WaitForSeconds (2);
+		if (g != null) {
+			g.GetComponent<PlayerController> ().Damage (100f);
+		}
+		//		yield return new WaitForSeconds (2);
+		//		GameObject.FindGameObjectWithTag ("GM").GetComponent<GameController> ().changeTurn ();
 	}
 
 

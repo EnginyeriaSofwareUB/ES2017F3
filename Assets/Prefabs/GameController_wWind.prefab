@@ -269,10 +269,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  minDistance: 1
   numMedical: 5
   medical: {fileID: 1809551435781242, guid: b3ee9cf04b8dc4d4491684106da963c9, type: 2}
   numAmmunition: 5
-  ammunition: {fileID: 0}
+  ammunition: {fileID: 1753187005233192, guid: c56543d2c5bbfc54bbd2b5e793045688, type: 2}
 --- !u!114 &114607817917921614
 MonoBehaviour:
   m_ObjectHideFlags: 1
