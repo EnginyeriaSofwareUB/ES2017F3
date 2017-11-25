@@ -10,6 +10,7 @@ public class WindController : MonoBehaviour {
     public bool ignoreMass = false; //bool per determinar si la força del vent s'aplica tenin en conte la massa o no
     public bool affectPlayers = true; //bool per determinar si el vent afecta als jugadors o no
     [Space(5)]
+    [Range(0, 6)]
     public float windForce; //min 0 max 6;
     public Vector2 windDirection;
     public int direction = 1;
@@ -58,13 +59,34 @@ public class WindController : MonoBehaviour {
             fan_UI.transform.Rotate(0f, 0f, 40f * windForce * Time.deltaTime);
         }
 
+
+
+        //set the cloud velocity = wind force * velocity proportionality
         weather.cloudVelocity = windForce * weather.windForceMultiplier;
         //Debug.Log("[WIND] Setting clouds speed to: " + windForce + "*"+ weather.windForceMultiplier);
         windForceText.text = windForce.ToString("0.0");
 
         GarbageClean();
 
+        SetWeatherState();
+
         Canvas.ForceUpdateCanvases();
+    }
+
+    void SetWeatherState()
+    {
+        if(windForce <= 1f && weather.current != WeatherController.weatherState.CALM)
+        {
+            weather.ChangeWeather(WeatherController.weatherState.CALM);
+        }
+        else if(windForce > 1f && windForce <= 4.5f && weather.current != WeatherController.weatherState.CLOUDY)
+        {
+            weather.ChangeWeather(WeatherController.weatherState.CLOUDY);
+        }
+        else if(windForce > 4.5f && weather.current != WeatherController.weatherState.STORMY)
+        {
+            weather.ChangeWeather(WeatherController.weatherState.STORMY);
+        }
     }
 
     void GarbageClean()
