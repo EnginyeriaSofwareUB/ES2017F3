@@ -20,9 +20,14 @@ public class PlayerShooting : MonoBehaviour
 
     public UnityEvent shootEvent;
 
+    private GameController _gameController;
+    private PlayerController _playerController;
+    
     private void Awake()
     {
-        _guns = new List<Gun>(GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().AvailableGuns);
+        _playerController = GetComponent<PlayerController>();
+        _gameController = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
+        _guns = new List<Gun>(_gameController.AvailableGuns);
         hands = transform.Find(BaseGunPath);
         modelCenter = transform.Find(ModelCenter);
         mdlHandLeft = transform.Find(ModelHands+"Hand_Left_001");
@@ -119,6 +124,7 @@ public class PlayerShooting : MonoBehaviour
     }
 
     void Fire() {
+        _gameController.AddGunUsages(_playerController.TEAM, lastGunEquipped, -1);
         // notify all listenrs of this shoot
         if (shootEvent != null) shootEvent.Invoke();
 
@@ -257,7 +263,8 @@ public class PlayerShooting : MonoBehaviour
 
         // Change gun only when changing to another one
         if (_currentGun == _guns[gunIndex]) return;
-
+        if (_gameController.GetGunUsagesLeft(_playerController.TEAM, gunIndex) == 0)
+            return;
         if (!GunEquipped()) SetHandsAnimation(false);
 
         SetCurrentGunActive(false);
