@@ -68,8 +68,7 @@ public class GameController : MonoBehaviour {
         InitGame();
 		// Create remaining gun uses
 		_teamGunUses = new int[2][];
-		for (int i = 0; i < 2; i++)
-		{
+		for (int i = 0; i < 2; i++) {
 			_teamGunUses[i] = new int[AvailableGuns.Count];
 			for (int j = 0; j < AvailableGuns.Count; j++)
 			{
@@ -97,12 +96,10 @@ public class GameController : MonoBehaviour {
 		changeTurn();
 	}
 
-    void InitGame()
-    {
+    void InitGame() {
         Debug.Log("Init game; Spawning " + nPlayersPerTeam + " per team.");
         //team1
-        for (int i = 0; i < nPlayersPerTeam; i++)
-        {
+        for (int i = 0; i < nPlayersPerTeam; i++) {
             //GameObject p1 = Instantiate(Resources.Load("Prefabs/Characters/Animated Characters/" + testPlayerPrefabName), spawnPoint1.position, spawnPoint1.rotation, null) as GameObject;
             GameObject p1 = Instantiate(testPlayerPrefab, spawnPoint1.position, spawnPoint1.rotation, null) as GameObject;
             p1.SetActive(true);
@@ -118,8 +115,7 @@ public class GameController : MonoBehaviour {
         }
 
         //TEAM2
-        for (int i = 0; i < nPlayersPerTeam; i++)
-        {
+        for (int i = 0; i < nPlayersPerTeam; i++) {
             GameObject p2 = Instantiate(testPlayerPrefab, spawnPoint2.position, spawnPoint2.rotation, null) as GameObject;
             p2.SetActive(true);
             p2.GetComponent<PlayerController>().TEAM = 2;
@@ -136,9 +132,6 @@ public class GameController : MonoBehaviour {
         }
     }
 
-
-
-
     void OnShoot() {
 		// disable shooting
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
@@ -150,18 +143,15 @@ public class GameController : MonoBehaviour {
         players.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
     }
 
-	public int GetGunUsagesLeft(int team, int index)
-	{
+	public int GetGunUsagesLeft(int team, int index) {
 		return _teamGunUses[team - 1][index];
 	}
 
-	public IEnumerable<int> GetGunUsagesLeft(int team)
-	{
+	public IEnumerable<int> GetGunUsagesLeft(int team) {
 		return _teamGunUses[team - 1];
 	}
 
-	public void AddGunUsages(int team, int index, int usages)
-	{
+	public void AddGunUsages(int team, int index, int usages) {
 		if (_teamGunUses[team - 1][index] < 0)
 			return;
 		_teamGunUses[team - 1][index] += usages;
@@ -169,8 +159,7 @@ public class GameController : MonoBehaviour {
 	}
 	
     public void changeTurn() {
-        if (players.Count < 2)
-        {
+        if (players.Count < 2) {
             // Game finished
 
             Debug.Log("Game has ended!");
@@ -184,8 +173,7 @@ public class GameController : MonoBehaviour {
         }
 
         // disable movement and firing to the previous player
-        if (activePlayer)
-        {
+        if (activePlayer) {
             activePlayer.GetComponent<PlayerShooting>().EmptyHands();
             activePlayer.GetComponent<PlayerMovement>().Idle();
             activePlayer.GetComponent<PlayerMovement>().enabled = false;
@@ -198,17 +186,14 @@ public class GameController : MonoBehaviour {
 
         }
         
-
 		// point to the next player
 		turnId = (turnId + 1) % players.Count;
 		// FIXME @rafa: this dummy assignment will lead weird bugs
 		// TODO: pass to next plater with a better way
 
-	    
-
+        // Game continues
         if(players.Count >= 2) {
-            // Game continues
-
+            // Sudden death
 			if (!suddenDeath) {
 				if (turnCount >= turnsTillSudden) {
 					SuddenDeath ();
@@ -225,14 +210,13 @@ public class GameController : MonoBehaviour {
             activePlayer.GetComponent<PlayerShooting>().enabled = true;
 
 			// enable flag
-			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null){
+			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null) {
 				activePlayer.GetComponentInChildren<FlagMainPlayer>().EnableMain(true);
 			}
 
             // this turn expires in 10 seconds
             turnRemainingTime = turnTime;
         }
-
 
         GetComponent<WindController>().ChangeWindRandom();
 	}
@@ -252,20 +236,15 @@ public class GameController : MonoBehaviour {
 				pauseScreenUI.SetActive(true);
 				current = gameStates.pause;
 			}
-
 		}
 
         UpdateCanvas();
 	}
 
-    void UpdateCanvas()
-    {
-        if(turnRemainingTime <= turnTime * 0.2f)
-        {
+    void UpdateCanvas() {
+        if(turnRemainingTime <= turnTime * 0.2f) {
             turnTimerText.color = Color.red;
-        }
-        else
-        {
+        } else {
             turnTimerText.color = Color.blue;
         }
         turnTimerText.text = turnRemainingTime.ToString("00"); //Remaining time 
