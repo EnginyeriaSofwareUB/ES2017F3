@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -139,8 +139,27 @@ public class GameController : MonoBehaviour {
     }
 
     void OnDeath(int playerId) {
+        bool isCurrentPlayer = activePlayer.GetComponent<PlayerController>().playerId == playerId;
+        // Debug.Log("suicide! " + isCurrentPlayer);
+
         // Delete from players dead player
         players.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
+
+        // suicide
+        if (isCurrentPlayer) changeTurn();
+
+        // Game over
+        if (players.Count < 2) {
+            Debug.Log("Game has ended!");
+
+            current = gameStates.gameOver;
+
+            // activar pantalla GameOver
+			completeLevelUI.SetActive(true);
+
+            //Return to main menu
+            //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
+        }
     }
 
 	public int GetGunUsagesLeft(int team, int index) {
@@ -159,19 +178,6 @@ public class GameController : MonoBehaviour {
 	}
 	
     public void changeTurn() {
-        if (players.Count < 2) {
-            // Game finished
-
-            Debug.Log("Game has ended!");
-
-            current = gameStates.gameOver;
-
-			completeLevelUI.SetActive (true);//activar pantalla GameOver
-
-            //Return to main menu
-            //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
-        }
-
         // disable movement and firing to the previous player
         if (activePlayer) {
             activePlayer.GetComponent<PlayerShooting>().EmptyHands();
@@ -183,7 +189,6 @@ public class GameController : MonoBehaviour {
 			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null){
 				activePlayer.GetComponentInChildren<FlagMainPlayer>().EnableMain(false);
 			}
-
         }
         
 		// point to the next player
