@@ -35,7 +35,7 @@ public class RandomInitialization : MonoBehaviour {
 			Vector3 pos = piece.transform.position;
 			pos.z -= 0.2f;
 
-			var med = (GameObject)Instantiate (
+			Instantiate (
 				         medical,
 				         pos,
 				Quaternion.identity);
@@ -49,7 +49,7 @@ public class RandomInitialization : MonoBehaviour {
 			var piece = destructiblePieces [Random.Range (0, destructiblePieces.Count)];
 			Destroy (piece.gameObject);
 
-			var amm = (GameObject)Instantiate (
+			Instantiate (
 				ammunition,
 				piece.transform.position,
 				Quaternion.identity);
