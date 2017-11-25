@@ -122,7 +122,7 @@ public class WeatherController : MonoBehaviour {
 
                 sea_animator.speed = 3f;
 
-                if (clouds.Count <= 25) {
+                if (clouds.Count <= 40) {
 					
 					cloudDelay += Time.deltaTime;
 					if (cloudDelay >= cloudSpawnTimeStormy) {

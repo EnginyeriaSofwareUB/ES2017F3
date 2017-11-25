@@ -488,13 +488,15 @@ GameObject:
   - component: {fileID: 114164703533368678}
   - component: {fileID: 114151515222237272}
   - component: {fileID: 136535894377287358}
+  - component: {fileID: 114848381590171420}
+  - component: {fileID: 82604268382880432}
   m_Layer: 0
   m_Name: Viking_Character
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1939469296772294
 GameObject:
   m_ObjectHideFlags: 1
@@ -630,7 +632,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1934148465144300}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 14.781, y: -4.239, z: -0.81276}
+  m_LocalPosition: {x: 10.277396, y: 0.10546149, z: -0.81276}
   m_LocalScale: {x: 0.24577843, y: 0.24577843, z: 0.24577843}
   m_Children:
   - {fileID: 4398615038571798}
@@ -894,6 +896,86 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300010, guid: 4206cad5bd7ba9f43bc48e28a093b790, type: 3}
+--- !u!82 &82604268382880432
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1934148465144300}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95973586384181784
 Animator:
   serializedVersion: 3
@@ -945,6 +1027,11 @@ MonoBehaviour:
   rb: {fileID: 0}
   horizontal: 0
   model: {fileID: 4014456020868080}
+  jump: 0
+  isGrounded: 0
+  backJump: 0
+  jump_force: {x: 0, y: 0, z: 0}
+  backJump_force: {x: 0, y: 0, z: 0}
 --- !u!114 &114183231593927812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1205,6 +1292,25 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114848381590171420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1934148465144300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039037569556e7b4ebf27f6750854222, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedWeapon: {fileID: 0}
+  jump:
+  - {fileID: 8300000, guid: 189dbf477a4ccd848a46268b6e480865, type: 3}
+  - {fileID: 8300000, guid: 6cc4649237f77804fa48b2d27c2f51c0, type: 3}
+  jump2:
+  - {fileID: 8300000, guid: 71908542eee3547428952edb80e01709, type: 3}
+  steps: {fileID: 8300000, guid: 857ace406c3a96c489e53d452034447a, type: 3}
+  canon: {fileID: 8300000, guid: 2feb52f89626647e68d422b40882c546, type: 3}
 --- !u!114 &114896193245975554
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1254,6 +1360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7223287cf2a9de44482071287b383632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentGun: {fileID: 0}
   angleSpeed: 0.6
   maxPowerSeconds: 3.5
   maxPower: 40
@@ -2033,7 +2140,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2051,7 +2158,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

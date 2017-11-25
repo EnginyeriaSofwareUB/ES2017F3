@@ -188,7 +188,7 @@ public class WindController : MonoBehaviour {
         {
             foreach (GameObject cloud in GetComponent<WeatherController>().clouds)
             {
-                Debug.Log(cloud);
+                //Debug.Log(cloud);
                 //cloud.GetComponent<CloudController>().fade = true; //this is to trigger fade away animation on clouds (destroys them on end)
 
                 if(cloud.GetComponent<CloudController>().dir != dir)

@@ -9,7 +9,7 @@ public class PlayerShooting : MonoBehaviour
 {
     private const string ModelCenter = "Animator/Model_Center/", BaseGunPath = ModelCenter + "Model/Character_Hands/", ModelHands = ModelCenter + "Model/Character_Base/";
     private Transform hands, modelCenter, mdlHandLeft, mdlHandRight;
-    private Gun _currentGun;
+    public Gun _currentGun;
     private List<Gun> _guns;
     private float thrust, startPowerTime;
     public float angleSpeed, maxPowerSeconds;
