@@ -130,8 +130,11 @@ public class CameraController : MonoBehaviour {
 						flag.transform.parent = player.transform;
 						flags.Add (flag);
 
-						if (player.Equals(_controller.activePlayer)){
+
+						if (player.Equals(_controller.activePlayer)) {
 							player.GetComponentInChildren<FlagMainPlayer> ().enabled = true;
+						} else {
+							player.GetComponentInChildren<FlagMainPlayer> ().enabled = false;
 						}
 					}
 				}
