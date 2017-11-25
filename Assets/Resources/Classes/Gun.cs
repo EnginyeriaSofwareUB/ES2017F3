@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,6 +12,14 @@ public class Gun : MonoBehaviour
     private Animator anim;
     private float thrust;
     public float minShootSpeed;
+
+    // Positive integer for limited use of variables, negative for infinite use
+    public int InitialUsagesLeft;
+
+    public bool InfiniteUses
+    {
+        get { return InitialUsagesLeft < 0; }
+    }
 
     public UnityEvent bulletFired;
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -52,7 +53,12 @@ public class GameController : MonoBehaviour {
 	private bool suddenDeath = false;
 	private int turnCount;
 
-	[Header("Guns")] public List<Gun> AvailableGuns;
+	[Header("Guns")]
+	public List<Gun> AvailableGuns;
+
+	private int[][] _teamGunUses;
+	public static readonly UnityEvent ChangedGunUsesEvent = new UnityEvent();
+
 	// Use this for initialization
 	void Start () {
         //TODO: Set the activePlayer to the Main Player.
@@ -60,7 +66,17 @@ public class GameController : MonoBehaviour {
 
         //Spawn players
         InitGame();
-
+		// Create remaining gun uses
+		_teamGunUses = new int[2][];
+		for (int i = 0; i < 2; i++)
+		{
+			_teamGunUses[i] = new int[AvailableGuns.Count];
+			for (int j = 0; j < AvailableGuns.Count; j++)
+			{
+				_teamGunUses[i][j] = AvailableGuns[j].InitialUsagesLeft;
+			}
+		}
+		
         turnCount = 0;
         // retrieve players
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
@@ -133,7 +149,21 @@ public class GameController : MonoBehaviour {
         // Delete from players dead player
         players.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
     }
-		
+
+	public int GetGunUsagesLeft(int team, int index)
+	{
+		Debug.Log(_teamGunUses[team - 1][index]);
+		return _teamGunUses[team - 1][index];
+	}
+
+	public void AddGunUsages(int team, int index, int usages)
+	{
+		if (_teamGunUses[team - 1][index] < 0)
+			return;
+		_teamGunUses[team - 1][index] += usages;
+		ChangedGunUsesEvent.Invoke();
+	}
+	
     public void changeTurn() {
         if (players.Count < 2)
         {
