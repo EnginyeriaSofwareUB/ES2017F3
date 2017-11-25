@@ -6,13 +6,27 @@ public class DynamiteBullet : ExplosiveBullet {
 
     private Animator anim;
 
+    AudioSource audio;
+    public AudioClip mecha;
+    public AudioClip boom;
+
 	// Use this for initialization
 	new void Start () {
 	    base.Start();
 	    anim = GetComponent<Animator>();
-	}
+
+        audio = GetComponent<AudioSource>();
+        audio.clip = mecha;
+        audio.Play();
+        audio.loop = true;
+    }
 
     protected override void DespawnBullet() {
+        audio.Stop();
+        audio.clip = boom;
+        audio.loop = false;
+        audio.Play();
+
         anim.SetTrigger("explode");
     }
 

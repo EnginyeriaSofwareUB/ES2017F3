@@ -89,12 +89,15 @@ public class PlayerSounds : MonoBehaviour {
 
     public void OnShoot()
     {
-        print("shoooot on audio " + selectedWeapon.name);
+        print("shoooot audio " + selectedWeapon.name);
         switch (selectedWeapon.name)
         {
             case "Cannon Base":
                 source.volume = 0.5f;
-                source.PlayOneShot(canon);
+                source.loop = false;
+                //source.PlayOneShot(canon);
+                source.clip = canon;
+                source.Play();
                 break;
         }
         
