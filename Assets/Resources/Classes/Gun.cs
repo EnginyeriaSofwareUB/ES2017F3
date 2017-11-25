@@ -47,9 +47,11 @@ public class Gun : MonoBehaviour
         print("Shoot bullet");
         var shootingVector = SpawnPoint.position - transform.position;
         shootingVector.z = 0;
+        var projectedPosition = SpawnPoint.position;
+        projectedPosition.z = -0.88f;
         var bullet = Instantiate(
             BulletPrefab,
-            SpawnPoint.position,
+            projectedPosition,
             Quaternion.Euler(0, 0, 0));
 
         // Add force to the bullet (vector = bulletPos - gunPos)
