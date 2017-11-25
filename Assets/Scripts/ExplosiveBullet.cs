@@ -101,7 +101,7 @@ public class ExplosiveBullet : AbstractBullet
 		ExplosiveArea.enabled = true;
 		if (ExplosionEffect != null)
 		{
-			var go = Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
+			var go = Instantiate(ExplosionEffect, transform.position, transform.rotation);
 			Destroy(go, 1f);
 		}
 		Destroy(gameObject, ExplosionDuration);
