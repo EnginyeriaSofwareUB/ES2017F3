@@ -15,7 +15,7 @@ public class MovementCamera : MonoBehaviour {
 
 	public float min_X = 0f;
 	public float max_X = 25f;
-	public float min_Y = -0.5f;
+	public float min_Y = 1f;
 	public float max_Y = 8f;
 
 	// Use this for initialization
