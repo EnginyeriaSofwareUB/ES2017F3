@@ -39,25 +39,29 @@ public class UIClock : MonoBehaviour {
 				if (i == sprites.Length-1) {
 					//
 					float speed = 100F;
-					print ("AA" + i + "" + notrot);
 					transform.rotation = Quaternion.RotateTowards (
 						transform.rotation, Quaternion.Euler (0, 0, notrot * 180), Time.deltaTime * speed);				
 				}
 
 				if (i != index) {
-					
-					index = (index + 1) % sprites.Length;
 
-					print (i);
-					if (notrot == 0) {
+					//print (i);
+
+					if (notrot == 0 && index!=2) {
 						clock.sprite = sprites [i];
-					} else {
+						//print ("AA" + i + " " + notrot +" "+index);
+
+					} else if(notrot==1 && index!=2){
 						clock.sprite = spritesrot [i];
+						//print ("BB" + i + " " + notrot +" "+index);
 					}
 
 					if (i == 0) {
-						notrot = (notrot+1)%2;
+						notrot = (notrot + 1) % 2;
 					}
+						
+					index = (index + 1) % sprites.Length;
+
 				}
 			}
 
