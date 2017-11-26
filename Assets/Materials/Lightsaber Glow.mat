@@ -27,7 +27,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - _MKGlowPower: 1
+    - _MKGlowPower: 2.5
     - _MKGlowTexStrength: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
