@@ -240,19 +240,22 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (current == gameStates.gameOn) {
-            turnRemainingTime -= Time.deltaTime;
-            if (turnRemainingTime < 0) startDelay();
-        } 
-		if (current == gameStates.delayed) {
-            delayRemainingTime -= Time.deltaTime;
-            if (delayRemainingTime < 0) changeTurn();
-        } 
-		
-		if (Input.GetKey(KeyCode.Escape)) {
-            bool isPaused = !current.Equals("pause");
-            pauseScreenUI.SetActive(isPaused);
-            current = isPaused ? gameStates.pause : gameStates.gameOn;
+		turnRemainingTime -= Time.deltaTime;
+		if(turnRemainingTime < 0) {
+			changeTurn();
+		}
+
+		if (Input.GetKey (KeyCode.Escape)) {
+			if (current.Equals("pause")) {
+				pauseScreenUI.SetActive(false);
+				current = gameStates.gameOn;
+				Time.timeScale = 1;
+			} else {
+				pauseScreenUI.SetActive(true);
+				current = gameStates.pause;
+				Time.timeScale = 0;
+			}
+
 		}
 
         UpdateCanvas();
@@ -273,5 +276,6 @@ public class GameController : MonoBehaviour {
 	public void BotonResumPause() {
 		pauseScreenUI.SetActive(false);
 		current = gameStates.gameOn;
+		Time.timeScale = 1;
 	}
 }
