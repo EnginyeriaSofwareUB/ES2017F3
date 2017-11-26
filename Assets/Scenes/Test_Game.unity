@@ -2922,14 +2922,14 @@ RectTransform:
   m_GameObject: {fileID: 744073571}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.854737, y: 2.4968724, z: 1}
+  m_LocalScale: {x: 0.85178566, y: 0.99024695, z: 1}
   m_Children: []
   m_Father: {fileID: 42470556}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 63.7, y: -18.3}
+  m_AnchoredPosition: {x: 9.1, y: -2.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &744073573
@@ -2943,6 +2943,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73873c166f2c88a46b1c386db899a9c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 21300000, guid: 7f83a961f1543e94abced740ce0e22fe, type: 3}
+  - {fileID: 21300000, guid: bfce0fde23a709e408f38f01724436e9, type: 3}
+  - {fileID: 21300000, guid: 14bd702d969630140904248212958ebb, type: 3}
+  - {fileID: 21300000, guid: 8a4ad352d1a12224091a4920f9e5de49, type: 3}
+  spritesrot:
+  - {fileID: 21300000, guid: d7f008275a19e7541bbc8507f148f3b2, type: 3}
+  - {fileID: 21300000, guid: ffd15772fa7d90e4c9af9f53de731b22, type: 3}
+  - {fileID: 21300000, guid: b0be6e117fb84244e96b74e03c99acd0, type: 3}
+  - {fileID: 21300000, guid: eaf41be81cabc9046a03b1247b8952f0, type: 3}
 --- !u!114 &744073574
 MonoBehaviour:
   m_ObjectHideFlags: 0
