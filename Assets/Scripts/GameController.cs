@@ -64,7 +64,14 @@ public class GameController : MonoBehaviour {
         //TODO: Set the activePlayer to the Main Player.
         //activePlayer = GameObject.Find(testPlayerName);	
 
-        //Spawn players
+		//TODO: LOAD DATA FROM GamePreferences INTO MATCH USING InitGame()
+		Debug.Log("TEAM_1 FACTION:::"+ GamePreferences.p1_faction);
+		Debug.Log("TEAM_2 FACTION:::"+ GamePreferences.p2_faction);
+		Debug.Log("PLAYERS MAX_LIFE:::"+ GamePreferences.players_maxlife);
+		Debug.Log("SUDDEN_DEATH ACTIVATED:::"+ GamePreferences.sudden_death_activated);
+		Debug.Log("SUDDEN_DEATH TURNS:::"+ GamePreferences.sudden_death_turns);
+
+		//Spawn players
         InitGame();
 		// Create remaining gun uses
 		_teamGunUses = new int[2][];
