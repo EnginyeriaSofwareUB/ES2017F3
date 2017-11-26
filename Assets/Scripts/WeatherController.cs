@@ -192,6 +192,7 @@ public class WeatherController : MonoBehaviour {
         foreach(GameObject cloud in clouds)
         {
             cloud.GetComponent<CloudController>().fade = true; //that will destroy the clouds with a visual fade away;
+            cloud.GetComponent<Rigidbody>().AddForce(new Vector3(0f, 2f, 0f), ForceMode.Impulse); //small visual effect improvement
         }
     }
 }

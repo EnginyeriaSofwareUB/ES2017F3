@@ -80,17 +80,17 @@ public class WindController : MonoBehaviour {
         if(windForce <= 1f && weather.current != WeatherController.weatherState.CALM)
         {
             weather.ChangeWeather(WeatherController.weatherState.CALM);
-            audioManager.SetAmbientSound(audioManager.calm);
+            audioManager.SetAmbientSound(audioManager.calm, 0.6f);
         }
         else if(windForce > 1f && windForce <= 4.5f && weather.current != WeatherController.weatherState.CLOUDY)
         {
             weather.ChangeWeather(WeatherController.weatherState.CLOUDY);
-            audioManager.SetAmbientSound(audioManager.windy);
+            audioManager.SetAmbientSound(audioManager.windy, 0.5f);
         }
         else if(windForce > 4.5f && weather.current != WeatherController.weatherState.STORMY)
         {
             weather.ChangeWeather(WeatherController.weatherState.STORMY);
-            audioManager.SetAmbientSound(audioManager.rain);
+            audioManager.SetAmbientSound(audioManager.rain, 0.5f);
         }
     }
 

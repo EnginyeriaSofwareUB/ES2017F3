@@ -3155,6 +3155,9 @@ MonoBehaviour:
   - {fileID: 391954641}
   mainTheme: {fileID: 0}
   seaSound: {fileID: 0}
+  fallToWater:
+  - {fileID: 8300000, guid: 2ca4b7cef6c025c41adbe041eb2afc44, type: 3}
+  - {fileID: 8300000, guid: 0a39f6a6ae6904c40848595ccc04c358, type: 3}
   calm: {fileID: 8300000, guid: bd420fe5231eb5141ab484d3ebf50801, type: 3}
   windy: {fileID: 8300000, guid: c79436d28b22ecc46a743c22cf09f8aa, type: 3}
   rain: {fileID: 8300000, guid: 1856554cacca02448aeccfd4524703aa, type: 3}
@@ -6000,91 +6003,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1017226095424276, guid: f1aac2315fae2464b90f557564da521f,
     type: 2}
   m_PrefabInternal: {fileID: 997812162}
---- !u!1 &1773866363 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1279913282122506, guid: 3550e084e780f40a2b4a63afc041b310,
-    type: 2}
-  m_PrefabInternal: {fileID: 1929763895}
---- !u!82 &1773866364
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1773866363}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 71d064b7e093c8447a9a39aff8ed6444, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.4
-  m_Pitch: 1
-  Loop: 1
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 0
 --- !u!95 &1773866368 stripped
 Animator:
   m_PrefabParentObject: {fileID: 95013522898782696, guid: 3550e084e780f40a2b4a63afc041b310,
