@@ -116,6 +116,22 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+	/*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */
+	public void Heal(float value)
+	{
+		//animator.SetTrigger("hurt");
+		damageText.text = "+"+value.ToString();
+
+		health = health + value;
+
+		healthbar.value = health;
+		healthtext.text = health.ToString() + "%";
+
+		SetHealthColor();
+
+		
+	}
+
     /*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */
     public void Damage(float value)
     {
