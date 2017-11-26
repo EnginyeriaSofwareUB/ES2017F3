@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour
 
     public Transform SpawnPoint;
     public GameObject BulletPrefab;
-    private Animator anim;
+    internal Animator anim;
     private float thrust;
     public float minShootSpeed;
 
@@ -24,7 +24,7 @@ public class Gun : MonoBehaviour
     public UnityEvent bulletFired;
 
     // Use this for initialization
-    void Start()
+    internal void Start()
     {
         anim = GetComponent<Animator>();
 
@@ -33,7 +33,7 @@ public class Gun : MonoBehaviour
 
     }
 
-    public void Shoot(float thrust, float maxPower)
+    public virtual void Shoot(float thrust, float maxPower)
     {
         this.thrust = thrust;
 

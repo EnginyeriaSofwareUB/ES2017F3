@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
 		gameOn,
 		pause,
 		gameOver,
+        delayed,
 		none,
 	};
 
@@ -23,12 +24,10 @@ public class GameController : MonoBehaviour {
     [Header("Canvas Objects")]
     public Text turnTimerText;
 
-
     [Header("Testing Variables Here")]
     public GameObject activePlayer = null;
     public GameObject testPlayerPrefab; //seleccionar per script al carregar desde la escena anterior
     public List<GameObject> players; //mirar de eliminar! 
-
 
     [Header("TEAM variables")]
     public Transform spawnPoint1;
@@ -39,14 +38,15 @@ public class GameController : MonoBehaviour {
     int spawned1 = 0;
     int spawned2 = 0;
 
-
     [Header("Turns")]
 	// points to the current active playe in the players index
 	public int turnId;
     // in seconds
     public float turnTime = 10.0f;
-	public float turnRemainingTime;
+    public float delayTime = 5f;
     public float afterShootTime = 3f;
+	public float turnRemainingTime;
+	public float delayRemainingTime;
 
 	// Sudden Death (Reduces HP of all plyers to 1)
 	public int turnsTillSudden = 10;
@@ -60,7 +60,7 @@ public class GameController : MonoBehaviour {
 	public static readonly UnityEvent ChangedGunUsesEvent = new UnityEvent();
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
         //TODO: Set the activePlayer to the Main Player.
         //activePlayer = GameObject.Find(testPlayerName);	
 
@@ -68,8 +68,7 @@ public class GameController : MonoBehaviour {
         InitGame();
 		// Create remaining gun uses
 		_teamGunUses = new int[2][];
-		for (int i = 0; i < 2; i++)
-		{
+		for (int i = 0; i < 2; i++) {
 			_teamGunUses[i] = new int[AvailableGuns.Count];
 			for (int j = 0; j < AvailableGuns.Count; j++)
 			{
@@ -97,12 +96,10 @@ public class GameController : MonoBehaviour {
 		changeTurn();
 	}
 
-    void InitGame()
-    {
+    void InitGame() {
         Debug.Log("Init game; Spawning " + nPlayersPerTeam + " per team.");
         //team1
-        for (int i = 0; i < nPlayersPerTeam; i++)
-        {
+        for (int i = 0; i < nPlayersPerTeam; i++) {
             //GameObject p1 = Instantiate(Resources.Load("Prefabs/Characters/Animated Characters/" + testPlayerPrefabName), spawnPoint1.position, spawnPoint1.rotation, null) as GameObject;
             GameObject p1 = Instantiate(testPlayerPrefab, spawnPoint1.position, spawnPoint1.rotation, null) as GameObject;
             p1.SetActive(true);
@@ -118,8 +115,7 @@ public class GameController : MonoBehaviour {
         }
 
         //TEAM2
-        for (int i = 0; i < nPlayersPerTeam; i++)
-        {
+        for (int i = 0; i < nPlayersPerTeam; i++) {
             GameObject p2 = Instantiate(testPlayerPrefab, spawnPoint2.position, spawnPoint2.rotation, null) as GameObject;
             p2.SetActive(true);
             p2.GetComponent<PlayerController>().TEAM = 2;
@@ -136,9 +132,6 @@ public class GameController : MonoBehaviour {
         }
     }
 
-
-
-
     void OnShoot() {
 		// disable shooting
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
@@ -146,46 +139,47 @@ public class GameController : MonoBehaviour {
     }
 
     void OnDeath(int playerId) {
+        bool isCurrentPlayer = activePlayer.GetComponent<PlayerController>().playerId == playerId;
+        // Debug.Log("suicide! " + isCurrentPlayer);
+
         // Delete from players dead player
         players.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
+
+        // suicide
+        if (isCurrentPlayer) changeTurn();
+
+        // Game over
+        if (players.Count < 2) {
+            Debug.Log("Game has ended!");
+
+            current = gameStates.gameOver;
+
+            // activar pantalla GameOver
+			completeLevelUI.SetActive(true);
+
+            //Return to main menu
+            //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
+        }
     }
 
-	public int GetGunUsagesLeft(int team, int index)
-	{
+	public int GetGunUsagesLeft(int team, int index) {
 		return _teamGunUses[team - 1][index];
 	}
 
-	public IEnumerable<int> GetGunUsagesLeft(int team)
-	{
+	public IEnumerable<int> GetGunUsagesLeft(int team) {
 		return _teamGunUses[team - 1];
 	}
 
-	public void AddGunUsages(int team, int index, int usages)
-	{
+	public void AddGunUsages(int team, int index, int usages) {
 		if (_teamGunUses[team - 1][index] < 0)
 			return;
 		_teamGunUses[team - 1][index] += usages;
 		ChangedGunUsesEvent.Invoke();
 	}
-	
-    public void changeTurn() {
-        if (players.Count < 2)
-        {
-            // Game finished
 
-            Debug.Log("Game has ended!");
-
-            current = gameStates.gameOver;
-
-			completeLevelUI.SetActive (true);//activar pantalla GameOver
-
-            //Return to main menu
-            //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
-        }
-
+    public void disableActivePlayer() {
         // disable movement and firing to the previous player
-        if (activePlayer)
-        {
+        if (activePlayer) {
             activePlayer.GetComponent<PlayerShooting>().EmptyHands();
             activePlayer.GetComponent<PlayerMovement>().Idle();
             activePlayer.GetComponent<PlayerMovement>().enabled = false;
@@ -195,23 +189,31 @@ public class GameController : MonoBehaviour {
 			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null){
 				activePlayer.GetComponentInChildren<FlagMainPlayer>().EnableMain(false);
 			}
-
         }
-        
+    }
 
+    public void startDelay() {
+        current = gameStates.delayed;
+        delayRemainingTime = delayTime;
+        disableActivePlayer();
+    }
+	
+    public void changeTurn() {
+        current = gameStates.gameOn;
+        
+        disableActivePlayer();
+        
 		// point to the next player
 		turnId = (turnId + 1) % players.Count;
 		// FIXME @rafa: this dummy assignment will lead weird bugs
 		// TODO: pass to next plater with a better way
 
-	    
-
-        if(players.Count >= 2) {
-            // Game continues
-
+        // Game continues
+        if (players.Count > 1) {
+            // Sudden death
 			if (!suddenDeath) {
 				if (turnCount >= turnsTillSudden) {
-					SuddenDeath ();
+					SuddenDeath();
 					suddenDeath = true;
 				}
 				turnCount += 1;
@@ -225,16 +227,15 @@ public class GameController : MonoBehaviour {
             activePlayer.GetComponent<PlayerShooting>().enabled = true;
 
 			// enable flag
-			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null){
+			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null) {
 				activePlayer.GetComponentInChildren<FlagMainPlayer>().EnableMain(true);
 			}
 
             // this turn expires in 10 seconds
             turnRemainingTime = turnTime;
+
+            GetComponent<WindController>().ChangeWindRandom();
         }
-
-
-        GetComponent<WindController>().ChangeWindRandom();
 	}
 	
 	// Update is called once per frame
@@ -248,11 +249,9 @@ public class GameController : MonoBehaviour {
 			if (current.Equals("pause")) {
 				pauseScreenUI.SetActive(false);
 				current = gameStates.gameOn;
-				Time.timeScale = 1;
 			} else {
 				pauseScreenUI.SetActive(true);
 				current = gameStates.pause;
-				Time.timeScale = 0;
 			}
 
 		}
@@ -260,16 +259,8 @@ public class GameController : MonoBehaviour {
         UpdateCanvas();
 	}
 
-    void UpdateCanvas()
-    {
-        if(turnRemainingTime <= turnTime * 0.2f)
-        {
-            turnTimerText.color = Color.red;
-        }
-        else
-        {
-            turnTimerText.color = Color.blue;
-        }
+    void UpdateCanvas() {
+        turnTimerText.color = (turnRemainingTime <= turnTime * 0.2f) ? Color.red : Color.blue;
         turnTimerText.text = turnRemainingTime.ToString("00"); //Remaining time 
     }
 
@@ -283,6 +274,5 @@ public class GameController : MonoBehaviour {
 	public void BotonResumPause() {
 		pauseScreenUI.SetActive(false);
 		current = gameStates.gameOn;
-		Time.timeScale = 1;
 	}
 }

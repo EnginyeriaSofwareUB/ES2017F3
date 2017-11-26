@@ -62,6 +62,10 @@ public class PlayerShooting : MonoBehaviour
                     newPos = new Vector3(2f, 1.5f, -1.5f);
                     newScale = Vector3.one;
                     break;
+                case "Laser Saber":
+                    newPos = new Vector3(0.48f, 0.38f, -1.33f);
+                    newScale = Vector3.one * 0.4f;
+                    break;
                 default:
                     newScale = newPos = Vector3.one;
                     break;
@@ -209,7 +213,6 @@ public class PlayerShooting : MonoBehaviour
 
 
     void CheckChangeGun() {
-
         if (Input.GetKeyDown(KeyCode.Alpha1))
             EmptyHands();
         else if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -218,7 +221,8 @@ public class PlayerShooting : MonoBehaviour
             ChangeGunTo(1);
         else if (Input.GetKeyDown(KeyCode.Alpha4))
             ChangeGunTo(2);
-
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+            ChangeGunTo(3);
     }
 
     public void StashGun(bool stash) {
@@ -274,18 +278,6 @@ public class PlayerShooting : MonoBehaviour
 
         // Select configurations of the gun
         switch (gunIndex) {
-            
-            // Cannon gun
-            case 0:
-                RestoreShootingParam();
-                break;
-
-            // Dynamite
-            case 1:
-
-                maxAngle = 0;
-                maxPower = minPower = 0;
-                break;
             default:
                 RestoreShootingParam();
                 break;
