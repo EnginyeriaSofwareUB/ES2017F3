@@ -26,7 +26,6 @@ public class UIClock : MonoBehaviour {
 		notrot = 0;
 
 		max = control.turnTime;
-		//spritesrot = (Sprite[])sprites.Clone ();
     }
 
 	// Update is called once per frame
@@ -45,15 +44,11 @@ public class UIClock : MonoBehaviour {
 
 				if (i != index) {
 
-					//print (i);
-
 					if (notrot == 0 && index!=2) {
 						clock.sprite = sprites [i];
-						//print ("AA" + i + " " + notrot +" "+index);
 
 					} else if(notrot==1 && index!=2){
 						clock.sprite = spritesrot [i];
-						//print ("BB" + i + " " + notrot +" "+index);
 					}
 
 					if (i == 0) {
@@ -66,9 +61,6 @@ public class UIClock : MonoBehaviour {
 			}
 
 		}
-
-		//
-        //clock.fillAmount = control.turnRemainingTime / control.turnTime;
 
 	}
 }
