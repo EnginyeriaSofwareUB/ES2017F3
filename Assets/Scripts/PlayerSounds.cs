@@ -8,6 +8,7 @@ public class PlayerSounds : MonoBehaviour {
     PlayerMovement move;
 
     public Gun selectedWeapon;
+    public AnimationClip shot_cannon_animation;
     [Space(5)]
 
     public AudioClip[] jump;
@@ -87,17 +88,21 @@ public class PlayerSounds : MonoBehaviour {
         source.PlayOneShot(jump2[rand]);
     }
 
-    public void OnShoot()
+    public void OnShoot() //BUG! El codi s'executa, pero no funciona, dont know why
     {
         print("shoooot audio " + selectedWeapon.name);
         switch (selectedWeapon.name)
         {
             case "Cannon Base":
-                source.volume = 0.5f;
+                print("aaaaaaaaaa");
+                source.clip = canon;
+                //source.PlayDelayed(1f);//(shot_cannon_animation.length);
+                source.PlayOneShot(canon);
+                /*source.volume = 0.5f;
                 source.loop = false;
                 //source.PlayOneShot(canon);
                 source.clip = canon;
-                source.Play();
+                source.Play();*/
                 break;
         }
         

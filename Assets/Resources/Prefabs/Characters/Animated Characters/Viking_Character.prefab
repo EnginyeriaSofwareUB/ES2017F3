@@ -1304,6 +1304,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedWeapon: {fileID: 0}
+  shot_cannon_animation: {fileID: 7400000, guid: 065a82aa8a8c4b4438565e735c8e0c2d,
+    type: 2}
   jump:
   - {fileID: 8300000, guid: 189dbf477a4ccd848a46268b6e480865, type: 3}
   - {fileID: 8300000, guid: 6cc4649237f77804fa48b2d27c2f51c0, type: 3}

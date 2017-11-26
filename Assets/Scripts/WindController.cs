@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class WindController : MonoBehaviour {
     WeatherController weather;
+    AudioManager audioManager;
 
     public bool windActive;
     public bool ignoreMass = false; //bool per determinar si la força del vent s'aplica tenin en conte la massa o no
@@ -31,6 +32,7 @@ public class WindController : MonoBehaviour {
     void Start()
     {
         weather = GetComponent<WeatherController>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
         fan_scale = fan_UI.transform.localScale;
 
@@ -78,14 +80,17 @@ public class WindController : MonoBehaviour {
         if(windForce <= 1f && weather.current != WeatherController.weatherState.CALM)
         {
             weather.ChangeWeather(WeatherController.weatherState.CALM);
+            audioManager.SetAmbientSound(audioManager.calm);
         }
         else if(windForce > 1f && windForce <= 4.5f && weather.current != WeatherController.weatherState.CLOUDY)
         {
             weather.ChangeWeather(WeatherController.weatherState.CLOUDY);
+            audioManager.SetAmbientSound(audioManager.windy);
         }
         else if(windForce > 4.5f && weather.current != WeatherController.weatherState.STORMY)
         {
             weather.ChangeWeather(WeatherController.weatherState.STORMY);
+            audioManager.SetAmbientSound(audioManager.rain);
         }
     }
 
@@ -97,27 +102,6 @@ public class WindController : MonoBehaviour {
                 Destroy(o);
         }
     }
-
-    /*
-    void SetNumberBars(int n)
-    {
-        int j = 0;
-        foreach( Transform bar in windBars)
-        {
-            if (j < n)
-            {
-                bar.gameObject.SetActive(true);
-                //print("[WIND] n Bars changed");
-            }
-            else
-            {
-                bar.gameObject.SetActive(false);
-            }
-            j++;
-        }
-
-        //SetBarsDirection(dir);
-    }*/
 
 
     // Update is called once per frame

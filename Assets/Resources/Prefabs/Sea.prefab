@@ -22,9 +22,10 @@ GameObject:
   - component: {fileID: 95013522898782696}
   - component: {fileID: 65789850815480658}
   - component: {fileID: 114101551770384018}
+  - component: {fileID: 65947967609908402}
   m_Layer: 0
   m_Name: Sea
-  m_TagString: Untagged
+  m_TagString: Sea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,6 +74,18 @@ Transform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 4, y: 0, z: 0}
 --- !u!65 &65789850815480658
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1279913282122506}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 45.73, y: 1, z: -46.66}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65947967609908402
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

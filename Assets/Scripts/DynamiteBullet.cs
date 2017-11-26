@@ -25,7 +25,7 @@ public class DynamiteBullet : ExplosiveBullet {
         audio.Stop();
         audio.clip = boom;
         audio.loop = false;
-        audio.Play();
+        audio.PlayDelayed(1.5f); //1.5 is the explosive animation lenght
 
         anim.SetTrigger("explode");
     }
