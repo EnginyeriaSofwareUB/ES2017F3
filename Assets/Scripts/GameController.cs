@@ -248,9 +248,11 @@ public class GameController : MonoBehaviour {
 			if (current.Equals("pause")) {
 				pauseScreenUI.SetActive(false);
 				current = gameStates.gameOn;
+				Time.timeScale = 1;
 			} else {
 				pauseScreenUI.SetActive(true);
 				current = gameStates.pause;
+				Time.timeScale = 0;
 			}
 
 		}
@@ -281,5 +283,6 @@ public class GameController : MonoBehaviour {
 	public void BotonResumPause() {
 		pauseScreenUI.SetActive(false);
 		current = gameStates.gameOn;
+		Time.timeScale = 1;
 	}
 }
