@@ -13,6 +13,7 @@ public class GameController : MonoBehaviour {
 		gameOn,
 		pause,
 		gameOver,
+        delayed,
 		none,
 	};
 
@@ -42,8 +43,10 @@ public class GameController : MonoBehaviour {
 	public int turnId;
     // in seconds
     public float turnTime = 10.0f;
-	public float turnRemainingTime;
+    public float delayTime = 5f;
     public float afterShootTime = 3f;
+	public float turnRemainingTime;
+	public float delayRemainingTime;
 
 	// Sudden Death (Reduces HP of all plyers to 1)
 	public int turnsTillSudden = 10;
@@ -57,7 +60,7 @@ public class GameController : MonoBehaviour {
 	public static readonly UnityEvent ChangedGunUsesEvent = new UnityEvent();
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
         //TODO: Set the activePlayer to the Main Player.
         //activePlayer = GameObject.Find(testPlayerName);	
 
@@ -173,8 +176,8 @@ public class GameController : MonoBehaviour {
 		_teamGunUses[team - 1][index] += usages;
 		ChangedGunUsesEvent.Invoke();
 	}
-	
-    public void changeTurn() {
+
+    public void disableActivePlayer() {
         // disable movement and firing to the previous player
         if (activePlayer) {
             activePlayer.GetComponent<PlayerShooting>().EmptyHands();
@@ -187,6 +190,18 @@ public class GameController : MonoBehaviour {
 				activePlayer.GetComponentInChildren<FlagMainPlayer>().EnableMain(false);
 			}
         }
+    }
+
+    public void startDelay() {
+        current = gameStates.delayed;
+        delayRemainingTime = delayTime;
+        disableActivePlayer();
+    }
+	
+    public void changeTurn() {
+        current = gameStates.gameOn;
+        
+        disableActivePlayer();
         
 		// point to the next player
 		turnId = (turnId + 1) % players.Count;
@@ -194,7 +209,7 @@ public class GameController : MonoBehaviour {
 		// TODO: pass to next plater with a better way
 
         // Game continues
-        if(players.Count > 1) {
+        if (players.Count > 1) {
             // Sudden death
 			if (!suddenDeath) {
 				if (turnCount >= turnsTillSudden) {
@@ -225,30 +240,26 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (current == gameStates.gameOn) turnRemainingTime -= Time.deltaTime;
-		if (turnRemainingTime < 0) {
-			changeTurn();
-		}
-
-		if (Input.GetKey (KeyCode.Escape)) {
-			if (current.Equals("pause")) {
-				pauseScreenUI.SetActive(false);
-				current = gameStates.gameOn;
-			} else {
-				pauseScreenUI.SetActive(true);
-				current = gameStates.pause;
-			}
+		if (current == gameStates.gameOn) {
+            turnRemainingTime -= Time.deltaTime;
+            if (turnRemainingTime < 0) startDelay();
+        } 
+		if (current == gameStates.delayed) {
+            delayRemainingTime -= Time.deltaTime;
+            if (delayRemainingTime < 0) changeTurn();
+        } 
+		
+		if (Input.GetKey(KeyCode.Escape)) {
+            bool isPaused = !current.Equals("pause");
+            pauseScreenUI.SetActive(isPaused);
+            current = isPaused ? gameStates.pause : gameStates.gameOn;
 		}
 
         UpdateCanvas();
 	}
 
     void UpdateCanvas() {
-        if(turnRemainingTime <= turnTime * 0.2f) {
-            turnTimerText.color = Color.red;
-        } else {
-            turnTimerText.color = Color.blue;
-        }
+        turnTimerText.color = (turnRemainingTime <= turnTime * 0.2f) ? Color.red : Color.blue;
         turnTimerText.text = turnRemainingTime.ToString("00"); //Remaining time 
     }
 
