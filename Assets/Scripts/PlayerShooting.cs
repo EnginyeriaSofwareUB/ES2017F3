@@ -278,18 +278,6 @@ public class PlayerShooting : MonoBehaviour
 
         // Select configurations of the gun
         switch (gunIndex) {
-            
-            // Cannon gun
-            case 0:
-                RestoreShootingParam();
-                break;
-
-            // Dynamite
-            case 1:
-
-                maxAngle = 0;
-                maxPower = minPower = 0;
-                break;
             default:
                 RestoreShootingParam();
                 break;
