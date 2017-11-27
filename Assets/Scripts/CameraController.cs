@@ -71,6 +71,9 @@ public class CameraController : MonoBehaviour {
 			}
 			Camera.main.projectionMatrix = mat;
 			Camera.main.transform.position = Vector3.Slerp(startPos, position, t);
+			if (Camera.main.GetComponent<FollowingCamera>().enabled) {
+				Camera.main.ResetProjectionMatrix();
+			}
 			yield return null;
 		}
 	}

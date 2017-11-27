@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    void InitPlayerCanvas()
+    public void InitPlayerCanvas()
     {
         //init health bar / text
         healthbar.minValue = 0f;
@@ -75,17 +75,17 @@ public class PlayerController : MonoBehaviour {
 
     void SetHealthColor()
     {
-        if(health >= 80f)
+        if(health >= maxHealth*0.8f)
         {
             healthtext.color = Color.green;
             healthbar_fill.color = Color.green;
         }
-        else if(health < 80f && health >= 50f)
+        else if(health < maxHealth * 0.8f && health >= maxHealth * 0.5f)
         {
             healthtext.color = Color.yellow;
             healthbar_fill.color = Color.yellow;
         }
-        else if(health < 50f && health >= 30f)
+        else if(health < maxHealth * 0.5f && health >= maxHealth * 0.3f)
         {
             healthtext.color = Color.red;
             healthbar_fill.color = Color.red;
