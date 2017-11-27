@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DeathOnTouch : MonoBehaviour {
 
+    public float turnTimeRemainingOnFall;
+
 	private bool isDrown;
 	private IEnumerator coroutine;
 
@@ -30,7 +32,13 @@ public class DeathOnTouch : MonoBehaviour {
 			coroutine = DelayToDeath(g);
 			StartCoroutine (coroutine);
 
-		}
+            //play chof sound
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().FallToWater();
+
+            //set remaining turn time
+            GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().turnRemainingTime = turnTimeRemainingOnFall;
+
+        }
 	}
 
 	IEnumerator DelayToDeath(GameObject g){

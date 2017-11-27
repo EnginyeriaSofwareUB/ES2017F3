@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour {
     public Image healthbar_fill;
     public Text healthtext;
     public Text damageText;
+    public float damageTextShowTime = 1.5f;
     Canvas playerCanvas;
 
 
@@ -119,7 +120,8 @@ public class PlayerController : MonoBehaviour {
 	/*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */
 	public void Heal(float value)
 	{
-		//animator.SetTrigger("hurt");
+        //animator.SetTrigger("hurt");
+        damageText.gameObject.SetActive(true);
 		damageText.text = "+"+value.ToString();
 
 		health = health + value;
@@ -129,13 +131,15 @@ public class PlayerController : MonoBehaviour {
 
 		SetHealthColor();
 
-		
+        Invoke("HideDamageText", damageTextShowTime);
 	}
 
     /*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */
     public void Damage(float value)
     {
         animator.SetTrigger("hurt");
+
+        damageText.gameObject.SetActive(true);
         damageText.text = "-"+value.ToString();
 
 
@@ -152,6 +156,13 @@ public class PlayerController : MonoBehaviour {
         {
             Dying();
         }
+
+        Invoke("HideDamageText", damageTextShowTime);
+    }
+
+    void HideDamageText()
+    {
+        damageText.gameObject.SetActive(false);
     }
 
     void Dying()

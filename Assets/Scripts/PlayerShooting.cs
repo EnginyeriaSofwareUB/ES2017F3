@@ -9,7 +9,7 @@ public class PlayerShooting : MonoBehaviour
 {
     private const string ModelCenter = "Animator/Model_Center/", BaseGunPath = ModelCenter + "Model/Character_Hands/", ModelHands = ModelCenter + "Model/Character_Base/";
     private Transform hands, modelCenter, mdlHandLeft, mdlHandRight;
-    private Gun _currentGun;
+    public Gun _currentGun;
     private List<Gun> _guns;
     private float thrust, startPowerTime;
     public float angleSpeed, maxPowerSeconds;
@@ -19,6 +19,7 @@ public class PlayerShooting : MonoBehaviour
     private AnimationFunctions animFunc;
 
     public UnityEvent shootEvent;
+    public readonly UnityEvent ChangeGunEvent = new UnityEvent();
 
     private GameController _gameController;
     private PlayerController _playerController;
@@ -223,6 +224,7 @@ public class PlayerShooting : MonoBehaviour
             ChangeGunTo(2);
         else if (Input.GetKeyDown(KeyCode.Alpha5))
             ChangeGunTo(3);
+        ChangeGunEvent.Invoke();
     }
 
     public void StashGun(bool stash) {

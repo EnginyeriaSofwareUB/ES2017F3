@@ -89,7 +89,7 @@ public class GameController : MonoBehaviour {
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
 		// initiate
 		foreach (GameObject player in players) {
-            Debug.Log(player);
+            //Debug.Log(player);
 			// disable movement
 			player.GetComponent<PlayerMovement>().enabled = false;
 			// disable firing shoots
@@ -186,6 +186,8 @@ public class GameController : MonoBehaviour {
             // activar pantalla GameOver
 			completeLevelUI.SetActive(true);
 
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().PlayGameOverSound();
+
             //Return to main menu
             //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
         }
@@ -249,7 +251,7 @@ public class GameController : MonoBehaviour {
 			}
 
             activePlayer = players[turnId];
-            Debug.Log("Now active player is: " + activePlayer);
+            //Debug.Log("Now active player is: " + activePlayer);
             // enable movement
             activePlayer.GetComponent<PlayerMovement>().enabled = true;
             // enable firing shoots

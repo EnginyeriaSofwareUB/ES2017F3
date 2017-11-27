@@ -53,6 +53,8 @@ public class Gun : MonoBehaviour
 
     public void ShootBullet()
     {
+        
+
         print("Shoot bullet");
         var shootingVector = SpawnPoint.position - transform.position;
         shootingVector.z = 0;
