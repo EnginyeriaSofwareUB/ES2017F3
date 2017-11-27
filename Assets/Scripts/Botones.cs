@@ -14,11 +14,11 @@ public class Botones : MonoBehaviour {
 
 	public void LoadScene() {
 		GetGamePreferences();
-        SceneManager.LoadScene("Test_Game_Integrations", LoadSceneMode.Single);
+        SceneManager.LoadScene("Test_Game", LoadSceneMode.Single);
 	}
 
 	public void LoadMenu() {
-		SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
+		SceneManager.LoadScene("Main_Menu_Integrated", LoadSceneMode.Single);
 	}
 
 	public void BotonSalir() {
