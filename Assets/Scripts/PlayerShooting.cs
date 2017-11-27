@@ -13,8 +13,8 @@ public class PlayerShooting : MonoBehaviour
     private List<Gun> _guns;
     private float thrust, startPowerTime;
     public float angleSpeed, maxPowerSeconds;
-    public int maxPower, minPower, maxAngle;
-    private int initMaxPower, initMinPower, initMaxAngle, lastGunEquipped;
+	public int maxPower, minPower, maxAngle, lastGunEquipped;
+    private int initMaxPower, initMinPower, initMaxAngle;
     private bool shoot;
     private AnimationFunctions animFunc;
 

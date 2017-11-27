@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour {
 
 	public GameObject completeLevelUI; //elemento para poder poner gameOver image
 	public GameObject pauseScreenUI;
+	public GameObject handS, lightSS, canonS, tntS, granadeS, arrowS;
 
 	public gameStates current = gameStates.none;
     [Header("Canvas Objects")]
@@ -98,6 +99,8 @@ public class GameController : MonoBehaviour {
             player.GetComponent<PlayerShooting>().shootEvent.AddListener(OnShoot);
             // attach listener to deathEvent
             player.GetComponent<PlayerController>().deathEvent.AddListener(OnDeath);
+
+
         }
 
         turnId = -1;
@@ -167,6 +170,63 @@ public class GameController : MonoBehaviour {
         turnRemainingTime = afterShootTime;
     }
 
+	void ChangeGun(){
+
+		int wnum= activePlayer.GetComponent<PlayerShooting>().lastGunEquipped;
+
+		switch (wnum) {
+		default://hand active
+			handS.SetActive(true);
+			lightSS.SetActive (false);
+			canonS.SetActive (false);
+			tntS.SetActive (false);
+			granadeS.SetActive (false);
+			arrowS.SetActive (false);
+			break;
+		case 0://light sable active
+			handS.SetActive(false);
+			lightSS.SetActive (true);
+			canonS.SetActive (false);
+			tntS.SetActive (false);
+			granadeS.SetActive (false);
+			arrowS.SetActive (false);
+			break;
+		case 1://canon active
+			handS.SetActive(false);
+			lightSS.SetActive (false);
+			canonS.SetActive (true);
+			tntS.SetActive (false);
+			granadeS.SetActive (false);
+			arrowS.SetActive (false);
+			break;
+		case 2://tnt active
+			handS.SetActive(false);
+			lightSS.SetActive (false);
+			canonS.SetActive (false);
+			tntS.SetActive (true);
+			granadeS.SetActive (false);
+			arrowS.SetActive (false);
+			break;
+		case 5://granade active
+			handS.SetActive(false);
+			lightSS.SetActive (false);
+			canonS.SetActive (false);
+			tntS.SetActive (false);
+			granadeS.SetActive (true);
+			arrowS.SetActive (false);
+			break;
+		case 3://arrow active
+			handS.SetActive(false);
+			lightSS.SetActive (false);
+			canonS.SetActive (false);
+			tntS.SetActive (false);
+			granadeS.SetActive (false);
+			arrowS.SetActive (true);
+			break;
+		}
+		
+}
+		
     void OnDeath(int playerId) {
         bool isCurrentPlayer = activePlayer.GetComponent<PlayerController>().playerId == playerId;
         // Debug.Log("suicide! " + isCurrentPlayer);
@@ -271,6 +331,8 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
+
 		turnRemainingTime -= Time.deltaTime;
 		if(turnRemainingTime < 0) {
 			changeTurn();
