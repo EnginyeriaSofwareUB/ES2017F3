@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    void InitPlayerCanvas()
+    public void InitPlayerCanvas()
     {
         //init health bar / text
         healthbar.minValue = 0f;

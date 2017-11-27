@@ -937,7 +937,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1934148465144300}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35fb90eecfbf37a4fbfc17ae6146e1ec, type: 3}
   m_Name: 
@@ -945,6 +945,8 @@ MonoBehaviour:
   rb: {fileID: 0}
   horizontal: 0
   model: {fileID: 4014456020868080}
+  jump_force: {x: 0, y: 0, z: 0}
+  backJump_force: {x: 0, y: 0, z: 0}
 --- !u!114 &114183231593927812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1249,7 +1251,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1934148465144300}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7223287cf2a9de44482071287b383632, type: 3}
   m_Name: 

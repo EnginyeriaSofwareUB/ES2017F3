@@ -13,7 +13,7 @@ public class Botones : MonoBehaviour {
 
 	public void LoadScene() {
 		GetGamePreferences();
-        SceneManager.LoadScene("Test_Game", LoadSceneMode.Single);
+        SceneManager.LoadScene("Test_Game_Integrations", LoadSceneMode.Single);
 	}
 
 	public void LoadMenu() {
