@@ -10,6 +10,7 @@ public class Botones : MonoBehaviour {
 	public GameObject suddenBool;
 	public GameObject suddenTurns;
 	public GameObject maxLife;
+    public GameObject playersTeam;
 
 	public void LoadScene() {
 		GetGamePreferences();
@@ -49,10 +50,31 @@ public class Botones : MonoBehaviour {
 			}
 		}
 
-		GamePreferences.sudden_death_activated = bool.Parse(suddenBool.GetComponent<Text>().text); 
+		GamePreferences.sudden_death_activated = suddenBool.GetComponent<Toggle>().isOn; 
 		GamePreferences.sudden_death_turns = int.Parse(suddenTurns.GetComponent<InputField>().text);
-		GamePreferences.players_maxlife = int.Parse(maxLife.GetComponent<InputField>().text);  
+		GamePreferences.players_maxlife = int.Parse(maxLife.GetComponent<InputField>().text);
+        int nplayers = int.Parse(playersTeam.GetComponent<InputField>().text);
+        if (nplayers <= 4)
+        {
+            GamePreferences.number_players_team = nplayers;
+        } else
+        {
+            GamePreferences.number_players_team = 4;
+        }
 	}
 
+    public void CheckNPlayersPerTeam()
+    {
+        int nplayers = int.Parse(playersTeam.GetComponent<InputField>().text);
+        if (nplayers > 4)
+        {
+            playersTeam.GetComponent<InputField>().text = 4.ToString();
+        }
+    }
+
+        public void SetSuddenTurnsInteractable()
+    {
+        suddenTurns.GetComponent<InputField>().interactable = suddenBool.GetComponent<Toggle>().isOn;
+    }
 }
 
