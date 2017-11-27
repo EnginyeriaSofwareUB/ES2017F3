@@ -19,6 +19,7 @@ public class PlayerShooting : MonoBehaviour
     private AnimationFunctions animFunc;
 
     public UnityEvent shootEvent;
+    public readonly UnityEvent ChangeGunEvent = new UnityEvent();
 
     private GameController _gameController;
     private PlayerController _playerController;
@@ -223,6 +224,7 @@ public class PlayerShooting : MonoBehaviour
             ChangeGunTo(2);
         else if (Input.GetKeyDown(KeyCode.Alpha5))
             ChangeGunTo(3);
+        ChangeGunEvent.Invoke();
     }
 
     public void StashGun(bool stash) {
