@@ -21,6 +21,7 @@ public class PlayerSounds : MonoBehaviour {
     [Space(5)]
 
     public AudioClip canon;
+    public AudioClip bow;
 
     // Use this for initialization
     void Start () {
@@ -90,19 +91,24 @@ public class PlayerSounds : MonoBehaviour {
 
     public void OnShoot() //BUG! El codi s'executa, pero no funciona, dont know why
     {
+        source.loop = false;
         print("shoooot audio " + selectedWeapon.name);
         switch (selectedWeapon.name)
         {
             case "Cannon Base":
-                print("aaaaaaaaaa");
                 source.clip = canon;
-                //source.PlayDelayed(1f);//(shot_cannon_animation.length);
-                source.PlayOneShot(canon);
-                /*source.volume = 0.5f;
-                source.loop = false;
+                source.PlayDelayed(1f);//(shot_cannon_animation.length);
                 //source.PlayOneShot(canon);
-                source.clip = canon;
-                source.Play();*/
+                /*source.volume = 0.5f;
+                source.clip = canon;*/
+                
+                //source.Play();
+                break;
+
+            case "Bow and Arrow":
+                //source.PlayOneShot(bow);
+                source.clip = bow;
+                source.Play();
                 break;
         }
         

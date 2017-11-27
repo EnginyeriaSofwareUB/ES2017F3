@@ -157,6 +157,8 @@ public class GameController : MonoBehaviour {
             // activar pantalla GameOver
 			completeLevelUI.SetActive(true);
 
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().PlayGameOverSound();
+
             //Return to main menu
             //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
         }

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
-    //just for general sounds
+    GameController control;
 
+    //just for general sounds
     public AudioSource source;
     public AudioSource[] sourceAux; //for weather sounds
 
     [Header("Loop Clips")] //
 
     public AudioClip mainTheme;
-    public AudioClip seaSound;
+    public AudioClip gameOver;
 
     [Header("Single play Clips")] //
 
@@ -26,13 +27,20 @@ public class AudioManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        control = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
         source = GetComponent<AudioSource>();
         //sourceAux = GetComponentsInChildren<AudioSource>(); //For multiple "loop" audios at same time
+
+        source.clip = mainTheme;
+        source.loop = true;
+        source.volume = 0.5f; //TODO: Change volume trhoug input settings
+        source.Play();
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
+
 	}
 
     public void FallToWater()
@@ -61,6 +69,14 @@ public class AudioManager : MonoBehaviour {
             sourceAux[1].volume = volume;
             sourceAux[1].Play();
         }
+    }
+
+    public void PlayGameOverSound()
+    {
+        source.clip = gameOver;
+        source.loop = false;
+        source.volume = 0.8f;
+        source.Play();
     }
 
 

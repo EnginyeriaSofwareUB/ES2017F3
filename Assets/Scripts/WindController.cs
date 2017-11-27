@@ -39,6 +39,7 @@ public class WindController : MonoBehaviour {
         if(affectPlayers)   
             objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
 
+        SetWeatherState();
     }
 
 
