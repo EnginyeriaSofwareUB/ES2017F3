@@ -5,11 +5,13 @@ using UnityEngine.UI;
 
 public class WindController : MonoBehaviour {
     WeatherController weather;
+    AudioManager audioManager;
 
     public bool windActive;
     public bool ignoreMass = false; //bool per determinar si la força del vent s'aplica tenin en conte la massa o no
     public bool affectPlayers = true; //bool per determinar si el vent afecta als jugadors o no
     [Space(5)]
+    [Range(0, 6)]
     public float windForce; //min 0 max 6;
     public Vector2 windDirection;
     public int direction = 1;
@@ -30,12 +32,14 @@ public class WindController : MonoBehaviour {
     void Start()
     {
         weather = GetComponent<WeatherController>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
 
         fan_scale = fan_UI.transform.localScale;
 
         if(affectPlayers)   
             objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
 
+        SetWeatherState();
     }
 
 
@@ -58,13 +62,37 @@ public class WindController : MonoBehaviour {
             fan_UI.transform.Rotate(0f, 0f, 40f * windForce * Time.deltaTime);
         }
 
+
+
+        //set the cloud velocity = wind force * velocity proportionality
         weather.cloudVelocity = windForce * weather.windForceMultiplier;
         //Debug.Log("[WIND] Setting clouds speed to: " + windForce + "*"+ weather.windForceMultiplier);
         windForceText.text = windForce.ToString("0.0");
 
         GarbageClean();
 
+        SetWeatherState();
+
         Canvas.ForceUpdateCanvases();
+    }
+
+    void SetWeatherState()
+    {
+        if(windForce <= 1f && weather.current != WeatherController.weatherState.CALM)
+        {
+            weather.ChangeWeather(WeatherController.weatherState.CALM);
+            audioManager.SetAmbientSound(audioManager.calm, 0.6f);
+        }
+        else if(windForce > 1f && windForce <= 4.5f && weather.current != WeatherController.weatherState.CLOUDY)
+        {
+            weather.ChangeWeather(WeatherController.weatherState.CLOUDY);
+            audioManager.SetAmbientSound(audioManager.windy, 0.5f);
+        }
+        else if(windForce > 4.5f && weather.current != WeatherController.weatherState.STORMY)
+        {
+            weather.ChangeWeather(WeatherController.weatherState.STORMY);
+            audioManager.SetAmbientSound(audioManager.rain, 0.5f);
+        }
     }
 
     void GarbageClean()
@@ -75,27 +103,6 @@ public class WindController : MonoBehaviour {
                 Destroy(o);
         }
     }
-
-    /*
-    void SetNumberBars(int n)
-    {
-        int j = 0;
-        foreach( Transform bar in windBars)
-        {
-            if (j < n)
-            {
-                bar.gameObject.SetActive(true);
-                //print("[WIND] n Bars changed");
-            }
-            else
-            {
-                bar.gameObject.SetActive(false);
-            }
-            j++;
-        }
-
-        //SetBarsDirection(dir);
-    }*/
 
 
     // Update is called once per frame
@@ -166,7 +173,7 @@ public class WindController : MonoBehaviour {
         {
             foreach (GameObject cloud in GetComponent<WeatherController>().clouds)
             {
-                Debug.Log(cloud);
+                //Debug.Log(cloud);
                 //cloud.GetComponent<CloudController>().fade = true; //this is to trigger fade away animation on clouds (destroys them on end)
 
                 if(cloud.GetComponent<CloudController>().dir != dir)

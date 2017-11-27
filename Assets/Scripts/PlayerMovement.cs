@@ -8,9 +8,9 @@ public class PlayerMovement : MonoBehaviour {
 
     public float horizontal;
 	public Transform model;
-	private bool jump;
-	private bool isGrounded;
-	private bool backJump = false;
+	public bool jump;
+	public bool isGrounded;
+	public bool backJump = false;
     private const float m_JumpPower = 5f; // The force added to the ball when it jumps.
 	private bool facingRight = false;
     private Animator anim;
@@ -109,7 +109,9 @@ public class PlayerMovement : MonoBehaviour {
 		//Jump Done
 		backJump = false;
 		jump = true;
-	}
+
+        GetComponent<PlayerSounds>().BackJump();
+    }
     
     public void Jump() {
         if (anim == null) return;
@@ -125,6 +127,8 @@ public class PlayerMovement : MonoBehaviour {
 
         jump = true;
 		backJump = true;
+
+        GetComponent<PlayerSounds>().NormalJump();
     }
 
 }

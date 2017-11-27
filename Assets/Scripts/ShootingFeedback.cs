@@ -35,7 +35,7 @@ public class ShootingFeedback : MonoBehaviour {
             {
                 time += Time.deltaTime;
 
-                UI_bar.rectTransform.sizeDelta = new Vector2(UI_bar.rectTransform.sizeDelta.x + time* barVelocity, UI_bar.rectTransform.sizeDelta.y);
+                UI_bar.rectTransform.sizeDelta = new Vector2(UI_bar.rectTransform.sizeDelta.x + time * barVelocity, UI_bar.rectTransform.sizeDelta.y);
             }
 
             //Mentre esta apretat, incrementem
