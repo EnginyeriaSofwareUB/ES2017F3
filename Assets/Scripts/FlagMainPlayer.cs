@@ -8,6 +8,8 @@ public class FlagMainPlayer : MonoBehaviour {
 	public float speed = 2.8f;
 	public float ampli = 0.75f;
 
+	private float pos_z = 0;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -15,9 +17,9 @@ public class FlagMainPlayer : MonoBehaviour {
 
 	public void EnableMain(bool enable){		
 		if (enable) {
-			transform.position = new Vector3(transform.position.x,transform.position.y,-0.5f);
+			transform.position = new Vector3(transform.position.x,transform.position.y, -0.5f);
 		} else {
-			transform.position = new Vector3(transform.position.x,transform.position.y, 0.5f);
+			transform.position = new Vector3(transform.position.x,transform.position.y, pos_z);
 		}
 		this.enabled = enable;
 	}
@@ -28,5 +30,9 @@ public class FlagMainPlayer : MonoBehaviour {
 		transform.position = new Vector3(transform.parent.position.x,y,transform.position.z);
 
 		//print (transform.position);
+	}
+
+	public void setZ(float value){
+		pos_z = value;
 	}
 }

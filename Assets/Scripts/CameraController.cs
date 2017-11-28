@@ -113,7 +113,8 @@ public class CameraController : MonoBehaviour {
 
 				if (activateFlags) {
 					// Get all the players
-								
+
+					float pos = 0f;
 					foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {	
 						
 						GameObject flag;
@@ -121,17 +122,20 @@ public class CameraController : MonoBehaviour {
 							flag = (GameObject)Instantiate (
 								flagTeam1,
 								player.transform.position + new Vector3 (0, 1.5f, 0),
-								Quaternion.identity);
+								Quaternion.identity);							
 						
 						} else {
 							flag = (GameObject)Instantiate (
 								flagTeam2,
 								player.transform.position + new Vector3 (0, 1.5f, 0),
 								Quaternion.identity);
+							
 						}
 
+						flag.GetComponent<FlagMainPlayer> ().setZ (pos);
 						flag.transform.parent = player.transform;
 						flags.Add (flag);
+						pos += 0.2f;
 
 
 						if (player.Equals(_controller.activePlayer)) {

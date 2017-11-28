@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114473329320602040}
   - component: {fileID: 114145031473226572}
   - component: {fileID: 114607817917921614}
+  - component: {fileID: 114784094305993838}
   m_Layer: 0
   m_Name: GameController_wWind
   m_TagString: GM
@@ -276,6 +277,21 @@ MonoBehaviour:
   clouds: []
   leftSpawn: {fileID: 0}
   rightSpawn: {fileID: 0}
+--- !u!114 &114784094305993838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005167791410812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34b5b554e2fd03e408e3dfe68a46e8cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bowUsagesT1: {fileID: 0}
+  grenadeT1: {fileID: 0}
+  bowUsagesT2: {fileID: 0}
+  grenadeT2: {fileID: 0}
 --- !u!114 &114877061906343460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -289,6 +305,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   completeLevelUI: {fileID: 0}
   pauseScreenUI: {fileID: 0}
+  handS: {fileID: 0}
+  lightSS: {fileID: 0}
+  canonS: {fileID: 0}
+  tntS: {fileID: 0}
+  granadeS: {fileID: 0}
+  arrowS: {fileID: 0}
   current: 1
   turnTimerText: {fileID: 0}
   activePlayer: {fileID: 1934148465144300, guid: 97111cba46aba224599ceda8d7d46873,
@@ -311,4 +333,5 @@ MonoBehaviour:
   - {fileID: 114355620122308924, guid: 452dd88794c594526b58221c659a4763, type: 2}
   - {fileID: 114727934429342124, guid: 9be5a490636abea42a9be5c1a90afd4d, type: 2}
   - {fileID: 114311834838564246, guid: 61f001341212f9b4fad937ffa4259e23, type: 2}
+  - {fileID: 114509311658052858, guid: 06c00fc23d52f0f4f8ee0db1244e60e1, type: 2}
   - {fileID: 114870639887352798, guid: bca1aa6c8cfdb4e0c9a0d3eeed55af39, type: 2}

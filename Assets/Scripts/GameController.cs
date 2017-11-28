@@ -173,13 +173,21 @@ public class GameController : MonoBehaviour {
 		// disable shooting
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
         turnRemainingTime = afterShootTime;	
+		updateUsages ();
 
+    }
+
+	public void updateUsages(){
 		int team = activePlayer.GetComponent<PlayerController> ().TEAM;
 
 		GetComponent<InitUsages> ().SetBowUsages(team, _teamGunUses [team-1] [4]);
 		GetComponent<InitUsages> ().SetGrenadeUsages(team, _teamGunUses [team-1] [3]);
+	}
 
-    }
+	public void addUsages(int team, int gun, int value){
+		_teamGunUses[team-1][gun]+=value;
+		updateUsages ();
+	}
 
 	void ChangeGun(){
 
