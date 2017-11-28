@@ -2,20 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationFunctions : MonoBehaviour {
+public class AnimationFunctions : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private Animator anim;
+    private PlayerMovement pm;
+    private PlayerShooting ps;
+    private PlayerController pc;
 
-    public void CallDeath()
-    {
-        GetComponentInParent<PlayerController>().Death();
+    // Use this for initialization
+    void Start() {
+        anim = GetComponent<Animator>();
+        pm = GetComponentInParent<PlayerMovement>();
+        ps = GetComponentInParent<PlayerShooting>();
+        pc = GetComponentInParent<PlayerController>();
     }
+
+    public void CallDeath() {
+        pc.Death();
+    }
+
+    public void RandomizeIdle() {
+        anim.SetFloat("IdleBlend", Random.Range(0, 3));
+    }
+
+    public void PerformJump() {
+        pm.Jump();
+    }
+
+    public void FireCannon() {
+        anim.SetTrigger("fireCannon");
+    }
+
+    public void EndFire() {
+        ps.EmptyHands();
+    }
+
 }

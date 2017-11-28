@@ -13,6 +13,9 @@ TagManager:
   - ShootUI_bar
   - ShootUI_text
   - Minimap Point
+  - Flag
+  - AudioManager
+  - Sea
   layers:
   - Default
   - TransparentFX

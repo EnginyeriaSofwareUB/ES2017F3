@@ -1584,7 +1584,7 @@ MeshCollider:
   m_GameObject: {fileID: 1934086470605630}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 0
@@ -1626,7 +1626,7 @@ MeshCollider:
   m_GameObject: {fileID: 1546051380718426}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 0
@@ -1677,6 +1677,7 @@ MonoBehaviour:
   BulletDamage: 10
   TimeUntilDespawn: 3
   ExplosionDuration: 0
+  ExplosionEffect: {fileID: 0}
 --- !u!114 &114311834838564246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1692,6 +1693,7 @@ MonoBehaviour:
   BulletPrefab: {fileID: 1226028752044792, guid: b1b4636a3b5dee34ba9e16e376a3877a,
     type: 2}
   minShootSpeed: 0.3
+  InitialUsagesLeft: -1
   bulletFired:
     m_PersistentCalls:
       m_Calls: []

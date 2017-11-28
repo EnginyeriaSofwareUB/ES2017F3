@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Test_Game.unity
     guid: 068403239af6b4aa0a5e1203b8b751ba
+  - enabled: 1
+    path: Assets/Scenes/Test_Game_Integrations.unity
+    guid: d22cf8c648ee44041bd9f1a967409a11
   - enabled: 0
-    path: Assets/Scenes/BasicShooting_Test.unity
+    path: 
     guid: 3cd160df8606b074d87210707218bbe3
+  - enabled: 0
+    path: Assets/Scenes/Main_Menu_Integrated.unity
+    guid: d920299f5098b9d4dab96f7001289046

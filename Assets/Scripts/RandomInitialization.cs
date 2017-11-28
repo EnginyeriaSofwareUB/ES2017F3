@@ -4,32 +4,86 @@ using UnityEngine;
 
 public class RandomInitialization : MonoBehaviour {
 
+	// List of pieces that can be destroyed
 	public List<GameObject> destructiblePieces;
-	public int numMedicalObjects;
+
+	[Range(0,3)]
+	public float minDistance =1f;
+
+	private List<GameObject> piecesAdded;
+
+
+	[Space(5)]
+	[Header("Medical")]
+	// Num of medical objects in the scenario
+	public int numMedical =5;
+
+	// Game object to replace pieces
 	public GameObject medical;
 
-	private List<GameObject> removedPiece;
-	private List<GameObject> medicalAdded;
+	[Space(5)]
+	[Header("Ammunition")]
+	// Num of ammunition objects in the scenario
+	public int numAmmunition =5;
 
-	// Use this for initialization
+	// Game object to replace pieces
+	public GameObject ammunition;
+
+	private bool checkNear(GameObject piece){
+		foreach(GameObject p in piecesAdded){
+			if (Vector3.Distance (piece.transform.position, p.transform.position) < 1f) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	void Start () {		
 
-		removedPiece = new List<GameObject> ();
-		medicalAdded = new List<GameObject> ();
+		piecesAdded = new List<GameObject> ();
 
-		for (int i = 0; i < numMedicalObjects; i++) {
-			
+		for (int i = 0; i < numMedical; i++) {
+
+			// Pick a random piece and destoy it
 			var piece = destructiblePieces [Random.Range (0, destructiblePieces.Count)];
+
+			while (!checkNear (piece)) {
+				piece = destructiblePieces [Random.Range (0, destructiblePieces.Count)];
+			}
+
 			Destroy (piece.gameObject);
 
-			var med = (GameObject)Instantiate (
+			// Bring the medical to the front
+			Vector3 pos = piece.transform.position;
+			pos.z -= 0.2f;
+
+			Instantiate (
 				         medical,
-				         piece.transform.position,
-				         piece.transform.rotation);
+				         pos,
+				Quaternion.identity);
 		
 			destructiblePieces.Remove (piece);
-			removedPiece.Add (piece);
-			medicalAdded.Add (med);
+			piecesAdded.Add (piece);
+		}
+
+		for (int i = 0; i < numAmmunition; i++) {
+
+			// Pick a random piece and destoy it
+			var piece = destructiblePieces [Random.Range (0, destructiblePieces.Count)];
+
+			while (!checkNear (piece)) {
+				piece = destructiblePieces [Random.Range (0, destructiblePieces.Count)];
+			}
+
+			Destroy (piece.gameObject);
+
+			Instantiate (
+				ammunition,
+				piece.transform.position,
+				Quaternion.identity);
+
+			destructiblePieces.Remove (piece);
+			piecesAdded.Add (piece);
 		}
 	}
 	

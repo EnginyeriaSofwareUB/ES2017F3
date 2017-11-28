@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour {
     public Image healthbar_fill;
     public Text healthtext;
     public Text damageText;
+    public float damageTextShowTime = 1.5f;
     Canvas playerCanvas;
 
 
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour {
     }
 
 
-    void InitPlayerCanvas()
+    public void InitPlayerCanvas()
     {
         //init health bar / text
         healthbar.minValue = 0f;
@@ -74,17 +75,17 @@ public class PlayerController : MonoBehaviour {
 
     void SetHealthColor()
     {
-        if(health >= 80f)
+        if(health >= maxHealth*0.8f)
         {
             healthtext.color = Color.green;
             healthbar_fill.color = Color.green;
         }
-        else if(health < 80f && health >= 50f)
+        else if(health < maxHealth * 0.8f && health >= maxHealth * 0.5f)
         {
             healthtext.color = Color.yellow;
             healthbar_fill.color = Color.yellow;
         }
-        else if(health < 50f && health >= 30f)
+        else if(health < maxHealth * 0.5f && health >= maxHealth * 0.3f)
         {
             healthtext.color = Color.red;
             healthbar_fill.color = Color.red;
@@ -116,10 +117,29 @@ public class PlayerController : MonoBehaviour {
 
     }
 
+	/*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */
+	public void Heal(float value)
+	{
+        //animator.SetTrigger("hurt");
+        damageText.gameObject.SetActive(true);
+		damageText.text = "+"+value.ToString();
+
+		health = health + value;
+
+		healthbar.value = health;
+		healthtext.text = health.ToString() + "%";
+
+		SetHealthColor();
+
+        Invoke("HideDamageText", damageTextShowTime);
+	}
+
     /*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */
     public void Damage(float value)
     {
         animator.SetTrigger("hurt");
+
+        damageText.gameObject.SetActive(true);
         damageText.text = "-"+value.ToString();
 
 
@@ -136,6 +156,13 @@ public class PlayerController : MonoBehaviour {
         {
             Dying();
         }
+
+        Invoke("HideDamageText", damageTextShowTime);
+    }
+
+    void HideDamageText()
+    {
+        damageText.gameObject.SetActive(false);
     }
 
     void Dying()

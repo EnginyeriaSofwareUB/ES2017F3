@@ -1,66 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WindController : MonoBehaviour {
+    WeatherController weather;
+    AudioManager audioManager;
 
     public bool windActive;
     public bool ignoreMass = false; //bool per determinar si la força del vent s'aplica tenin en conte la massa o no
+    public bool affectPlayers = true; //bool per determinar si el vent afecta als jugadors o no
     [Space(5)]
-    public float windForce; //min 0 max 5;
+    [Range(0, 6)]
+    public float windForce; //min 0 max 6;
     public Vector2 windDirection;
-    public int dir = 0;
+    public int direction = 1;
     //[Space(5)]
     //public string[] tagsToApplyWind = { "Player", "Bullet" };
     [Space(5)]
     public List<GameObject> objectsWind = new List<GameObject>();
-    [Space(5)]
-
-    [Header("UI")]
-    public RectTransform[] windBars;
-    float bar_startScale;
 
     [Space(10)]
+    [Header("UI")]
     public GameObject fan_UI;
-    public GameObject arrow_UI;
-    Vector3 arrow_scale;
     Vector3 fan_scale;
+    public Text windForceText;
 
-  
+    bool firsttime = true;
 
 
     void Start()
     {
-        arrow_scale = arrow_UI.transform.localScale;
+        weather = GetComponent<WeatherController>();
+        audioManager = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>();
+
         fan_scale = fan_UI.transform.localScale;
-        bar_startScale = windBars[0].localScale.y;
 
-        objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
+        if(affectPlayers)   
+            objectsWind.AddRange(GameObject.FindGameObjectsWithTag("Player"));
 
-        if(windDirection.x < 0)
-        {
-            dir = -1;
-            foreach (Transform bar in windBars)
-            {
-                if (bar.gameObject.activeSelf)
-                {
-                    bar.localScale = new Vector3(bar_startScale * dir, bar_startScale, bar_startScale);
-
-                }
-            }
-        }
-        else
-        {
-            dir = 1;
-            foreach (Transform bar in windBars)
-            {
-                if (bar.gameObject.activeSelf)
-                {
-                    bar.localScale = new Vector3(bar_startScale * dir, bar_startScale, bar_startScale);
-
-                }
-            }
-        }
+        SetWeatherState();
     }
 
 
@@ -70,59 +49,50 @@ public class WindController : MonoBehaviour {
         
         if (windDirection.x > 0)
         {
-            arrow_UI.SetActive(true);
-            //arrow_UI.transform.localScale = arrow_scale;
-            //SetBarsDirection(1);
-
-            foreach (Transform bar in windBars)
-            {
-                bar.localScale = new Vector3(1f, bar_startScale, bar_startScale);//Mathf.Abs(bar_startScale) *
-            }
-            Canvas.ForceUpdateCanvases();
+            direction = 1;
 
             fan_UI.transform.localScale = fan_scale;
-            fan_UI.transform.Rotate(0f, 0f, -30f * windForce * Time.deltaTime);
+            fan_UI.transform.Rotate(0f, 0f, -40f * windForce * Time.deltaTime);
         }
         else if (windDirection.x < 0)
         {
-            arrow_UI.SetActive(true);
-            //arrow_UI.transform.localScale = new Vector3(arrow_scale.x * -1f, arrow_scale.y, arrow_scale.z);
-            //SetBarsDirection(-1);
-            foreach (Transform bar in windBars)
-            {
-                bar.localScale = new Vector3(-1f, bar_startScale, bar_startScale);//Mathf.Abs(bar_startScale) *
-            }
-            Canvas.ForceUpdateCanvases();
+            direction = -1;
 
             fan_UI.transform.localScale = new Vector3(fan_scale.x * -1f, fan_scale.y, fan_scale.z);
-            fan_UI.transform.Rotate(0f, 0f, 30f * windForce * Time.deltaTime);
-        }
-        else
-        {
-            arrow_UI.SetActive(false);
+            fan_UI.transform.Rotate(0f, 0f, 40f * windForce * Time.deltaTime);
         }
 
-        SetNumberBars(Mathf.RoundToInt(windForce));
+
+
+        //set the cloud velocity = wind force * velocity proportionality
+        weather.cloudVelocity = windForce * weather.windForceMultiplier;
+        //Debug.Log("[WIND] Setting clouds speed to: " + windForce + "*"+ weather.windForceMultiplier);
+        windForceText.text = windForce.ToString("0.0");
+
         GarbageClean();
 
-        /* For testing purposes
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            windDirection = new Vector2(0f, 1f);
-            //int lastdir = dir;
-            windForce = Random.Range(0f, 4.9f);
-            float r = Random.Range(0f, 1.1f);
-            if (r > 0.5f)
-                dir = 1;
-            if (r <= 0.5f)
-                dir = -1;
+        SetWeatherState();
 
-            windDirection = new Vector2(dir, 1f);
-            //if (lastdir != dir)
-            //print("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
-            //SetBarsDirection(dir);
-            print("[WIND] Random change dir " + dir + ", force " + windForce);
-        }*/
+        Canvas.ForceUpdateCanvases();
+    }
+
+    void SetWeatherState()
+    {
+        if(windForce <= 1f && weather.current != WeatherController.weatherState.CALM)
+        {
+            weather.ChangeWeather(WeatherController.weatherState.CALM);
+            audioManager.SetAmbientSound(audioManager.calm, 0.6f);
+        }
+        else if(windForce > 1f && windForce <= 4.5f && weather.current != WeatherController.weatherState.CLOUDY)
+        {
+            weather.ChangeWeather(WeatherController.weatherState.CLOUDY);
+            audioManager.SetAmbientSound(audioManager.windy, 0.5f);
+        }
+        else if(windForce > 4.5f && weather.current != WeatherController.weatherState.STORMY)
+        {
+            weather.ChangeWeather(WeatherController.weatherState.STORMY);
+            audioManager.SetAmbientSound(audioManager.rain, 0.5f);
+        }
     }
 
     void GarbageClean()
@@ -133,48 +103,6 @@ public class WindController : MonoBehaviour {
                 Destroy(o);
         }
     }
-
-
-    void SetNumberBars(int n)
-    {
-        int j = 0;
-        foreach( Transform bar in windBars)
-        {
-            if (j < n)
-            {
-                bar.gameObject.SetActive(true);
-                print("[WIND] n Bars changed");
-            }
-            else
-            {
-                bar.gameObject.SetActive(false);
-            }
-            j++;
-        }
-
-        //SetBarsDirection(dir);
-    }
-
-    /*
-    void SetBarsDirection(int d)
-    {
-
-        //print(d + " <> " + dir);
-        if (d != dir)
-        {
-            foreach (Transform bar in windBars)
-            {
-                //if (bar.gameObject.activeSelf)
-                //{
-                print("[WIND] Changed direction to "+d);
-                bar.localScale = new Vector3( d, bar_startScale, bar_startScale);//Mathf.Abs(bar_startScale) *
-
-                //}
-            }
-            dir = d;
-        }
-
-    }*/
 
 
     // Update is called once per frame
@@ -204,7 +132,7 @@ public class WindController : MonoBehaviour {
                         else
                             rig.AddForce(force, ForceMode.Acceleration);
 
-                        Debug.Log(" > Applying wind force to: " + obj.name);
+                        Debug.Log("[WIND] Applying wind force to: " + obj.name);
                     }
                 }
             }
@@ -212,23 +140,49 @@ public class WindController : MonoBehaviour {
 
 	}
 
-
+    //called onec per turn change
     public void ChangeWindRandom()
     {
         windDirection = new Vector2(0f, 1f);
         //int lastdir = dir;
-        windForce = Random.Range(0f, 4.9f);
+        windForce = Random.Range(0.7f, 6.1f);
+
+        float dir = 1;
         float r = Random.Range(0f, 1.1f);
         if (r > 0.5f)
             dir = 1;
         if (r <= 0.5f)
             dir = -1;
         
-        windDirection = new Vector2(dir, 1f);
-        //if (lastdir != dir)
-            //print("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        //SetBarsDirection(dir);
-        print("[WIND] Random change dir "+dir+", force "+windForce);
+
+        if (firsttime) //ugly fix
+        {
+            dir = 1;
+            windDirection = new Vector2(dir, 1f);
+            direction = Mathf.RoundToInt(dir);
+            firsttime = false;
+        }
+        else
+        {
+            windDirection = new Vector2(dir, 1f);
+            direction = Mathf.RoundToInt(dir);
+        }
+
+        //tell the actual clouds to die
+        if(GetComponent<WeatherController>().clouds.Count > 0)
+        {
+            foreach (GameObject cloud in GetComponent<WeatherController>().clouds)
+            {
+                //Debug.Log(cloud);
+                //cloud.GetComponent<CloudController>().fade = true; //this is to trigger fade away animation on clouds (destroys them on end)
+
+                if(cloud.GetComponent<CloudController>().dir != dir)
+                {
+                    cloud.GetComponent<CloudController>().dir = dir;
+                }
+            }
+        }
+        
     }
 
 

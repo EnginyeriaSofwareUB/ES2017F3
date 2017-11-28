@@ -4,24 +4,49 @@ using UnityEngine;
 
 public class DeathOnTouch : MonoBehaviour {
 
+    public float turnTimeRemainingOnFall;
+
+	private IEnumerator coroutine;
+
 	// Use this for initialization
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-		
+
 	}
 
 	void OnTriggerEnter(Collider col){
 
-		Debug.Log (col.tag + col.name);
+		if (col.gameObject.CompareTag("Player") && !col.gameObject.transform.GetComponent<Rigidbody> ().isKinematic) {
+			GameObject g = col.gameObject;
 
-		if (col.gameObject.tag == "Player") {
+			g.transform.GetComponent<Rigidbody> ().isKinematic = true;
+			g.GetComponentInChildren<Animator> ().SetTrigger ("drown");
 
-			// TODO: Dying should be public
-			col.gameObject.GetComponent<PlayerController> ().Damage (col.gameObject.GetComponent<PlayerController> ().maxHealth);
-		}
+			//set a delay
+			coroutine = DelayToDeath(g);
+			StartCoroutine (coroutine);
+
+            //play chof sound
+            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().FallToWater();
+
+            //set remaining turn time
+            GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().turnRemainingTime = turnTimeRemainingOnFall;
+
+        }
 	}
+
+	IEnumerator DelayToDeath(GameObject g){
+		print ("COR" + g);
+		yield return new WaitForSeconds (2);
+		if (g != null) {
+			g.GetComponent<PlayerController> ().Damage (100f);
+		}
+		//		yield return new WaitForSeconds (2);
+		//		GameObject.FindGameObjectWithTag ("GM").GetComponent<GameController> ().changeTurn ();
+	}
+
+
 }
