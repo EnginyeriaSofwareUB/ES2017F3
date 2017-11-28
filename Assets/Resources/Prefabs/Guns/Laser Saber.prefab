@@ -58,6 +58,8 @@ GameObject:
   - component: {fileID: 4157628367806376}
   - component: {fileID: 95237997822273614}
   - component: {fileID: 114355620122308924}
+  - component: {fileID: 82567156205530674}
+  - component: {fileID: 114673922196848432}
   m_Layer: 0
   m_Name: Laser Saber
   m_TagString: Untagged
@@ -135,7 +137,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1069647562288944}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 461.88635, y: 285.42783, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4815477437872160}
@@ -398,6 +400,86 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 29806cc7198df1f4f853bdaa21b07c55, type: 3}
+--- !u!82 &82567156205530674
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1069647562288944}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95237997822273614
 Animator:
   serializedVersion: 3
@@ -447,3 +529,27 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114673922196848432
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1069647562288944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6649de1fe1c2594f9e7364f912c11ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightsaberColors:
+  - {fileID: 2100000, guid: 3da932420f8e74e38951a22bd1a3a42e, type: 2}
+  - {fileID: 2100000, guid: 7dbde1af1b2071e43a10aa05db30c4d8, type: 2}
+  - {fileID: 2100000, guid: c7b6459e1845cbb49b9fe8b7be4d07e8, type: 2}
+  - {fileID: 2100000, guid: 3b27db50e21ead64492f2f6b4173c666, type: 2}
+  - {fileID: 2100000, guid: e3d3ed474d9372b4ba59daffeebe747f, type: 2}
+  r: {fileID: 23715071018485942}
+  on: {fileID: 8300000, guid: 8060c96120472a74a8535b682b381ad0, type: 3}
+  off: {fileID: 8300000, guid: 9883be5df17859246ad6b2881cf50e21, type: 3}
+  loop: {fileID: 8300000, guid: 75ba4beab0a60dc4abeb52f6be9fa3fb, type: 3}
+  attacks:
+  - {fileID: 8300000, guid: fc202d00025eedc40b0eb74e3aaebce5, type: 3}
+  - {fileID: 8300000, guid: 7ce36adb4de80fa4fa641bbdef629bac, type: 3}

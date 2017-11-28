@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 54121516048377964}
   - component: {fileID: 136289688077659240}
   - component: {fileID: 114146731585171000}
+  - component: {fileID: 82788048719086058}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -104,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1757145855569732}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.694, y: 4.884, z: 2}
+  m_LocalPosition: {x: 351.93875, y: 254.80951, z: 2}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4423166219073864}
@@ -313,6 +314,86 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: a65c1bb7658ae4aef853a6b2a00253d0, type: 3}
+--- !u!82 &82788048719086058
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1757145855569732}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95074925746971478
 Animator:
   serializedVersion: 3
@@ -346,6 +427,10 @@ MonoBehaviour:
   ExplosionDuration: 0.1
   ExplosionEffect: {fileID: 1090855516486484, guid: 64f102e164cbc40ceb5dfdd2f9a5c929,
     type: 2}
+  isDinamite: 0
+  mecha: {fileID: 8300000, guid: 133c9dcb35141164e91101152901952d, type: 3}
+  boom: {fileID: 8300000, guid: 85a16557245e31243ac8cc4b62b85305, type: 3}
+  grenadeBoom: {fileID: 8300000, guid: 1f5f3836a5c8e01448e2e95dfeb6e2c4, type: 3}
 --- !u!136 &136289688077659240
 CapsuleCollider:
   m_ObjectHideFlags: 1
