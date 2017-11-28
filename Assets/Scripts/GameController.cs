@@ -34,7 +34,7 @@ public class GameController : MonoBehaviour {
     [Header("TEAM variables")]
     public Transform spawnPoint1;
     public Transform spawnPoint2;
-    public static int nPlayersPerTeam = 1;
+    public static int nPlayersPerTeam = 2;
     public List<GameObject> team1;
     public List<GameObject> team2;
     int spawned1 = 0;
@@ -88,6 +88,8 @@ public class GameController : MonoBehaviour {
         turnCount = 0;
         // retrieve players
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
+        players.Sort((self, other) => self.GetComponent<PlayerController>().playerId - other.GetComponent<PlayerController>().playerId);
+
 		// initiate
 		foreach (GameObject player in players) {
             //Debug.Log(player);
@@ -126,7 +128,7 @@ public class GameController : MonoBehaviour {
             GameObject p1 = Instantiate(testPlayerPrefab, spawnPoint1.position, spawnPoint1.rotation, null) as GameObject;
             p1.SetActive(true);
             p1.GetComponent<PlayerController>().TEAM = 1;
-            p1.GetComponent<PlayerController>().playerId = 1 + spawned1;
+            p1.GetComponent<PlayerController>().playerId = 1 + 2*spawned1;
             p1.GetComponent<PlayerController>().last_dir = 1;
 			p1.GetComponent<PlayerController>().maxHealth = GamePreferences.players_maxlife;
 			p1.GetComponent<PlayerController>().health = GamePreferences.players_maxlife;
@@ -149,7 +151,7 @@ public class GameController : MonoBehaviour {
             GameObject p2 = Instantiate(testPlayerPrefab, spawnPoint2.position, spawnPoint2.rotation, null) as GameObject;
             p2.SetActive(true);
             p2.GetComponent<PlayerController>().TEAM = 2;
-            p2.GetComponent<PlayerController>().playerId = 2 + spawned2;
+            p2.GetComponent<PlayerController>().playerId = 2 + 2*spawned2;
             p2.GetComponent<PlayerController>().last_dir = -1;
 			p2.GetComponent<PlayerController>().maxHealth = GamePreferences.players_maxlife;
 			p2.GetComponent<PlayerController>().health = GamePreferences.players_maxlife;
