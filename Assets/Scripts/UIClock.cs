@@ -51,7 +51,7 @@ public class UIClock : MonoBehaviour {
 						clock.sprite = spritesrot [i];
 					}
 
-					if (i == 0) {
+					if (i == 3) {
 						notrot = (notrot + 1) % 2;
 					}
 						
