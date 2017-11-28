@@ -135,9 +135,9 @@ public class CameraController : MonoBehaviour {
 
 
 						if (player.Equals(_controller.activePlayer)) {
-							player.GetComponentInChildren<FlagMainPlayer> ().enabled = true;
+							player.GetComponentInChildren<FlagMainPlayer> ().EnableMain(true);
 						} else {
-							player.GetComponentInChildren<FlagMainPlayer> ().enabled = false;
+							player.GetComponentInChildren<FlagMainPlayer> ().EnableMain(false);
 						}
 					}
 				}

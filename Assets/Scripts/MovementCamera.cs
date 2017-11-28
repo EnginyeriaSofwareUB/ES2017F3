@@ -42,7 +42,7 @@ public class MovementCamera : MonoBehaviour {
 			transform.position += mUpDirection * Time.deltaTime * mSpeed;
 
 		// Check if on the down edge
-		} else if ((Input.mousePosition.y <= 0 + mDelta) && (transform.position.y>min_X)) {
+		} else if ((Input.mousePosition.y <= 0 + mDelta) && (transform.position.y>min_Y)) {
 			// Move the camera
 			transform.position -= mUpDirection * Time.deltaTime * mSpeed;
 		}			

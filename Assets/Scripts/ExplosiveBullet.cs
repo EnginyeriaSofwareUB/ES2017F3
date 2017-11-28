@@ -56,7 +56,7 @@ public class ExplosiveBullet : AbstractBullet
 			// Pushback the players inside the trigger
 			var pushbackDir = (gameObject.transform.position - other.transform.position);
 			pushbackDir.z = 0;
-			other.GetComponent<Rigidbody>().AddForce(pushbackDir.normalized * 10, ForceMode.Impulse);
+			other.GetComponent<Rigidbody>().AddForce(pushbackDir.normalized * (-10), ForceMode.Impulse);
 		}
 
 

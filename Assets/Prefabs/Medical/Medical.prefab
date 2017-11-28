@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4639747518964666}
   - component: {fileID: 95980845141424736}
   - component: {fileID: 114131350759879648}
-  - component: {fileID: 136949056323501146}
+  - component: {fileID: 65004029257066896}
   m_Layer: 0
   m_Name: Medical
   m_TagString: Untagged
@@ -83,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1809551435781242}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.194475, y: -4.766087, z: -0.68988645}
+  m_LocalPosition: {x: 5.1394024, y: -4.9727063, z: -0.701}
   m_LocalScale: {x: 0.15960999, y: 0.15716258, z: 0.16358265}
   m_Children:
   - {fileID: 4818856607593494}
@@ -186,6 +186,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1246342659540824}
   m_Mesh: {fileID: 4300002, guid: 8825ec5f65b008c439121d2a5355caaf, type: 3}
+--- !u!65 &65004029257066896
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1809551435781242}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0154939, y: 2.2, z: 24.27}
+  m_Center: {x: -0.17, y: 1.68, z: 0.08}
 --- !u!95 &95980845141424736
 Animator:
   serializedVersion: 3
@@ -214,16 +226,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a5417a19a7df6e429a454fa4a03b33c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &136949056323501146
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1809551435781242}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 3.08
-  m_Height: 31.13
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}

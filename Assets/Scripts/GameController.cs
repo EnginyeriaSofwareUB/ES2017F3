@@ -84,6 +84,9 @@ public class GameController : MonoBehaviour {
 				_teamGunUses[i][j] = AvailableGuns[j].InitialUsagesLeft;
 			}
 		}
+
+		//Init shots left
+
 		
         turnCount = 0;
         // retrieve players
@@ -169,7 +172,13 @@ public class GameController : MonoBehaviour {
     void OnShoot() {
 		// disable shooting
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
-        turnRemainingTime = afterShootTime;
+        turnRemainingTime = afterShootTime;	
+
+		int team = activePlayer.GetComponent<PlayerController> ().TEAM;
+
+		GetComponent<InitUsages> ().SetBowUsages(team, _teamGunUses [team-1] [4]);
+		GetComponent<InitUsages> ().SetGrenadeUsages(team, _teamGunUses [team-1] [3]);
+
     }
 
 	void ChangeGun(){
@@ -209,7 +218,7 @@ public class GameController : MonoBehaviour {
 			granadeS.SetActive (false);
 			arrowS.SetActive (false);
 			break;
-		case 5://granade active
+		case 3://granade active
 			handS.SetActive(false);
 			lightSS.SetActive (false);
 			canonS.SetActive (false);
@@ -217,7 +226,7 @@ public class GameController : MonoBehaviour {
 			granadeS.SetActive (true);
 			arrowS.SetActive (false);
 			break;
-		case 3://arrow active
+		case 4://arrow active
 			handS.SetActive(false);
 			lightSS.SetActive (false);
 			canonS.SetActive (false);
@@ -277,6 +286,7 @@ public class GameController : MonoBehaviour {
             activePlayer.GetComponent<PlayerMovement>().Idle();
             activePlayer.GetComponent<PlayerMovement>().enabled = false;
             activePlayer.GetComponent<PlayerShooting>().enabled = false;
+
 
 			// disable flag
 			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null){

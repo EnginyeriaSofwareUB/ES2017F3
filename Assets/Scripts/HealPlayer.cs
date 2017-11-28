@@ -18,7 +18,6 @@ public class HealPlayer : MonoBehaviour {
 		if (col.gameObject.tag == "Player") {
 			Debug.Log(col.gameObject.name +" healed");
 
-			//TODO: Heal the player correctly
 			col.gameObject.GetComponent<PlayerController> ().Heal (10);
 
 			Destroy (this.gameObject);

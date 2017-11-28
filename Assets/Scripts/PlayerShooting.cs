@@ -59,6 +59,11 @@ public class PlayerShooting : MonoBehaviour
                     newScale = Vector3.one * 1.9f;
                     newPos = new Vector3(-0.019f, 0.426f, -0.448f);
                     break;
+				case "Grenade Base":
+					newScale = Vector3.one * 2f;
+					newPos = new Vector3(-0.2f, 0.79f, 0.60f);
+					break;
+
                 case "Bow and Arrow":
                     newPos = new Vector3(2f, 1.5f, -1.5f);
                     newScale = Vector3.one;
@@ -222,8 +227,10 @@ public class PlayerShooting : MonoBehaviour
             ChangeGunTo(1);
         else if (Input.GetKeyDown(KeyCode.Alpha4))
             ChangeGunTo(2);
-        else if (Input.GetKeyDown(KeyCode.Alpha5))
-            ChangeGunTo(3);
+		else if (Input.GetKeyDown(KeyCode.Alpha5))
+			ChangeGunTo(3);
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+            ChangeGunTo(4);
         ChangeGunEvent.Invoke();
     }
 

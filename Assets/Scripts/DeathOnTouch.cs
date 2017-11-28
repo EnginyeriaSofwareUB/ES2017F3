@@ -6,12 +6,11 @@ public class DeathOnTouch : MonoBehaviour {
 
     public float turnTimeRemainingOnFall;
 
-	private bool isDrown;
 	private IEnumerator coroutine;
 
 	// Use this for initialization
 	void Start () {
-		isDrown = false;
+		
 	}
 
 	void Update () {
@@ -20,9 +19,7 @@ public class DeathOnTouch : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col){
 
-		if (col.gameObject.CompareTag("Player") && !isDrown) {
-			Debug.Log ("A");
-			isDrown = true;
+		if (col.gameObject.CompareTag("Player") && !col.gameObject.transform.GetComponent<Rigidbody> ().isKinematic) {
 			GameObject g = col.gameObject;
 
 			g.transform.GetComponent<Rigidbody> ().isKinematic = true;
