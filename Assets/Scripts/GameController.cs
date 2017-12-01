@@ -86,8 +86,7 @@ public class GameController : MonoBehaviour {
 		}
 
 		//Init shots left
-
-		
+				
         turnCount = 0;
         // retrieve players
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
