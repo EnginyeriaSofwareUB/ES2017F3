@@ -337,5 +337,6 @@ public class PlayerShooting : MonoBehaviour
         minPower = initMinPower;
 
     }
+		
 
 }

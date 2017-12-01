@@ -390,4 +390,14 @@ public class GameController : MonoBehaviour {
 		current = gameStates.gameOn;
 		Time.timeScale = 1;
 	}
+
+	public void PauseHowTo(bool pause){
+		if (pause) {
+			current = gameStates.pause;
+			Time.timeScale = 0;
+		} else {
+			current = gameStates.gameOn;
+			Time.timeScale = 1;
+		}
+	}
 }

@@ -1082,6 +1082,7 @@ MonoBehaviour:
   healthbar_fill: {fileID: 114183231593927812}
   healthtext: {fileID: 114735765675642164}
   damageText: {fileID: 114426476780802152}
+  damageTextShowTime: 1.5
   deathEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1358,7 +1359,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1934148465144300}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7223287cf2a9de44482071287b383632, type: 3}
   m_Name: 
@@ -1369,6 +1370,7 @@ MonoBehaviour:
   maxPower: 40
   minPower: 3
   maxAngle: 48
+  lastGunEquipped: 0
   shootEvent:
     m_PersistentCalls:
       m_Calls: []
