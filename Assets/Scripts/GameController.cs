@@ -346,6 +346,9 @@ public class GameController : MonoBehaviour {
 
             GetComponent<WindController>().ChangeWindRandom();
         }
+
+		int team = activePlayer.GetComponent<PlayerController> ().TEAM;
+		GetComponent<InitUsages> ().SetPanel(team);
 	}
 	
 	// Update is called once per frame
@@ -389,5 +392,15 @@ public class GameController : MonoBehaviour {
 		pauseScreenUI.SetActive(false);
 		current = gameStates.gameOn;
 		Time.timeScale = 1;
+	}
+
+	public void PauseHowTo(bool pause){
+		if (pause) {
+			current = gameStates.pause;
+			Time.timeScale = 0;
+		} else {
+			current = gameStates.gameOn;
+			Time.timeScale = 1;
+		}
 	}
 }

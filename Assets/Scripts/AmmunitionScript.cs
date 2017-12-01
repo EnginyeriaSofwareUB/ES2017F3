@@ -20,7 +20,7 @@ public class AmmunitionScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-
+		print ("coll");
 		if (col.gameObject.tag == "Player") {			
 			Destroy (this.gameObject);
 			int team = col.GetComponent<PlayerController>().TEAM;

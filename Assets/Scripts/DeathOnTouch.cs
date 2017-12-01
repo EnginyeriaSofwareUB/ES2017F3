@@ -48,5 +48,4 @@ public class DeathOnTouch : MonoBehaviour {
 		//		GameObject.FindGameObjectWithTag ("GM").GetComponent<GameController> ().changeTurn ();
 	}
 
-
 }
