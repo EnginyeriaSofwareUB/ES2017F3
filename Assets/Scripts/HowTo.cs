@@ -80,7 +80,6 @@ public class HowTo : MonoBehaviour {
 			break;
 
 		case 3:
-			print(tabs);
 			if (Input.GetKeyUp (KeyCode.Tab) && tabs % 2 == 0) {
 				ap.GetComponent<PlayerShooting> ().enabled = true;
 				coroutine = ShootTime ();

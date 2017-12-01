@@ -346,6 +346,9 @@ public class GameController : MonoBehaviour {
 
             GetComponent<WindController>().ChangeWindRandom();
         }
+
+		int team = activePlayer.GetComponent<PlayerController> ().TEAM;
+		GetComponent<InitUsages> ().SetPanel(team);
 	}
 	
 	// Update is called once per frame
