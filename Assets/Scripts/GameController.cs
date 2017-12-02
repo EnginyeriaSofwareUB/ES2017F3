@@ -349,6 +349,8 @@ public class GameController : MonoBehaviour {
 
 		int team = activePlayer.GetComponent<PlayerController> ().TEAM;
 		GetComponent<InitUsages> ().SetPanel(team);
+		GetComponent<InitUsages> ().SetBowUsages(team, _teamGunUses [team-1] [4]);
+		GetComponent<InitUsages> ().SetGrenadeUsages(team, _teamGunUses [team-1] [3]);
 	}
 	
 	// Update is called once per frame

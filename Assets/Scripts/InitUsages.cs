@@ -16,6 +16,9 @@ public class InitUsages : MonoBehaviour {
 
 	public GameObject panel;
 
+	public GameObject grenadeActive, grenadeOut;
+	public GameObject bowActive, bowOut;
+
 	private IEnumerator coroutine;
 	private int ang=0;
 
@@ -53,6 +56,14 @@ public class InitUsages : MonoBehaviour {
 		} else {
 			bowUsagesT2.GetComponent<UnityEngine.UI.Text> ().text = value.ToString ();
 		}
+
+		if (value == 0) {
+			bowActive.SetActive (false);
+			bowOut.SetActive (true);
+		} else {
+			bowActive.SetActive (true);
+			bowOut.SetActive (false);
+		}
 	}
 
 	public void SetGrenadeUsages(int team, int value){
@@ -60,6 +71,14 @@ public class InitUsages : MonoBehaviour {
 			grenadeT1.GetComponent<UnityEngine.UI.Text> ().text = value.ToString ();
 		} else {
 			grenadeT2.GetComponent<UnityEngine.UI.Text> ().text = value.ToString ();
+		}
+
+		if (value == 0) {
+			grenadeActive.SetActive (false);
+			grenadeOut.SetActive (true);
+		} else {
+			grenadeActive.SetActive (true);
+			grenadeOut.SetActive (false);
 		}
 	}
 
