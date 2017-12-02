@@ -80,10 +80,14 @@ public class ExplosiveBullet : AbstractBullet
 		return BulletDamage * Mathf.Max(((radius - modulus) / radius), 0.075f);
 	}
 	
-	protected void TriggerExplosion()
-	{
+	protected void TriggerExplosion() {
+	    if (wind == null) return;
+
+        // play explosion sound
+        GetComponent<AudioSource>().Play();
+
         //delete itself from wind objects
-        if(wind.objectsWind.Contains(this.gameObject))
+        if (wind.objectsWind.Contains(this.gameObject))
             wind.objectsWind.Remove(this.gameObject);
 
 		Debug.Log("Explosion Position: " + transform.position);
