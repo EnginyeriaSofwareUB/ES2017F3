@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour
 
     public Transform SpawnPoint;
     public GameObject BulletPrefab;
-    internal Animator anim;
+    protected Animator anim;
     private float thrust;
     public float minShootSpeed;
 
@@ -27,7 +27,7 @@ public class Gun : MonoBehaviour
     internal void Start()
     {
         anim = GetComponent<Animator>();
-
+        print(anim!=null);
         if (bulletFired == null)
             bulletFired = new UnityEvent();
 
@@ -36,7 +36,7 @@ public class Gun : MonoBehaviour
     public virtual void Shoot(float thrust, float maxPower)
     {
         this.thrust = thrust;
-
+        print(anim != null);
         if (anim != null)
         {
             anim.SetTrigger("shoot");
