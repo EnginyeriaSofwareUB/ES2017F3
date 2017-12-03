@@ -16,6 +16,8 @@ TagManager:
   - Flag
   - AudioManager
   - Sea
+  - Hurting Object
+  - ShootUI_slider
   layers:
   - Default
   - TransparentFX

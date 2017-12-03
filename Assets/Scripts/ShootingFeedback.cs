@@ -7,21 +7,31 @@ public class ShootingFeedback : MonoBehaviour {
     GameController control;
     public Image UI_bar;
     public Text UI_text;
+    //public Slider UI_bar_slider;
+
     [Space(5)]
-    public float barVelocity = 2f;
+    public float barVelocity = 1.75f;
     public float time = 0f;
     float maxShootTime;
 
     public Color[] bar_colors;
 
+
+    float thrust;
+    float maxPower;
+
 	// Use this for initialization
 	void Start () {
         control = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
         maxShootTime = GetComponent<PlayerShooting>().maxPowerSeconds;
+        maxPower = GetComponent<PlayerShooting>().maxPower;
+
         UI_bar = GameObject.FindGameObjectWithTag("ShootUI_bar").GetComponent<Image>();
         UI_text = GameObject.FindGameObjectWithTag("ShootUI_text").GetComponent<Text>();
+        //UI_bar_slider = GameObject.FindGameObjectWithTag("ShootUI_slider").GetComponent<Slider>();
 
         UI_bar.rectTransform.sizeDelta = new Vector2(1f, UI_bar.rectTransform.sizeDelta.y);
+        //UI_bar_slider.maxValue = maxPower;
     }
 	
 	// Update is called once per frame
@@ -29,6 +39,9 @@ public class ShootingFeedback : MonoBehaviour {
         if (control.activePlayer.Equals(this.gameObject)) //Si som el actiu..
         {
             UI_bar.gameObject.SetActive(true);
+            //UI_bar_slider.gameObject.SetActive(true);
+
+            thrust = GetComponent<PlayerShooting>().thrust;
 
             //Quan es clica
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -36,6 +49,8 @@ public class ShootingFeedback : MonoBehaviour {
                 time += Time.deltaTime;
 
                 UI_bar.rectTransform.sizeDelta = new Vector2(UI_bar.rectTransform.sizeDelta.x + time * barVelocity, UI_bar.rectTransform.sizeDelta.y);
+
+                //UI_bar_slider.value = time * barVelocity;
             }
 
             //Mentre esta apretat, incrementem
@@ -45,6 +60,8 @@ public class ShootingFeedback : MonoBehaviour {
                 {
                     time += Time.deltaTime;
                     UI_bar.rectTransform.sizeDelta = new Vector2(UI_bar.rectTransform.sizeDelta.x + time * barVelocity, UI_bar.rectTransform.sizeDelta.y);
+
+                    //UI_bar_slider.value = time * barVelocity; 
                 }
                     
                 //Format del % en text
@@ -66,6 +83,8 @@ public class ShootingFeedback : MonoBehaviour {
                 time = 0f;
 
                 UI_bar.rectTransform.sizeDelta = new Vector2(1f, UI_bar.rectTransform.sizeDelta.y);
+
+                //UI_bar_slider.value = 0f;
             }
             
 
@@ -90,6 +109,7 @@ public class ShootingFeedback : MonoBehaviour {
         else if(control.activePlayer == null)
         {
             UI_bar.gameObject.SetActive(false); //Si ningu esta actiu, desactivem la barra
+            //UI_bar_slider.gameObject.SetActive(false);
         }
 
 

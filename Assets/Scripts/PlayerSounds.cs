@@ -91,8 +91,8 @@ public class PlayerSounds : MonoBehaviour {
 
     public void OnShoot() //BUG! El codi s'executa, pero no funciona, dont know why
     {
+        //TO DO: Add sounds for every weapon (here only the shoot sound, not for the dinamite/grenade)
         source.loop = false;
-        print("shoooot audio " + selectedWeapon.name);
         switch (selectedWeapon.name)
         {
             case "Cannon Base":
