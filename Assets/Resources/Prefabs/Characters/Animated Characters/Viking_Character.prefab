@@ -963,7 +963,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI_bar: {fileID: 0}
   UI_text: {fileID: 0}
-  barVelocity: 1
+  barVelocity: 1.75
   time: 0
   bar_colors:
   - {r: 1, g: 0.95486814, b: 0.3455882, a: 0.584}
@@ -1365,6 +1365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentGun: {fileID: 0}
+  thrust: 0
+  startPowerTime: 0
   angleSpeed: 0.6
   maxPowerSeconds: 3.5
   maxPower: 40

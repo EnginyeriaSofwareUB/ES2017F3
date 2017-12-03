@@ -25,15 +25,21 @@ public class GameController : MonoBehaviour {
     [Header("Canvas Objects")]
     public Text turnTimerText;
 
-    [Header("Testing Variables Here")]
+    [Header("Player/Prefab Variables")]
 	public GameObject activePlayer = null;
-    public List<GameObject> testPlayerPrefabs; //seleccionar per script al carregar desde la escena anterior
+
+    //public List<GameObject> testPlayerPrefabs; //seleccionar per script al carregar desde la escena anterior
+    public GameObject vikingPlayer;
+    public GameObject piratePlayer;
+    public GameObject knightPlayer;
+
     public List<GameObject> players; //mirar de eliminar! 
-	private GameObject testPlayerPrefab;
+	private GameObject PlayerPrefab;
 
     [Header("TEAM variables")]
     public Transform spawnPoint1;
     public Transform spawnPoint2;
+    public float maxSpawnSpread = 1f;
     public static int nPlayersPerTeam = 2;
     public List<GameObject> team1;
     public List<GameObject> team2;
@@ -116,7 +122,7 @@ public class GameController : MonoBehaviour {
 		nPlayersPerTeam = GamePreferences.number_players_team;
 		suddenDeath = GamePreferences.sudden_death_activated;
 		turnsTillSudden = GamePreferences.sudden_death_turns;
-		testPlayerPrefab = testPlayerPrefabs.ToList () [0];
+        //testPlayerPrefab = testPlayerPrefabs.ToList()[0];
 
 		// For now it only checks for VIKING or NON VIKING players
 		//if (GamePreferences.p1_faction == "viking") {
@@ -126,8 +132,27 @@ public class GameController : MonoBehaviour {
         Debug.Log("Init game; Spawning " + nPlayersPerTeam + " per team.");
         //team1
         for (int i = 0; i < nPlayersPerTeam; i++) {
+
+            PlayerPrefab = null;
+            //ALERT: Check factions name
+            switch (GamePreferences.p1_faction)
+            {
+                case "pirates":
+                    PlayerPrefab = piratePlayer;
+                    break;
+                case "vikings":
+                    PlayerPrefab = vikingPlayer;
+                    break;
+                case "knight":
+                    PlayerPrefab = knightPlayer;
+                    break;
+            }
+
+            //take spawnposition and add some variation on X value, to spread the spawn
+            Vector3 where = new Vector3(spawnPoint1.position.x + Random.Range(-maxSpawnSpread, maxSpawnSpread), spawnPoint1.position.y, spawnPoint1.position.z);
+
             //GameObject p1 = Instantiate(Resources.Load("Prefabs/Characters/Animated Characters/" + testPlayerPrefabName), spawnPoint1.position, spawnPoint1.rotation, null) as GameObject;
-            GameObject p1 = Instantiate(testPlayerPrefab, spawnPoint1.position, spawnPoint1.rotation, null) as GameObject;
+            GameObject p1 = Instantiate(PlayerPrefab, where, spawnPoint1.rotation, null) as GameObject;
             p1.SetActive(true);
             p1.GetComponent<PlayerController>().TEAM = 1;
             p1.GetComponent<PlayerController>().playerId = 1 + 2*spawned1;
@@ -140,7 +165,7 @@ public class GameController : MonoBehaviour {
 
             p1.name = "Player_T1_" + spawned1.ToString();
 
-            activePlayer = p1; //activem el player 1 com a target 
+            activePlayer = p1; //activem el player ultim del team 1 com a target 
         }
 
 		// For now it only checks for VIKING or NON VIKING players
@@ -150,7 +175,24 @@ public class GameController : MonoBehaviour {
 
         //TEAM2
         for (int i = 0; i < nPlayersPerTeam; i++) {
-            GameObject p2 = Instantiate(testPlayerPrefab, spawnPoint2.position, spawnPoint2.rotation, null) as GameObject;
+            PlayerPrefab = null;
+            //ALERT: Check factions name
+            switch (GamePreferences.p2_faction)
+            {
+                case "pirates":
+                    PlayerPrefab = piratePlayer;
+                    break;
+                case "vikings":
+                    PlayerPrefab = vikingPlayer;
+                    break;
+                case "knight":
+                    PlayerPrefab = knightPlayer;
+                    break;
+            }
+            //take spawnposition and add some variation on X value, to spread the spawn
+            Vector3 where = new Vector3(spawnPoint2.position.x + Random.Range(-maxSpawnSpread, maxSpawnSpread), spawnPoint2.position.y, spawnPoint2.position.z);
+
+            GameObject p2 = Instantiate(PlayerPrefab, where, spawnPoint2.rotation, null) as GameObject;
             p2.SetActive(true);
             p2.GetComponent<PlayerController>().TEAM = 2;
             p2.GetComponent<PlayerController>().playerId = 2 + 2*spawned2;
@@ -243,7 +285,7 @@ public class GameController : MonoBehaviour {
 			break;
 		}
 		
-}
+    }
 		
     void OnDeath(int playerId) {
         bool isCurrentPlayer = activePlayer.GetComponent<PlayerController>().playerId == playerId;
@@ -345,6 +387,8 @@ public class GameController : MonoBehaviour {
             turnRemainingTime = turnTime;
 
             GetComponent<WindController>().ChangeWindRandom();
+
+            //GetComponent<MatchProgressBar>().GetTeamHPs(); //recalculate HPs on change turn (probably not needed here)
         }
 
 		int team = activePlayer.GetComponent<PlayerController> ().TEAM;
@@ -355,7 +399,8 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
+        if(activePlayer)
+		    activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
 
 		turnRemainingTime -= Time.deltaTime;
 		if(turnRemainingTime < 0) {

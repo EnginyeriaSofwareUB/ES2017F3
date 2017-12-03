@@ -27,7 +27,7 @@ public class Gun : MonoBehaviour
     internal void Start()
     {
         anim = GetComponent<Animator>();
-        print(anim!=null);
+        //print(anim!=null);
         if (bulletFired == null)
             bulletFired = new UnityEvent();
 

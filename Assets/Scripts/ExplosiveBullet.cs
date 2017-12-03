@@ -45,7 +45,7 @@ public class ExplosiveBullet : AbstractBullet
 	{
 		if (!_isExploding)
 			return;
-		Debug.Log("Colliding with: " + other.tag);
+		//Debug.Log("Colliding with: " + other.tag);
 		if (other.CompareTag("DestructibleCube"))
 			Destroy(other.gameObject);
 		if (other.CompareTag("Player"))
