@@ -243,7 +243,7 @@ public class GameController : MonoBehaviour {
 			break;
 		}
 		
-}
+    }
 		
     void OnDeath(int playerId) {
         bool isCurrentPlayer = activePlayer.GetComponent<PlayerController>().playerId == playerId;
@@ -345,6 +345,8 @@ public class GameController : MonoBehaviour {
             turnRemainingTime = turnTime;
 
             GetComponent<WindController>().ChangeWindRandom();
+
+            //GetComponent<MatchProgressBar>().GetTeamHPs(); //recalculate HPs on change turn (probably not needed here)
         }
 
 		int team = activePlayer.GetComponent<PlayerController> ().TEAM;
@@ -355,7 +357,8 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
+        if(activePlayer)
+		    activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
 
 		turnRemainingTime -= Time.deltaTime;
 		if(turnRemainingTime < 0) {

@@ -157,6 +157,8 @@ public class PlayerController : MonoBehaviour {
             Dying();
         }
 
+        gameControl.GetComponent<MatchProgressBar>().GetTeamHPs(); //when damage taken, recalculate progress bar
+
         Invoke("HideDamageText", damageTextShowTime);
     }
 
