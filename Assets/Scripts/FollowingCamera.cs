@@ -16,7 +16,8 @@ public class FollowingCamera : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		transform.position = new Vector3 (target.transform.position.x, (target.transform.position.y + 2), transform.position.z);
+        if(target)
+		    transform.position = new Vector3 (target.transform.position.x, (target.transform.position.y + 2), transform.position.z);
 	}
 	
 	// LateUpdate is called once per frame

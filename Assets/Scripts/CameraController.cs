@@ -18,6 +18,8 @@ public class CameraController : MonoBehaviour {
 	private Vector3 _minimapPoint;
 	public float MinimapWidth;
 
+    bool startdone = false;
+
 	[Space(5)]
 	[Header("Flags")]
 	public bool activateFlags = true;
@@ -32,9 +34,17 @@ public class CameraController : MonoBehaviour {
 		_followingMode = Camera.main.GetComponent<FollowingCamera> ();
 		_mapMode = Camera.main.GetComponent<MovementCamera> ();
 
-		_followingMode.target = _controller.activePlayer;
+        //_followingMode.target = _controller.activePlayer;
+        Invoke("SetPlayerTargetFirstTime", 0.75f); //Intencio: conseguir la camara fen un travelling del fondo al nivell jugable abans de comensar
+
 		_minimapPoint = GameObject.FindGameObjectWithTag("Minimap Point").GetComponent<Transform>().position;
 	}
+
+    void SetPlayerTargetFirstTime()
+    {
+        _followingMode.target = _controller.activePlayer;
+        startdone = true;
+    }
 
 	// Use this for initialization
 	void Start () {
@@ -81,7 +91,8 @@ public class CameraController : MonoBehaviour {
 	// Update is called once per frame
 	private void Update () {
         // Update target
-        _followingMode.target = _controller.activePlayer; //TODO: Desde el controler, al canvi de torn es pot canviar el active player del following camera; evitem accedir a cada frame
+        if(startdone)
+            _followingMode.target = _controller.activePlayer; //TODO: Desde el controler, al canvi de torn es pot canviar el active player del following camera; evitem accedir a cada frame
 
 		// Pressing Tab Key makes lock/unlock character
 		if (Input.GetKeyDown(KeyCode.Tab))

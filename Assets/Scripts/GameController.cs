@@ -288,7 +288,7 @@ public class GameController : MonoBehaviour {
     }
 		
     void OnDeath(int playerId) {
-        bool isCurrentPlayer = activePlayer.GetComponent<PlayerController>().playerId == playerId;
+        bool isCurrentPlayer = activePlayer.GetComponent<PlayerController>().playerId == playerId; //ALERT: Si moren els dos alhora peta aqui
         // Debug.Log("suicide! " + isCurrentPlayer);
 
         // Delete from players dead player

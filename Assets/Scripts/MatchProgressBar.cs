@@ -124,44 +124,48 @@ public class MatchProgressBar : MonoBehaviour
         if (team1Health >= team1MaxHealth * 0.8f)
         {
             t1Back.color = Color.green;
-            team1BarPart.color = Color.green; 
+            t1Back.color = Color.green; 
         }
         else if (team1Health < team1MaxHealth * 0.8f && team1Health >= team1MaxHealth * 0.5f)
         {
             t1Back.color = Color.yellow;
-            team1BarPart.color = Color.yellow;
+            t1Back.color = Color.yellow;
         }
         else if (team1Health < team1MaxHealth * 0.5f && team1Health >= team1MaxHealth * 0.3f)
         {
             t1Back.color = Color.red;
-            team1BarPart.color = Color.red;
+            t1Back.color = Color.red;
         }
         else if(team1Health < team1MaxHealth * 0.3f)
         {
             t1Back.color = Color.magenta;
-            team1BarPart.color = Color.magenta;
+            t1Back.color = Color.magenta;
         }
 
         //for team2
         if (team2Health >= team2MaxHealth * 0.8f)
         {
             t2Back.color = Color.green;
-            team2BarPart.color = Color.green;
+            t2Back.color = Color.green;
         }
         else if (team2Health < team2MaxHealth * 0.8f && team2Health >= team2MaxHealth * 0.5f)
         {
             t2Back.color = Color.yellow;
-            team2BarPart.color = Color.yellow;
+            t2Back.color = Color.yellow;
         }
         else if (team2Health < team2MaxHealth * 0.5f && team2Health >= team2MaxHealth * 0.3f)
         {
             t2Back.color = Color.red;
-            team2BarPart.color = Color.red;
+            t2Back.color = Color.red;
         }
         else if(team2Health < team2MaxHealth * 0.3f)
         {
             t2Back.color = Color.magenta;
-            team2BarPart.color = Color.magenta;
+            t2Back.color = Color.magenta;
         }
+
+        //setting alpha value, opaque not wanted 
+        t1Back.color = new Color(t1Back.color.r, t1Back.color.g, t1Back.color.b, 0.65f);
+        t2Back.color = new Color(t2Back.color.r, t2Back.color.g, t2Back.color.b, 0.65f);
     }
 }
