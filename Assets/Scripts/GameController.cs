@@ -301,7 +301,7 @@ public class GameController : MonoBehaviour {
         if (players.Count < 2) {
             Debug.Log("Game has ended!");
 
-            current = gameStates.gameOver;
+            current = gameStates.gameOver; //important
 
             // activar pantalla GameOver
 			completeLevelUI.SetActive(true);
@@ -351,50 +351,57 @@ public class GameController : MonoBehaviour {
     }
 	
     public void changeTurn() {
-        current = gameStates.gameOn;
-        
-        disableActivePlayer();
-        
-		// point to the next player
-		turnId = (turnId + 1) % players.Count;
-		// FIXME @rafa: this dummy assignment will lead weird bugs
-		// TODO: pass to next plater with a better way
+        if (current != gameStates.gameOver)
+        {
+            current = gameStates.gameOn;
 
-        // Game continues
-        if (players.Count > 1) {
-            // Sudden death
-			if (!suddenDeath) {
-				if (turnCount >= turnsTillSudden) {
-					SuddenDeath();
-					suddenDeath = true;
-				}
-				turnCount += 1;
-			}
+            disableActivePlayer();
 
-            activePlayer = players[turnId];
-            //Debug.Log("Now active player is: " + activePlayer);
-            // enable movement
-            activePlayer.GetComponent<PlayerMovement>().enabled = true;
-            // enable firing shoots
-            activePlayer.GetComponent<PlayerShooting>().enabled = true;
+            // point to the next player
+            turnId = (turnId + 1) % players.Count;
+            // FIXME @rafa: this dummy assignment will lead weird bugs
+            // TODO: pass to next plater with a better way
 
-			// enable flag
-			if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null) {
-				activePlayer.GetComponentInChildren<FlagMainPlayer>().EnableMain(true);
-			}
+            // Game continues
+            if (players.Count > 1)
+            {
+                // Sudden death
+                if (!suddenDeath)
+                {
+                    if (turnCount >= turnsTillSudden)
+                    {
+                        SuddenDeath();
+                        suddenDeath = true;
+                    }
+                    turnCount += 1;
+                }
 
-            // this turn expires in 10 seconds
-            turnRemainingTime = turnTime;
+                activePlayer = players[turnId];
+                //Debug.Log("Now active player is: " + activePlayer);
+                // enable movement
+                activePlayer.GetComponent<PlayerMovement>().enabled = true;
+                // enable firing shoots
+                activePlayer.GetComponent<PlayerShooting>().enabled = true;
 
-            GetComponent<WindController>().ChangeWindRandom();
+                // enable flag
+                if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null)
+                {
+                    activePlayer.GetComponentInChildren<FlagMainPlayer>().EnableMain(true);
+                }
 
-            //GetComponent<MatchProgressBar>().GetTeamHPs(); //recalculate HPs on change turn (probably not needed here)
+                // this turn expires in 10 seconds
+                turnRemainingTime = turnTime;
+
+                GetComponent<WindController>().ChangeWindRandom();
+
+                //GetComponent<MatchProgressBar>().GetTeamHPs(); //recalculate HPs on change turn (probably not needed here)
+            }
+
+            int team = activePlayer.GetComponent<PlayerController>().TEAM;
+            GetComponent<InitUsages>().SetPanel(team);
+            GetComponent<InitUsages>().SetBowUsages(team, _teamGunUses[team - 1][4]);
+            GetComponent<InitUsages>().SetGrenadeUsages(team, _teamGunUses[team - 1][3]);
         }
-
-		int team = activePlayer.GetComponent<PlayerController> ().TEAM;
-		GetComponent<InitUsages> ().SetPanel(team);
-		GetComponent<InitUsages> ().SetBowUsages(team, _teamGunUses [team-1] [4]);
-		GetComponent<InitUsages> ().SetGrenadeUsages(team, _teamGunUses [team-1] [3]);
 	}
 	
 	// Update is called once per frame

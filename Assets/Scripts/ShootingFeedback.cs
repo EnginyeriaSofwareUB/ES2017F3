@@ -36,7 +36,7 @@ public class ShootingFeedback : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (control.activePlayer.Equals(this.gameObject)) //Si som el actiu..
+        if (control.activePlayer.Equals(this.gameObject) && control.current != GameController.gameStates.gameOver) //Si som el actiu y no es gameover..
         {
             UI_bar.gameObject.SetActive(true);
             //UI_bar_slider.gameObject.SetActive(true);

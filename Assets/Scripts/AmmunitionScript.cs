@@ -24,6 +24,7 @@ public class AmmunitionScript : MonoBehaviour {
 		if (col.gameObject.tag == "Player") {			
 			Destroy (this.gameObject);
 			int team = col.GetComponent<PlayerController>().TEAM;
+            Debug.Log(GM);
 			if (Random.value > 0.5) {				
 				GM.GetComponent<GameController> ().addUsages (team, BOW, 1);
 			} else {
