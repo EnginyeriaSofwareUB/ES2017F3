@@ -335,6 +335,7 @@ public class GameController : MonoBehaviour {
             activePlayer.GetComponent<PlayerMovement>().Idle();
             activePlayer.GetComponent<PlayerMovement>().enabled = false;
             activePlayer.GetComponent<PlayerShooting>().enabled = false;
+	        activePlayer.GetComponent<PlayerController>().enableOutline(false);
 
 
 			// disable flag
@@ -382,6 +383,8 @@ public class GameController : MonoBehaviour {
                 activePlayer.GetComponent<PlayerMovement>().enabled = true;
                 // enable firing shoots
                 activePlayer.GetComponent<PlayerShooting>().enabled = true;
+	            // enable outline
+	            activePlayer.GetComponent<PlayerController>().enableOutline(true);
 
                 // enable flag
                 if (activePlayer.GetComponentInChildren<FlagMainPlayer>() != null)

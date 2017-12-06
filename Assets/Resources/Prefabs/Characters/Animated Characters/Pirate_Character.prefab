@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4191498059546010}
   - component: {fileID: 137766782177017648}
   - component: {fileID: 64231590399130212}
+  - component: {fileID: 114253747978720764}
   m_Layer: 0
   m_Name: Head_001
   m_TagString: Untagged
@@ -78,6 +79,7 @@ GameObject:
   - component: {fileID: 4711323135596924}
   - component: {fileID: 137482315675110338}
   - component: {fileID: 64651995532680930}
+  - component: {fileID: 114423765596323620}
   m_Layer: 0
   m_Name: Torso_001
   m_TagString: Untagged
@@ -141,6 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4459392675208606}
   - component: {fileID: 137939729910321828}
+  - component: {fileID: 114772495348013458}
   m_Layer: 0
   m_Name: Pupul_left_005
   m_TagString: Untagged
@@ -172,6 +175,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4359818028616778}
   - component: {fileID: 137336934177873388}
+  - component: {fileID: 114599094259929482}
   m_Layer: 0
   m_Name: Mouth_001
   m_TagString: Untagged
@@ -220,6 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4340320254054614}
   - component: {fileID: 137277927079811256}
+  - component: {fileID: 114840242743796922}
   m_Layer: 0
   m_Name: Hand_Left_001
   m_TagString: Untagged
@@ -236,6 +241,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4075331037935394}
   - component: {fileID: 137703110032114852}
+  - component: {fileID: 114619523397169422}
   m_Layer: 0
   m_Name: Hand_right_001
   m_TagString: Untagged
@@ -394,6 +400,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4501204574570036}
   - component: {fileID: 137057935948890596}
+  - component: {fileID: 114667046221036636}
   m_Layer: 0
   m_Name: Eye_left_005
   m_TagString: Untagged
@@ -425,6 +432,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4933390569054452}
   - component: {fileID: 137700745117264066}
+  - component: {fileID: 114775495082003458}
   m_Layer: 0
   m_Name: Circle_002
   m_TagString: Untagged
@@ -475,6 +483,7 @@ GameObject:
   - component: {fileID: 4668678444001022}
   - component: {fileID: 137535284719611140}
   - component: {fileID: 64512066965903804}
+  - component: {fileID: 114617695613193718}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -520,7 +529,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1150633669930894}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 5.4921603, y: -4.9804735, z: -0.9527941}
+  m_LocalPosition: {x: 9.752896, y: -1.9394497, z: -0.86928654}
   m_LocalScale: {x: 0.2457784, y: 0.2457784, z: 0.2457784}
   m_Children:
   - {fileID: 4244214946502488}
@@ -1045,6 +1054,21 @@ MonoBehaviour:
   - {r: 0.99264705, g: 0.67773837, b: 0, a: 0.584}
   - {r: 1, g: 0.40872207, b: 0.19117647, a: 0.757}
   - {r: 1, g: 0.062069, b: 0, a: 0.578}
+--- !u!114 &114253747978720764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1016260314266490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114371731267130644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1056,6 +1080,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 654891bbfc6b5cc439f69af6bdca4c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114423765596323620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1153266364379660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114550078298934520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1156,6 +1195,36 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114599094259929482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1294733032758910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
+--- !u!114 &114617695613193718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1989186945281412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114618905386750798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1189,6 +1258,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: '%'
+--- !u!114 &114619523397169422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1493892871454264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114629927742427376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1216,6 +1300,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114667046221036636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1802648646205312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114738504392925860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1238,6 +1337,36 @@ MonoBehaviour:
   steps: {fileID: 8300000, guid: 857ace406c3a96c489e53d452034447a, type: 3}
   canon: {fileID: 8300000, guid: 2feb52f89626647e68d422b40882c546, type: 3}
   bow: {fileID: 8300000, guid: b9e584c4afc04cf41bd2558e0016c64d, type: 3}
+--- !u!114 &114772495348013458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1261147080126044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
+--- !u!114 &114775495082003458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923444723385220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114795943627159958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1267,6 +1396,21 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: IntUnityEvent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+--- !u!114 &114840242743796922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1485532768655892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 1
+  originalLayer: 0
+  originalMaterials: []
 --- !u!114 &114994645704242044
 MonoBehaviour:
   m_ObjectHideFlags: 1

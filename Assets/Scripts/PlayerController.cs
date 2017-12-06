@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Outline = cakeslice.Outline;
 
 public class PlayerController : MonoBehaviour {
     GameController gameControl;
@@ -43,6 +44,8 @@ public class PlayerController : MonoBehaviour {
     //Components
     Animator animator;
 
+    private Outline[] _outlines;
+
     private void Awake()
     {
         gameControl = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
@@ -54,6 +57,8 @@ public class PlayerController : MonoBehaviour {
         InitPlayerCanvas();
 
         currentState = PlayerState.none;
+        _outlines = GetComponentsInChildren<Outline>();
+        
     }
 
 
@@ -199,7 +204,13 @@ public class PlayerController : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
-
+    public void enableOutline(bool boolean)
+    {
+        foreach (var outline in _outlines)
+        {
+            outline.eraseRenderer = !boolean;
+        }
+    }
 
 
     private void OnDrawGizmos()
