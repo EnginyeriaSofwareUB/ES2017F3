@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour {
 	public bool isGrounded;
 	public bool backJump = false;
     private const float m_JumpPower = 5f; // The force added to the ball when it jumps.
-	private const float m_BackJumpPower = 1.5f;
+	private const float m_BackJumpPower = 6f;
 	private bool facingRight = false;
     private Animator anim;
 
@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour {
    
     void BackJump() {
 		//The addforce that makes the Player jump slightly higher.
-		rb.AddForce(Vector3.up * m_BackJumpPower * m_JumpPower, ForceMode.Impulse);
+		rb.AddForce(Vector3.up * m_BackJumpPower, ForceMode.Impulse);
 
 		//Jump Done
 		backJump = false;
