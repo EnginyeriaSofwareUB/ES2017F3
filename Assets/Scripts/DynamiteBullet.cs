@@ -37,6 +37,8 @@ public class DynamiteBullet : ExplosiveBullet {
         TriggerSound();
 
         anim.SetTrigger("explode");
+
+        Invoke("EndShoot", 1.5f);
     }
 
     public void TriggerSound()
@@ -56,4 +58,9 @@ public class DynamiteBullet : ExplosiveBullet {
          //1.5 is the explosive animation lenght
     }
 
+    void EndShoot()
+    {
+        //tell controler that we finished attacking
+        GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().shoot_ongoing = false;
+    }
 }

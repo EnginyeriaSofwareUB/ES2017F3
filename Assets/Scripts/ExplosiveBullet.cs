@@ -60,6 +60,8 @@ public class ExplosiveBullet : AbstractBullet
 		}
 
 
+        //tell controler that we finished attacking
+        GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().shoot_ongoing = false;
 
     }
 

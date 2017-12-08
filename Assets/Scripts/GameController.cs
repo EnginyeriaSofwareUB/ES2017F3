@@ -22,6 +22,9 @@ public class GameController : MonoBehaviour {
 	public GameObject pauseScreenUI;
 	public GameObject handS, lightSS, canonS, tntS, granadeS, arrowS;
 
+    [Space(5)]
+    public bool shoot_ongoing = false;
+
 	public gameStates current = gameStates.none;
     [Header("Canvas Objects")]
     public Text turnTimerText;
@@ -240,6 +243,7 @@ public class GameController : MonoBehaviour {
         turnRemainingTime = afterShootTime;	
 		updateUsages ();
 
+        shoot_ongoing = true;
     }
 
 	public void updateUsages(){
