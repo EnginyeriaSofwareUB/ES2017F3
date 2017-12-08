@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 
 	public enum gameStates {
 		menu,
+        startAnim,
 		gameOn,
 		pause,
 		gameOver,
@@ -24,6 +25,7 @@ public class GameController : MonoBehaviour {
 	public gameStates current = gameStates.none;
     [Header("Canvas Objects")]
     public Text turnTimerText;
+    public GameObject[] UI; //for activating/deactivating UI purposes
 
     [Header("Player/Prefab Variables")]
 	public GameObject activePlayer = null;
@@ -72,15 +74,22 @@ public class GameController : MonoBehaviour {
         //TODO: Set the activePlayer to the Main Player.
         //activePlayer = GameObject.Find(testPlayerName);	
 
-		//TODO: LOAD DATA FROM GamePreferences INTO MATCH USING InitGame()
-		Debug.Log("TEAM_1 FACTION:::"+ GamePreferences.p1_faction);
+        //Spawn players
+        InitGame();
+
+        //Start camera animation
+        Camera.main.GetComponent<Animator>().SetTrigger("start");
+        current = gameStates.startAnim;
+        SetUIActive(false);
+
+        //TODO: LOAD DATA FROM GamePreferences INTO MATCH USING InitGame()
+        Debug.Log("TEAM_1 FACTION:::"+ GamePreferences.p1_faction);
 		Debug.Log("TEAM_2 FACTION:::"+ GamePreferences.p2_faction);
 		Debug.Log("PLAYERS MAX_LIFE:::"+ GamePreferences.players_maxlife);
 		Debug.Log("SUDDEN_DEATH ACTIVATED:::"+ GamePreferences.sudden_death_activated);
 		Debug.Log("SUDDEN_DEATH TURNS:::"+ GamePreferences.sudden_death_turns);
 
-		//Spawn players
-        InitGame();
+		
 		// Create remaining gun uses
 		_teamGunUses = new int[2][];
 		for (int i = 0; i < 2; i++) {
@@ -113,9 +122,9 @@ public class GameController : MonoBehaviour {
 
         }
 
-        turnId = -1;
-		changeTurn();
-	}
+        //turnId = -1;
+        //changeTurn(); //moved to StartGame()
+    }
 
     void InitGame() {
 		//Getting Match Data from the Menu
@@ -129,7 +138,7 @@ public class GameController : MonoBehaviour {
 		//	testPlayerPrefab = testPlayerPrefabs.ToList () [0];
 		//}
 
-        Debug.Log("Init game; Spawning " + nPlayersPerTeam + " per team.");
+        Debug.Log(" >>> Init game; Spawning " + nPlayersPerTeam + " per team.");
         //team1
         for (int i = 0; i < nPlayersPerTeam; i++) {
 
@@ -143,7 +152,7 @@ public class GameController : MonoBehaviour {
                 case "vikings":
                     PlayerPrefab = vikingPlayer;
                     break;
-                case "knight":
+                case "knights":
                     PlayerPrefab = knightPlayer;
                     break;
             }
@@ -209,6 +218,21 @@ public class GameController : MonoBehaviour {
             p2.name = "Player_T2_" + spawned2.ToString();
         }
     }
+
+
+    //this function will be called when the start camera animation ends
+    public void StartGame()
+    {
+        Debug.Log("GAME BEGIN");
+        Camera.main.GetComponent<CameraController>().SetPlayerTargetFirstTime();
+        Destroy(Camera.main.GetComponent<Animator>());
+
+        SetUIActive(true);
+        current = gameStates.gameOn;
+        turnId = -1;
+        changeTurn();
+    }
+
 
     void OnShoot() {
 		// disable shooting
@@ -409,13 +433,19 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(activePlayer)
-		    activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
 
-		turnRemainingTime -= Time.deltaTime;
-		if(turnRemainingTime < 0) {
-			changeTurn();
-		}
+        if(current == gameStates.gameOn)
+        {
+            if (activePlayer)
+                activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
+
+            turnRemainingTime -= Time.deltaTime;
+            if (turnRemainingTime < 0)
+            {
+                changeTurn();
+            }
+        }
+        
 
 		if (Input.GetKey (KeyCode.Escape)) {
 			if (current.Equals("pause")) {
@@ -460,4 +490,12 @@ public class GameController : MonoBehaviour {
 			Time.timeScale = 1;
 		}
 	}
+
+    public void SetUIActive(bool active)
+    {
+        foreach(GameObject e in UI)
+        {
+            e.SetActive(active);
+        }
+    }
 }

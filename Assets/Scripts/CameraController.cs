@@ -35,12 +35,12 @@ public class CameraController : MonoBehaviour {
 		_mapMode = Camera.main.GetComponent<MovementCamera> ();
 
         //_followingMode.target = _controller.activePlayer;
-        Invoke("SetPlayerTargetFirstTime", 0.75f); //Intencio: conseguir la camara fen un travelling del fondo al nivell jugable abans de comensar
+        //Invoke("SetPlayerTargetFirstTime", 0.75f); //Intencio: conseguir la camara fen un travelling del fondo al nivell jugable abans de comensar
 
 		_minimapPoint = GameObject.FindGameObjectWithTag("Minimap Point").GetComponent<Transform>().position;
 	}
 
-    void SetPlayerTargetFirstTime()
+    public void SetPlayerTargetFirstTime()
     {
         _followingMode.target = _controller.activePlayer;
         startdone = true;
@@ -88,6 +88,11 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 	
+    public void EndCameraStartAnimation()
+    {
+        _controller.StartGame();
+    }
+
 	// Update is called once per frame
 	private void Update () {
         // Update target
