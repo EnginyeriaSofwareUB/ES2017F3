@@ -32,6 +32,9 @@ public class MatchProgressBar : MonoBehaviour
     public Transform t2Icon;
     public SpriteRenderer t1Back;
     public SpriteRenderer t2Back;
+    [Space(5)]
+    public Transform back1_backup;
+    public Transform back2_backup;
 
     [Space(5)]
 
@@ -76,6 +79,15 @@ public class MatchProgressBar : MonoBehaviour
         //GetTeamHPs();
 
         Invoke("GetTeamHPs", 0.3f); //to avoid some bug related with this script being fastest than game controller
+    }
+
+    public void SetBackIconsDefaultPosition()
+    {
+        t1Back.transform.position = back1_backup.transform.position;
+        t1Back.transform.localScale = back1_backup.transform.localScale;
+
+        t2Back.transform.position = back2_backup.transform.position;
+        t2Back.transform.localScale = back2_backup.transform.localScale;
     }
 
     // Update is called once per frame

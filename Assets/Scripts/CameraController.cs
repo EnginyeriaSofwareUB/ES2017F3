@@ -26,9 +26,9 @@ public class CameraController : MonoBehaviour {
 	public GameObject flagTeam1;
 	public GameObject flagTeam2;
 	private List<GameObject> flags;
+    
 
-
-	private void Awake () {
+    private void Awake () {
 		// Acceso al Controlador, Camara y guardamos la referencia al objeto Jugador.
 		_controller = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
 		_followingMode = Camera.main.GetComponent<FollowingCamera> ();
@@ -172,4 +172,10 @@ public class CameraController : MonoBehaviour {
 			-MinimapWidth, MinimapWidth, -MinimapWidth / aspectRatio, MinimapWidth / aspectRatio,
 			Camera.main.nearClipPlane, Camera.main.farClipPlane);
 	}
+
+
+    public void CancelStartAnimation()
+    {
+
+    }
 }

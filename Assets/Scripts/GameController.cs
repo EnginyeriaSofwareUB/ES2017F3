@@ -24,6 +24,8 @@ public class GameController : MonoBehaviour {
 
     [Space(5)]
     public bool shoot_ongoing = false;
+    bool shoot_dynamite = false;
+    bool startAnimCancelled = false;
 
 	public gameStates current = gameStates.none;
     [Header("Canvas Objects")]
@@ -226,7 +228,7 @@ public class GameController : MonoBehaviour {
     //this function will be called when the start camera animation ends
     public void StartGame()
     {
-        Debug.Log("GAME BEGIN");
+        //Debug.Log("GAME BEGIN");
         Camera.main.GetComponent<CameraController>().SetPlayerTargetFirstTime();
         Destroy(Camera.main.GetComponent<Animator>());
 
@@ -240,8 +242,12 @@ public class GameController : MonoBehaviour {
     void OnShoot() {
 		// disable shooting
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
-        turnRemainingTime = afterShootTime;	
-		updateUsages ();
+        if(shoot_dynamite)
+            turnRemainingTime = afterShootTime + 2f;	 //2f is da explosion animation lenght
+        else
+            turnRemainingTime = afterShootTime;
+
+        updateUsages ();
 
         shoot_ongoing = true;
     }
@@ -270,7 +276,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (false);
 			granadeS.SetActive (false);
 			arrowS.SetActive (false);
-			break;
+            shoot_dynamite = false;
+            break;
 		case 0://light sable active
 			handS.SetActive(false);
 			lightSS.SetActive (true);
@@ -278,7 +285,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (false);
 			granadeS.SetActive (false);
 			arrowS.SetActive (false);
-			break;
+            shoot_dynamite = false;
+            break;
 		case 1://canon active
 			handS.SetActive(false);
 			lightSS.SetActive (false);
@@ -286,7 +294,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (false);
 			granadeS.SetActive (false);
 			arrowS.SetActive (false);
-			break;
+            shoot_dynamite = false;
+            break;
 		case 2://tnt active
 			handS.SetActive(false);
 			lightSS.SetActive (false);
@@ -294,7 +303,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (true);
 			granadeS.SetActive (false);
 			arrowS.SetActive (false);
-			break;
+            shoot_dynamite = true;
+            break;
 		case 3://granade active
 			handS.SetActive(false);
 			lightSS.SetActive (false);
@@ -302,7 +312,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (false);
 			granadeS.SetActive (true);
 			arrowS.SetActive (false);
-			break;
+            shoot_dynamite = true;
+            break;
 		case 4://arrow active
 			handS.SetActive(false);
 			lightSS.SetActive (false);
@@ -310,7 +321,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (false);
 			granadeS.SetActive (false);
 			arrowS.SetActive (true);
-			break;
+            shoot_dynamite = false;
+            break;
 		}
 		
     }
@@ -437,6 +449,19 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if(current == gameStates.startAnim)
+        {
+            if (Input.GetKeyUp(KeyCode.Space) && !startAnimCancelled)
+            {
+                StartGame();
+                startAnimCancelled = true;
+                Camera.main.GetComponent<Animator>().enabled = false; //stop travelling animation
+
+                GetComponent<MatchProgressBar>().SetBackIconsDefaultPosition();
+            }
+        }
+
 
         if(current == gameStates.gameOn)
         {
