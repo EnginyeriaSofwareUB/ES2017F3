@@ -35,7 +35,7 @@ public class Botones : MonoBehaviour {
 				} else if (f.name.Contains("Pirates")) {
 					GamePreferences.p1_faction = "pirates";
 				} else if (f.name.Contains("Knights")){
-					GamePreferences.p1_faction = "knights";
+					GamePreferences.p1_faction = "knight";
 				}
 			}
 
@@ -45,7 +45,7 @@ public class Botones : MonoBehaviour {
 				} else if (f.name.Contains("Pirates")) {
 					GamePreferences.p2_faction = "pirates";
 				} else if (f.name.Contains("Knights")){
-					GamePreferences.p2_faction = "knights";
+					GamePreferences.p2_faction = "knight";
 				}
 			}
 		}

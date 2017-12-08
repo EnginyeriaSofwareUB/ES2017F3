@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour {
     [Header("Single play Clips")] //
 
     public AudioClip[] fallToWater;
+	public AudioClip suddenDeath;
 
     [Header("Weather related Clips")]
     public AudioClip calm; //CALM
@@ -48,10 +49,19 @@ public class AudioManager : MonoBehaviour {
         PlayQuickClip(fallToWater[Random.Range(0,fallToWater.Length)]);
     }
 
-    public void PlayQuickClip(AudioClip clip)
+	public void SuddenDeath() {
+		PlayQuickClip(suddenDeath, 2.5f);
+	}
+
+	public void PlayQuickClip(AudioClip clip, float vol)
     {
-        source.PlayOneShot(clip);
+        source.PlayOneShot(clip, vol);
     }
+
+	public void PlayQuickClip(AudioClip clip)
+	{
+		source.PlayOneShot(clip);
+	}
 
     public void SetAmbientSound(AudioClip au, float volume)
     {
@@ -78,6 +88,5 @@ public class AudioManager : MonoBehaviour {
         source.volume = 0.8f;
         source.Play();
     }
-
 
 }
