@@ -26,6 +26,8 @@ public class GameController : MonoBehaviour {
     [Header("Canvas Objects")]
     public Text turnTimerText;
     public GameObject[] UI; //for activating/deactivating UI purposes
+    public GameObject UI_shoot_bar; //for players to retrieve it from here, no more findbytag, so we can deactivate this gameobjecte safefully
+    public GameObject UI_shoot_text;
 
     [Header("Player/Prefab Variables")]
 	public GameObject activePlayer = null;
@@ -74,10 +76,7 @@ public class GameController : MonoBehaviour {
         //TODO: Set the activePlayer to the Main Player.
         //activePlayer = GameObject.Find(testPlayerName);	
 
-        //Spawn players
-        InitGame();
-
-        //Start camera animation
+        //Start camera animation, deactivate UI
         Camera.main.GetComponent<Animator>().SetTrigger("start");
         current = gameStates.startAnim;
         SetUIActive(false);
@@ -89,7 +88,8 @@ public class GameController : MonoBehaviour {
 		Debug.Log("SUDDEN_DEATH ACTIVATED:::"+ GamePreferences.sudden_death_activated);
 		Debug.Log("SUDDEN_DEATH TURNS:::"+ GamePreferences.sudden_death_turns);
 
-		
+		//Spawn players
+        InitGame();
 		// Create remaining gun uses
 		_teamGunUses = new int[2][];
 		for (int i = 0; i < 2; i++) {
