@@ -474,9 +474,14 @@ public class GameController : MonoBehaviour {
                 changeTurn();
             }
         }
-        
 
-		if (Input.GetKey (KeyCode.Escape)) {
+
+        if (current == gameStates.gameOver)
+            turnRemainingTime = 0;
+
+
+
+        if (Input.GetKey (KeyCode.Escape)) {
 			if (current.Equals("pause")) {
 				pauseScreenUI.SetActive(false);
 				current = gameStates.gameOn;

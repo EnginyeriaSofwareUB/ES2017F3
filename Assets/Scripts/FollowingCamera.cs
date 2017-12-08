@@ -44,6 +44,21 @@ public class FollowingCamera : MonoBehaviour {
 			} else {
 				transform.position = new Vector3(target.transform.position.x, target.transform.position.y + height, target.transform.position.z - offset);
 			}
+
+            Vector3 eulerRot;
+            if(target.GetComponent<PlayerController>().TEAM == 1)
+            {
+                eulerRot = new Vector3(15f, 15f, 2.5f);
+                offsetX = -1f;
+            }
+            else
+            {
+                eulerRot = new Vector3(15f, -15f, 2.5f);
+                offsetX = 1f;
+            }
+
+            this.transform.rotation = Quaternion.Euler(eulerRot);
+
 		}
 
         if(control.shoot_ongoing && bullet_target)
