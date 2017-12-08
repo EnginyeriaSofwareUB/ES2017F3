@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ca42377ec38123b4ba3df8ac101b6943
-timeCreated: 1487992276
+guid: 973b2165233ebe14597a66004e78730d
+timeCreated: 1512763939
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,11 +9,10 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: ColaborateLight
+  fontName: Waters Gothic Deux
   fontNames:
-  - ColaborateLight
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 75e9f78f3f43947499e996000c1b2c82, type: 3}
+  - Waters Gothic Deux
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
