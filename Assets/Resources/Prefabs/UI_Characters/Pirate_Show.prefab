@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4340178002815022}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Character_Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4141434209150234}
   - component: {fileID: 137141919681847102}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pupul_left_005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 4176677170591914}
   - component: {fileID: 137673959913331324}
   - component: {fileID: 64802881629438368}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,13 +67,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4342614565729764}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Armature_Viking
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1255467200077274
 GameObject:
   m_ObjectHideFlags: 0
@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 4146952308740400}
   - component: {fileID: 54446840407508302}
   - component: {fileID: 136586329241249576}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Pirate_Show
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4814676414960802}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Torso
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4718624369314066}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Character_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 4233901099242190}
   - component: {fileID: 137469569727042234}
   - component: {fileID: 64438082609074866}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Head_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4343348031141600}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4122860080729608}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Arm_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 4067218821792796}
   - component: {fileID: 95677259088243990}
   - component: {fileID: 114907888161561258}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Animator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4969942310467294}
   - component: {fileID: 137341258819657218}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Eye_left_005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -209,7 +209,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4444318319943270}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Arm_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4523111895495648}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4469780425886516}
   - component: {fileID: 137857552796316920}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Hand_Left_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4014370621417014}
   - component: {fileID: 137171593930481076}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Mouth_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4678094095195414}
   - component: {fileID: 137072464414896220}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Hand_right_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4022748659619404}
   - component: {fileID: 137948471040665982}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Circle_002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4975769360965288}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Model_Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 4146232231989712}
   - component: {fileID: 137892941777681152}
   - component: {fileID: 64114937339647804}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Torso_001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1255467200077274}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 624.8152, y: 362.98904, z: -473.77728}
+  m_LocalPosition: {x: 28.436, y: -4.11, z: -2.76}
   m_LocalScale: {x: 0.10064391, y: 0.10064391, z: 0.10064391}
   m_Children:
   - {fileID: 4067218821792796}
@@ -712,7 +712,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1871564878526800}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -761,7 +761,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1156981063374722}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -809,7 +809,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1846579285769534}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -857,7 +857,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1742948876107348}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -905,7 +905,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1432545112143582}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -954,7 +954,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1182239168533458}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1002,7 +1002,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1838643981305610}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1050,7 +1050,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1989997313863234}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1099,7 +1099,7 @@ SkinnedMeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1937111269780808}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1

@@ -19,6 +19,8 @@ public class CameraController : MonoBehaviour {
 	public float MinimapWidth;
 
     bool startdone = false;
+    bool enddone = false;
+    public Transform loserPosition;
 
 	[Space(5)]
 	[Header("Flags")]
@@ -93,14 +95,32 @@ public class CameraController : MonoBehaviour {
         _controller.StartGame();
     }
 
-	// Update is called once per frame
-	private void Update () {
+    public void EndCameraEndAnimation()
+    {
+        GetComponent<Animator>().enabled = false;
+    }
+
+    // Update is called once per frame
+    private void Update () {
         // Update target
-        if(startdone)
+        if(startdone && !enddone)
             _followingMode.target = _controller.activePlayer; //TODO: Desde el controler, al canvi de torn es pot canviar el active player del following camera; evitem accedir a cada frame
 
-		// Pressing Tab Key makes lock/unlock character
-		if (Input.GetKeyDown(KeyCode.Tab))
+        if (_controller.current.Equals(GameController.gameStates.gameOver) && !enddone) //si es gameover i no sa fet la animacio final, es fa
+        {
+            GetComponent<Animator>().enabled = true;
+            GetComponent<Animator>().SetTrigger("end");
+
+            _controller.SetLoserOnAnimation(loserPosition);
+
+            enddone = true;
+        }
+
+        if (enddone)
+            _followingMode.target = null;
+
+        // Pressing Tab Key makes lock/unlock character
+        if (Input.GetKeyDown(KeyCode.Tab))
 		{
 			StopCoroutine(_transitionCoroutine);
 			if (_mapMode.enabled)

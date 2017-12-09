@@ -20,7 +20,8 @@ public class GameController : MonoBehaviour {
 
 	public GameObject completeLevelUI; //elemento para poder poner gameOver image
 	public GameObject pauseScreenUI;
-	public GameObject handS, lightSS, canonS, tntS, granadeS, arrowS;
+    public GameObject skipStartAnimationMsg;
+    public GameObject handS, lightSS, canonS, tntS, granadeS, arrowS;
 
     [Space(5)]
     public bool shoot_ongoing = false;
@@ -225,13 +226,16 @@ public class GameController : MonoBehaviour {
     }
 
 
-    //this function will be called when the start camera animation ends
+    //this function will be called when the start camera animation ends or is skipped
     public void StartGame()
     {
         //Debug.Log("GAME BEGIN");
         Camera.main.GetComponent<CameraController>().SetPlayerTargetFirstTime();
-        Destroy(Camera.main.GetComponent<Animator>());
+        //Destroy(Camera.main.GetComponent<Animator>());
+        Camera.main.GetComponent<Animator>().SetTrigger("skipstart");
+        Camera.main.GetComponent<Animator>().enabled = false;
 
+        skipStartAnimationMsg.SetActive(false);
         SetUIActive(true);
         current = gameStates.gameOn;
         turnId = -1;
@@ -531,5 +535,50 @@ public class GameController : MonoBehaviour {
         {
             e.SetActive(active);
         }
+    }
+
+    public void SetLoserOnAnimation(Transform pos)
+    {
+        MatchProgressBar m = GetComponent<MatchProgressBar>(); //sorry i put it there, lazy to change it
+        GameObject L = new GameObject();
+
+        //NOTE!! For the moment ill assume the winner team is the team of the last player alive
+        if(players[0].GetComponent<PlayerController>().TEAM == 1) //si ha guanyat team 1, el loser sera del team2
+        {
+            switch (GamePreferences.p2_faction)
+            {
+                case "pirates":
+                    L = Instantiate(m.pirate, pos);
+                    break;
+                case "vikings":
+                    L = Instantiate(m.viking, pos);
+                    break;
+                case "knight":
+                    L = Instantiate(m.knight, pos);
+                    break;
+            }
+        }
+        else
+        {
+            switch (GamePreferences.p1_faction)
+            {
+                case "pirates":
+                    L = Instantiate(m.pirate, pos);
+                    break;
+                case "vikings":
+                    L = Instantiate(m.viking, pos);
+                    break;
+                case "knight":
+                    L = Instantiate(m.knight, pos);
+                    break;
+            }
+        }
+
+        L.transform.position = pos.position;
+        L.transform.rotation = pos.rotation;
+        L.transform.localScale = pos.localScale;
+
+
+
     }
 }
