@@ -144,7 +144,7 @@ public class GameController : MonoBehaviour {
                 case "vikings":
                     PlayerPrefab = vikingPlayer;
                     break;
-                case "knight":
+                case "knights":
                     PlayerPrefab = knightPlayer;
                     break;
             }
@@ -186,7 +186,7 @@ public class GameController : MonoBehaviour {
                 case "vikings":
                     PlayerPrefab = vikingPlayer;
                     break;
-                case "knight":
+                case "knights":
                     PlayerPrefab = knightPlayer;
                     break;
             }

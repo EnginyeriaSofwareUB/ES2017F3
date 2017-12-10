@@ -83,6 +83,7 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayGameOverSound()
     {
+		source.pitch = 1.0f;
         source.clip = gameOver;
         source.loop = false;
         source.volume = 0.8f;
