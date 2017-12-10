@@ -116,8 +116,8 @@ public class CameraController : MonoBehaviour {
             enddone = true;
         }
 
-        if (enddone)
-            _followingMode.target = null;
+        if (enddone) //On game over, the camera may focus on the winner 
+            _followingMode.target = null; // _controller.players[0]; //NOTE: This may bring problems if the players are treated different in the future, for now we take the last player alive
 
         // Pressing Tab Key makes lock/unlock character
         if (Input.GetKeyDown(KeyCode.Tab))
