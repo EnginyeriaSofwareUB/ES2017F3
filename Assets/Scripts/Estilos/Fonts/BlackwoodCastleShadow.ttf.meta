@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: aaa5217b0bbadef499337279fd5ad114
-timeCreated: 1463803500
+guid: 98803bac5a7d7a746a3adda5cfe2c345
+timeCreated: 1512763782
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,11 +9,10 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Franchise Free
+  fontName: Blackwood Castle Shadow
   fontNames:
-  - Franchise Free
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 06ca7cf82da35e443871f04d706fb942, type: 3}
+  - Blackwood Castle Shadow
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

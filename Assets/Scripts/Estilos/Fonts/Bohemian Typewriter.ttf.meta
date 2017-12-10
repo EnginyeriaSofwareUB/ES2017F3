@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8843c2fccf8c3964c8a3301af82d2554
-timeCreated: 1510073297
+guid: cb61da841e7582d478093ae5e90765fc
+timeCreated: 1512767214
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,11 +9,10 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Cloister Black
+  fontName: Bohemian typewriter
   fontNames:
-  - Cloister Black
-  fallbackFontReferences:
-  - {fileID: 12800000, guid: 64d65f12cd2f48d49ad18df11be8a1e2, type: 3}
+  - Bohemian typewriter
+  fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
