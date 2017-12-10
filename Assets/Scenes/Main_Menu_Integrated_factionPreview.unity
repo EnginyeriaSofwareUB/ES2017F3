@@ -3252,7 +3252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &382271657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12649,8 +12649,6 @@ MonoBehaviour:
   playersTeam: {fileID: 205955367}
   f1_place: {fileID: 934677606}
   f2_place: {fileID: 354797774}
-  lastf1: 
-  lastf2: 
 --- !u!1 &1197177599
 GameObject:
   m_ObjectHideFlags: 0
@@ -19346,7 +19344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1700018703
 MonoBehaviour:
   m_ObjectHideFlags: 0
