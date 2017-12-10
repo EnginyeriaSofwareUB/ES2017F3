@@ -59,7 +59,7 @@ public class MatchProgressBar : MonoBehaviour
             case "vikings":
                 Instantiate(viking, t1Icon.position, t1Icon.transform.rotation, t1Icon);
                 break;
-            case "knight":
+            case "knights":
                 Instantiate(knight, t1Icon.position, t1Icon.transform.rotation, t1Icon);
                 break;
         }
@@ -71,7 +71,7 @@ public class MatchProgressBar : MonoBehaviour
             case "vikings":
                 Instantiate(viking, t2Icon.position, t2Icon.transform.rotation, t2Icon);
                 break;
-            case "knight":
+            case "knights":
                 Instantiate(knight, t2Icon.position, t2Icon.transform.rotation, t2Icon);
                 break;
         }
