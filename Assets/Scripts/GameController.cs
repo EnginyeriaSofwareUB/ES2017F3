@@ -229,7 +229,7 @@ public class GameController : MonoBehaviour {
     //this function will be called when the start camera animation ends or is skipped
     public void StartGame()
     {
-        //Debug.Log("GAME BEGIN");
+        Debug.Log("GAME BEGIN");
         Camera.main.GetComponent<CameraController>().SetPlayerTargetFirstTime();
         //Destroy(Camera.main.GetComponent<Animator>());
         Camera.main.GetComponent<Animator>().SetTrigger("skipstart");
