@@ -11,6 +11,9 @@ public class ImpactBullet : AbstractBullet
 
     protected override void DespawnBullet()
     {
+        //tell controler that we finished attacking
+        GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().shoot_ongoing = false;
+
         Destroy(gameObject);
     }
 }

@@ -19,6 +19,8 @@ public class CameraController : MonoBehaviour {
 	public float MinimapWidth;
 
     bool startdone = false;
+    bool enddone = false;
+    public Transform loserPosition;
 
 	[Space(5)]
 	[Header("Flags")]
@@ -26,21 +28,21 @@ public class CameraController : MonoBehaviour {
 	public GameObject flagTeam1;
 	public GameObject flagTeam2;
 	private List<GameObject> flags;
+    
 
-
-	private void Awake () {
+    private void Awake () {
 		// Acceso al Controlador, Camara y guardamos la referencia al objeto Jugador.
 		_controller = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
 		_followingMode = Camera.main.GetComponent<FollowingCamera> ();
 		_mapMode = Camera.main.GetComponent<MovementCamera> ();
 
         //_followingMode.target = _controller.activePlayer;
-        Invoke("SetPlayerTargetFirstTime", 0.75f); //Intencio: conseguir la camara fen un travelling del fondo al nivell jugable abans de comensar
+        //Invoke("SetPlayerTargetFirstTime", 0.75f); //Intencio: conseguir la camara fen un travelling del fondo al nivell jugable abans de comensar
 
 		_minimapPoint = GameObject.FindGameObjectWithTag("Minimap Point").GetComponent<Transform>().position;
 	}
 
-    void SetPlayerTargetFirstTime()
+    public void SetPlayerTargetFirstTime()
     {
         _followingMode.target = _controller.activePlayer;
         startdone = true;
@@ -88,14 +90,37 @@ public class CameraController : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	private void Update () {
+    public void EndCameraStartAnimation()
+    {
+        _controller.StartGame();
+    }
+
+    public void EndCameraEndAnimation()
+    {
+        GetComponent<Animator>().enabled = false;
+    }
+
+    // Update is called once per frame
+    private void Update () {
         // Update target
-        if(startdone)
+        if(startdone && !enddone)
             _followingMode.target = _controller.activePlayer; //TODO: Desde el controler, al canvi de torn es pot canviar el active player del following camera; evitem accedir a cada frame
 
-		// Pressing Tab Key makes lock/unlock character
-		if (Input.GetKeyDown(KeyCode.Tab))
+        if (_controller.current.Equals(GameController.gameStates.gameOver) && !enddone) //si es gameover i no sa fet la animacio final, es fa
+        {
+            GetComponent<Animator>().enabled = true;
+            GetComponent<Animator>().SetTrigger("end");
+
+            _controller.SetLoserOnAnimation(loserPosition);
+
+            enddone = true;
+        }
+
+        if (enddone) //On game over, the camera may focus on the winner 
+            _followingMode.target = null; // _controller.players[0]; //NOTE: This may bring problems if the players are treated different in the future, for now we take the last player alive
+
+        // Pressing Tab Key makes lock/unlock character
+        if (Input.GetKeyDown(KeyCode.Tab))
 		{
 			StopCoroutine(_transitionCoroutine);
 			if (_mapMode.enabled)
@@ -167,4 +192,10 @@ public class CameraController : MonoBehaviour {
 			-MinimapWidth, MinimapWidth, -MinimapWidth / aspectRatio, MinimapWidth / aspectRatio,
 			Camera.main.nearClipPlane, Camera.main.farClipPlane);
 	}
+
+
+    public void CancelStartAnimation()
+    {
+
+    }
 }

@@ -9,9 +9,14 @@ public class AmmunitionScript : MonoBehaviour {
 	private int BOW = 4;
 	private int GRENADE = 3;
 
-	// Use this for initialization
-	void Start () {
-		GM = GameObject.FindGameObjectWithTag ("GM");
+    private void Awake()
+    {
+        GM = GameObject.FindGameObjectWithTag("GM");
+    }
+
+    // Use this for initialization
+    void Start () {
+		
 	}
 	
 	// Update is called once per frame

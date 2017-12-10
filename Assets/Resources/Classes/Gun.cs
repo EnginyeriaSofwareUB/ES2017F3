@@ -65,6 +65,7 @@ public class Gun : MonoBehaviour
             projectedPosition,
             Quaternion.Euler(0, 0, 0));
 
+        Camera.main.GetComponent<FollowingCamera>().bullet_target = bullet;
         // Add force to the bullet (vector = bulletPos - gunPos)
         bullet.GetComponent<Rigidbody>().AddForce(shootingVector.normalized * thrust, ForceMode.Impulse);
 

@@ -32,6 +32,9 @@ public class MatchProgressBar : MonoBehaviour
     public Transform t2Icon;
     public SpriteRenderer t1Back;
     public SpriteRenderer t2Back;
+    [Space(5)]
+    public Transform back1_backup;
+    public Transform back2_backup;
 
     [Space(5)]
 
@@ -56,7 +59,7 @@ public class MatchProgressBar : MonoBehaviour
             case "vikings":
                 Instantiate(viking, t1Icon.position, t1Icon.transform.rotation, t1Icon);
                 break;
-            case "knight":
+            case "knights":
                 Instantiate(knight, t1Icon.position, t1Icon.transform.rotation, t1Icon);
                 break;
         }
@@ -68,7 +71,7 @@ public class MatchProgressBar : MonoBehaviour
             case "vikings":
                 Instantiate(viking, t2Icon.position, t2Icon.transform.rotation, t2Icon);
                 break;
-            case "knight":
+            case "knights":
                 Instantiate(knight, t2Icon.position, t2Icon.transform.rotation, t2Icon);
                 break;
         }
@@ -76,6 +79,15 @@ public class MatchProgressBar : MonoBehaviour
         //GetTeamHPs();
 
         Invoke("GetTeamHPs", 0.3f); //to avoid some bug related with this script being fastest than game controller
+    }
+
+    public void SetBackIconsDefaultPosition()
+    {
+        t1Back.transform.position = back1_backup.transform.position;
+        t1Back.transform.localScale = back1_backup.transform.localScale;
+
+        t2Back.transform.position = back2_backup.transform.position;
+        t2Back.transform.localScale = back2_backup.transform.localScale;
     }
 
     // Update is called once per frame
@@ -165,7 +177,7 @@ public class MatchProgressBar : MonoBehaviour
         }
 
         //setting alpha value, opaque not wanted 
-        t1Back.color = new Color(t1Back.color.r, t1Back.color.g, t1Back.color.b, 0.65f);
-        t2Back.color = new Color(t2Back.color.r, t2Back.color.g, t2Back.color.b, 0.65f);
+        t1Back.color = new Color(t1Back.color.r, t1Back.color.g, t1Back.color.b, 0.55f);
+        t2Back.color = new Color(t2Back.color.r, t2Back.color.g, t2Back.color.b, 0.55f);
     }
 }

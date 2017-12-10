@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 
 	public enum gameStates {
 		menu,
+        startAnim,
 		gameOn,
 		pause,
 		gameOver,
@@ -19,11 +20,20 @@ public class GameController : MonoBehaviour {
 
 	public GameObject completeLevelUI; //elemento para poder poner gameOver image
 	public GameObject pauseScreenUI;
-	public GameObject handS, lightSS, canonS, tntS, granadeS, arrowS;
+    public GameObject skipStartAnimationMsg;
+    public GameObject handS, lightSS, canonS, tntS, granadeS, arrowS;
+
+    [Space(5)]
+    public bool shoot_ongoing = false;
+    bool shoot_dynamite = false;
+    bool startAnimCancelled = false;
 
 	public gameStates current = gameStates.none;
     [Header("Canvas Objects")]
     public Text turnTimerText;
+    public GameObject[] UI; //for activating/deactivating UI purposes
+    public GameObject UI_shoot_bar; //for players to retrieve it from here, no more findbytag, so we can deactivate this gameobjecte safefully
+    public GameObject UI_shoot_text;
 
     [Header("Player/Prefab Variables")]
 	public GameObject activePlayer = null;
@@ -73,8 +83,13 @@ public class GameController : MonoBehaviour {
         //TODO: Set the activePlayer to the Main Player.
         //activePlayer = GameObject.Find(testPlayerName);	
 
-		//TODO: LOAD DATA FROM GamePreferences INTO MATCH USING InitGame()
-		Debug.Log("TEAM_1 FACTION:::"+ GamePreferences.p1_faction);
+        //Start camera animation, deactivate UI
+        Camera.main.GetComponent<Animator>().SetTrigger("start");
+        current = gameStates.startAnim;
+        SetUIActive(false);
+
+        //TODO: LOAD DATA FROM GamePreferences INTO MATCH USING InitGame()
+        Debug.Log("TEAM_1 FACTION:::"+ GamePreferences.p1_faction);
 		Debug.Log("TEAM_2 FACTION:::"+ GamePreferences.p2_faction);
 		Debug.Log("PLAYERS MAX_LIFE:::"+ GamePreferences.players_maxlife);
 		Debug.Log("SUDDEN_DEATH ACTIVATED:::"+ GamePreferences.sudden_death_activated);
@@ -114,9 +129,9 @@ public class GameController : MonoBehaviour {
 
         }
 
-        turnId = -1;
-		changeTurn();
-	}
+        //turnId = -1;
+        //changeTurn(); //moved to StartGame()
+    }
 
     void InitGame() {
 		//Getting Match Data from the Menu
@@ -130,7 +145,7 @@ public class GameController : MonoBehaviour {
 		//	testPlayerPrefab = testPlayerPrefabs.ToList () [0];
 		//}
 
-        Debug.Log("Init game; Spawning " + nPlayersPerTeam + " per team.");
+        Debug.Log(" >>> Init game; Spawning " + nPlayersPerTeam + " per team.");
         //team1
         for (int i = 0; i < nPlayersPerTeam; i++) {
 
@@ -211,12 +226,35 @@ public class GameController : MonoBehaviour {
         }
     }
 
+
+    //this function will be called when the start camera animation ends or is skipped
+    public void StartGame()
+    {
+        Debug.Log("GAME BEGIN");
+        Camera.main.GetComponent<CameraController>().SetPlayerTargetFirstTime();
+        //Destroy(Camera.main.GetComponent<Animator>());
+        Camera.main.GetComponent<Animator>().SetTrigger("skipstart");
+        Camera.main.GetComponent<Animator>().enabled = false;
+
+        skipStartAnimationMsg.SetActive(false);
+        SetUIActive(true);
+        current = gameStates.gameOn;
+        turnId = -1;
+        changeTurn();
+    }
+
+
     void OnShoot() {
 		// disable shooting
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
-        turnRemainingTime = afterShootTime;	
-		updateUsages ();
+        if(shoot_dynamite)
+            turnRemainingTime = afterShootTime + 2f;	 //2f is da explosion animation lenght
+        else
+            turnRemainingTime = afterShootTime;
 
+        updateUsages ();
+
+        shoot_ongoing = true;
     }
 
 	public void updateUsages(){
@@ -243,7 +281,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (false);
 			granadeS.SetActive (false);
 			arrowS.SetActive (false);
-			break;
+            shoot_dynamite = false;
+            break;
 		case 0://light sable active
 			handS.SetActive(false);
 			lightSS.SetActive (true);
@@ -251,7 +290,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (false);
 			granadeS.SetActive (false);
 			arrowS.SetActive (false);
-			break;
+            shoot_dynamite = false;
+            break;
 		case 1://canon active
 			handS.SetActive(false);
 			lightSS.SetActive (false);
@@ -259,7 +299,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (false);
 			granadeS.SetActive (false);
 			arrowS.SetActive (false);
-			break;
+            shoot_dynamite = false;
+            break;
 		case 2://tnt active
 			handS.SetActive(false);
 			lightSS.SetActive (false);
@@ -267,7 +308,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (true);
 			granadeS.SetActive (false);
 			arrowS.SetActive (false);
-			break;
+            shoot_dynamite = true;
+            break;
 		case 3://granade active
 			handS.SetActive(false);
 			lightSS.SetActive (false);
@@ -275,7 +317,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (false);
 			granadeS.SetActive (true);
 			arrowS.SetActive (false);
-			break;
+            shoot_dynamite = true;
+            break;
 		case 4://arrow active
 			handS.SetActive(false);
 			lightSS.SetActive (false);
@@ -283,7 +326,8 @@ public class GameController : MonoBehaviour {
 			tntS.SetActive (false);
 			granadeS.SetActive (false);
 			arrowS.SetActive (true);
-			break;
+            shoot_dynamite = false;
+            break;
 		}
 		
     }
@@ -412,15 +456,39 @@ public class GameController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(activePlayer)
-		    activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
 
-		turnRemainingTime -= Time.deltaTime;
-		if(turnRemainingTime < 0) {
-			changeTurn();
-		}
+        if(current == gameStates.startAnim)
+        {
+            if (Input.GetKeyUp(KeyCode.Space) && !startAnimCancelled)
+            {
+                StartGame();
+                startAnimCancelled = true;
+                Camera.main.GetComponent<Animator>().enabled = false; //stop travelling animation
 
-		if (Input.GetKey (KeyCode.Escape)) {
+                GetComponent<MatchProgressBar>().SetBackIconsDefaultPosition();
+            }
+        }
+
+
+        if(current == gameStates.gameOn)
+        {
+            if (activePlayer)
+                activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
+
+            turnRemainingTime -= Time.deltaTime;
+            if (turnRemainingTime < 0)
+            {
+                changeTurn();
+            }
+        }
+
+
+        if (current == gameStates.gameOver)
+            turnRemainingTime = 0;
+
+
+
+        if (Input.GetKey (KeyCode.Escape)) {
 			if (current.Equals("pause")) {
 				pauseScreenUI.SetActive(false);
 				current = gameStates.gameOn;
@@ -464,4 +532,57 @@ public class GameController : MonoBehaviour {
 			Time.timeScale = 1;
 		}
 	}
+
+    public void SetUIActive(bool active)
+    {
+        foreach(GameObject e in UI)
+        {
+            e.SetActive(active);
+        }
+    }
+
+    public void SetLoserOnAnimation(Transform pos)
+    {
+        MatchProgressBar m = GetComponent<MatchProgressBar>(); //sorry i put it there, lazy to change it
+        GameObject L = new GameObject();
+
+        //NOTE!! For the moment ill assume the winner team is the team of the last player alive
+        if(players[0].GetComponent<PlayerController>().TEAM == 1) //si ha guanyat team 1, el loser sera del team2
+        {
+            switch (GamePreferences.p2_faction)
+            {
+                case "pirates":
+                    L = Instantiate(m.pirate, pos);
+                    break;
+                case "vikings":
+                    L = Instantiate(m.viking, pos);
+                    break;
+                case "knight":
+                    L = Instantiate(m.knight, pos);
+                    break;
+            }
+        }
+        else
+        {
+            switch (GamePreferences.p1_faction)
+            {
+                case "pirates":
+                    L = Instantiate(m.pirate, pos);
+                    break;
+                case "vikings":
+                    L = Instantiate(m.viking, pos);
+                    break;
+                case "knight":
+                    L = Instantiate(m.knight, pos);
+                    break;
+            }
+        }
+
+        L.transform.position = pos.position;
+        L.transform.rotation = pos.rotation;
+        L.transform.localScale = pos.localScale;
+
+
+
+    }
 }
