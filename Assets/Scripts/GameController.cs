@@ -68,6 +68,7 @@ public class GameController : MonoBehaviour {
 
 	// Sudden Death (Reduces HP of all plyers to 1)
 	public int turnsTillSudden = 10;
+	public bool suddenDeathActivated;
 	private bool suddenDeath = false;
 	private int turnCount;
 
@@ -135,7 +136,7 @@ public class GameController : MonoBehaviour {
     void InitGame() {
 		//Getting Match Data from the Menu
 		nPlayersPerTeam = GamePreferences.number_players_team;
-		suddenDeath = GamePreferences.sudden_death_activated;
+		suddenDeathActivated = GamePreferences.sudden_death_activated;
 		turnsTillSudden = GamePreferences.sudden_death_turns;
         //testPlayerPrefab = testPlayerPrefabs.ToList()[0];
 
@@ -410,16 +411,18 @@ public class GameController : MonoBehaviour {
             // Game continues
             if (players.Count > 1)
             {
-                // Sudden death
-                if (!suddenDeath)
-                {
-                    if (turnCount >= turnsTillSudden)
-                    {
-                        SuddenDeath();
-                        suddenDeath = true;
-                    }
-                    turnCount += 1;
-                }
+				if (suddenDeathActivated) {
+					// Sudden death
+					if (!suddenDeath)
+					{
+						if (turnCount >= turnsTillSudden)
+						{
+							SuddenDeath();
+							suddenDeath = true;
+						}
+						turnCount += 1;
+					}
+				}
 
                 activePlayer = players[turnId];
                 //Debug.Log("Now active player is: " + activePlayer);
@@ -508,6 +511,7 @@ public class GameController : MonoBehaviour {
 
 	void SuddenDeath() {
 		Debug.Log("Sudden Death ON ::: All players at 1HP");
+		this.GetComponent<ShowSuddenDeath>().SuddenDeath();
 		foreach (GameObject player in players) {
 			player.GetComponent<PlayerController> ().Damage ((player.GetComponent<PlayerController> ().health - 1));
 		}
