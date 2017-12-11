@@ -343,7 +343,9 @@ public class GameController : MonoBehaviour {
         if (isCurrentPlayer) changeTurn();
 
         // Game over
-        if (players.Count < 2) {
+        bool isTeam1Alive = players.Any(player => player.GetComponent<PlayerController>().playerId % 2 == 1);
+        bool isTeam2Alive = players.Any(player => player.GetComponent<PlayerController>().playerId % 2 == 0);
+        if (!isTeam1Alive || !isTeam2Alive) {
             Debug.Log("Game has ended!");
 
             current = gameStates.gameOver; //important
@@ -405,8 +407,6 @@ public class GameController : MonoBehaviour {
 
             // point to the next player
             turnId = (turnId + 1) % players.Count;
-            // FIXME @rafa: this dummy assignment will lead weird bugs
-            // TODO: pass to next plater with a better way
 
             // Game continues
             if (players.Count > 1)
