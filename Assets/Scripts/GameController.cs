@@ -58,7 +58,8 @@ public class GameController : MonoBehaviour {
 
     [Header("Turns")]
 	// points to the current active playe in the players index
-	public int turnId;
+	public int turnTeam1;
+	public int turnTeam2;
     // in seconds
     public float turnTime = 10.0f;
     public float delayTime = 5f;
@@ -239,7 +240,8 @@ public class GameController : MonoBehaviour {
         skipStartAnimationMsg.SetActive(false);
         SetUIActive(true);
         current = gameStates.gameOn;
-        turnId = -1;
+        turnTeam1 = -1;
+        turnTeam2 = -1;
         changeTurn();
     }
 
@@ -338,13 +340,12 @@ public class GameController : MonoBehaviour {
 
         // Delete from players dead player
         players.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
-
-        // suicide
-        if (isCurrentPlayer) changeTurn();
+        team1.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
+        team2.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
 
         // Game over
-        bool isTeam1Alive = players.Any(player => player.GetComponent<PlayerController>().playerId % 2 == 1);
-        bool isTeam2Alive = players.Any(player => player.GetComponent<PlayerController>().playerId % 2 == 0);
+        bool isTeam1Alive = team1.Count > 0;
+        bool isTeam2Alive = team2.Count > 0;
         if (!isTeam1Alive || !isTeam2Alive) {
             Debug.Log("Game has ended!");
 
@@ -357,6 +358,9 @@ public class GameController : MonoBehaviour {
 
             //Return to main menu
             //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
+        } else {
+            // suicide
+            if (isCurrentPlayer) changeTurn();
         }
     }
 
@@ -406,7 +410,17 @@ public class GameController : MonoBehaviour {
             disableActivePlayer();
 
             // point to the next player
-            turnId = (turnId + 1) % players.Count;
+            int prevTeam = activePlayer.GetComponent<PlayerController>().playerId % 2;
+            if (prevTeam == 0) {
+                // next team 1
+                turnTeam1 = (turnTeam1 + 1) % team1.Count;
+                activePlayer = team1[turnTeam1];
+            } else {
+                // next team 2
+                turnTeam2 = (turnTeam2 + 1) % team2.Count;
+                activePlayer = team2[turnTeam2];
+            }
+            
 
             // Game continues
             if (players.Count > 1)
@@ -424,7 +438,6 @@ public class GameController : MonoBehaviour {
 					}
 				}
 
-                activePlayer = players[turnId];
                 //Debug.Log("Now active player is: " + activePlayer);
                 // enable movement
                 activePlayer.GetComponent<PlayerMovement>().enabled = true;
