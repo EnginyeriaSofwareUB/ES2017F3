@@ -183,7 +183,7 @@ public class GameController : MonoBehaviour {
 
             p1.name = "Player_T1_" + spawned1.ToString();
 
-            activePlayer = p1; //activem el player ultim del team 1 com a target 
+            
         }
 
 		// For now it only checks for VIKING or NON VIKING players
@@ -225,6 +225,8 @@ public class GameController : MonoBehaviour {
             spawned2++;
 
             p2.name = "Player_T2_" + spawned2.ToString();
+
+            activePlayer = p2; //activem el last player afegit, dakesta manera a changeTurn() es triara el primer torn el player 1 del team 1
         }
     }
 
@@ -409,18 +411,24 @@ public class GameController : MonoBehaviour {
         {
             current = gameStates.gameOn;
 
+            shoot_ongoing = false;
+
             disableActivePlayer();
 
+            print("-active p: " + activePlayer);
             // point to the next player
             int prevTeam = activePlayer.GetComponent<PlayerController>().playerId % 2;
+            print("PREV TEAM: " + prevTeam);
             if (prevTeam == 0) {
                 // next team 1
                 turnTeam1 = (turnTeam1 + 1) % team1.Count;
                 activePlayer = team1[turnTeam1];
+                print(turnTeam1 + " " + activePlayer);
             } else {
                 // next team 2
                 turnTeam2 = (turnTeam2 + 1) % team2.Count;
                 activePlayer = team2[turnTeam2];
+                print(turnTeam2 + " " + activePlayer);
             }
             
 
