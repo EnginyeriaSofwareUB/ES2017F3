@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour {
     bool startAnimCancelled = false;
 
 	public gameStates current = gameStates.none;
+    public int winner = 0;
     [Header("Canvas Objects")]
     public Text turnTimerText;
     public GameObject[] UI; //for activating/deactivating UI purposes
@@ -350,6 +351,7 @@ public class GameController : MonoBehaviour {
             Debug.Log("Game has ended!");
 
             current = gameStates.gameOver; //important
+            winner = isTeam1Alive ? 1 : 2;
 
             // activar pantalla GameOver
 			completeLevelUI.SetActive(true);
@@ -554,48 +556,26 @@ public class GameController : MonoBehaviour {
         }
     }
 
-    public void SetLoserOnAnimation(Transform pos)
-    {
+    public void SetLoserOnAnimation(Transform pos) {
         MatchProgressBar m = GetComponent<MatchProgressBar>(); //sorry i put it there, lazy to change it
         GameObject L = new GameObject();
 
-        //NOTE!! For the moment ill assume the winner team is the team of the last player alive
-        if(players[0].GetComponent<PlayerController>().TEAM == 1) //si ha guanyat team 1, el loser sera del team2
-        {
-            switch (GamePreferences.p2_faction)
-            {
-                case "pirates":
-                    L = Instantiate(m.pirate, pos);
-                    break;
-                case "vikings":
-                    L = Instantiate(m.viking, pos);
-                    break;
-                case "knight":
-                    L = Instantiate(m.knight, pos);
-                    break;
-            }
-        }
-        else
-        {
-            switch (GamePreferences.p1_faction)
-            {
-                case "pirates":
-                    L = Instantiate(m.pirate, pos);
-                    break;
-                case "vikings":
-                    L = Instantiate(m.viking, pos);
-                    break;
-                case "knight":
-                    L = Instantiate(m.knight, pos);
-                    break;
-            }
+        //si ha guanyat team 1, el loser sera del team2
+        string loserFaction = (winner == 1) ? GamePreferences.p2_faction : GamePreferences.p1_faction;
+        switch (loserFaction) {
+            case "pirates":
+                L = Instantiate(m.pirate, pos);
+                break;
+            case "vikings":
+                L = Instantiate(m.viking, pos);
+                break;
+            case "knight":
+                L = Instantiate(m.knight, pos);
+                break;
         }
 
         L.transform.position = pos.position;
         L.transform.rotation = pos.rotation;
         L.transform.localScale = pos.localScale;
-
-
-
     }
 }
