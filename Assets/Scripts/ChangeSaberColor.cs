@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ChangeSaberColor : MonoBehaviour {
 
+    public Light saberLight;
     public Material[] lightsaberColors;
     public Renderer r;
 
@@ -16,15 +17,37 @@ public class ChangeSaberColor : MonoBehaviour {
     public AudioClip loop;
     public AudioClip[] attacks;
 
-    private void Start()
+    private void Awake()
     {
-        
+        saberLight = GetComponentInChildren<Light>();
     }
 
     private void OnEnable()
     {
+        //color order: red, blue, green, purple, yellow
+
         int rand = Random.Range(0, lightsaberColors.Length);
         r.material = lightsaberColors[rand];
+
+        //set light color
+        switch (rand)
+        {
+            case 0:
+                saberLight.color = Color.red;
+                break;
+            case 1:
+                saberLight.color = Color.blue;
+                break;
+            case 2:
+                saberLight.color = Color.green;
+                break;
+            case 3:
+                saberLight.color = Color.magenta;
+                break;
+            case 4:
+                saberLight.color = Color.yellow;
+                break;
+        }
 
         source = GetComponent<AudioSource>();
         source.PlayOneShot(on);
