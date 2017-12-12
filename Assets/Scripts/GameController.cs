@@ -35,6 +35,7 @@ public class GameController : MonoBehaviour {
     public GameObject[] UI; //for activating/deactivating UI purposes
     public GameObject UI_shoot_bar; //for players to retrieve it from here, no more findbytag, so we can deactivate this gameobjecte safefully
     public GameObject UI_shoot_text;
+    public Text UI_winnerplayer;
 
     [Header("Player/Prefab Variables")]
 	public GameObject activePlayer = null;
@@ -358,6 +359,9 @@ public class GameController : MonoBehaviour {
             // activar pantalla GameOver
 			completeLevelUI.SetActive(true);
 
+            //set player who wins
+            UI_winnerplayer.text = "Player " + winner;
+
             GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().PlayGameOverSound();
 
             //Return to main menu
@@ -512,7 +516,7 @@ public class GameController : MonoBehaviour {
 
 
         if (Input.GetKey (KeyCode.Escape)) {
-			if (current.Equals("pause")) {
+			if (current == gameStates.pause) {
 				pauseScreenUI.SetActive(false);
 				current = gameStates.gameOn;
 				Time.timeScale = 1;

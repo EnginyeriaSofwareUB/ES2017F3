@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Botones : MonoBehaviour
 {
+    public bool IS_MENU = false;
 
     public GameObject factions;
     public GameObject suddenBool;
@@ -30,12 +31,17 @@ public class Botones : MonoBehaviour
         vikingUI = Resources.Load("Prefabs/UI_Characters/Viking_Show") as GameObject;
         pirateUI = Resources.Load("Prefabs/UI_Characters/Pirate_Show") as GameObject;
         knightUI = Resources.Load("Prefabs/UI_Characters/Knight_Show") as GameObject;
-        FirstSelected();
+
+        IS_MENU = SceneManager.GetActiveScene().name.ToLower().Contains("menu"); //check if is menu scene by name
+
+        if(IS_MENU)
+            FirstSelected();
     }
 
     public void LoadScene()
     {
-        GetGamePreferences();
+        if (IS_MENU)
+            GetGamePreferences();
         SceneManager.LoadScene("Test_Game", LoadSceneMode.Single);
     }
 

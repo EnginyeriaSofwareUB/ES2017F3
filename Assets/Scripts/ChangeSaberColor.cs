@@ -17,6 +17,8 @@ public class ChangeSaberColor : MonoBehaviour {
     public AudioClip loop;
     public AudioClip[] attacks;
 
+    bool firstdisable = true; //to avoid bug of lightsaber off sound on start match
+
     private void Awake()
     {
         saberLight = GetComponentInChildren<Light>();
@@ -65,7 +67,11 @@ public class ChangeSaberColor : MonoBehaviour {
 
     private void OnDisable()
     {
-        GetComponentInParent<PlayerController>().GetComponent<AudioSource>().PlayOneShot(off);
+        if (!firstdisable)
+        {
+            GetComponentInParent<PlayerController>().GetComponent<AudioSource>().PlayOneShot(off);
+            firstdisable = false;
+        }
         //source.PlayOneShot(off);
     }
 
