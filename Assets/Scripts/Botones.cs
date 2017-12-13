@@ -101,10 +101,11 @@ public class Botones : MonoBehaviour
 
         GetFactionPreferences();
 
+        //changed input for text fields as no longer needed to edit it by the player, just use arrows
         GamePreferences.sudden_death_activated = suddenBool.GetComponent<Toggle>().isOn;
-        GamePreferences.sudden_death_turns = int.Parse(suddenTurns.GetComponent<InputField>().text);
-        GamePreferences.players_maxlife = int.Parse(maxLife.GetComponent<InputField>().text);
-        int nplayers = int.Parse(playersTeam.GetComponent<InputField>().text);
+        GamePreferences.sudden_death_turns = int.Parse(suddenTurns.GetComponent<Text>().text);
+        GamePreferences.players_maxlife = int.Parse(maxLife.GetComponent<Text>().text);
+        int nplayers = int.Parse(playersTeam.GetComponent<Text>().text);
         if (nplayers <= 4)
         {
             GamePreferences.number_players_team = nplayers;

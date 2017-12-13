@@ -36,7 +36,7 @@ public class MenuArrowSelector : MonoBehaviour {
     public void ChangeNPlayers(int value)
     {
         int newval = (int.Parse(nPlayers.text) + value);
-        if(newval <= 6 && newval > 0)
+        if(newval <= 4 && newval > 0)
         {
             nPlayers.text = newval.ToString();
         }
@@ -44,8 +44,7 @@ public class MenuArrowSelector : MonoBehaviour {
 
     public void ChangeHealth(int value)
     {
-        int newval = (int.Parse(damageMult.text) + value);
-
+        int newval = (int.Parse(health.text) + value);
         if (newval > 0)
             health.text = (int.Parse(health.text) + value).ToString();
     }

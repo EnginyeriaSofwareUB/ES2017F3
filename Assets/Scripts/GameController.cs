@@ -419,20 +419,16 @@ public class GameController : MonoBehaviour {
 
             disableActivePlayer();
 
-            print("-active p: " + activePlayer);
             // point to the next player
             int prevTeam = activePlayer.GetComponent<PlayerController>().playerId % 2;
-            print("PREV TEAM: " + prevTeam);
             if (prevTeam == 0) {
                 // next team 1
                 turnTeam1 = (turnTeam1 + 1) % team1.Count;
                 activePlayer = team1[turnTeam1];
-                print(turnTeam1 + " " + activePlayer);
             } else {
                 // next team 2
                 turnTeam2 = (turnTeam2 + 1) % team2.Count;
                 activePlayer = team2[turnTeam2];
-                print(turnTeam2 + " " + activePlayer);
             }
             
 
