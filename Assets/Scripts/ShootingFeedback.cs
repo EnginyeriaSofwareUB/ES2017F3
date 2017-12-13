@@ -7,28 +7,41 @@ public class ShootingFeedback : MonoBehaviour {
     GameController control;
     public Image UI_bar;
     public Text UI_text;
+    //public Slider UI_bar_slider;
+
     [Space(5)]
-    public float barVelocity = 2f;
+    public float barVelocity = 1.75f;
     public float time = 0f;
     float maxShootTime;
 
     public Color[] bar_colors;
 
+
+    float thrust;
+    float maxPower;
+
 	// Use this for initialization
 	void Start () {
         control = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
         maxShootTime = GetComponent<PlayerShooting>().maxPowerSeconds;
-        UI_bar = GameObject.FindGameObjectWithTag("ShootUI_bar").GetComponent<Image>();
-        UI_text = GameObject.FindGameObjectWithTag("ShootUI_text").GetComponent<Text>();
+        maxPower = GetComponent<PlayerShooting>().maxPower;
+
+        UI_bar = control.UI_shoot_bar.GetComponent<Image>();
+        UI_text = control.UI_shoot_text.GetComponent<Text>();
+
+        //UI_bar = GameObject.FindGameObjectWithTag("ShootUI_bar").GetComponent<Image>();
+        //UI_text = GameObject.FindGameObjectWithTag("ShootUI_text").GetComponent<Text>();
 
         UI_bar.rectTransform.sizeDelta = new Vector2(1f, UI_bar.rectTransform.sizeDelta.y);
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (control.activePlayer.Equals(this.gameObject)) //Si som el actiu..
+        if (control.activePlayer.Equals(this.gameObject) && control.current != GameController.gameStates.gameOver) //Si som el actiu y no es gameover..
         {
             UI_bar.gameObject.SetActive(true);
+
+            thrust = GetComponent<PlayerShooting>().thrust;
 
             //Quan es clica
             if (Input.GetKeyDown(KeyCode.Mouse0))

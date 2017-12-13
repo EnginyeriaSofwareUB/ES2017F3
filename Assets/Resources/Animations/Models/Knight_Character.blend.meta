@@ -1,0 +1,159 @@
+fileFormatVersion: 2
+guid: 65aa1c84fa3b875409076182bb20a4a6
+timeCreated: 1512217818
+licenseType: Free
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Arm_Left
+    100002: Arm_Right
+    100004: Armature_Knight
+    100006: Eye_left_002
+    100008: Eye_Right_001
+    100010: Hand_Left_002
+    100012: Hand_right_002
+    100014: Head
+    100016: Head_002
+    100018: Icosphere
+    100020: //RootNode
+    100022: Pupil_right_001
+    100024: Pupul_left_002
+    100026: Sphere_001
+    100028: Torso
+    100030: Torso_002
+    400000: Arm_Left
+    400002: Arm_Right
+    400004: Armature_Knight
+    400006: Eye_left_002
+    400008: Eye_Right_001
+    400010: Hand_Left_002
+    400012: Hand_right_002
+    400014: Head
+    400016: Head_002
+    400018: Icosphere
+    400020: //RootNode
+    400022: Pupil_right_001
+    400024: Pupul_left_002
+    400026: Sphere_001
+    400028: Torso
+    400030: Torso_002
+    4300000: Icosphere
+    4300002: Head_002
+    4300004: Sphere_001
+    4300006: Eye_left_002
+    4300008: Eye_Right_001
+    4300010: Pupil_right_001
+    4300012: Pupul_left_002
+    4300014: Hand_right_002
+    4300016: Hand_Left_002
+    4300018: Torso_002
+    7400000: Default Take
+    7400002: Bow
+    7400004: Cannon
+    7400006: Cannon_001
+    7400008: Drown
+    7400010: Flying
+    7400012: Flying_001
+    7400014: Granade
+    7400016: Granade_001
+    7400018: Idle_Animation_1
+    7400020: Idle_Animation_1_001
+    7400022: Idle_Animation_2
+    7400024: Idle_Animation_2_001
+    7400026: Idle_Animation_3
+    7400028: Idle_Animation_3_001
+    7400030: Jump_2
+    7400032: Jump_2_001
+    7400034: Jump_3
+    7400036: Jump_3_001
+    7400038: Saber_Hit
+    7400040: Victory
+    7400042: Victory_001
+    7400044: Walking_Animation
+    7400046: Walking_Animation_001
+    9500000: //RootNode
+    13700000: Eye_left_002
+    13700002: Eye_Right_001
+    13700004: Hand_Left_002
+    13700006: Hand_right_002
+    13700008: Head_002
+    13700010: Icosphere
+    13700012: Pupil_right_001
+    13700014: Pupul_left_002
+    13700016: Sphere_001
+    13700018: Torso_002
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

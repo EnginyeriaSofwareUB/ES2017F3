@@ -36,6 +36,14 @@ public class DeathOnTouch : MonoBehaviour {
             GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().turnRemainingTime = turnTimeRemainingOnFall;
 
         }
+        else if(col.gameObject.CompareTag("Bullet"))
+        {
+            GameObject g = col.gameObject;
+            GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().shoot_ongoing = false;
+            Destroy(g);
+        }
+
+
 	}
 
 	IEnumerator DelayToDeath(GameObject g){
@@ -47,6 +55,5 @@ public class DeathOnTouch : MonoBehaviour {
 		//		yield return new WaitForSeconds (2);
 		//		GameObject.FindGameObjectWithTag ("GM").GetComponent<GameController> ().changeTurn ();
 	}
-
 
 }

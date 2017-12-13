@@ -9,9 +9,14 @@ public class AmmunitionScript : MonoBehaviour {
 	private int BOW = 4;
 	private int GRENADE = 3;
 
-	// Use this for initialization
-	void Start () {
-		GM = GameObject.FindGameObjectWithTag ("GM");
+    private void Awake()
+    {
+        GM = GameObject.FindGameObjectWithTag("GM");
+    }
+
+    // Use this for initialization
+    void Start () {
+		
 	}
 	
 	// Update is called once per frame
@@ -20,10 +25,11 @@ public class AmmunitionScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider col){
-
+		//print ("coll");
 		if (col.gameObject.tag == "Player") {			
 			Destroy (this.gameObject);
 			int team = col.GetComponent<PlayerController>().TEAM;
+            Debug.Log(GM);
 			if (Random.value > 0.5) {				
 				GM.GetComponent<GameController> ().addUsages (team, BOW, 1);
 			} else {

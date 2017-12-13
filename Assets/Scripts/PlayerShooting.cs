@@ -11,7 +11,7 @@ public class PlayerShooting : MonoBehaviour
     private Transform hands, modelCenter, mdlHandLeft, mdlHandRight;
     public Gun _currentGun;
     private List<Gun> _guns;
-    private float thrust, startPowerTime;
+    public float thrust, startPowerTime;
     public float angleSpeed, maxPowerSeconds;
 	public int maxPower, minPower, maxAngle, lastGunEquipped;
     private int initMaxPower, initMinPower, initMaxAngle;
@@ -337,5 +337,6 @@ public class PlayerShooting : MonoBehaviour
         minPower = initMinPower;
 
     }
+		
 
 }

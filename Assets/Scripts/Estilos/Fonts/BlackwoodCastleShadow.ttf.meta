@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 98803bac5a7d7a746a3adda5cfe2c345
+timeCreated: 1512763782
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Blackwood Castle Shadow
+  fontNames:
+  - Blackwood Castle Shadow
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
