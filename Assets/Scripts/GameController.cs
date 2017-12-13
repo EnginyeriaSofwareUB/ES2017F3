@@ -86,6 +86,8 @@ public class GameController : MonoBehaviour {
         //TODO: Set the activePlayer to the Main Player.
         //activePlayer = GameObject.Find(testPlayerName);	
 
+		GetComponent<HowTo> ().enabled = GamePreferences.howTo;
+
         //Start camera animation, deactivate UI
         Camera.main.GetComponent<Animator>().SetTrigger("start");
         current = gameStates.startAnim;

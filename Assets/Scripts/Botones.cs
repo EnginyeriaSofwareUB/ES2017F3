@@ -50,6 +50,12 @@ public class Botones : MonoBehaviour
         SceneManager.LoadScene("Main_Menu_Integrated", LoadSceneMode.Single);
     }
 
+	public void LoadHowTo()
+	{
+		GamePreferences.howTo = true;
+		SceneManager.LoadScene("Test_Game", LoadSceneMode.Single);
+	}
+
     public void BotonSalir()
     {
         Application.Quit();
