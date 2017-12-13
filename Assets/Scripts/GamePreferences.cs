@@ -11,5 +11,6 @@ public class GamePreferences {
 	public static int number_players_team = 2;
 	public static int players_maxlife = 100;
 	public static int difficulty = 1;
+	public static bool howTo = false;
 
 }
