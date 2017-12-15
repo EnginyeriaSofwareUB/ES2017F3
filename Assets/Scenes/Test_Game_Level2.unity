@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1898,33 +1898,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300390, guid: 0440fd3c026ce6e4fbeb5923e46f141e, type: 3}
---- !u!84 &73919430
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 927
-  m_Height: 549
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 0
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &79413414 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 101200, guid: 0440fd3c026ce6e4fbeb5923e46f141e, type: 3}
@@ -3305,7 +3278,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 12
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3328,7 +3301,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 189097550}
   m_LocalRotation: {x: 0.13471217, y: -0, z: -0, w: 0.9908848}
-  m_LocalPosition: {x: 4.63, y: -1.75, z: -6.39}
+  m_LocalPosition: {x: 11, y: 1, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 925985520}
@@ -3369,12 +3342,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac33b7d1996187140975118a7e16bf7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mDelta: 25
-  mSpeed: 5
-  min_X: 0
-  max_X: 25
-  min_Y: 1
-  max_Y: 8
+  MovementDelta: 25
+  MovementSpeed: 5
+  MinX: 0
+  MaxX: 25
 --- !u!114 &189097558
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3402,7 +3373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Follow: 1
   PerspectiveTransitionTime: 0.4
-  MinimapWidth: 22
+  MinimapWidth: 19.2
   loserPosition: {fileID: 2113203087}
   activateFlags: 1
   flagTeam1: {fileID: 1060904057786540, guid: d8cdf8957c0d3e34ab9eb875579ecf9c, type: 2}
@@ -3460,8 +3431,8 @@ MonoBehaviour:
   sourceCamera: {fileID: 189097554}
   outlineCamera: {fileID: 370996332}
   outlineShaderMaterial: {fileID: 0}
-  renderTexture: {fileID: 73919430}
-  extraRenderTexture: {fileID: 1254936911}
+  renderTexture: {fileID: 836315536}
+  extraRenderTexture: {fileID: 2145404760}
 --- !u!95 &189097562
 Animator:
   serializedVersion: 3
@@ -6194,13 +6165,13 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 12
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 0
   m_RenderingPath: 1
-  m_TargetTexture: {fileID: 73919430}
+  m_TargetTexture: {fileID: 836315536}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 0
@@ -12434,6 +12405,33 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300590, guid: 0440fd3c026ce6e4fbeb5923e46f141e, type: 3}
+--- !u!84 &836315536
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 738
+  m_Height: 461
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 0
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &837647424 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100692, guid: 0440fd3c026ce6e4fbeb5923e46f141e, type: 3}
@@ -14383,6 +14381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ffe728a71b9cc04da7e4ae7fb204281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IS_MENU: 0
   factions: {fileID: 0}
   suddenBool: {fileID: 0}
   suddenTurns: {fileID: 0}
@@ -17385,33 +17384,6 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4301158, guid: 0440fd3c026ce6e4fbeb5923e46f141e, type: 3}
---- !u!84 &1254936911
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_Width: 927
-  m_Height: 549
-  m_AntiAliasing: 1
-  m_DepthFormat: 1
-  m_ColorFormat: 0
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1258237736 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 101332, guid: 0440fd3c026ce6e4fbeb5923e46f141e, type: 3}
@@ -19345,6 +19317,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1383271575}
+  - component: {fileID: 1383271576}
   m_Layer: 0
   m_Name: Minimap point
   m_TagString: Minimap Point
@@ -19359,12 +19332,23 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1383271574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.82, y: 0.73, z: -13.2}
+  m_LocalPosition: {x: 11, y: 0, z: -13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1383271576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1383271574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70d1ad844991544a280f8ae238508fd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1385039837 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100416, guid: 0440fd3c026ce6e4fbeb5923e46f141e, type: 3}
@@ -30660,7 +30644,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4203787087579566, guid: 3550e084e780f40a2b4a63afc041b310, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.03489949
+      value: -0.004363368
       objectReference: {fileID: 0}
     - target: {fileID: 4203787087579566, guid: 3550e084e780f40a2b4a63afc041b310, type: 2}
       propertyPath: m_LocalRotation.y
@@ -30672,7 +30656,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4203787087579566, guid: 3550e084e780f40a2b4a63afc041b310, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.99939084
+      value: 0.9999905
       objectReference: {fileID: 0}
     - target: {fileID: 4203787087579566, guid: 3550e084e780f40a2b4a63afc041b310, type: 2}
       propertyPath: m_RootOrder
@@ -30682,6 +30666,10 @@ Prefab:
         type: 2}
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4203787087579566, guid: 3550e084e780f40a2b4a63afc041b310, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3550e084e780f40a2b4a63afc041b310, type: 2}
@@ -33308,3 +33296,30 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300142, guid: 0440fd3c026ce6e4fbeb5923e46f141e, type: 3}
+--- !u!84 &2145404760
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_Width: 738
+  m_Height: 461
+  m_AntiAliasing: 1
+  m_DepthFormat: 1
+  m_ColorFormat: 0
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1

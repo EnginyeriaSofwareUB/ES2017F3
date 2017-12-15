@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
 	
 	public bool Follow = true;
 	public float PerspectiveTransitionTime = 0.4f;
-	private Vector3 _minimapPoint;
+	private GameObject _minimapPoint;
 	public float MinimapWidth;
 
     bool startdone = false;
@@ -39,8 +39,8 @@ public class CameraController : MonoBehaviour {
         //_followingMode.target = _controller.activePlayer;
         //Invoke("SetPlayerTargetFirstTime", 0.75f); //Intencio: conseguir la camara fen un travelling del fondo al nivell jugable abans de comensar
 
-		_minimapPoint = GameObject.FindGameObjectWithTag("Minimap Point").GetComponent<Transform>().position;
-	}
+	    _minimapPoint = GameObject.FindGameObjectWithTag("Minimap Point");
+    }
 
     public void SetPlayerTargetFirstTime()
     {
@@ -148,7 +148,8 @@ public class CameraController : MonoBehaviour {
 				_followingMode.enabled =
 					false; // following camera is always updating the position, impedes the lerp to minimap point
 				Camera.main.ResetProjectionMatrix();
-				_transitionCoroutine = TransitionCameraPerspective(GetOrtographicMatrix(), _minimapPoint, PerspectiveTransitionTime,
+				_transitionCoroutine = TransitionCameraPerspective(GetOrtographicMatrix(), 
+					_minimapPoint.transform.position, PerspectiveTransitionTime,
 					_mapMode, _followingMode);
 				StartCoroutine(_transitionCoroutine);
 
