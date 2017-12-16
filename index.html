@@ -1,9 +1,734 @@
- <!DOCTYPE html>
-<html>
-<head>
-<title>ES2017F3</title>
-</head>
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+
+<link rel="stylesheet" type="text/css" href="resourcesWeb/ihover.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+      integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script>
+$(document).ready(function(){
+    $(".weap1").on("click", function() {
+        var cusid_ele = document.getElementsByClassName('video');
+        for (var i = 0; i < cusid_ele.length; ++i) {
+            var item = cusid_ele[i];
+            item.style.display = "none";
+        }
+        var v = document.getElementsByClassName('video1');
+        v[0].style.display = "block";
+
+        var cusid = document.getElementsByClassName('txt_info');
+        for (var i = 0; i < cusid.length; ++i) {
+            var item = cusid[i];
+            item.style.display = "none";
+        }
+        var v = document.getElementsByClassName('txt_info1');
+        v[0].style.display = "block";
+    });
+
+    $(".weap2").on("click", function() {
+        var cusid_ele = document.getElementsByClassName('video');
+        for (var i = 0; i < cusid_ele.length; ++i) {
+            var item = cusid_ele[i];
+            item.style.display = "none";
+        }
+        var v = document.getElementsByClassName('video2');
+        v[0].style.display = "block";
+
+        var cusid = document.getElementsByClassName('txt_info');
+        for (var i = 0; i < cusid.length; ++i) {
+            var item = cusid[i];
+            item.style.display = "none";
+        }
+        var v = document.getElementsByClassName('txt_info2');
+        v[0].style.display = "block";
+    });
+
+     $(".weap3").on("click", function() {
+        var cusid_ele = document.getElementsByClassName('video');
+        for (var i = 0; i < cusid_ele.length; ++i) {
+            var item = cusid_ele[i];
+            item.style.display = "none";
+        }
+        var v = document.getElementsByClassName('video3');
+        v[0].style.display = "block";
+
+        var cusid = document.getElementsByClassName('txt_info');
+        for (var i = 0; i < cusid.length; ++i) {
+            var item = cusid[i];
+            item.style.display = "none";
+        }
+        var v = document.getElementsByClassName('txt_info3');
+        v[0].style.display = "block";
+    });
+
+     $(".weap4").on("click", function() {
+        var cusid_ele = document.getElementsByClassName('video');
+        for (var i = 0; i < cusid_ele.length; ++i) {
+            var item = cusid_ele[i];
+            item.style.display = "none";
+        }
+        var v = document.getElementsByClassName('video4');
+        v[0].style.display = "block";
+
+        var cusid = document.getElementsByClassName('txt_info');
+        for (var i = 0; i < cusid.length; ++i) {
+            var item = cusid[i];
+            item.style.display = "none";
+        }
+        var v = document.getElementsByClassName('txt_info4');
+        v[0].style.display = "block";
+    });
+
+     $(".weap5").on("click", function() {
+        var cusid_ele = document.getElementsByClassName('video');
+        for (var i = 0; i < cusid_ele.length; ++i) {
+            var item = cusid_ele[i];
+            item.style.display = "none";
+        }
+        var v = document.getElementsByClassName('video5');
+        v[0].style.display = "block";
+
+        var cusid = document.getElementsByClassName('txt_info');
+        for (var i = 0; i < cusid.length; ++i) {
+            var item = cusid[i];
+            item.style.display = "none";
+        }
+        var v = document.getElementsByClassName('txt_info5');
+        v[0].style.display = "block";
+    });
+});
+
+// Select all links with hashes
+$(document).ready(function(){
+    $('a[href*="#"]')
+      .not('[href="#"]')
+      .not('[href="#0"]')
+      .click(function(event) {
+        if (
+          location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '')
+          &&
+          location.hostname == this.hostname
+        ) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+          if (target.length) {
+            event.preventDefault();
+            $('html, body').animate({
+              scrollTop: target.offset().top-300
+            }, 1000, function() {
+              var $target = $(target);
+              $target.focus();
+              if ($target.is(":focus")) {
+                return false;
+              } else {
+                $target.attr('tabindex','-1');
+                $target.focus(); // Set focus again
+              };
+            });
+          }
+        }
+      });
+  });
+
+$(document).ready(function(){
+   var scroll_start = 0;
+   var startchange = $('#inici');
+   var offset = startchange.offset();
+   if (startchange.length){
+   $(document).scroll(function() {
+      scroll_start = $(this).scrollTop();
+   });
+    }
+});
+
+$(document).ready(function(){
+   var scroll_start = 0;
+   var startchange = $('#serveis');
+   var offset = startchange.offset();
+   if (startchange.length){
+   $(document).scroll(function() {
+      scroll_start = $(this).scrollTop();
+   });
+    }
+});
+
+$(document).ready(function(){
+   var scroll_start = 0;
+   var startchange = $('#contacte');
+   var offset = startchange.offset();
+   if (startchange.length){
+   $(document).scroll(function() {
+      scroll_start = $(this).scrollTop();
+   });
+    }
+});
+
+</script>
+
+<style>
+body{
+    background-image: url("resourcesWeb/bg_blur.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+
+body, html{
+    cursor: url("resourcesWeb/cur964.cur"), progress !important;
+}
+
+
+.custom_image{
+    background-image: url("resourcesWeb/bg_blur.png");
+    background-size: 100%;
+}
+
+#nav{
+      background: url("resourcesWeb/woodText.png") scroll top left;
+      background-color: none;
+      width:100%;
+      height:66px;
+      position:fixed;
+      top:0px;
+}
+
+#nav a{
+    color: #ffffff;
+}
+
+.elem_bar{
+    margin-right: 150px;
+    margin-top: 5px;
+    background: url("resourcesWeb/button.png");
+    width: 150px;
+    text-align: center;
+    border: 2px solid #000;
+}
+
+.prog_diss{
+    color: #ffffff;
+}
+
+.custom_size{
+    width:140%;
+    height: 120%;
+}
+
+.personatge{
+    width: 100%;
+    background: rgba(256, 256, 256, 0.4);
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+
+.armes{
+    width: 100%;
+    background: rgba(000, 000, 000, 0);
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+
+.levels{
+    width: 100%;
+    background: rgba(000, 000, 000, 0.5);
+    padding-bottom: 5%;
+    margin-top: 5%;
+    padding-top: 5%;
+}
+
+.mes{
+    width: 100%;
+    background: rgba(000, 000, 000, 0.5);
+    padding-bottom: 5%;
+    padding-top: 5%;
+}
+
+@font-face {
+     font-family: 'diamonds';
+     src: url(resourcesWeb/deutch.ttf);
+}
+
+.title_diamonds{
+    font-family: diamonds;
+    font-size: 500%;
+    display: inline;
+    color:#fff;
+}
+
+.title_diamonds_black{
+    font-family: diamonds;
+    font-size: 300%;
+    display: inline;
+}
+
+.text_diamonds{
+    font-family: diamonds;
+    font-size: 300%;
+    display: inline;
+}
+
+.text_cite{
+    font-family: diamonds;
+    font-size: 200%;
+    display: block;
+}
+
+.text_weapons{
+    font-family: diamonds;
+    font-size: 250%;
+    display: block;
+    margin: 10px;
+}
+
+.arma_icon{
+    width: 70%;
+    border-radius: 5px;
+    border: 5px solid #000;
+}
+
+.arma_icon:hover{
+    opacity: 0.8;
+}
+
+.pj{
+    width: 80%;
+    padding-left: 20%
+}
+
+.video{
+    display: none;
+}
+
+.video1{
+    display: block;
+}
+
+.txt_info{
+    display: none;
+}
+
+.txt_info1{
+    display: block;
+}
+
+.text_div{
+    border-radius: 5px;
+    border: 5px solid #000;
+    height: 300px;
+    margin-top: 2.5%;
+}
+
+tr.border_bottom td {
+  border-bottom:1pt solid black;
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+</style>
+
+<html lang="ca">
+
+    <nav id="nav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+
+            <div class="navbar-header">
+
+            </div>
+
+            <ul class="nav navbar-nav navbar-right" style="padding-right: 15%;">
+
+                <li class="elem_bar" id="nav_ini"><a
+                        href="#inici">INICI</a>
+                </li>
+
+
+                <!--<li class="divider-vertical"></li>-->
+
+                <li class="elem_bar" id="nav_desc"><a
+                        href="#descarrega">DESCÀRREGA</a>
+                </li>
+
+                <!--<li class="divider-vertical"></li>-->
+
+                <li class="elem_bar" id="nav_cred"><a
+                        href="#credits">
+                    CRÈDITS </a></li>
+            </ul>
+        </div>
+
+    </nav>
+
 <body>
-<h1>PolyWars</h1>
+<br><br><br><br>
+<a id="inici"></a>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="text_cite"
+                   style="margin-top: 5%; margin-left: 10%; width: 70%; border-bottom:3pt solid green; border-top:3pt solid green;">
+            <p>Un joc fresc i innovador que et
+                fa gaudir de molt bons moments</p>
+            <p align="right">Tutankamon, 1r del seu nom</p>
+        </div>
+        <div class="text_cite"
+                   style="margin-top: 5%; margin-left: 25%; width: 70%; border-bottom:3pt solid green; border-top:3pt solid green;">
+            <p>Un joc fresc i innovador que et
+                fa gaudir de molt bons moments</p>
+            <p align="right">Tutankamon, 1r del seu nom</p>
+        </div>
+        <div class="text_cite"
+                   style="margin-top: 5%; margin-left: 40%; width: 70%; border-bottom:3pt solid green; border-top:3pt solid green;">
+            <p>Un joc fresc i innovador que et
+                fa gaudir de molt bons moments</p>
+            <p align="right">Tutankamon, 1r del seu nom</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <img src=resourcesWeb/title.png
+         style="width:70%; margin-left:20%; margin-top: 3%">
+    </div>
+</div>
+<div class="levels">
+    <center><h1 class="title_diamonds">Dos nivells a escollir</h1></center><br>
+    <div class="row">
+      <div class="col-sm-6">
+
+        <!-- normal -->
+        <div class="ih-item square effect3 bottom_to_top" style="width: 90%; height: 100%; margin-left:10%"><a>
+            <div class="img"><img src="resourcesWeb/medieval.png" alt="img"></div>
+            <div class="info">
+              <h3>ERA MEDIEVAL</h3>
+              <p>Ambientada en el S.X durant les gestes i guerres de cavalleria </p>
+            </div></a>
+        </div>
+        <!-- end normal -->
+      </div>
+        <div class="col-sm-6">
+          <div class="ih-item square effect3 bottom_to_top" style="width: 90%; height: 100%; margin-right:10%"><a>
+                <div class="img"><img src="resourcesWeb/egipt.png" alt="img"></div>
+                <div class="info">
+                  <h3>ERA FARAÒNICA</h3>
+                  <p>Situada durant el 3.000 a.C enmig del gran imperi egipci i les dinasties dels faraons.</p>
+                </div></a>
+          </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="armes">
+    <center><h1 class="title_diamonds_black">5 armes diferents</h1></center><br>
+        <div class="row" style="padding-left: 2%">
+            <div class="col-sm-5" style="margin-bottom:1%">
+                 <video width="120%" height="120%" autoplay="autoplay" loop class="video video1" >
+                    <source src="resourcesWeb/arc.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video>
+                <video width="120%" height="120%" autoplay="autoplay" loop class="video video2" >
+                    <source src="resourcesWeb/canon.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video>
+                <video width="120%" height="120%" autoplay="autoplay" loop class="video video3" >
+                    <source src="resourcesWeb/laser.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video>
+                <video width="120%" height="120%" autoplay="autoplay" loop class="video video4" >
+                    <source src="resourcesWeb/laser.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video>
+                <video width="120%" height="120%" autoplay="autoplay" loop class="video video5" >
+                    <source src="resourcesWeb/laser.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video>
+            </div>
+            <div class="col-sm-offset-1 col-sm-5">
+                <div class="text_div">
+                    <div class="txt_info txt_info1" style="margin-left:5%">
+                        <table border="0" class="text_weapons">
+                            <tr>
+                                <td colspan="2" align="center">SABLE LÀSER<br><br></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">DANY:</td>
+                                <td style="text-align:left">&nbsp Molt elevat</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">DISTÀNCIA:</td>
+                                <td style="text-align:left">&nbsp Cos a cos</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">MUNICIÓ:</td>
+                                <td style="text-align:left">&nbsp Usos il·limitats</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="txt_info txt_info2" style="margin-left:5%">
+                        <table border="0" class="text_weapons">
+                            <tr>
+                                <td colspan="2" align="center">CANÓ<br><br></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">DANY:</td>
+                                <td style="text-align:left">&nbsp Alt</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">DISTÀNCIA:</td>
+                                <td style="text-align:left">&nbsp Llarg abast</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">MUNICIÓ:</td>
+                                <td style="text-align:left">&nbsp Usos il·limitats</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="txt_info txt_info3" style="margin-left:5%">
+                        <table border="0" class="text_weapons">
+                            <tr>
+                                <td colspan="2" align="center">DINAMITA<br><br></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">DANY:</td>
+                                <td style="text-align:left">&nbsp Mitjà</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">DISTÀNCIA:</td>
+                                <td style="text-align:left">&nbsp Cos a cos</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">MUNICIÓ:</td>
+                                <td style="text-align:left">&nbsp Usos il·limitats</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="txt_info txt_info4" style="margin-left:5%">
+                        <table border="0" class="text_weapons">
+                            <tr>
+                                <td colspan="2" align="center">GRANADA<br><br></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">DANY:</td>
+                                <td style="text-align:left">&nbsp Mitjà</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">DISTÀNCIA:</td>
+                                <td style="text-align:left">&nbsp Curt abast</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">MUNICIÓ:</td>
+                                <td style="text-align:left">&nbsp 10 usos inicials</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="txt_info txt_info5" style="margin-left:5%">
+                        <table border="0" class="text_weapons">
+                            <tr>
+                                <td colspan="2" align="center">ARC<br><br></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">DANY:</td>
+                                <td style="text-align:left">&nbsp Baix</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">DISTÀNCIA:</td>
+                                <td style="text-align:left">&nbsp Llarg abast</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:right">MUNICIÓ:</td>
+                                <td style="text-align:left">&nbsp 2 usos inicials</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-left: 5%; ">
+            <div class="col-sm-1">
+                <center><img src="resourcesWeb/download.png" class="arma_icon weap weap1" alt="img"></center>
+            </div>
+            <div class="col-sm-1">
+                <center><img src="resourcesWeb/download.png" class="arma_icon weap weap2" alt="img"></center>
+            </div>
+            <div class="col-sm-1">
+                <center><img src="resourcesWeb/download.png" class="arma_icon weap weap3" alt="img"></center>
+            </div>
+            <div class="col-sm-1">
+                <center><img src="resourcesWeb/download.png" class="arma_icon weap weap4" alt="img"></center>
+            </div>
+            <div class="col-sm-1">
+                <center><img src="resourcesWeb/download.png" class="arma_icon weap weap5" alt="img"></center>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="personatge">
+        <center><h1 class="title_diamonds_black">3 personatges totalment animats</h1></center><br>
+        <div class="row">
+            <div class="col-sm-4 ">
+                <center><p class="text_diamonds">VIKINGS</p></center>
+            </div>
+            <div class="col-sm-4 ">
+                <center><p class="text_diamonds">PIRATES</p></center>
+            </div>
+            <div class="col-sm-4 ">
+                <center><p class="text_diamonds">CAVALLERS</p></center>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <img src="resourcesWeb/viking.gif" alt="img" class="pj">
+            </div>
+            <div class="col-sm-4">
+                <img src="resourcesWeb/pirate.gif" alt="img" class="pj">
+            </div>
+            <div class="col-sm-4">
+                <img src="resourcesWeb/knight.gif" alt="img" class="pj">
+            </div>
+        </div>
+    </div>
+
+<br><br>
+
+<div class="mes">
+<center><h1 class="title_diamonds">Un munt de físiques realistes</h1>
+    <table border="0" class="text_weapons">
+        <tr class="border_bottom">
+            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
+            <td style="text-align:center">&nbsp VIDA<br>
+            Retorna salut al personatge</td>
+        </tr>
+
+        <tr class="border_bottom">
+            <td style="text-align:center">MUNICIÓ<br>
+            Retorna munició d'alguna de les armes <br>que no tenen munició infinita.</td>
+            <td style="text-align:center">&nbsp<img src="resourcesWeb/cur964.cur" alt="img"></td>
+        </tr>
+        <tr class="border_bottom">
+            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
+            <td style="text-align:center">&nbsp VENT<br>
+            El vent varia el sentit i afecta als dispars,<br>
+            modificant-ne la trajectòria.</td>
+        </tr>
+        <tr class="border_bottom">
+            <td style="text-align:center">GRAVETAT<br>
+            Alguns elements com aquest pont, <br>són afectats per la gravetat.</td>
+            <td style="text-align:center">&nbsp<img src="resourcesWeb/cur964.cur" alt="img"></td>
+        </tr>
+
+    </table>
+</center>
+</div>
+<div class="usuari" style="margin-top:100px">
+<center><h1 class="title_diamonds">Adaptat a l'usuari</h1>
+    <table border="0" class="text_weapons">
+        <tr class="border_bottom">
+            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
+            <td style="text-align:left"><u>3 nivells de dificultat</u><br>
+            Que altera la durada de la partida</td>
+        </tr>
+
+        <tr class="border_bottom">
+
+            <td style="text-align:left"><u>Partides personalitzables</u><br>
+            Com ara selecció de personatge,<br>
+            nombre de jugadors a controlar i<br>
+                dos escenaris a escollir.</td>
+            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
+        </tr>
+
+        <tr class="border_bottom">
+            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
+            <td style="text-align:left"><u>Tutorial pas a pas</u><br>
+            Un breu tutorial per introduir-se <br>en els controls més bàsics.</td>
+
+        </tr>
+
+        <tr class="border_bottom">
+
+            <td style="text-align:center"><u>Control de la duració de la partida</u><br>
+            Si es desitja activar la mort súbita, <br>les partides no esdevindran eternes.</td>
+            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
+        </tr>
+
+    </table>
+</center>
+</div>
+
+<br><br>
+<div style="margin-top: 3%">
+    <center><h1 class="title_diamonds">Descarrega'l ara</h1>
+        <a id="descarrega"></a>
+    <div class="container-fluid" style="margin-top: 5%">
+      <div class="col-md-4">
+        <center><h2 class="text_diamonds">Windows</h2><br>
+        <a href="http://www.github.com" target="_blank"><img src=resourcesWeb/download.png
+    style="width:30%"></a>
+        </center>
+      </div>
+      <div class="col-md-4">
+        <center><h2 class="text_diamonds">Linux</h2><br>
+        <a href="http://www.github.com" target="_blank"><img src=resourcesWeb/download.png
+    style="width:30%"></a>
+        </center>
+      </div>
+    <div class="col-md-4">
+        <center><h2 class="text_diamonds">Mac</h2><br>
+       <a href="http://www.github.com" target="_blank"><img src=resourcesWeb/download.png
+    style="width:30%"></a>
+        </center>
+      </div>
+    </div>
+    </center>
+</div>
+
+
+
+<div style="margin-top: 10%">
+    <center><h1 class="title_diamonds">Els autèntics herois</h1>
+    <a id="credits"></a>
+    <div class="row" style="margin-top: 2%">
+      <div class="col-md-offset-1 col-md-5">
+        <h2 class="text_diamonds">Programadors</h2>
+      </div>
+      <div class="col-md-5">
+        <h2 class="text_diamonds">Dissenyadors</h2>
+
+      </div>
+    </div>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-5">
+        <img src=resourcesWeb/nomsProg.png
+    style="width:40%">
+      </div>
+<div class="col-md-5">
+        <img src=resourcesWeb/dev.png
+    style="width:40%">
+
+      </div>
+        </div>
+    </center>
+    <br><br><br><br><br><br>
+    <center>Enginyeria del Software - 2017</center>
+    <br><br><br>
+    <br><br>
+</div>
 </body>
-</html> 
+</html>
