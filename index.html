@@ -183,6 +183,7 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100%;
+    color: #fff;
 }
 
 html, body {
@@ -202,7 +203,7 @@ body, html{
 }
 
 #nav{
-      background: url("resourcesWeb/woodText.png") scroll top left;
+      background: url("resourcesWeb/stone1.png") scroll top left;
       background-color: none;
       width:100%;
       height:66px;
@@ -217,7 +218,7 @@ body, html{
 .elem_bar{
     margin-right: 150px;
     margin-top: 5px;
-    background: url("resourcesWeb/button.png");
+    background: rgba(000, 000, 000, 0.5);
     width: 150px;
     text-align: center;
     border: 2px solid #000;
@@ -234,8 +235,9 @@ body, html{
 
 .personatge{
     width: 100%;
-    background: rgba(256, 256, 256, 0.4);
+    background: rgba(000, 000, 000, 0.5);
     padding-bottom: 2%;
+    margin-top: 10%;
     padding-top: 2%;
 }
 
@@ -244,9 +246,18 @@ body, html{
     background: rgba(000, 000, 000, 0);
     padding-bottom: 2%;
     padding-top: 2%;
+    margin-top: 8%;
 }
 
 .levels{
+    width: 100%;
+    background: rgba(000, 000, 000, 0.5);
+    padding-bottom: 5%;
+    margin-top: 5%;
+    padding-top: 5%;
+}
+
+.usuari{
     width: 100%;
     background: rgba(000, 000, 000, 0.5);
     padding-bottom: 5%;
@@ -258,6 +269,7 @@ body, html{
     width: 100%;
     background: rgba(000, 000, 000, 0.5);
     padding-bottom: 5%;
+    margin-top: 5%;
     padding-top: 5%;
 }
 
@@ -275,7 +287,7 @@ body, html{
 
 .title_diamonds_black{
     font-family: diamonds;
-    font-size: 300%;
+    font-size: 500%;
     display: inline;
 }
 
@@ -285,10 +297,22 @@ body, html{
     display: inline;
 }
 
+.text_foot{
+    font-family: diamonds;
+}
+
 .text_cite{
     font-family: diamonds;
     font-size: 200%;
     display: block;
+    background: rgba(000, 000, 000, 0.5);
+    padding: 2%;
+}
+
+.text_nav{
+    font-family: diamonds;
+    font-size: 150%;
+    background: rgba(000, 000, 000, 0.5);
 }
 
 .text_weapons{
@@ -299,13 +323,15 @@ body, html{
 }
 
 .arma_icon{
-    width: 70%;
+    width: 100%;
     border-radius: 5px;
     border: 5px solid #000;
+    padding: 3%;
+    background: rgba(256, 256, 256, 0.4);
 }
 
 .arma_icon:hover{
-    opacity: 0.8;
+    opacity: 0.5;
 }
 
 .pj{
@@ -334,6 +360,7 @@ body, html{
     border: 5px solid #000;
     height: 300px;
     margin-top: 2.5%;
+    background: rgba(000, 000, 000, 0.5);
 }
 
 tr.border_bottom td {
@@ -355,22 +382,22 @@ tr.border_bottom td {
 
             <ul class="nav navbar-nav navbar-right" style="padding-right: 15%;">
 
-                <li class="elem_bar" id="nav_ini"><a
-                        href="#inici">INICI</a>
+                <li class="elem_bar text_nav" id="nav_ini"><a
+                        href="#inici">Poly Wars</a>
                 </li>
 
 
                 <!--<li class="divider-vertical"></li>-->
 
-                <li class="elem_bar" id="nav_desc"><a
-                        href="#descarrega">DESCÀRREGA</a>
+                <li class="elem_bar text_nav" id="nav_desc"><a
+                        href="#descarrega">Descàrrega</a>
                 </li>
 
                 <!--<li class="divider-vertical"></li>-->
 
-                <li class="elem_bar" id="nav_cred"><a
+                <li class="elem_bar text_nav" id="nav_cred"><a
                         href="#credits">
-                    CRÈDITS </a></li>
+                    Crèdits </a></li>
             </ul>
         </div>
 
@@ -383,19 +410,19 @@ tr.border_bottom td {
 <div class="row">
     <div class="col-md-6">
         <div class="text_cite"
-                   style="margin-top: 5%; margin-left: 10%; width: 70%; border-bottom:3pt solid green; border-top:3pt solid green;">
+                   style="margin-top: 5%; margin-left: 10%; width: 70%;">
             <p>Un joc fresc i innovador que et
                 fa gaudir de molt bons moments</p>
             <p align="right">Tutankamon, 1r del seu nom</p>
         </div>
         <div class="text_cite"
-                   style="margin-top: 5%; margin-left: 25%; width: 70%; border-bottom:3pt solid green; border-top:3pt solid green;">
+                   style="margin-top: 5%; margin-left: 25%; width: 70%;">
             <p>Un joc fresc i innovador que et
                 fa gaudir de molt bons moments</p>
             <p align="right">Tutankamon, 1r del seu nom</p>
         </div>
         <div class="text_cite"
-                   style="margin-top: 5%; margin-left: 40%; width: 70%; border-bottom:3pt solid green; border-top:3pt solid green;">
+                   style="margin-top: 5%; margin-left: 40%; width: 70%;">
             <p>Un joc fresc i innovador que et
                 fa gaudir de molt bons moments</p>
             <p align="right">Tutankamon, 1r del seu nom</p>
@@ -415,7 +442,7 @@ tr.border_bottom td {
         <div class="ih-item square effect3 bottom_to_top" style="width: 90%; height: 100%; margin-left:10%"><a>
             <div class="img"><img src="resourcesWeb/medieval.png" alt="img"></div>
             <div class="info">
-              <h3>ERA MEDIEVAL</h3>
+              <h3 class="text_foot">Era Medieval</h3>
               <p>Ambientada en el S.X durant les gestes i guerres de cavalleria </p>
             </div></a>
         </div>
@@ -425,7 +452,7 @@ tr.border_bottom td {
           <div class="ih-item square effect3 bottom_to_top" style="width: 90%; height: 100%; margin-right:10%"><a>
                 <div class="img"><img src="resourcesWeb/egipt.png" alt="img"></div>
                 <div class="info">
-                  <h3>ERA FARAÒNICA</h3>
+                  <h3 class="text_foot">Era Faraònica</h3>
                   <p>Situada durant el 3.000 a.C enmig del gran imperi egipci i les dinasties dels faraons.</p>
                 </div></a>
           </div>
@@ -435,26 +462,26 @@ tr.border_bottom td {
 <br><br>
 <div class="armes">
     <center><h1 class="title_diamonds_black">5 armes diferents</h1></center><br>
-        <div class="row" style="padding-left: 2%">
+        <div class="row" style="padding-left: 5%">
             <div class="col-sm-5" style="margin-bottom:1%">
-                 <video width="120%" height="120%" autoplay="autoplay" loop class="video video1" >
+                 <video width="100%" height="100%" autoplay="autoplay" loop muted class="video video1" >
+                    <source src="resourcesWeb/sable.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video>
+                <video width="100%" height="100%" autoplay="autoplay" loop muted class="video video2" >
+                    <source src="resourcesWeb/cano.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video>
+                <video width="100%" height="100%" autoplay="autoplay" loop muted class="video video3" >
+                    <source src="resourcesWeb/dinamita.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video>
+                <video width="100%" height="100%" autoplay="autoplay" loop muted class="video video4" >
+                    <source src="resourcesWeb/granada.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video>
+                <video width="100%" height="100%" autoplay="autoplay" loop muted class="video video5" >
                     <source src="resourcesWeb/arc.mp4" type="video/mp4">
-                    Your browser does not support this video.
-                </video>
-                <video width="120%" height="120%" autoplay="autoplay" loop class="video video2" >
-                    <source src="resourcesWeb/canon.mp4" type="video/mp4">
-                    Your browser does not support this video.
-                </video>
-                <video width="120%" height="120%" autoplay="autoplay" loop class="video video3" >
-                    <source src="resourcesWeb/laser.mp4" type="video/mp4">
-                    Your browser does not support this video.
-                </video>
-                <video width="120%" height="120%" autoplay="autoplay" loop class="video video4" >
-                    <source src="resourcesWeb/laser.mp4" type="video/mp4">
-                    Your browser does not support this video.
-                </video>
-                <video width="120%" height="120%" autoplay="autoplay" loop class="video video5" >
-                    <source src="resourcesWeb/laser.mp4" type="video/mp4">
                     Your browser does not support this video.
                 </video>
             </div>
@@ -561,19 +588,19 @@ tr.border_bottom td {
         </div>
         <div class="row" style="padding-left: 5%; ">
             <div class="col-sm-1">
-                <center><img src="resourcesWeb/download.png" class="arma_icon weap weap1" alt="img"></center>
+                <center><img src="resourcesWeb/laser.png" class="arma_icon weap weap1" alt="img"></center>
             </div>
             <div class="col-sm-1">
-                <center><img src="resourcesWeb/download.png" class="arma_icon weap weap2" alt="img"></center>
+                <center><img src="resourcesWeb/canon.png" class="arma_icon weap weap2" alt="img"></center>
             </div>
             <div class="col-sm-1">
-                <center><img src="resourcesWeb/download.png" class="arma_icon weap weap3" alt="img"></center>
+                <center><img src="resourcesWeb/dynamite.png" class="arma_icon weap weap3" alt="img"></center>
             </div>
             <div class="col-sm-1">
-                <center><img src="resourcesWeb/download.png" class="arma_icon weap weap4" alt="img"></center>
+                <center><img src="resourcesWeb/grenade.png" class="arma_icon weap weap4" alt="img"></center>
             </div>
             <div class="col-sm-1">
-                <center><img src="resourcesWeb/download.png" class="arma_icon weap weap5" alt="img"></center>
+                <center><img src="resourcesWeb/bow.png" class="arma_icon weap weap5" alt="img"></center>
             </div>
         </div>
 
@@ -610,27 +637,39 @@ tr.border_bottom td {
 <div class="mes">
 <center><h1 class="title_diamonds">Un munt de físiques realistes</h1>
     <table border="0" class="text_weapons">
+
         <tr class="border_bottom">
-            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
-            <td style="text-align:center">&nbsp VIDA<br>
+            <td style="text-align:center">
+                <img width="30%" height="10%" src="resourcesWeb/heal.gif" alt="img"></td>
+             <td width="30%" style="text-align:center">&nbsp VIDA<br>
             Retorna salut al personatge</td>
         </tr>
 
         <tr class="border_bottom">
-            <td style="text-align:center">MUNICIÓ<br>
+             <td width="30%" style="text-align:center">MUNICIÓ<br>
             Retorna munició d'alguna de les armes <br>que no tenen munició infinita.</td>
-            <td style="text-align:center">&nbsp<img src="resourcesWeb/cur964.cur" alt="img"></td>
+            <td style="text-align:center">
+                <img width="30%" height="10%" src="resourcesWeb/crate.gif" alt="img"></td>
         </tr>
+
         <tr class="border_bottom">
-            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
-            <td style="text-align:center">&nbsp VENT<br>
+            <td style="text-align:center">
+                <video width="70%" height="80%" autoplay="autoplay" loop muted>
+                    <source src="resourcesWeb/vent.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video></td>
+            <td width="30%" style="text-align:center">&nbsp VENT<br>
             El vent varia el sentit i afecta als dispars,<br>
             modificant-ne la trajectòria.</td>
         </tr>
         <tr class="border_bottom">
-            <td style="text-align:center">GRAVETAT<br>
-            Alguns elements com aquest pont, <br>són afectats per la gravetat.</td>
-            <td style="text-align:center">&nbsp<img src="resourcesWeb/cur964.cur" alt="img"></td>
+            <td width="30%" style="text-align:center; margin-right:2%;">GRAVETAT<br>
+            Alguns elements com aquest pont, són afectats per la gravetat.</td>
+            <td style="text-align:center">
+                <video width="70%" height="80%" autoplay="autoplay" loop muted>
+                    <source src="resourcesWeb/pont.mp4" type="video/mp4">
+                    Your browser does not support this video.
+                </video></td>
         </tr>
 
     </table>
@@ -640,32 +679,34 @@ tr.border_bottom td {
 <center><h1 class="title_diamonds">Adaptat a l'usuari</h1>
     <table border="0" class="text_weapons">
         <tr class="border_bottom">
-            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
-            <td style="text-align:left"><u>3 nivells de dificultat</u><br>
-            Que altera la durada de la partida</td>
+            <td style="text-align:center">
+                <img width="70%" height="80%" src="resourcesWeb/pjs.png" alt="img"></td>
+            <td width="40%" style="text-align:center; margin-right:2%;"><u>3 nivells de dificultat</u><br>
+            Que altera la durada de la partida i <br>el nivell de dany que provoquen les armes</td>
         </tr>
 
         <tr class="border_bottom">
-
-            <td style="text-align:left"><u>Partides personalitzables</u><br>
-            Com ara selecció de personatge,<br>
-            nombre de jugadors a controlar i<br>
-                dos escenaris a escollir.</td>
-            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
-        </tr>
-
-        <tr class="border_bottom">
-            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
-            <td style="text-align:left"><u>Tutorial pas a pas</u><br>
+            <td width="40%" style="text-align:center; margin-right:2%;"><u>Tutorial pas a pas</u><br>
             Un breu tutorial per introduir-se <br>en els controls més bàsics.</td>
-
+            <td style="text-align:center">
+                <img width="70%" height="80%" src="resourcesWeb/tutorial.png" alt="img"></td>
         </tr>
 
         <tr class="border_bottom">
 
-            <td style="text-align:center"><u>Control de la duració de la partida</u><br>
-            Si es desitja activar la mort súbita, <br>les partides no esdevindran eternes.</td>
-            <td style="text-align:center"><img src="resourcesWeb/cur964.cur" alt="img"></td>
+            <td style="text-align:center">
+                <img width="70%" height="80%" src="resourcesWeb/pjs.png" alt="img"></td>
+            <td width="40%" style="text-align:center; margin-right:2%;"><u>Partides personalitzables</u><br>
+            Com ara selecció de personatge,
+            nombre de jugadors a controlar i
+                dos escenaris a escollir.</td>
+        </tr>
+
+        <tr class="border_bottom">
+            <td width="40%" style="text-align:center; margin-right:2%;"><u>Control de la duració de la partida</u><br>
+            Si es desitja activar la mort súbita, les partides no esdevindran eternes.</td>
+            <td style="text-align:center">
+                <img width="70%" height="80%" src="resourcesWeb/sudden.png" alt="img"></td>
         </tr>
 
     </table>
@@ -719,15 +760,15 @@ tr.border_bottom td {
     style="width:40%">
       </div>
 <div class="col-md-5">
-        <img src=resourcesWeb/dev.png
+        <img src=resourcesWeb/NomsDis.png
     style="width:40%">
 
       </div>
         </div>
     </center>
     <br><br><br><br><br><br>
-    <center>Enginyeria del Software - 2017</center>
-    <br><br><br>
+    <center><h2 class="text_diamonds">Enginyeria del Software - 2017</h2></center>
+    <br>
     <br><br>
 </div>
 </body>
