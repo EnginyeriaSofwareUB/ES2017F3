@@ -8,15 +8,15 @@ public class InitUsages : MonoBehaviour {
 	public GameObject bowUsagesT1;
 	public GameObject bowUsagesT2;
 
-	public GameObject grenadeT1;
-	public GameObject grenadeT2;
+	public GameObject dynamiteT1;
+	public GameObject dynamiteT2;
 
 	public GameObject panelT1;
 	public GameObject panelT2;
 
 	public GameObject panel;
 
-	public GameObject grenadeActive, grenadeOut;
+	public GameObject dynamiteActive, dynamiteOut;
 	public GameObject bowActive, bowOut;
 
 	private IEnumerator coroutine;
@@ -31,9 +31,9 @@ public class InitUsages : MonoBehaviour {
 				bowUsagesT1.GetComponent<UnityEngine.UI.Text> ().text = g.InitialUsagesLeft.ToString();
 				bowUsagesT2.GetComponent<UnityEngine.UI.Text> ().text = g.InitialUsagesLeft.ToString();
 				break;
-			case "Grenade Base":
-				grenadeT1.GetComponent<UnityEngine.UI.Text> ().text = g.InitialUsagesLeft.ToString();
-				grenadeT2.GetComponent<UnityEngine.UI.Text> ().text = g.InitialUsagesLeft.ToString();
+			case "Dynamite Base":
+				dynamiteT1.GetComponent<UnityEngine.UI.Text> ().text = g.InitialUsagesLeft.ToString();
+				dynamiteT2.GetComponent<UnityEngine.UI.Text> ().text = g.InitialUsagesLeft.ToString();
 				break;
 			}				
 		}
@@ -66,19 +66,19 @@ public class InitUsages : MonoBehaviour {
 		}
 	}
 
-	public void SetGrenadeUsages(int team, int value){
+	public void SetDynamiteUsages(int team, int value){
 		if (team == 1) {
-			grenadeT1.GetComponent<UnityEngine.UI.Text> ().text = value.ToString ();
+			dynamiteT1.GetComponent<UnityEngine.UI.Text> ().text = value.ToString ();
 		} else {
-			grenadeT2.GetComponent<UnityEngine.UI.Text> ().text = value.ToString ();
+			dynamiteT2.GetComponent<UnityEngine.UI.Text> ().text = value.ToString ();
 		}
 
 		if (value == 0) {
-			grenadeActive.SetActive (false);
-			grenadeOut.SetActive (true);
+			dynamiteActive.SetActive (false);
+			dynamiteOut.SetActive (true);
 		} else {
-			grenadeActive.SetActive (true);
-			grenadeOut.SetActive (false);
+			dynamiteActive.SetActive (true);
+			dynamiteOut.SetActive (false);
 		}
 	}
 
