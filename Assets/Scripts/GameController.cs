@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 
 	public enum gameStates {
 		menu,
+        howto,
         startAnim,
 		gameOn,
 		pause,
@@ -83,15 +84,31 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
-        //TODO: Set the activePlayer to the Main Player.
-        //activePlayer = GameObject.Find(testPlayerName);	
 
-		GetComponent<HowTo> ().enabled = GamePreferences.howTo;
+        GetComponent<HowTo>().enabled = GamePreferences.howTo;
 
-        //Start camera animation, deactivate UI
-        Camera.main.GetComponent<Animator>().SetTrigger("start");
-        current = gameStates.startAnim;
-        SetUIActive(false);
+        
+
+        //If HowTo is activated, the game starts normally, otherwise it begins the start animation rutine 
+        if (GamePreferences.howTo)
+        {
+            current = gameStates.howto;
+            
+            InitHowToGame();
+
+            StartGame();
+        }
+        else
+        {
+            //Start camera animation, deactivate UI
+            Camera.main.GetComponent<Animator>().SetTrigger("start");
+            current = gameStates.startAnim;
+            SetUIActive(false);
+
+            //Spawn players
+            InitGame();
+        }
+
 
         //TODO: LOAD DATA FROM GamePreferences INTO MATCH USING InitGame()
         Debug.Log("TEAM_1 FACTION:::"+ GamePreferences.p1_faction);
@@ -100,8 +117,6 @@ public class GameController : MonoBehaviour {
 		Debug.Log("SUDDEN_DEATH ACTIVATED:::"+ GamePreferences.sudden_death_activated);
 		Debug.Log("SUDDEN_DEATH TURNS:::"+ GamePreferences.sudden_death_turns);
 
-		//Spawn players
-        InitGame();
 		// Create remaining gun uses
 		_teamGunUses = new int[2][];
 		for (int i = 0; i < 2; i++) {
@@ -119,23 +134,48 @@ public class GameController : MonoBehaviour {
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
         players.Sort((self, other) => self.GetComponent<PlayerController>().playerId - other.GetComponent<PlayerController>().playerId);
 
-		// initiate
-		foreach (GameObject player in players) {
-            //Debug.Log(player);
-			// disable movement
-			player.GetComponent<PlayerMovement>().enabled = false;
-			// disable firing shoots
-			player.GetComponent<PlayerShooting>().enabled = false;
-            // attach listener to shootEvent
-            player.GetComponent<PlayerShooting>().shootEvent.AddListener(OnShoot);
-            // attach listener to deathEvent
-            player.GetComponent<PlayerController>().deathEvent.AddListener(OnDeath);
-
-
+        if (!GamePreferences.howTo)
+        {
+            // initiate
+            foreach (GameObject player in players)
+            {
+                //Debug.Log(player);
+                // disable movement
+                player.GetComponent<PlayerMovement>().enabled = false;
+                // disable firing shoots
+                player.GetComponent<PlayerShooting>().enabled = false;
+                // attach listener to shootEvent
+                player.GetComponent<PlayerShooting>().shootEvent.AddListener(OnShoot);
+                // attach listener to deathEvent
+                player.GetComponent<PlayerController>().deathEvent.AddListener(OnDeath);
+            }
         }
+		
 
         //turnId = -1;
         //changeTurn(); //moved to StartGame()
+    }
+
+    void InitHowToGame()
+    {
+        PlayerPrefab = vikingPlayer;
+        Vector3 where = new Vector3(spawnPoint1.position.x + Random.Range(-maxSpawnSpread, maxSpawnSpread), spawnPoint1.position.y, spawnPoint1.position.z);
+        GameObject p1 = Instantiate(PlayerPrefab, where, spawnPoint1.rotation, null) as GameObject;
+        p1.SetActive(true);
+        team1.Add(p1);
+        spawned1++;
+        p1.name = "Player_T1_" + spawned1.ToString();
+
+        activePlayer = p1;
+
+
+        PlayerPrefab = knightPlayer;
+        where = new Vector3(spawnPoint2.position.x + Random.Range(-maxSpawnSpread, maxSpawnSpread), spawnPoint2.position.y, spawnPoint2.position.z);
+        GameObject p2 = Instantiate(PlayerPrefab, where, spawnPoint2.rotation, null) as GameObject;
+        p2.SetActive(true);
+        team2.Add(p2);
+        spawned2++;
+        p2.name = "Player_T2_" + spawned2.ToString();
     }
 
     void InitGame() {
@@ -245,10 +285,22 @@ public class GameController : MonoBehaviour {
 
         skipStartAnimationMsg.SetActive(false);
         SetUIActive(true);
-        current = gameStates.gameOn;
-        turnTeam1 = -1;
-        turnTeam2 = -1;
-        changeTurn();
+
+        if(current != gameStates.howto)
+        {
+            current = gameStates.gameOn;
+            turnTeam1 = -1;
+            turnTeam2 = -1;
+            changeTurn();
+        }
+        else
+        {
+            print("howto active, enabling " + activePlayer);
+            activePlayer.GetComponent<PlayerMovement>().enabled = true;
+            activePlayer.GetComponent<PlayerShooting>().enabled = true;
+            activePlayer.GetComponent<PlayerController>().enableOutline(true);
+        }
+        
     }
 
 

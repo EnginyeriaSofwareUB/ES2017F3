@@ -11,16 +11,33 @@ public class MenuArrowSelector : MonoBehaviour {
     public Text health;
     public Text damageMult;
 
+    public Image suddenArrowL;
+    public Image suddenArrowR;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+
+        if (botones.suddenBool.GetComponent<Toggle>().isOn)
+        {
+            Color c = suddenArrowL.color;
+            c.a = 1f;
+            suddenArrowL.color = c;
+            suddenArrowR.color = c;
+        }
+        else
+        {
+            Color c = suddenArrowL.color;
+            c.a = 0.35f;
+            suddenArrowL.color = c;
+            suddenArrowR.color = c;
+        }
+
+    }
 
     public void ChangeTSudden(int value)
     {
