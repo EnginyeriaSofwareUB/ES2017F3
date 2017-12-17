@@ -66,6 +66,8 @@ public class Gun : MonoBehaviour
             Quaternion.Euler(0, 0, 0));
 
         Camera.main.GetComponent<FollowingCamera>().bullet_target = bullet;
+        GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().shoot_ongoing = true;
+
         // Add force to the bullet (vector = bulletPos - gunPos)
         bullet.GetComponent<Rigidbody>().AddForce(shootingVector.normalized * thrust, ForceMode.Impulse);
 

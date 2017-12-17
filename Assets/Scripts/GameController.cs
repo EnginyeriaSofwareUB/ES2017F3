@@ -316,7 +316,7 @@ public class GameController : MonoBehaviour {
 
         updateUsages ();
 
-        shoot_ongoing = true;
+        //shoot_ongoing = true; //now set from gun.cs
     }
 
     //called when projectile explodes
