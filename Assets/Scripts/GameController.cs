@@ -162,6 +162,12 @@ public class GameController : MonoBehaviour {
         Vector3 where = new Vector3(spawnPoint1.position.x + Random.Range(-maxSpawnSpread, maxSpawnSpread), spawnPoint1.position.y, spawnPoint1.position.z);
         GameObject p1 = Instantiate(PlayerPrefab, where, spawnPoint1.rotation, null) as GameObject;
         p1.SetActive(true);
+        p1.GetComponent<PlayerController>().TEAM = 1;
+        p1.GetComponent<PlayerController>().playerId = 1 + 2 * spawned1;
+        p1.GetComponent<PlayerController>().last_dir = 1;
+        p1.GetComponent<PlayerController>().maxHealth = GamePreferences.players_maxlife;
+        p1.GetComponent<PlayerController>().health = GamePreferences.players_maxlife;
+        p1.GetComponent<PlayerController>().InitPlayerCanvas();
         team1.Add(p1);
         spawned1++;
         p1.name = "Player_T1_" + spawned1.ToString();
@@ -173,6 +179,12 @@ public class GameController : MonoBehaviour {
         where = new Vector3(spawnPoint2.position.x + Random.Range(-maxSpawnSpread, maxSpawnSpread), spawnPoint2.position.y, spawnPoint2.position.z);
         GameObject p2 = Instantiate(PlayerPrefab, where, spawnPoint2.rotation, null) as GameObject;
         p2.SetActive(true);
+        p2.GetComponent<PlayerController>().TEAM = 2;
+        p2.GetComponent<PlayerController>().playerId = 2 + 2 * spawned2;
+        p2.GetComponent<PlayerController>().last_dir = -1;
+        p2.GetComponent<PlayerController>().maxHealth = GamePreferences.players_maxlife;
+        p2.GetComponent<PlayerController>().health = GamePreferences.players_maxlife;
+        p2.GetComponent<PlayerController>().InitPlayerCanvas();
         team2.Add(p2);
         spawned2++;
         p2.name = "Player_T2_" + spawned2.ToString();
@@ -183,12 +195,6 @@ public class GameController : MonoBehaviour {
 		nPlayersPerTeam = GamePreferences.number_players_team;
 		suddenDeathActivated = GamePreferences.sudden_death_activated;
 		turnsTillSudden = GamePreferences.sudden_death_turns;
-        //testPlayerPrefab = testPlayerPrefabs.ToList()[0];
-
-		// For now it only checks for VIKING or NON VIKING players
-		//if (GamePreferences.p1_faction == "viking") {
-		//	testPlayerPrefab = testPlayerPrefabs.ToList () [0];
-		//}
 
         Debug.Log(" >>> Init game; Spawning " + nPlayersPerTeam + " per team.");
         //team1
@@ -228,11 +234,6 @@ public class GameController : MonoBehaviour {
 
             
         }
-
-		// For now it only checks for VIKING or NON VIKING players
-		//if (GamePreferences.p2_faction == "viking") {
-		//	testPlayerPrefab = testPlayerPrefabs.ToList()[0];
-		//}
 
         //TEAM2
         for (int i = 0; i < nPlayersPerTeam; i++) {

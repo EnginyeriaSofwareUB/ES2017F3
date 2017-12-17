@@ -42,6 +42,7 @@ public class Botones : MonoBehaviour
     {
         if (IS_MENU)
             GetGamePreferences();
+        GamePreferences.howTo = false;
         SceneManager.LoadScene("Test_Game", LoadSceneMode.Single);
     }
 
