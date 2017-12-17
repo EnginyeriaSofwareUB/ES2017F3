@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114784094305993838}
   - component: {fileID: 114683890972338434}
   - component: {fileID: 114287518657687636}
+  - component: {fileID: 114962287380270976}
   m_Layer: 0
   m_Name: GameController_wWind
   m_TagString: GM
@@ -1122,6 +1123,8 @@ MonoBehaviour:
   t2Icon: {fileID: 0}
   t1Back: {fileID: 0}
   t2Back: {fileID: 0}
+  back1_backup: {fileID: 0}
+  back2_backup: {fileID: 0}
   pirate: {fileID: 1255467200077274, guid: 53bdb3797349ea94c957178a64029549, type: 2}
   viking: {fileID: 1598442643831114, guid: 154e31878ddd23843958859adf762832, type: 2}
   knight: {fileID: 1292872620016826, guid: b2b68e7c8d824fc44878b60b99552e27, type: 2}
@@ -1288,13 +1291,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bowUsagesT1: {fileID: 0}
   bowUsagesT2: {fileID: 0}
-  grenadeT1: {fileID: 0}
-  grenadeT2: {fileID: 0}
+  dynamiteT1: {fileID: 0}
+  dynamiteT2: {fileID: 0}
   panelT1: {fileID: 0}
   panelT2: {fileID: 0}
   panel: {fileID: 0}
-  grenadeActive: {fileID: 0}
-  grenadeOut: {fileID: 0}
+  dynamiteActive: {fileID: 0}
+  dynamiteOut: {fileID: 0}
   bowActive: {fileID: 0}
   bowOut: {fileID: 0}
 --- !u!114 &114877061906343460
@@ -1310,14 +1313,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   completeLevelUI: {fileID: 0}
   pauseScreenUI: {fileID: 0}
+  skipStartAnimationMsg: {fileID: 0}
   handS: {fileID: 0}
   lightSS: {fileID: 0}
   canonS: {fileID: 0}
   tntS: {fileID: 0}
   granadeS: {fileID: 0}
   arrowS: {fileID: 0}
+  shoot_ongoing: 0
   current: 1
+  winner: 0
   turnTimerText: {fileID: 0}
+  UI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  UI_shoot_bar: {fileID: 0}
+  UI_shoot_text: {fileID: 0}
+  UI_winnerplayer: {fileID: 0}
   activePlayer: {fileID: 0}
   vikingPlayer: {fileID: 1934148465144300, guid: 97111cba46aba224599ceda8d7d46873,
     type: 2}
@@ -1331,16 +1346,31 @@ MonoBehaviour:
   maxSpawnSpread: 1
   team1: []
   team2: []
-  turnId: 0
+  turnTeam1: 0
+  turnTeam2: 0
   turnTime: 20
   delayTime: 5
   afterShootTime: 3
   turnRemainingTime: 0
   delayRemainingTime: 0
   turnsTillSudden: 10
+  suddenDeathActivated: 0
   AvailableGuns:
   - {fileID: 114355620122308924, guid: 452dd88794c594526b58221c659a4763, type: 2}
   - {fileID: 114727934429342124, guid: 9be5a490636abea42a9be5c1a90afd4d, type: 2}
   - {fileID: 114311834838564246, guid: 61f001341212f9b4fad937ffa4259e23, type: 2}
   - {fileID: 114509311658052858, guid: 06c00fc23d52f0f4f8ee0db1244e60e1, type: 2}
   - {fileID: 114870639887352798, guid: bca1aa6c8cfdb4e0c9a0d3eeed55af39, type: 2}
+--- !u!114 &114962287380270976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005167791410812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5d14c83bffbffd4fba07ce3fd199171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sudden: {fileID: 0}
+  transitionDuration: 1.5

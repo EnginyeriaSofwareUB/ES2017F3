@@ -56,7 +56,7 @@ public class ExplosiveBullet : AbstractBullet
 			// Pushback the players inside the trigger
 			var pushbackDir = (gameObject.transform.position - other.transform.position);
 			pushbackDir.z = 0;
-			other.GetComponent<Rigidbody>().AddForce(pushbackDir.normalized * (-10), ForceMode.Impulse);
+			other.GetComponent<Rigidbody>().AddForce(new Vector3(pushbackDir.normalized.x * (-5),Mathf.Abs(pushbackDir.normalized.y * 9),0f) , ForceMode.Impulse);
 		}
 
 
@@ -66,10 +66,11 @@ public class ExplosiveBullet : AbstractBullet
     }
 
 	protected float CalculateDamage(GameObject other) {
+		//For calculate damage the radius is going to be slightly greater, to create an effect of "Onda expansiva"
 	    var playerBase = other.transform.Find("Animator/Model_Center/Model/Character_Hands").transform.position;
         var playerPos = new Vector3(playerBase.x, playerBase.y);
         var bulletPos = new Vector3(transform.position.x, transform.position.y);
-	    var radius = ExplosiveArea.radius * ExplosiveArea.transform.localScale.x;
+	    var radius = ExplosiveArea.radius * 1.5f  * ExplosiveArea.transform.localScale.x;
 	    var modulus = (playerPos - bulletPos).magnitude;
 
         //print("Explosion Radius " + radius);
@@ -77,9 +78,9 @@ public class ExplosiveBullet : AbstractBullet
         //print("Bullet at: " + bulletPos + " // Player at: " + playerPos);
         //print("Ratio damage: " + ((radius-modulus)/radius) );
 	    if (radius < modulus) {
-            return BulletDamage * 0.075f;
+			return Mathf.Floor(BulletDamage * 0.4f);
         }
-		return BulletDamage * Mathf.Max(((radius - modulus) / radius), 0.075f);
+		return Mathf.Floor(BulletDamage * Mathf.Max(((radius - modulus) / radius), 0.4f));
 	}
 	
 	protected void TriggerExplosion() {

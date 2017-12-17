@@ -952,6 +952,9 @@ ModelImporter:
     101888: Plane_001_cell_749
     101890: Plane_001_cell_750
     101892: Plane_001_cell_751
+    101894: Circle_004_cell_019
+    101896: Circle_005_cell_021
+    101898: Circle_006_cell_016
     400000: Circle_004_cell
     400002: Circle_004_cell_001
     400004: Circle_004_cell_002
@@ -1899,6 +1902,9 @@ ModelImporter:
     401888: Plane_001_cell_749
     401890: Plane_001_cell_750
     401892: Plane_001_cell_751
+    401894: Circle_004_cell_019
+    401896: Circle_005_cell_021
+    401898: Circle_006_cell_016
     2300000: Circle_004_cell
     2300002: Circle_004_cell_001
     2300004: Circle_004_cell_002
@@ -2845,6 +2851,9 @@ ModelImporter:
     2301886: Plane_001_cell_749
     2301888: Plane_001_cell_750
     2301890: Plane_001_cell_751
+    2301892: Circle_004_cell_019
+    2301894: Circle_005_cell_021
+    2301896: Circle_006_cell_016
     3300000: Circle_004_cell
     3300002: Circle_004_cell_001
     3300004: Circle_004_cell_002
@@ -3791,6 +3800,9 @@ ModelImporter:
     3301886: Plane_001_cell_749
     3301888: Plane_001_cell_750
     3301890: Plane_001_cell_751
+    3301892: Circle_004_cell_019
+    3301894: Circle_005_cell_021
+    3301896: Circle_006_cell_016
     4300000: Icosphere_007
     4300002: Icosphere_006
     4300004: Icosphere
@@ -4737,6 +4749,9 @@ ModelImporter:
     4301886: Cube_118
     4301888: Cube_117
     4301890: Cube_006
+    4301892: Circle_005_cell_021
+    4301894: Circle_006_cell_016
+    4301896: Circle_004_cell_019
     7400000: Default Take
     9500000: //RootNode
   materials:

@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
 	
 	public bool Follow = true;
 	public float PerspectiveTransitionTime = 0.4f;
-	private Vector3 _minimapPoint;
+	private GameObject _minimapPoint;
 	public float MinimapWidth;
 
     bool startdone = false;
@@ -39,8 +39,8 @@ public class CameraController : MonoBehaviour {
         //_followingMode.target = _controller.activePlayer;
         //Invoke("SetPlayerTargetFirstTime", 0.75f); //Intencio: conseguir la camara fen un travelling del fondo al nivell jugable abans de comensar
 
-		_minimapPoint = GameObject.FindGameObjectWithTag("Minimap Point").GetComponent<Transform>().position;
-	}
+	    _minimapPoint = GameObject.FindGameObjectWithTag("Minimap Point");
+    }
 
     public void SetPlayerTargetFirstTime()
     {
@@ -68,6 +68,10 @@ public class CameraController : MonoBehaviour {
 		var startTime = Time.time;
 		float[] currentTransitionSpeed = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		var startPos = Camera.main.transform.position;
+		var startRotation = Camera.main.transform.rotation;
+		var targetRotation = Camera.main.transform.rotation;
+		targetRotation.y = 0;
+		targetRotation.z = 0;
 		// 4 is here because it takes around 4 * T seconds for the result to get where we want
 		// even though the official documentation specifies that SmoothDamp will take
 		// approximately T time to get there
@@ -83,6 +87,7 @@ public class CameraController : MonoBehaviour {
 			}
 			Camera.main.projectionMatrix = mat;
 			Camera.main.transform.position = Vector3.Slerp(startPos, position, t);
+			Camera.main.transform.rotation = Quaternion.Slerp(startRotation, targetRotation, t);
 			if (Camera.main.GetComponent<FollowingCamera>().enabled) {
 				Camera.main.ResetProjectionMatrix();
 			}
@@ -143,7 +148,8 @@ public class CameraController : MonoBehaviour {
 				_followingMode.enabled =
 					false; // following camera is always updating the position, impedes the lerp to minimap point
 				Camera.main.ResetProjectionMatrix();
-				_transitionCoroutine = TransitionCameraPerspective(GetOrtographicMatrix(), _minimapPoint, PerspectiveTransitionTime,
+				_transitionCoroutine = TransitionCameraPerspective(GetOrtographicMatrix(), 
+					_minimapPoint.transform.position, PerspectiveTransitionTime,
 					_mapMode, _followingMode);
 				StartCoroutine(_transitionCoroutine);
 
@@ -194,6 +200,11 @@ public class CameraController : MonoBehaviour {
 	}
 
 
+	public bool IsMinimapEnabled()
+	{
+		return _mapMode.enabled;
+	}
+	
     public void CancelStartAnimation()
     {
 

@@ -9,19 +9,24 @@ ModelImporter:
     100002: Cylinder
     100004: Cylinder_001
     100006: Icosphere
+    100008: Cylinder_002
     400000: //RootNode
     400002: Cylinder
     400004: Cylinder_001
     400006: Icosphere
+    400008: Cylinder_002
     2300000: Cylinder
     2300002: Cylinder_001
     2300004: Icosphere
+    2300006: Cylinder_002
     3300000: Cylinder
     3300002: Cylinder_001
     3300004: Icosphere
+    3300006: Cylinder_002
     4300000: Cylinder_001
     4300002: Cylinder
     4300004: Icosphere
+    4300006: Cylinder_002
     7400000: Default Take
     9500000: //RootNode
   materials:
