@@ -269,7 +269,7 @@ public class GameController : MonoBehaviour {
 		int team = activePlayer.GetComponent<PlayerController> ().TEAM;
 
 		GetComponent<InitUsages> ().SetBowUsages(team, _teamGunUses [team-1] [4]);
-		GetComponent<InitUsages> ().SetGrenadeUsages(team, _teamGunUses [team-1] [3]);
+		GetComponent<InitUsages> ().SetDynamiteUsages(team, _teamGunUses [team-1] [2]);
 	}
 
 	public void addUsages(int team, int gun, int value){
@@ -475,7 +475,7 @@ public class GameController : MonoBehaviour {
             int team = activePlayer.GetComponent<PlayerController>().TEAM;
             GetComponent<InitUsages>().SetPanel(team);
             GetComponent<InitUsages>().SetBowUsages(team, _teamGunUses[team - 1][4]);
-            GetComponent<InitUsages>().SetGrenadeUsages(team, _teamGunUses[team - 1][3]);
+            GetComponent<InitUsages>().SetDynamiteUsages(team, _teamGunUses[team - 1][2]);
         }
 	}
 	
