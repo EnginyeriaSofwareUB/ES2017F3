@@ -513,7 +513,7 @@ public class GameController : MonoBehaviour {
 
 
 
-        if (Input.GetKey (KeyCode.Escape)) {
+        if (Input.GetKeyDown (KeyCode.Escape)) {
 			if (current == gameStates.pause) {
 				pauseScreenUI.SetActive(false);
 				current = gameStates.gameOn;
