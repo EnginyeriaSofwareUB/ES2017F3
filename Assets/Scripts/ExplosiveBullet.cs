@@ -115,8 +115,10 @@ public class ExplosiveBullet : AbstractBullet
 
     private void OnDestroy()
     {
+        //tell the camera where we were
+        Camera.main.GetComponent<FollowingCamera>().bullet_lastPos = this.transform;
+
         //tell controler that we finished attacking
-        //GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().shoot_ongoing = false;
         GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().OnEndShoot();
     }
 }

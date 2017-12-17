@@ -7,7 +7,7 @@ public class FollowingCamera : MonoBehaviour {
 
 	public GameObject target;
     public GameObject bullet_target;
-    public Transform bullet_lastPos;
+    public Transform bullet_lastPos; //will be filled from bullets script when they are destroyed.
 
     [Header("Camera sets")]
 	public float offset = 20.0f;
@@ -88,7 +88,7 @@ public class FollowingCamera : MonoBehaviour {
                 transform.position = new Vector3(bullet_target.transform.position.x, bullet_target.transform.position.y + height, bullet_target.transform.position.z - offset);
             }
 
-            bullet_lastPos = bullet_target.transform;
+            //bullet_lastPos = bullet_target.transform;
 
         }else if(control.shoot_ongoing && !bullet_target)
         {
