@@ -845,9 +845,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b49b9b185a4a4a5c8793b938ae26890b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletDamage: 10
+  BulletDamage: 21
   TimeUntilDespawn: 10
-  ExplosionDuration: 0.2
+  ExplosionDuration: 0.15
   ExplosionEffect: {fileID: 1494359384078398, guid: 7a9f311fbb7ca459783c9558c0de4ac6,
     type: 2}
 --- !u!136 &136460063269970000
@@ -872,7 +872,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 3.83
+  m_Radius: 5
   m_Height: 14.99
   m_Direction: 1
   m_Center: {x: 0, y: 7.4, z: 0}
