@@ -17,12 +17,16 @@ public class FollowingCamera : MonoBehaviour {
 	[Header("Smooth-Follow Camera")]
 	public bool activateSmooth = false;
 
+	private CameraController _cameraController;
+	
 	// Use this for initialization
 	void Start () {
         control = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
 
         if (target)
 		    transform.position = new Vector3 (target.transform.position.x, (target.transform.position.y + 2), transform.position.z);
+
+		_cameraController = GetComponent<CameraController>();
 	}
 
 
@@ -45,19 +49,22 @@ public class FollowingCamera : MonoBehaviour {
 				transform.position = new Vector3(target.transform.position.x, target.transform.position.y + height, target.transform.position.z - offset);
 			}
 
-            Vector3 eulerRot;
-            if(target.GetComponent<PlayerController>().TEAM == 1)
-            {
-                eulerRot = new Vector3(15f, 15f, 2.5f);
-                offsetX = -1f;
-            }
-            else
-            {
-                eulerRot = new Vector3(15f, -15f, 2.5f);
-                offsetX = 1f;
-            }
+			if (!_cameraController.IsMinimapEnabled())
+			{
+				Vector3 eulerRot;
+				if (target.GetComponent<PlayerController>().TEAM == 1)
+				{
+					eulerRot = new Vector3(15f, 15f, 2.5f);
+					offsetX = -1f;
+				}
+				else
+				{
+					eulerRot = new Vector3(15f, -15f, 2.5f);
+					offsetX = 1f;
+				}
 
-            this.transform.rotation = Quaternion.Euler(eulerRot);
+				transform.rotation = Quaternion.Euler(eulerRot);
+			}
 
 		}
 
