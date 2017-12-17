@@ -7,6 +7,7 @@ public class FollowingCamera : MonoBehaviour {
 
 	public GameObject target;
     public GameObject bullet_target;
+    public Transform bullet_lastPos;
 
     [Header("Camera sets")]
 	public float offset = 20.0f;
@@ -85,6 +86,27 @@ public class FollowingCamera : MonoBehaviour {
             else
             {
                 transform.position = new Vector3(bullet_target.transform.position.x, bullet_target.transform.position.y + height, bullet_target.transform.position.z - offset);
+            }
+
+            bullet_lastPos = bullet_target.transform;
+
+        }else if(control.shoot_ongoing && !bullet_target)
+        {
+            if (activateSmooth)
+            {
+
+                Vector3 pos = transform.position;
+                pos.x = Mathf.Lerp(transform.position.x, bullet_lastPos.transform.position.x, (speed * Time.deltaTime));
+                pos.y = Mathf.Lerp(transform.position.y, (bullet_lastPos.transform.position.y + height), (speed * Time.deltaTime));
+                pos.z = bullet_lastPos.transform.position.z - offset;
+
+                transform.position = pos;
+
+                // Camera basic follow.
+            }
+            else
+            {
+                transform.position = new Vector3(bullet_lastPos.transform.position.x, bullet_lastPos.transform.position.y + height, bullet_lastPos.transform.position.z - offset);
             }
         }
 	}

@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour {
 
     [Space(5)]
     public bool shoot_ongoing = false;
+    public float cameraOnExplosionTime = 1f;
     bool shoot_dynamite = false;
     bool startAnimCancelled = false;
 
@@ -308,14 +309,25 @@ public class GameController : MonoBehaviour {
     void OnShoot() {
 		// disable shooting
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
-        if(shoot_dynamite)
-            turnRemainingTime = afterShootTime + 2f;	 //2f is da explosion animation lenght
+        if (shoot_dynamite)
+            turnRemainingTime = afterShootTime + cameraOnExplosionTime; //+ 2f;	 //2f is da explosion animation lenght
         else
-            turnRemainingTime = afterShootTime;
+            turnRemainingTime = afterShootTime + cameraOnExplosionTime;
 
         updateUsages ();
 
         shoot_ongoing = true;
+    }
+
+    //called when projectile explodes
+    public void OnEndShoot()
+    {
+        Invoke("ShootOnGoingEnd", cameraOnExplosionTime);
+    }
+
+    void ShootOnGoingEnd()
+    {
+        shoot_ongoing = false;
     }
 
 	public void updateUsages(){
@@ -470,6 +482,7 @@ public class GameController : MonoBehaviour {
         {
             current = gameStates.gameOn;
 
+            //to avoid out of control bugs
             shoot_ongoing = false;
 
             disableActivePlayer();
@@ -553,7 +566,9 @@ public class GameController : MonoBehaviour {
             if (activePlayer)
                 activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
 
-            turnRemainingTime -= Time.deltaTime;
+            if(!shoot_ongoing)
+                turnRemainingTime -= Time.deltaTime;
+
             if (turnRemainingTime < 0)
             {
                 changeTurn();
