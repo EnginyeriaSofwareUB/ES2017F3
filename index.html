@@ -23,10 +23,14 @@ $(document).ready(function(){
         var cusid_ele = document.getElementsByClassName('video');
         for (var i = 0; i < cusid_ele.length; ++i) {
             var item = cusid_ele[i];
+            item.pause();
+            item.currentTime = 0;
             item.style.display = "none";
+
         }
         var v = document.getElementsByClassName('video1');
         v[0].style.display = "block";
+        v[0].play();
 
         var cusid = document.getElementsByClassName('txt_info');
         for (var i = 0; i < cusid.length; ++i) {
@@ -41,10 +45,13 @@ $(document).ready(function(){
         var cusid_ele = document.getElementsByClassName('video');
         for (var i = 0; i < cusid_ele.length; ++i) {
             var item = cusid_ele[i];
+            item.pause();
+            item.currentTime = 0;
             item.style.display = "none";
         }
         var v = document.getElementsByClassName('video2');
         v[0].style.display = "block";
+        v[0].play();
 
         var cusid = document.getElementsByClassName('txt_info');
         for (var i = 0; i < cusid.length; ++i) {
@@ -59,10 +66,13 @@ $(document).ready(function(){
         var cusid_ele = document.getElementsByClassName('video');
         for (var i = 0; i < cusid_ele.length; ++i) {
             var item = cusid_ele[i];
+            item.pause();
+            item.currentTime = 0;
             item.style.display = "none";
         }
         var v = document.getElementsByClassName('video3');
         v[0].style.display = "block";
+        v[0].play();
 
         var cusid = document.getElementsByClassName('txt_info');
         for (var i = 0; i < cusid.length; ++i) {
@@ -77,10 +87,13 @@ $(document).ready(function(){
         var cusid_ele = document.getElementsByClassName('video');
         for (var i = 0; i < cusid_ele.length; ++i) {
             var item = cusid_ele[i];
+            item.pause();
+            item.currentTime = 0;
             item.style.display = "none";
         }
         var v = document.getElementsByClassName('video4');
         v[0].style.display = "block";
+        v[0].play();
 
         var cusid = document.getElementsByClassName('txt_info');
         for (var i = 0; i < cusid.length; ++i) {
@@ -95,10 +108,13 @@ $(document).ready(function(){
         var cusid_ele = document.getElementsByClassName('video');
         for (var i = 0; i < cusid_ele.length; ++i) {
             var item = cusid_ele[i];
+            item.pause();
+            item.currentTime = 0;
             item.style.display = "none";
         }
         var v = document.getElementsByClassName('video5');
         v[0].style.display = "block";
+        v[0].play();
 
         var cusid = document.getElementsByClassName('txt_info');
         for (var i = 0; i < cusid.length; ++i) {
@@ -195,12 +211,6 @@ html, body {
 
 body, html{
     cursor: url("resourcesWeb/cur964.cur"), progress !important;
-}
-
-
-.custom_image{
-    background-image: url("resourcesWeb/bg_blur.png");
-    background-size: 100%;
 }
 
 #nav{
@@ -303,7 +313,7 @@ body, html{
 }
 
 .text_cite{
-    font-family: diamonds;
+    font-family: "Times New Roman", Times, serif;
     font-size: 200%;
     display: block;
     background: rgba(000, 000, 000, 0.5);
@@ -412,21 +422,18 @@ tr.border_bottom td {
     <div class="col-md-6">
         <div class="text_cite"
                    style="margin-top: 5%; margin-left: 10%; width: 70%;">
-            <p>Un joc fresc i innovador que et
-                fa gaudir de molt bons moments</p>
+            <p style="font-style: italic;">"Ni els meus esclaus ho hauríen fet millor"</p>
             <p align="right">Tutankamon, 1r del seu nom</p>
         </div>
         <div class="text_cite"
                    style="margin-top: 5%; margin-left: 25%; width: 70%;">
-            <p>Un joc fresc i innovador que et
-                fa gaudir de molt bons moments</p>
-            <p align="right">Tutankamon, 1r del seu nom</p>
+            <p style="font-style: italic;">"Molt recomanat a tots els mariners d'aigua dolça"</p>
+            <p align="right">Barba-roja</p>
         </div>
         <div class="text_cite"
                    style="margin-top: 5%; margin-left: 40%; width: 70%;">
-            <p>Un joc fresc i innovador que et
-                fa gaudir de molt bons moments</p>
-            <p align="right">Tutankamon, 1r del seu nom</p>
+            <p style="font-style: italic;">"Millor joc del 2017"</p>
+            <p align="right">New York Times</p>
         </div>
     </div>
     <div class="col-md-6">
@@ -541,7 +548,7 @@ tr.border_bottom td {
                             </tr>
                             <tr>
                                 <td style="text-align:right">MUNICIÓ:</td>
-                                <td style="text-align:left">&nbsp Usos il·limitats</td>
+                                <td style="text-align:left">&nbsp 2 usos inicials</td>
                             </tr>
                         </table>
                     </div>
@@ -561,7 +568,7 @@ tr.border_bottom td {
                             </tr>
                             <tr>
                                 <td style="text-align:right">MUNICIÓ:</td>
-                                <td style="text-align:left">&nbsp 10 usos inicials</td>
+                                <td style="text-align:left">&nbsp Usos il·limitats</td>
                             </tr>
                         </table>
                     </div>
@@ -580,7 +587,7 @@ tr.border_bottom td {
                             </tr>
                             <tr>
                                 <td style="text-align:right">MUNICIÓ:</td>
-                                <td style="text-align:left">&nbsp 2 usos inicials</td>
+                                <td style="text-align:left">&nbsp 1 ús inicial</td>
                             </tr>
                         </table>
                     </div>
@@ -641,7 +648,7 @@ tr.border_bottom td {
 
         <tr class="border_bottom">
             <td style="text-align:center">
-                <img width="30%" height="10%" src="resourcesWeb/heal.gif" alt="img"></td>
+                <img width="30%" src="resourcesWeb/heal.gif" alt="img"></td>
              <td width="30%" style="text-align:center">&nbsp VIDA<br>
             Retorna salut al personatge</td>
         </tr>
@@ -650,7 +657,7 @@ tr.border_bottom td {
              <td width="30%" style="text-align:center">MUNICIÓ<br>
             Retorna munició d'alguna de les armes <br>que no tenen munició infinita.</td>
             <td style="text-align:center">
-                <img width="30%" height="10%" src="resourcesWeb/crate.gif" alt="img"></td>
+                <img width="30%" src="resourcesWeb/crate.gif" alt="img"></td>
         </tr>
 
         <tr class="border_bottom">
