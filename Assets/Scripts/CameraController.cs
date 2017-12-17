@@ -130,8 +130,10 @@ public class CameraController : MonoBehaviour {
 			StopCoroutine(_transitionCoroutine);
 			if (_mapMode.enabled)
 			{
-				// We divide by 4 because the zoom back goes far quicker for some reason, so it takes less time
-				_transitionCoroutine = TransitionCameraPerspective(_perspectiveMatrix, _perspectivePoint,
+                _controller.GetComponent<MatchProgressBar>().SetPlayerIconsActive(true);
+
+                // We divide by 4 because the zoom back goes far quicker for some reason, so it takes less time
+                _transitionCoroutine = TransitionCameraPerspective(_perspectiveMatrix, _perspectivePoint,
 					PerspectiveTransitionTime / 4, _followingMode, _mapMode);
 				StartCoroutine(_transitionCoroutine);
 
@@ -140,10 +142,12 @@ public class CameraController : MonoBehaviour {
 						Destroy (flag);
 					}
 				}
-			}
+            }
 			else
 			{
-				_perspectiveMatrix = Camera.main.projectionMatrix;
+                _controller.GetComponent<MatchProgressBar>().SetPlayerIconsActive(false);
+
+                _perspectiveMatrix = Camera.main.projectionMatrix;
 				_perspectivePoint = Camera.main.transform.position;
 				_followingMode.enabled =
 					false; // following camera is always updating the position, impedes the lerp to minimap point
@@ -188,7 +192,8 @@ public class CameraController : MonoBehaviour {
 					}
 				}
 			}
-		}
+
+        }
 	}
 
 	private Matrix4x4 GetOrtographicMatrix()
