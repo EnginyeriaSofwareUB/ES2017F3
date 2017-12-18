@@ -19,6 +19,7 @@ public class Botones : MonoBehaviour
     public Transform f2_place;
     string lastf1 = "";
     string lastf2 = "";
+	string sceneToLoad = "Test_Game";
 
     //to load prefabs for the preview
     GameObject vikingUI;
@@ -43,8 +44,16 @@ public class Botones : MonoBehaviour
         if (IS_MENU)
             GetGamePreferences();
         GamePreferences.howTo = false;
-        SceneManager.LoadScene("Test_Game", LoadSceneMode.Single);
+		SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
     }
+
+	public void SetLevel1(){
+		sceneToLoad = "Test_Game";
+	}
+
+	public void SetLevel2(){
+		sceneToLoad = "Test_Game_Level2";
+	}
 
     public void LoadMenu()
     {
