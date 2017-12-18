@@ -55,13 +55,13 @@ public class PlayerShooting : MonoBehaviour
                     newScale = Vector3.one * 0.4f;
                     newPos = new Vector3(0.78f, 0, -0.15f);
                     break;
-                case "Dynamite Base":
-                    newScale = Vector3.one * 1.9f;
-                    newPos = new Vector3(-0.019f, 0.426f, -0.448f);
+				case "Dynamite Base":
+					newScale = Vector3.one * 1.9f;
+					newPos = new Vector3 (-0.019f, 0.426f, -0.448f);					
                     break;
 				case "Grenade Base":
 					newScale = Vector3.one * 2f;
-					newPos = new Vector3(-0.2f, 0.79f, 0.60f);
+					newPos = new Vector3(0.06f, 0.14f, 0.60f);
 					break;
 
                 case "Bow and Arrow":
@@ -287,6 +287,13 @@ public class PlayerShooting : MonoBehaviour
 
         // Select configurations of the gun
         switch (gunIndex) {
+
+			//Dynamite Base
+			case 2:
+				maxAngle = 0;
+				maxPower = 0;
+				break;
+
             default:
                 RestoreShootingParam();
                 break;
