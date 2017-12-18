@@ -62,6 +62,7 @@ GameObject:
   - component: {fileID: 136178061097212484}
   - component: {fileID: 114738504392925860}
   - component: {fileID: 82070948498829828}
+  - component: {fileID: 114149719477811084}
   m_Layer: 0
   m_Name: Pirate_Character
   m_TagString: Player
@@ -528,14 +529,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1150633669930894}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 9.752896, y: -1.9394497, z: -0.86928654}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 973.89636, y: 544.38745, z: -104.31294}
   m_LocalScale: {x: 0.2457784, y: 0.2457784, z: 0.2457784}
   m_Children:
   - {fileID: 4244214946502488}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4191498059546010
 Transform:
   m_ObjectHideFlags: 1
@@ -1018,6 +1019,22 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114149719477811084
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1150633669930894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db18a323e35375641ac44f1f8919905e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TEAM: 0
+  torso: {fileID: 1153266364379660}
+  head: {fileID: 1989186945281412}
+  t: {fileID: 0}
+  h: {fileID: 0}
 --- !u!114 &114203060443010476
 MonoBehaviour:
   m_ObjectHideFlags: 1

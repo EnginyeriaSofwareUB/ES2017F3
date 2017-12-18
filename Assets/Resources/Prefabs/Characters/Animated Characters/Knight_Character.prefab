@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 136185669584759864}
   - component: {fileID: 114652841794218342}
   - component: {fileID: 82959634380133262}
+  - component: {fileID: 114426923795310770}
   m_Layer: 0
   m_Name: Knight_Character
   m_TagString: Player
@@ -692,7 +693,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1705339421853476}
   m_LocalRotation: {x: -0.00000007683411, y: 0.70710367, z: -0.00000010803342, w: 0.70711}
-  m_LocalPosition: {x: 6.818968, y: -1.711845, z: -0.43440056}
+  m_LocalPosition: {x: 972.0624, y: 538.9949, z: -97.54358}
   m_LocalScale: {x: 0.2457784, y: 0.2457784, z: 0.2457784}
   m_Children:
   - {fileID: 4488295392862982}
@@ -1257,6 +1258,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114426923795310770
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1705339421853476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db18a323e35375641ac44f1f8919905e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TEAM: 0
+  torso: {fileID: 1736397928624512}
+  head: {fileID: 1203437455990264}
+  t: {fileID: 0}
+  h: {fileID: 0}
 --- !u!114 &114446078877288574
 MonoBehaviour:
   m_ObjectHideFlags: 1

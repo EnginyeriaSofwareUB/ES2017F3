@@ -171,6 +171,9 @@ public class Botones : MonoBehaviour
 			b = Instantiate(vikingUI, f2_place.position, f2_place.rotation, f2_place) as GameObject;
             a.transform.localScale = new Vector3(a.transform.localScale.x * 400f, a.transform.localScale.y * 400f, a.transform.localScale.z * -400f);
             b.transform.localScale = new Vector3(b.transform.localScale.x * 400f, b.transform.localScale.y * 400f, b.transform.localScale.z * -400f);
+            
+            a.GetComponent<ColorTeam>().color = 1;
+            b.GetComponent<ColorTeam>().color = 2;
         }
 
         lastf1 = "pirates";
@@ -271,6 +274,9 @@ public class Botones : MonoBehaviour
                         a = Instantiate(vikingUI, f1_place.position, f1_place.rotation, f1_place) as GameObject;
                         break;
                 }
+
+                //sets the color for the team
+                a.GetComponent<ColorTeam>().color = 1;
             }
 
             a.transform.localScale = new Vector3(a.transform.localScale.x * 400f, a.transform.localScale.y * 400f, a.transform.localScale.z * -400f);
@@ -307,6 +313,9 @@ public class Botones : MonoBehaviour
                         b = Instantiate(vikingUI, f2_place.position, f2_place.rotation, f2_place) as GameObject;
                         break;
                 }
+
+                //sets the color for the team
+                b.GetComponent<ColorTeam>().color = 2;
             }
 
             b.transform.localScale = new Vector3(b.transform.localScale.x * 400f, b.transform.localScale.y * 400f, b.transform.localScale.z * -400f);
