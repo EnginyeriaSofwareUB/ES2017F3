@@ -180,4 +180,10 @@ public class MatchProgressBar : MonoBehaviour
         t1Back.color = new Color(t1Back.color.r, t1Back.color.g, t1Back.color.b, 0.55f);
         t2Back.color = new Color(t2Back.color.r, t2Back.color.g, t2Back.color.b, 0.55f);
     }
+
+    public void SetPlayerIconsActive(bool active)
+    {
+        t1Back.gameObject.SetActive(active);
+        t2Back.gameObject.SetActive(active);
+    }
 }

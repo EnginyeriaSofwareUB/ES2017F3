@@ -60,8 +60,7 @@ public class ExplosiveBullet : AbstractBullet
 		}
 
 
-        //tell controler that we finished attacking
-        GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().shoot_ongoing = false;
+        
 
     }
 
@@ -113,4 +112,13 @@ public class ExplosiveBullet : AbstractBullet
 		}
 		Destroy(gameObject, ExplosionDuration);
 	}
+
+    private void OnDestroy()
+    {
+        //tell the camera where we were
+        Camera.main.GetComponent<FollowingCamera>().bullet_lastPos = this.transform.position;
+
+        //tell controler that we finished attacking
+        GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().OnEndShoot();
+    }
 }
