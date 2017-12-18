@@ -55,9 +55,11 @@ public class PlayerShooting : MonoBehaviour
                     newScale = Vector3.one * 0.4f;
                     newPos = new Vector3(0.78f, 0, -0.15f);
                     break;
-                case "Dynamite Base":
-                    newScale = Vector3.one * 1.9f;
-                    newPos = new Vector3(-0.019f, 0.426f, -0.448f);
+				case "Dynamite Base":
+					newScale = Vector3.one * 1.9f;
+					newPos = new Vector3 (-0.019f, 0.426f, -0.448f);
+					maxAngle = 0;
+					maxPower = 0;
                     break;
 				case "Grenade Base":
 					newScale = Vector3.one * 2f;
