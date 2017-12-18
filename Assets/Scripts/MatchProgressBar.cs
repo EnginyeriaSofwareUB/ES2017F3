@@ -35,6 +35,8 @@ public class MatchProgressBar : MonoBehaviour
     [Space(5)]
     public Transform back1_backup;
     public Transform back2_backup;
+    GameObject a;
+    GameObject b;
 
     [Space(5)]
 
@@ -50,31 +52,37 @@ public class MatchProgressBar : MonoBehaviour
         team1MaxHealth = GamePreferences.players_maxlife;
         team2MaxHealth = GamePreferences.players_maxlife;
 
+        a = new GameObject();
+        b = new GameObject();
         //Place the players indicators
         switch (GamePreferences.p1_faction)
         {
             case "pirates":
-                Instantiate(pirate, t1Icon.position, t1Icon.transform.rotation, t1Icon);
+                a = Instantiate(pirate, t1Icon.position, t1Icon.transform.rotation, t1Icon) as GameObject;
                 break;
             case "vikings":
-                Instantiate(viking, t1Icon.position, t1Icon.transform.rotation, t1Icon);
+                a = Instantiate(viking, t1Icon.position, t1Icon.transform.rotation, t1Icon) as GameObject;
                 break;
             case "knights":
-                Instantiate(knight, t1Icon.position, t1Icon.transform.rotation, t1Icon);
+                a = Instantiate(knight, t1Icon.position, t1Icon.transform.rotation, t1Icon) as GameObject;
                 break;
         }
         switch (GamePreferences.p2_faction)
         {
             case "pirates":
-                Instantiate(pirate, t2Icon.position, t2Icon.transform.rotation, t2Icon);
+                b = Instantiate(pirate, t2Icon.position, t2Icon.transform.rotation, t2Icon) as GameObject;
                 break;
             case "vikings":
-                Instantiate(viking, t2Icon.position, t2Icon.transform.rotation, t2Icon);
+                b = Instantiate(viking, t2Icon.position, t2Icon.transform.rotation, t2Icon) as GameObject;
                 break;
             case "knights":
-                Instantiate(knight, t2Icon.position, t2Icon.transform.rotation, t2Icon);
+                b = Instantiate(knight, t2Icon.position, t2Icon.transform.rotation, t2Icon) as GameObject;
                 break;
         }
+
+        //set player color
+        a.GetComponent<ColorTeam>().color = 1;
+        b.GetComponent<ColorTeam>().color = 2;
 
         //GetTeamHPs();
 
