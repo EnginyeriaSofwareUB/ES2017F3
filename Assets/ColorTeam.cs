@@ -12,6 +12,7 @@ public class ColorTeam : MonoBehaviour {
 
     [Space(5)]
 
+    public bool isViking = false;
     public GameObject torso;
     public GameObject head;
     public Material t;
@@ -22,8 +23,16 @@ public class ColorTeam : MonoBehaviour {
 	void Start () {
         if(!show)
             TEAM = GetComponent<PlayerController>().TEAM;
-        t = torso.GetComponent<Renderer>().material;
-        h = head.GetComponent<Renderer>().material;
+        if (isViking)
+        {
+            t = torso.GetComponent<Renderer>().materials[1];
+            h = head.GetComponent<Renderer>().material;
+        }
+        else
+        {
+            t = torso.GetComponent<Renderer>().material;
+            h = head.GetComponent<Renderer>().material;
+        }
 
         if (!show)
         {
