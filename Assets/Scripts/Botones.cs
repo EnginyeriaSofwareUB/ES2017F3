@@ -9,9 +9,9 @@ public class Botones : MonoBehaviour
     public bool IS_MENU = false;
 
     public GameObject factions;
-    public GameObject suddenBool;
-    public GameObject suddenTurns;
-    public GameObject maxLife;
+    //public GameObject suddenBool;
+    //public GameObject suddenTurns;
+    //public GameObject maxLife;
     public GameObject playersTeam;
 
     [Header("Preview Faction")]
@@ -53,6 +53,25 @@ public class Botones : MonoBehaviour
 
 	public void SetLevel2(){
 		sceneToLoad = "Test_Game_Level2";
+	}
+
+	public void setSudden(bool sudden){
+		GamePreferences.sudden_death_activated = sudden;
+	}
+
+	public void setGameMode(bool gameMode){
+
+
+		if (gameMode) {
+			// Normal
+			GamePreferences.sudden_death_turns = 12;
+			GamePreferences.players_maxlife = 100;
+			
+		} else {
+			//Fast
+			GamePreferences.sudden_death_turns = 6;
+			GamePreferences.players_maxlife = 75;
+		}
 	}
 
     public void LoadMenu()
@@ -118,10 +137,12 @@ public class Botones : MonoBehaviour
         GetFactionPreferences();
 
         //changed input for text fields as no longer needed to edit it by the player, just use arrows
-        GamePreferences.sudden_death_activated = suddenBool.GetComponent<Toggle>().isOn;
-        GamePreferences.sudden_death_turns = int.Parse(suddenTurns.GetComponent<Text>().text);
-        GamePreferences.players_maxlife = int.Parse(maxLife.GetComponent<Text>().text);
-        int nplayers = int.Parse(playersTeam.GetComponent<Text>().text);
+        
+		//GamePreferences.sudden_death_activated = suddenBool.GetComponent<Toggle>().isOn;
+        //GamePreferences.sudden_death_turns = int.Parse(suddenTurns.GetComponent<Text>().text);
+        //GamePreferences.players_maxlife = int.Parse(maxLife.GetComponent<Text>().text);
+        
+		int nplayers = int.Parse(playersTeam.GetComponent<Text>().text);
         if (nplayers <= 4)
         {
             GamePreferences.number_players_team = nplayers;
@@ -140,12 +161,6 @@ public class Botones : MonoBehaviour
             playersTeam.GetComponent<InputField>().text = 4.ToString();
         }
     }
-
-    public void SetSuddenTurnsInteractable()
-    {
-        suddenTurns.GetComponent<InputField>().interactable = suddenBool.GetComponent<Toggle>().isOn;
-    }
-
 
     //for first timne menu is showed
     public void FirstSelected()
