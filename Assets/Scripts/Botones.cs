@@ -144,13 +144,13 @@ public class Botones : MonoBehaviour
         if (f1_place && f2_place)
         {
             a = Instantiate(pirateUI, f1_place.position, f1_place.rotation, f1_place) as GameObject;
-            b = Instantiate(pirateUI, f2_place.position, f2_place.rotation, f2_place) as GameObject;
+			b = Instantiate(vikingUI, f2_place.position, f2_place.rotation, f2_place) as GameObject;
             a.transform.localScale = new Vector3(a.transform.localScale.x * 400f, a.transform.localScale.y * 400f, a.transform.localScale.z * -400f);
             b.transform.localScale = new Vector3(b.transform.localScale.x * 400f, b.transform.localScale.y * 400f, b.transform.localScale.z * -400f);
         }
 
         lastf1 = "pirates";
-        lastf2 = "pirates";
+        lastf2 = "vikings";
     }
 
     //to update the preview box
