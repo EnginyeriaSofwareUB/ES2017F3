@@ -61,7 +61,7 @@ public class PlayerShooting : MonoBehaviour
                     break;
 				case "Grenade Base":
 					newScale = Vector3.one * 2f;
-					newPos = new Vector3(-0.2f, 0.79f, 0.60f);
+					newPos = new Vector3(0.06f, 0.14f, 0.60f);
 					break;
 
                 case "Bow and Arrow":
