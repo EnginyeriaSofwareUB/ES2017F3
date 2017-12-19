@@ -12,5 +12,6 @@ public class GamePreferences {
 	public static int players_maxlife = 100;
 	public static int difficulty = 1;
 	public static bool howTo = false;
+    public static float audio_volume = 1.0f;
 
 }

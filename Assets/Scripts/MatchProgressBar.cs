@@ -90,10 +90,10 @@ public class MatchProgressBar : MonoBehaviour
 
         //GetTeamHPs();
         Camera cam = Camera.main;
+
+        //set pixel position
         b1_screen = cam.WorldToScreenPoint(t1Icon.position);
         b2_screen = cam.WorldToScreenPoint(t2Icon.position);
-        print("world pos: " + t1Icon.position + ", " + t2Icon.position);
-        print("screen pos: " + b1_screen + ", " + b2_screen);
 
         Invoke("GetTeamHPs", 0.3f); //to avoid some bug related with this script being fastest than game controller
     }
@@ -111,23 +111,13 @@ public class MatchProgressBar : MonoBehaviour
     void Update()
     {
 
-        //GetTeamHPs();
-
-        /* (0-1 way)
-        relation = t1Relation / t2Relation;
-        t1Relation = team1Health / team1MaxHealth;
-        t2Relation = team2Health / team2MaxHealth;
-
-        if (float.IsNaN(relation))
-            relation = 0.5f;
-        progressBar.value = relation;*/
-
+        //set fixed pixel position
         t1Back.transform.position = Camera.main.ScreenToWorldPoint(b1_screen);
         t2Back.transform.position = Camera.main.ScreenToWorldPoint(b2_screen);
 
+        //print("set screen pos: " + b1_screen + ", " + b2_screen);
+        //print("set world pos: " + t1Back.transform.position + ", " + t2Back.transform.position);
 
-        print("set screen pos: " + b1_screen + ", " + b2_screen);
-        print("set world pos: " + t1Back.transform.position + ", " + t2Back.transform.position);
     }
 
     public void GetTeamHPs()

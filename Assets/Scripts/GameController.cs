@@ -151,10 +151,10 @@ public class GameController : MonoBehaviour {
                 player.GetComponent<PlayerController>().deathEvent.AddListener(OnDeath);
             }
         }
-		
 
-        //turnId = -1;
-        //changeTurn(); //moved to StartGame()
+
+        //set audio master volume
+        AudioListener.volume = GamePreferences.audio_volume;
     }
 
     void InitHowToGame()

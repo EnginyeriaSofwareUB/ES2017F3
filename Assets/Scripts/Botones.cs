@@ -21,6 +21,9 @@ public class Botones : MonoBehaviour
     string lastf2 = "";
 	string sceneToLoad = "Test_Game";
 
+    [Header("Music")]
+    public Slider audioVolume;
+
     //to load prefabs for the preview
     GameObject vikingUI;
     GameObject pirateUI;
@@ -155,6 +158,9 @@ public class Botones : MonoBehaviour
         {
             GamePreferences.number_players_team = 4;
         }
+
+        //master audio volume
+        GamePreferences.audio_volume = audioVolume.value;
     }
 
     public void CheckNPlayersPerTeam()
