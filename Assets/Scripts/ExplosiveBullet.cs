@@ -81,12 +81,23 @@ public class ExplosiveBullet : AbstractBullet
         }
 		return Mathf.Floor(BulletDamage * Mathf.Max(((radius - modulus) / radius), 0.4f));
 	}
+
+    public void ExplosionLight()
+    {
+        GameObject l = Instantiate(Resources.Load("Effects/ExplosionLight"), transform.position, transform.rotation, transform) as GameObject;
+    }
 	
 	protected void TriggerExplosion() {
 	    if (wind == null) return;
 
+        //tell the camera where we were
+        Camera.main.GetComponent<FollowingCamera>().bullet_lastPos = this.transform.position;
+
         // play explosion sound
         GetComponent<AudioSource>().Play();
+
+        //play explosion light
+        ExplosionLight();
 
         //delete itself from wind objects
         if (wind.objectsWind.Contains(this.gameObject))
@@ -116,7 +127,7 @@ public class ExplosiveBullet : AbstractBullet
     private void OnDestroy()
     {
         //tell the camera where we were
-        Camera.main.GetComponent<FollowingCamera>().bullet_lastPos = this.transform.position;
+        //Camera.main.GetComponent<FollowingCamera>().bullet_lastPos = this.transform.position;
 
         //tell controler that we finished attacking
         GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().OnEndShoot();
