@@ -9,6 +9,10 @@ public class ColorTeam : MonoBehaviour {
     public int TEAM;
     //public Material red_color;
     //public Material blue_color;
+    [Space(5)]
+
+    public Color player1 = new Color(1f, 0.4f, 0.4f);
+    public Color player2 = new Color(0.4f, 0.7f, 1f);
 
     [Space(5)]
 
@@ -38,26 +42,26 @@ public class ColorTeam : MonoBehaviour {
         {
             if (TEAM == 1)
             {
-                t.SetColor("_Color", Color.red);
-                h.SetColor("_Color", Color.red);
+                t.SetColor("_Color", player1);
+                h.SetColor("_Color", player1);
             }
             else if (TEAM == 2)
             {
-                t.SetColor("_Color", Color.blue);
-                h.SetColor("_Color", Color.blue);
+                t.SetColor("_Color", player2);
+                h.SetColor("_Color", player2);
             }
         }
         else
         {
             if (color == 1)
             {
-                t.SetColor("_Color", Color.red);
-                h.SetColor("_Color", Color.red);
+                t.SetColor("_Color", player1);
+                h.SetColor("_Color", player1);
             }
             else if (color == 2)
             {
-                t.SetColor("_Color", Color.blue);
-                h.SetColor("_Color", Color.blue);
+                t.SetColor("_Color", player2);
+                h.SetColor("_Color", player2);
             }
         }
         
