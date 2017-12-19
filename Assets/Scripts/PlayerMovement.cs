@@ -11,8 +11,8 @@ public class PlayerMovement : MonoBehaviour {
 	public bool jump;
 	public bool isGrounded;
 	public bool backJump = false;
-    private const float m_JumpPower = 4f; // The force added to the ball when it jumps.
-	private const float m_BackJumpPower = 5f;
+    private const float m_JumpPower = 4.5f; // The force added to the ball when it jumps.
+	private const float m_BackJumpPower = 4f;
 	private bool facingRight = false;
     private Animator anim;
 
