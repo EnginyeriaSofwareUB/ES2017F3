@@ -26,7 +26,6 @@ $(document).ready(function(){
             item.pause();
             item.currentTime = 0;
             item.style.display = "none";
-
         }
         var v = document.getElementsByClassName('video1');
         v[0].style.display = "block";
@@ -217,7 +216,7 @@ body, html{
       background: url("resourcesWeb/stone1.png") scroll top left;
       background-color: none;
       width:100%;
-      height:66px;
+      height:10%;
       position:fixed;
       top:0px;
 }
@@ -227,10 +226,10 @@ body, html{
 }
 
 .elem_bar{
-    margin-right: 150px;
+    margin-left: 190px;
     margin-top: 5px;
     background: rgba(000, 000, 000, 0.5);
-    width: 150px;
+    width: 180px;
     text-align: center;
     border: 2px solid #000;
 }
@@ -286,7 +285,7 @@ body, html{
 
 @font-face {
      font-family: 'diamonds';
-     src: url(resourcesWeb/deutch.ttf);
+     src: url(resourcesWeb/let1.ttf);
 }
 
 .title_diamonds{
@@ -322,15 +321,15 @@ body, html{
 
 .text_nav{
     font-family: diamonds;
-    font-size: 150%;
+    font-size: 180%;
     background: rgba(000, 000, 000, 0.5);
 }
 
 .text_weapons{
     font-family: diamonds;
-    font-size: 250%;
+    font-size: 230%;
     display: block;
-    margin: 10px;
+    margin: 20px 5px 10px 5px;
 }
 
 .arma_icon{
@@ -649,12 +648,12 @@ tr.border_bottom td {
         <tr class="border_bottom">
             <td style="text-align:center">
                 <img width="30%" src="resourcesWeb/heal.gif" alt="img"></td>
-             <td width="30%" style="text-align:center">&nbsp VIDA<br>
+             <td width="30%" style="text-align:center">&nbsp VIDA<br><br>
             Retorna salut al personatge</td>
         </tr>
 
         <tr class="border_bottom">
-             <td width="30%" style="text-align:center">MUNICIÓ<br>
+             <td width="30%" style="text-align:center">MUNICIÓ<br><br>
             Retorna munició d'alguna de les armes <br>que no tenen munició infinita.</td>
             <td style="text-align:center">
                 <img width="30%" src="resourcesWeb/crate.gif" alt="img"></td>
@@ -662,19 +661,19 @@ tr.border_bottom td {
 
         <tr class="border_bottom">
             <td style="text-align:center">
-                <video width="70%" height="80%" autoplay="autoplay" loop muted>
+                <video width="70%" autoplay="autoplay" loop muted>
                     <source src="resourcesWeb/vent.mp4" type="video/mp4">
                     Your browser does not support this video.
                 </video></td>
-            <td width="30%" style="text-align:center">&nbsp VENT<br>
+            <td width="30%" style="text-align:center">&nbsp VENT<br><br>
             El vent varia el sentit i afecta als dispars,<br>
             modificant-ne la trajectòria.</td>
         </tr>
         <tr class="border_bottom">
-            <td width="30%" style="text-align:center; margin-right:2%;">GRAVETAT<br>
+            <td width="30%" style="text-align:center; margin-right:2%;">GRAVETAT<br><br>
             Alguns elements com aquest pont, són afectats per la gravetat.</td>
             <td style="text-align:center">
-                <video width="70%" height="80%" autoplay="autoplay" loop muted>
+                <video width="70%" autoplay="autoplay" loop muted>
                     <source src="resourcesWeb/pont.mp4" type="video/mp4">
                     Your browser does not support this video.
                 </video></td>
@@ -688,33 +687,33 @@ tr.border_bottom td {
     <table border="0" class="text_weapons">
         <tr class="border_bottom">
             <td style="text-align:center">
-                <img width="70%" height="80%" src="resourcesWeb/pjs.png" alt="img"></td>
-            <td width="40%" style="text-align:center; margin-right:2%;"><u>3 nivells de dificultat</u><br>
+                <img width="70%" src="resourcesWeb/modes.png" alt="img"></td>
+            <td width="40%" style="text-align:center; margin-right:2%;"><u>2 modes de joc</u><br><br>
             Que altera la durada de la partida i <br>el nivell de dany que provoquen les armes</td>
         </tr>
 
         <tr class="border_bottom">
-            <td width="40%" style="text-align:center; margin-right:2%;"><u>Tutorial pas a pas</u><br>
+            <td width="40%" style="text-align:center; margin-right:2%;"><u>Tutorial pas a pas</u><br><br>
             Un breu tutorial per introduir-se <br>en els controls més bàsics.</td>
             <td style="text-align:center">
-                <img width="70%" height="80%" src="resourcesWeb/tutorial.png" alt="img"></td>
+                <img width="70%" src="resourcesWeb/tutorial.png" alt="img"></td>
         </tr>
 
         <tr class="border_bottom">
 
             <td style="text-align:center">
-                <img width="70%" height="80%" src="resourcesWeb/pjs.png" alt="img"></td>
-            <td width="40%" style="text-align:center; margin-right:2%;"><u>Partides personalitzables</u><br>
+                <img width="70%" src="resourcesWeb/pjs.png" alt="img"></td>
+            <td width="40%" style="text-align:center; margin-right:2%;"><u>Partides personalitzables</u><br><br>
             Com ara selecció de personatge,
             nombre de jugadors a controlar i
                 dos escenaris a escollir.</td>
         </tr>
 
         <tr class="border_bottom">
-            <td width="40%" style="text-align:center; margin-right:2%;"><u>Control de la duració de la partida</u><br>
+            <td width="40%" style="text-align:center; margin-right:2%;"><u>Control de la duració de la partida</u><br><br>
             Si es desitja activar la mort súbita, les partides no esdevindran eternes.</td>
             <td style="text-align:center">
-                <img width="70%" height="80%" src="resourcesWeb/sudden.png" alt="img"></td>
+                <img width="70%" src="resourcesWeb/sudden.png" alt="img"></td>
         </tr>
 
     </table>
