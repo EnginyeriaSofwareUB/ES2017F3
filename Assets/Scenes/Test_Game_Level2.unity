@@ -1575,7 +1575,8 @@ Prefab:
       propertyPath: UI_winnerplayer
       value: 
       objectReference: {fileID: 1331342754}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114962287380270976, guid: 091cdace88c5d6240802da7332fe3ffa, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 091cdace88c5d6240802da7332fe3ffa, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &48642541 stripped
