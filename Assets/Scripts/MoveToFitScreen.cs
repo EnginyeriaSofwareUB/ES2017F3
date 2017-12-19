@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoveToFitScreen : MonoBehaviour
 {	
 	// Use this for initialization
-	void Start ()
+	void Awake ()
 	{
 		var minimapHeight = Camera.main.GetComponent<CameraController>().MinimapWidth / Camera.main.aspect;
 		Debug.Log("Calculated height for minimap = " + minimapHeight);
