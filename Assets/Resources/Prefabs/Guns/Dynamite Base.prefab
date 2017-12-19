@@ -1678,6 +1678,11 @@ MonoBehaviour:
   TimeUntilDespawn: 3
   ExplosionDuration: 0
   ExplosionEffect: {fileID: 0}
+  isDinamite: 1
+  countdown: {fileID: 0}
+  mecha: {fileID: 0}
+  boom: {fileID: 0}
+  grenadeBoom: {fileID: 0}
 --- !u!114 &114311834838564246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1693,7 +1698,7 @@ MonoBehaviour:
   BulletPrefab: {fileID: 1226028752044792, guid: b1b4636a3b5dee34ba9e16e376a3877a,
     type: 2}
   minShootSpeed: 0.3
-  InitialUsagesLeft: -1
+  InitialUsagesLeft: 2
   bulletFired:
     m_PersistentCalls:
       m_Calls: []

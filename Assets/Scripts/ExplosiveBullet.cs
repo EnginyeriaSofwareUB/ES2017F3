@@ -56,20 +56,20 @@ public class ExplosiveBullet : AbstractBullet
 			// Pushback the players inside the trigger
 			var pushbackDir = (gameObject.transform.position - other.transform.position);
 			pushbackDir.z = 0;
-			other.GetComponent<Rigidbody>().AddForce(pushbackDir.normalized * (-10), ForceMode.Impulse);
+			other.GetComponent<Rigidbody>().AddForce(new Vector3(pushbackDir.normalized.x * (-5),Mathf.Abs(pushbackDir.normalized.y * 9),0f) , ForceMode.Impulse);
 		}
 
 
-        //tell controler that we finished attacking
-        GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().shoot_ongoing = false;
+        
 
     }
 
 	protected float CalculateDamage(GameObject other) {
+		//For calculate damage the radius is going to be slightly greater, to create an effect of "Onda expansiva"
 	    var playerBase = other.transform.Find("Animator/Model_Center/Model/Character_Hands").transform.position;
         var playerPos = new Vector3(playerBase.x, playerBase.y);
         var bulletPos = new Vector3(transform.position.x, transform.position.y);
-	    var radius = ExplosiveArea.radius * ExplosiveArea.transform.localScale.x;
+	    var radius = ExplosiveArea.radius * 1.5f  * ExplosiveArea.transform.localScale.x;
 	    var modulus = (playerPos - bulletPos).magnitude;
 
         //print("Explosion Radius " + radius);
@@ -77,16 +77,27 @@ public class ExplosiveBullet : AbstractBullet
         //print("Bullet at: " + bulletPos + " // Player at: " + playerPos);
         //print("Ratio damage: " + ((radius-modulus)/radius) );
 	    if (radius < modulus) {
-            return BulletDamage * 0.075f;
+			return Mathf.Floor(BulletDamage * 0.4f);
         }
-		return BulletDamage * Mathf.Max(((radius - modulus) / radius), 0.075f);
+		return Mathf.Floor(BulletDamage * Mathf.Max(((radius - modulus) / radius), 0.4f));
 	}
+
+    public void ExplosionLight()
+    {
+        GameObject l = Instantiate(Resources.Load("Effects/ExplosionLight"), transform.position, transform.rotation, transform) as GameObject;
+    }
 	
 	protected void TriggerExplosion() {
 	    if (wind == null) return;
 
+        //tell the camera where we were
+        Camera.main.GetComponent<FollowingCamera>().bullet_lastPos = this.transform.position;
+
         // play explosion sound
         GetComponent<AudioSource>().Play();
+
+        //play explosion light
+        ExplosionLight();
 
         //delete itself from wind objects
         if (wind.objectsWind.Contains(this.gameObject))
@@ -112,4 +123,13 @@ public class ExplosiveBullet : AbstractBullet
 		}
 		Destroy(gameObject, ExplosionDuration);
 	}
+
+    private void OnDestroy()
+    {
+        //tell the camera where we were
+        //Camera.main.GetComponent<FollowingCamera>().bullet_lastPos = this.transform.position;
+
+        //tell controler that we finished attacking
+        GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>().OnEndShoot();
+    }
 }

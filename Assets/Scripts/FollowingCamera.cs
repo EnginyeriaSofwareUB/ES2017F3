@@ -7,6 +7,7 @@ public class FollowingCamera : MonoBehaviour {
 
 	public GameObject target;
     public GameObject bullet_target;
+    public Vector3 bullet_lastPos; //will be filled from bullets script when they are destroyed.
 
     [Header("Camera sets")]
 	public float offset = 20.0f;
@@ -17,12 +18,16 @@ public class FollowingCamera : MonoBehaviour {
 	[Header("Smooth-Follow Camera")]
 	public bool activateSmooth = false;
 
+	private CameraController _cameraController;
+	
 	// Use this for initialization
 	void Start () {
         control = GameObject.FindGameObjectWithTag("GM").GetComponent<GameController>();
 
         if (target)
 		    transform.position = new Vector3 (target.transform.position.x, (target.transform.position.y + 2), transform.position.z);
+
+		_cameraController = GetComponent<CameraController>();
 	}
 
 
@@ -45,19 +50,22 @@ public class FollowingCamera : MonoBehaviour {
 				transform.position = new Vector3(target.transform.position.x, target.transform.position.y + height, target.transform.position.z - offset);
 			}
 
-            Vector3 eulerRot;
-            if(target.GetComponent<PlayerController>().TEAM == 1)
-            {
-                eulerRot = new Vector3(15f, 15f, 2.5f);
-                offsetX = -1f;
-            }
-            else
-            {
-                eulerRot = new Vector3(15f, -15f, 2.5f);
-                offsetX = 1f;
-            }
+			if (!_cameraController.IsMinimapEnabled())
+			{
+				Vector3 eulerRot;
+				if (target.GetComponent<PlayerController>().TEAM == 1)
+				{
+					eulerRot = new Vector3(15f, 15f, 2.5f);
+					offsetX = -1f;
+				}
+				else
+				{
+					eulerRot = new Vector3(15f, -15f, 2.5f);
+					offsetX = 1f;
+				}
 
-            this.transform.rotation = Quaternion.Euler(eulerRot);
+				transform.rotation = Quaternion.Euler(eulerRot);
+			}
 
 		}
 
@@ -78,6 +86,27 @@ public class FollowingCamera : MonoBehaviour {
             else
             {
                 transform.position = new Vector3(bullet_target.transform.position.x, bullet_target.transform.position.y + height, bullet_target.transform.position.z - offset);
+            }
+
+            bullet_lastPos = bullet_target.transform.position;
+
+        }else if(control.shoot_ongoing && !bullet_target)
+        {
+            if (activateSmooth)
+            {
+
+                Vector3 pos = transform.position;
+                pos.x = Mathf.Lerp(transform.position.x, bullet_lastPos.x, (speed * Time.deltaTime));
+                pos.y = Mathf.Lerp(transform.position.y, (bullet_lastPos.y + height), (speed * Time.deltaTime));
+                pos.z = bullet_lastPos.z - offset;
+
+                transform.position = pos;
+
+                // Camera basic follow.
+            }
+            else
+            {
+                transform.position = new Vector3(bullet_lastPos.x, bullet_lastPos.y + height, bullet_lastPos.z - offset);
             }
         }
 	}

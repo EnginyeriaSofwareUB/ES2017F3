@@ -499,6 +499,7 @@ GameObject:
   - component: {fileID: 136535894377287358}
   - component: {fileID: 114848381590171420}
   - component: {fileID: 82604268382880432}
+  - component: {fileID: 114047632231537348}
   m_Layer: 0
   m_Name: Viking_Character
   m_TagString: Player
@@ -643,7 +644,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1934148465144300}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 11.449467, y: -2.2812521, z: -1.5640507}
+  m_LocalPosition: {x: 975.8852, y: 526.6352, z: -84.753494}
   m_LocalScale: {x: 0.24577843, y: 0.24577843, z: 0.24577843}
   m_Children:
   - {fileID: 4398615038571798}
@@ -1019,6 +1020,27 @@ MonoBehaviour:
   eraseRenderer: 1
   originalLayer: 0
   originalMaterials: []
+--- !u!114 &114047632231537348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1934148465144300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db18a323e35375641ac44f1f8919905e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  show: 0
+  color: 0
+  TEAM: 0
+  player1: {r: 0.79607844, g: 0.09803922, b: 0.09803922, a: 1}
+  player2: {r: 0.19215687, g: 0.50980395, b: 0.8235294, a: 1}
+  isViking: 1
+  torso: {fileID: 1939469296772294}
+  head: {fileID: 1715257309544074}
+  t: {fileID: 0}
+  h: {fileID: 0}
 --- !u!114 &114080682125584688
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1561,12 +1583,12 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1934148465144300}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 1.24
-  m_Height: 5.38
+  m_Height: 4.18
   m_Direction: 1
-  m_Center: {x: 0, y: 2.3, z: 0}
+  m_Center: {x: 0, y: 2.21, z: 0}
 --- !u!137 &137265297020265800
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

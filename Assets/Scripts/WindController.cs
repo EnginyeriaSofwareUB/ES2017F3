@@ -145,8 +145,6 @@ public class WindController : MonoBehaviour {
     {
         windDirection = new Vector2(0f, 1f);
         //int lastdir = dir;
-        windForce = Random.Range(0.7f, 6.1f);
-
         float dir = 1;
         float r = Random.Range(0f, 1.1f);
         if (r > 0.5f)
@@ -157,6 +155,7 @@ public class WindController : MonoBehaviour {
 
         if (firsttime) //ugly fix
         {
+			windForce = Random.Range(0.7f, 6.1f);
             dir = 1;
             windDirection = new Vector2(dir, 1f);
             direction = Mathf.RoundToInt(dir);
@@ -166,6 +165,18 @@ public class WindController : MonoBehaviour {
         {
             windDirection = new Vector2(dir, 1f);
             direction = Mathf.RoundToInt(dir);
+			float rand = Random.Range (0.3f, 3f);
+
+			if (windForce + rand > 6) {
+				windForce -= rand;
+
+			} else if (windForce-rand < 0.3) {
+				windForce += rand;
+
+			} else {
+				windForce += dir*rand;
+			}
+
         }
 
         //tell the actual clouds to die

@@ -35,6 +35,12 @@ public class MatchProgressBar : MonoBehaviour
     [Space(5)]
     public Transform back1_backup;
     public Transform back2_backup;
+    [Space(5)]
+    public Vector3 b1_screen;
+    public Vector3 b2_screen;
+
+    GameObject a;
+    GameObject b;
 
     [Space(5)]
 
@@ -50,33 +56,44 @@ public class MatchProgressBar : MonoBehaviour
         team1MaxHealth = GamePreferences.players_maxlife;
         team2MaxHealth = GamePreferences.players_maxlife;
 
+        a = new GameObject();
+        b = new GameObject();
         //Place the players indicators
         switch (GamePreferences.p1_faction)
         {
             case "pirates":
-                Instantiate(pirate, t1Icon.position, t1Icon.transform.rotation, t1Icon);
+                a = Instantiate(pirate, t1Icon.position, t1Icon.transform.rotation, t1Icon) as GameObject;
                 break;
             case "vikings":
-                Instantiate(viking, t1Icon.position, t1Icon.transform.rotation, t1Icon);
+                a = Instantiate(viking, t1Icon.position, t1Icon.transform.rotation, t1Icon) as GameObject;
                 break;
             case "knights":
-                Instantiate(knight, t1Icon.position, t1Icon.transform.rotation, t1Icon);
+                a = Instantiate(knight, t1Icon.position, t1Icon.transform.rotation, t1Icon) as GameObject;
                 break;
         }
         switch (GamePreferences.p2_faction)
         {
             case "pirates":
-                Instantiate(pirate, t2Icon.position, t2Icon.transform.rotation, t2Icon);
+                b = Instantiate(pirate, t2Icon.position, t2Icon.transform.rotation, t2Icon) as GameObject;
                 break;
             case "vikings":
-                Instantiate(viking, t2Icon.position, t2Icon.transform.rotation, t2Icon);
+                b = Instantiate(viking, t2Icon.position, t2Icon.transform.rotation, t2Icon) as GameObject;
                 break;
             case "knights":
-                Instantiate(knight, t2Icon.position, t2Icon.transform.rotation, t2Icon);
+                b = Instantiate(knight, t2Icon.position, t2Icon.transform.rotation, t2Icon) as GameObject;
                 break;
         }
 
+        //set player color
+        a.GetComponent<ColorTeam>().color = 1;
+        b.GetComponent<ColorTeam>().color = 2;
+
         //GetTeamHPs();
+        Camera cam = Camera.main;
+
+        //set pixel position
+        b1_screen = cam.WorldToScreenPoint(t1Icon.position);
+        b2_screen = cam.WorldToScreenPoint(t2Icon.position);
 
         Invoke("GetTeamHPs", 0.3f); //to avoid some bug related with this script being fastest than game controller
     }
@@ -94,18 +111,13 @@ public class MatchProgressBar : MonoBehaviour
     void Update()
     {
 
-        //GetTeamHPs();
+        //set fixed pixel position
+        t1Back.transform.position = Camera.main.ScreenToWorldPoint(b1_screen);
+        t2Back.transform.position = Camera.main.ScreenToWorldPoint(b2_screen);
 
-        /* (0-1 way)
-        relation = t1Relation / t2Relation;
-        t1Relation = team1Health / team1MaxHealth;
-        t2Relation = team2Health / team2MaxHealth;
+        //print("set screen pos: " + b1_screen + ", " + b2_screen);
+        //print("set world pos: " + t1Back.transform.position + ", " + t2Back.transform.position);
 
-        if (float.IsNaN(relation))
-            relation = 0.5f;
-        progressBar.value = relation;*/
-
-        
     }
 
     public void GetTeamHPs()
@@ -179,5 +191,11 @@ public class MatchProgressBar : MonoBehaviour
         //setting alpha value, opaque not wanted 
         t1Back.color = new Color(t1Back.color.r, t1Back.color.g, t1Back.color.b, 0.55f);
         t2Back.color = new Color(t2Back.color.r, t2Back.color.g, t2Back.color.b, 0.55f);
+    }
+
+    public void SetPlayerIconsActive(bool active)
+    {
+        t1Back.gameObject.SetActive(active);
+        t2Back.gameObject.SetActive(active);
     }
 }

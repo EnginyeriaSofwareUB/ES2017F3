@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour {
 
 	public enum gameStates {
 		menu,
+        howto,
         startAnim,
 		gameOn,
 		pause,
@@ -25,6 +26,7 @@ public class GameController : MonoBehaviour {
 
     [Space(5)]
     public bool shoot_ongoing = false;
+    public float cameraOnExplosionTime = 1f;
     bool shoot_dynamite = false;
     bool startAnimCancelled = false;
 
@@ -83,13 +85,31 @@ public class GameController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start() {
-        //TODO: Set the activePlayer to the Main Player.
-        //activePlayer = GameObject.Find(testPlayerName);	
 
-        //Start camera animation, deactivate UI
-        Camera.main.GetComponent<Animator>().SetTrigger("start");
-        current = gameStates.startAnim;
-        SetUIActive(false);
+        GetComponent<HowTo>().enabled = GamePreferences.howTo;
+
+        
+
+        //If HowTo is activated, the game starts normally, otherwise it begins the start animation rutine 
+        if (GamePreferences.howTo)
+        {
+            current = gameStates.howto;
+            
+            InitHowToGame();
+
+            StartGame();
+        }
+        else
+        {
+            //Start camera animation, deactivate UI
+            Camera.main.GetComponent<Animator>().SetTrigger("start");
+            current = gameStates.startAnim;
+            SetUIActive(false);
+
+            //Spawn players
+            InitGame();
+        }
+
 
         //TODO: LOAD DATA FROM GamePreferences INTO MATCH USING InitGame()
         Debug.Log("TEAM_1 FACTION:::"+ GamePreferences.p1_faction);
@@ -98,8 +118,6 @@ public class GameController : MonoBehaviour {
 		Debug.Log("SUDDEN_DEATH ACTIVATED:::"+ GamePreferences.sudden_death_activated);
 		Debug.Log("SUDDEN_DEATH TURNS:::"+ GamePreferences.sudden_death_turns);
 
-		//Spawn players
-        InitGame();
 		// Create remaining gun uses
 		_teamGunUses = new int[2][];
 		for (int i = 0; i < 2; i++) {
@@ -117,23 +135,60 @@ public class GameController : MonoBehaviour {
         players = GameObject.FindGameObjectsWithTag("Player").ToList();
         players.Sort((self, other) => self.GetComponent<PlayerController>().playerId - other.GetComponent<PlayerController>().playerId);
 
-		// initiate
-		foreach (GameObject player in players) {
-            //Debug.Log(player);
-			// disable movement
-			player.GetComponent<PlayerMovement>().enabled = false;
-			// disable firing shoots
-			player.GetComponent<PlayerShooting>().enabled = false;
-            // attach listener to shootEvent
-            player.GetComponent<PlayerShooting>().shootEvent.AddListener(OnShoot);
-            // attach listener to deathEvent
-            player.GetComponent<PlayerController>().deathEvent.AddListener(OnDeath);
-
-
+        if (!GamePreferences.howTo)
+        {
+            // initiate
+            foreach (GameObject player in players)
+            {
+                //Debug.Log(player);
+                // disable movement
+                player.GetComponent<PlayerMovement>().enabled = false;
+                // disable firing shoots
+                player.GetComponent<PlayerShooting>().enabled = false;
+                // attach listener to shootEvent
+                player.GetComponent<PlayerShooting>().shootEvent.AddListener(OnShoot);
+                // attach listener to deathEvent
+                player.GetComponent<PlayerController>().deathEvent.AddListener(OnDeath);
+            }
         }
 
-        //turnId = -1;
-        //changeTurn(); //moved to StartGame()
+
+        //set audio master volume
+        AudioListener.volume = GamePreferences.audio_volume;
+    }
+
+    void InitHowToGame()
+    {
+        PlayerPrefab = vikingPlayer;
+        Vector3 where = new Vector3(spawnPoint1.position.x + Random.Range(-maxSpawnSpread, maxSpawnSpread), spawnPoint1.position.y, spawnPoint1.position.z);
+        GameObject p1 = Instantiate(PlayerPrefab, where, spawnPoint1.rotation, null) as GameObject;
+        p1.SetActive(true);
+        p1.GetComponent<PlayerController>().TEAM = 1;
+        p1.GetComponent<PlayerController>().playerId = 1 + 2 * spawned1;
+        p1.GetComponent<PlayerController>().last_dir = 1;
+        p1.GetComponent<PlayerController>().maxHealth = GamePreferences.players_maxlife;
+        p1.GetComponent<PlayerController>().health = GamePreferences.players_maxlife;
+        p1.GetComponent<PlayerController>().InitPlayerCanvas();
+        team1.Add(p1);
+        spawned1++;
+        p1.name = "Player_T1_" + spawned1.ToString();
+
+        activePlayer = p1;
+
+
+        PlayerPrefab = knightPlayer;
+        where = new Vector3(spawnPoint2.position.x + Random.Range(-maxSpawnSpread, maxSpawnSpread), spawnPoint2.position.y, spawnPoint2.position.z);
+        GameObject p2 = Instantiate(PlayerPrefab, where, spawnPoint2.rotation, null) as GameObject;
+        p2.SetActive(true);
+        p2.GetComponent<PlayerController>().TEAM = 2;
+        p2.GetComponent<PlayerController>().playerId = 2 + 2 * spawned2;
+        p2.GetComponent<PlayerController>().last_dir = -1;
+        p2.GetComponent<PlayerController>().maxHealth = GamePreferences.players_maxlife;
+        p2.GetComponent<PlayerController>().health = GamePreferences.players_maxlife;
+        p2.GetComponent<PlayerController>().InitPlayerCanvas();
+        team2.Add(p2);
+        spawned2++;
+        p2.name = "Player_T2_" + spawned2.ToString();
     }
 
     void InitGame() {
@@ -141,12 +196,6 @@ public class GameController : MonoBehaviour {
 		nPlayersPerTeam = GamePreferences.number_players_team;
 		suddenDeathActivated = GamePreferences.sudden_death_activated;
 		turnsTillSudden = GamePreferences.sudden_death_turns;
-        //testPlayerPrefab = testPlayerPrefabs.ToList()[0];
-
-		// For now it only checks for VIKING or NON VIKING players
-		//if (GamePreferences.p1_faction == "viking") {
-		//	testPlayerPrefab = testPlayerPrefabs.ToList () [0];
-		//}
 
         Debug.Log(" >>> Init game; Spawning " + nPlayersPerTeam + " per team.");
         //team1
@@ -186,11 +235,6 @@ public class GameController : MonoBehaviour {
 
             
         }
-
-		// For now it only checks for VIKING or NON VIKING players
-		//if (GamePreferences.p2_faction == "viking") {
-		//	testPlayerPrefab = testPlayerPrefabs.ToList()[0];
-		//}
 
         //TEAM2
         for (int i = 0; i < nPlayersPerTeam; i++) {
@@ -243,31 +287,54 @@ public class GameController : MonoBehaviour {
 
         skipStartAnimationMsg.SetActive(false);
         SetUIActive(true);
-        current = gameStates.gameOn;
-        turnTeam1 = -1;
-        turnTeam2 = -1;
-        changeTurn();
+
+        if(current != gameStates.howto)
+        {
+            current = gameStates.gameOn;
+            turnTeam1 = -1;
+            turnTeam2 = -1;
+            changeTurn();
+        }
+        else
+        {
+            print("howto active, enabling " + activePlayer);
+            activePlayer.GetComponent<PlayerMovement>().enabled = true;
+            activePlayer.GetComponent<PlayerShooting>().enabled = true;
+            activePlayer.GetComponent<PlayerController>().enableOutline(true);
+        }
+        
     }
 
 
     void OnShoot() {
 		// disable shooting
 		activePlayer.GetComponent<PlayerShooting>().enabled = false;
-        if(shoot_dynamite)
-            turnRemainingTime = afterShootTime + 2f;	 //2f is da explosion animation lenght
+        if (shoot_dynamite)
+            turnRemainingTime = afterShootTime + cameraOnExplosionTime; //+ 2f;	 //2f is da explosion animation lenght
         else
-            turnRemainingTime = afterShootTime;
+            turnRemainingTime = afterShootTime + cameraOnExplosionTime;
 
         updateUsages ();
 
-        shoot_ongoing = true;
+        //shoot_ongoing = true; //now set from gun.cs
+    }
+
+    //called when projectile explodes
+    public void OnEndShoot()
+    {
+        Invoke("ShootOnGoingEnd", cameraOnExplosionTime);
+    }
+
+    void ShootOnGoingEnd()
+    {
+        shoot_ongoing = false;
     }
 
 	public void updateUsages(){
 		int team = activePlayer.GetComponent<PlayerController> ().TEAM;
 
 		GetComponent<InitUsages> ().SetBowUsages(team, _teamGunUses [team-1] [4]);
-		GetComponent<InitUsages> ().SetGrenadeUsages(team, _teamGunUses [team-1] [3]);
+		GetComponent<InitUsages> ().SetDynamiteUsages(team, _teamGunUses [team-1] [2]);
 	}
 
 	public void addUsages(int team, int gun, int value){
@@ -339,37 +406,43 @@ public class GameController : MonoBehaviour {
     }
 		
     void OnDeath(int playerId) {
-        bool isCurrentPlayer = activePlayer.GetComponent<PlayerController>().playerId == playerId; //ALERT: Si moren els dos alhora peta aqui
-        // Debug.Log("suicide! " + isCurrentPlayer);
+		if (gameStates.gameOver != current) {
+			bool isCurrentPlayer = activePlayer.GetComponent<PlayerController> ().playerId == playerId; //ALERT: Si moren els dos alhora peta aqui
+			// Debug.Log("suicide! " + isCurrentPlayer);
 
-        // Delete from players dead player
-        players.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
-        team1.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
-        team2.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
+			// Delete from players dead player
+			players.RemoveAll (player => player.GetComponent<PlayerController> ().playerId == playerId);
+			team1.RemoveAll (player => player.GetComponent<PlayerController> ().playerId == playerId);
+			team2.RemoveAll (player => player.GetComponent<PlayerController> ().playerId == playerId);
 
-        // Game over
-        bool isTeam1Alive = team1.Count > 0;
-        bool isTeam2Alive = team2.Count > 0;
-        if (!isTeam1Alive || !isTeam2Alive) {
-            Debug.Log("Game has ended!");
+			// Game over
+			bool isTeam1Alive = team1.Count > 0;
+			bool isTeam2Alive = team2.Count > 0;
+			if (!isTeam1Alive || !isTeam2Alive) {
+				Debug.Log ("Game has ended!");
 
-            current = gameStates.gameOver; //important
-            winner = isTeam1Alive ? 1 : 2;
+				current = gameStates.gameOver; //important
+				winner = isTeam1Alive ? 1 : 2;
 
-            // activar pantalla GameOver
-			completeLevelUI.SetActive(true);
+				// activar pantalla GameOver
+				completeLevelUI.SetActive (true);
+				foreach (GameObject g in UI) {
+					g.SetActive (false);
+				}
 
-            //set player who wins
-            UI_winnerplayer.text = "Player " + winner;
+				//set player who wins
+				UI_winnerplayer.text = "Player " + winner;
 
-            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().PlayGameOverSound();
+				GameObject.FindGameObjectWithTag ("AudioManager").GetComponent<AudioManager> ().PlayGameOverSound ();
 
-            //Return to main menu
-            //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
-        } else {
-            // suicide
-            if (isCurrentPlayer) changeTurn();
-        }
+				//Return to main menu
+				//SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
+			} else {
+				// suicide
+				if (isCurrentPlayer)
+					changeTurn ();
+			}
+		}
     }
 
 	public int GetGunUsagesLeft(int team, int index) {
@@ -415,6 +488,7 @@ public class GameController : MonoBehaviour {
         {
             current = gameStates.gameOn;
 
+            //to avoid out of control bugs
             shoot_ongoing = false;
 
             disableActivePlayer();
@@ -473,7 +547,7 @@ public class GameController : MonoBehaviour {
             int team = activePlayer.GetComponent<PlayerController>().TEAM;
             GetComponent<InitUsages>().SetPanel(team);
             GetComponent<InitUsages>().SetBowUsages(team, _teamGunUses[team - 1][4]);
-            GetComponent<InitUsages>().SetGrenadeUsages(team, _teamGunUses[team - 1][3]);
+            GetComponent<InitUsages>().SetDynamiteUsages(team, _teamGunUses[team - 1][2]);
         }
 	}
 	
@@ -498,7 +572,9 @@ public class GameController : MonoBehaviour {
             if (activePlayer)
                 activePlayer.GetComponent<PlayerShooting>().ChangeGunEvent.AddListener(ChangeGun);
 
-            turnRemainingTime -= Time.deltaTime;
+            if(!shoot_ongoing)
+                turnRemainingTime -= Time.deltaTime;
+
             if (turnRemainingTime < 0)
             {
                 changeTurn();
@@ -511,13 +587,19 @@ public class GameController : MonoBehaviour {
 
 
 
-        if (Input.GetKey (KeyCode.Escape)) {
+		if (Input.GetKeyDown (KeyCode.Escape) && current!=gameStates.gameOver) {
 			if (current == gameStates.pause) {
 				pauseScreenUI.SetActive(false);
+				foreach (GameObject g in UI) {
+					g.SetActive (true);
+				}
 				current = gameStates.gameOn;
 				Time.timeScale = 1;
 			} else {
 				pauseScreenUI.SetActive(true);
+				foreach (GameObject g in UI) {
+					g.SetActive (false);
+				}
 				current = gameStates.pause;
 				Time.timeScale = 0;
 			}

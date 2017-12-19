@@ -300,7 +300,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1757145855569732}
   serializedVersion: 2
-  m_Mass: 5
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -458,9 +458,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66679527d5c427e47a573defa8e1e7cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletDamage: 30
+  BulletDamage: 28
   TimeUntilDespawn: 4
-  ExplosionDuration: 0.1
+  ExplosionDuration: 0.05
   ExplosionEffect: {fileID: 1090855516486484, guid: 64f102e164cbc40ceb5dfdd2f9a5c929,
     type: 2}
   isDinamite: 0
@@ -547,7 +547,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 0
-  m_Radius: 8
+  m_Radius: 6
   m_Height: 120
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}

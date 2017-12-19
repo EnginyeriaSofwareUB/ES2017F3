@@ -42,17 +42,27 @@ public class ShootingFeedback : MonoBehaviour {
             UI_bar.gameObject.SetActive(true);
 
             thrust = GetComponent<PlayerShooting>().thrust;
+			string g = "None";
+			if (GetComponent<PlayerShooting> ()._currentGun) {
+				print(g = GetComponent<PlayerShooting> ()._currentGun.name);
+				g = GetComponent<PlayerShooting> ()._currentGun.name;
+			}
 
             //Quan es clica
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+			if (Input.GetKeyDown(KeyCode.Mouse0) 
+				&& !g.Equals("Dynamite Base")
+				&& !g.Equals("Laser Saber")
+				&& !g.Equals("None"))
             {
                 time += Time.deltaTime;
-
                 UI_bar.rectTransform.sizeDelta = new Vector2(UI_bar.rectTransform.sizeDelta.x + time * barVelocity, UI_bar.rectTransform.sizeDelta.y);
             }
 
             //Mentre esta apretat, incrementem
-            if (Input.GetKey(KeyCode.Mouse0))
+			if (Input.GetKey(KeyCode.Mouse0) 
+				&& !g.Equals("Dynamite Base") 
+				&& !g.Equals("Laser Saber")
+				&& !g.Equals("None"))
             {
                 if (time <= maxShootTime)
                 {
@@ -74,7 +84,7 @@ public class ShootingFeedback : MonoBehaviour {
             }
 
             //Quan es lliura el click, reiniciem
-            if (Input.GetKeyUp(KeyCode.Mouse0))
+            if (Input.GetKeyUp(KeyCode.Mouse0) )
             {
                 time = 0f;
 

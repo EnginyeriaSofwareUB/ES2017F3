@@ -9,9 +9,9 @@ public class Botones : MonoBehaviour
     public bool IS_MENU = false;
 
     public GameObject factions;
-    public GameObject suddenBool;
-    public GameObject suddenTurns;
-    public GameObject maxLife;
+    //public GameObject suddenBool;
+    //public GameObject suddenTurns;
+    //public GameObject maxLife;
     public GameObject playersTeam;
 
     [Header("Preview Faction")]
@@ -19,6 +19,10 @@ public class Botones : MonoBehaviour
     public Transform f2_place;
     string lastf1 = "";
     string lastf2 = "";
+	string sceneToLoad = "Test_Game";
+
+    [Header("Music")]
+    public Slider audioVolume;
 
     //to load prefabs for the preview
     GameObject vikingUI;
@@ -42,13 +46,51 @@ public class Botones : MonoBehaviour
     {
         if (IS_MENU)
             GetGamePreferences();
-        SceneManager.LoadScene("Test_Game", LoadSceneMode.Single);
+        GamePreferences.howTo = false;
+		SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
     }
+
+	public void SetLevel1(){
+		sceneToLoad = "Test_Game";
+	}
+
+	public void SetLevel2(){
+		sceneToLoad = "Test_Game_Level2";
+	}
+
+	public void LoadScene2(){
+		SceneManager.LoadScene("Test_Game_Level2", LoadSceneMode.Single);
+	}
+
+	public void setSudden(bool sudden){
+		GamePreferences.sudden_death_activated = sudden;
+	}
+
+	public void setGameMode(bool gameMode){
+
+
+		if (gameMode) {
+			// Normal
+			GamePreferences.sudden_death_turns = 12;
+			GamePreferences.players_maxlife = 100;
+			
+		} else {
+			//Fast
+			GamePreferences.sudden_death_turns = 6;
+			GamePreferences.players_maxlife = 75;
+		}
+	}
 
     public void LoadMenu()
     {
         SceneManager.LoadScene("Main_Menu_Integrated", LoadSceneMode.Single);
     }
+
+	public void LoadHowTo()
+	{
+		GamePreferences.howTo = true;
+		SceneManager.LoadScene("Test_Game", LoadSceneMode.Single);
+	}
 
     public void BotonSalir()
     {
@@ -102,10 +144,12 @@ public class Botones : MonoBehaviour
         GetFactionPreferences();
 
         //changed input for text fields as no longer needed to edit it by the player, just use arrows
-        GamePreferences.sudden_death_activated = suddenBool.GetComponent<Toggle>().isOn;
-        GamePreferences.sudden_death_turns = int.Parse(suddenTurns.GetComponent<Text>().text);
-        GamePreferences.players_maxlife = int.Parse(maxLife.GetComponent<Text>().text);
-        int nplayers = int.Parse(playersTeam.GetComponent<Text>().text);
+        
+		//GamePreferences.sudden_death_activated = suddenBool.GetComponent<Toggle>().isOn;
+        //GamePreferences.sudden_death_turns = int.Parse(suddenTurns.GetComponent<Text>().text);
+        //GamePreferences.players_maxlife = int.Parse(maxLife.GetComponent<Text>().text);
+        
+		int nplayers = int.Parse(playersTeam.GetComponent<Text>().text);
         if (nplayers <= 4)
         {
             GamePreferences.number_players_team = nplayers;
@@ -114,6 +158,9 @@ public class Botones : MonoBehaviour
         {
             GamePreferences.number_players_team = 4;
         }
+
+        //master audio volume
+        GamePreferences.audio_volume = audioVolume.value;
     }
 
     public void CheckNPlayersPerTeam()
@@ -125,25 +172,22 @@ public class Botones : MonoBehaviour
         }
     }
 
-    public void SetSuddenTurnsInteractable()
-    {
-        suddenTurns.GetComponent<InputField>().interactable = suddenBool.GetComponent<Toggle>().isOn;
-    }
-
-
     //for first timne menu is showed
     public void FirstSelected()
     {
         if (f1_place && f2_place)
         {
             a = Instantiate(pirateUI, f1_place.position, f1_place.rotation, f1_place) as GameObject;
-            b = Instantiate(pirateUI, f2_place.position, f2_place.rotation, f2_place) as GameObject;
+			b = Instantiate(vikingUI, f2_place.position, f2_place.rotation, f2_place) as GameObject;
             a.transform.localScale = new Vector3(a.transform.localScale.x * 400f, a.transform.localScale.y * 400f, a.transform.localScale.z * -400f);
             b.transform.localScale = new Vector3(b.transform.localScale.x * 400f, b.transform.localScale.y * 400f, b.transform.localScale.z * -400f);
+            
+            a.GetComponent<ColorTeam>().color = 1;
+            b.GetComponent<ColorTeam>().color = 2;
         }
 
         lastf1 = "pirates";
-        lastf2 = "pirates";
+        lastf2 = "vikings";
     }
 
     //to update the preview box
@@ -240,6 +284,9 @@ public class Botones : MonoBehaviour
                         a = Instantiate(vikingUI, f1_place.position, f1_place.rotation, f1_place) as GameObject;
                         break;
                 }
+
+                //sets the color for the team
+                a.GetComponent<ColorTeam>().color = 1;
             }
 
             a.transform.localScale = new Vector3(a.transform.localScale.x * 400f, a.transform.localScale.y * 400f, a.transform.localScale.z * -400f);
@@ -276,12 +323,14 @@ public class Botones : MonoBehaviour
                         b = Instantiate(vikingUI, f2_place.position, f2_place.rotation, f2_place) as GameObject;
                         break;
                 }
+
+                //sets the color for the team
+                b.GetComponent<ColorTeam>().color = 2;
             }
 
             b.transform.localScale = new Vector3(b.transform.localScale.x * 400f, b.transform.localScale.y * 400f, b.transform.localScale.z * -400f);
 
         }
     }
-
 }
 
