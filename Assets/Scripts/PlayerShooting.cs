@@ -286,14 +286,14 @@ public class PlayerShooting : MonoBehaviour
         SetCurrentGunActive(true);
 
         // Select configurations of the gun
-        switch (gunIndex) {
-
-			//Dynamite Base
-			case 2:
+        switch (_currentGun.name) {
+			case "Dynamite Base":
 				maxAngle = 0;
 				maxPower = 0;
 				break;
-
+            case "Cannon Base":
+                maxAngle = 45;
+                break;
             default:
                 RestoreShootingParam();
                 break;
