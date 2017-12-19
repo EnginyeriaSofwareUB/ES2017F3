@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour {
     public float health;
     [Space(5)]
     [HideInInspector] public int last_dir = 0;
+    Rigidbody rig;
+    float startmass;
 
     [Space(5)]
 
@@ -58,7 +60,10 @@ public class PlayerController : MonoBehaviour {
 
         currentState = PlayerState.none;
         _outlines = GetComponentsInChildren<Outline>();
-        
+
+
+        rig = GetComponent<Rigidbody>();
+        startmass = rig.mass;
     }
 
 
@@ -112,14 +117,20 @@ public class PlayerController : MonoBehaviour {
             deathEvent = new IntUnityEvent();
 
     }
-	
-	// Update is called once per frame
-	void Update () {
 
-
-
-        /*animations*/
-
+    // Update is called once per frame
+    void Update()
+    {
+        //si som actiu
+        if (gameControl.activePlayer.Equals(this.gameObject) && gameControl.current != GameController.gameStates.gameOver) //Si som el actiu y no es gameover..
+        {
+            GetComponent<Rigidbody>().mass = startmass;
+        }
+        //si no som actiu
+        else
+        {
+            GetComponent<Rigidbody>().mass = startmass*3f; //pesar el triple per evitar que ens arrastrin
+        }
     }
 
 	/*Aquesta funcio hauria de cridarse desde el suposat BulletScript, on al activarse OnEnterCollider(), si el target es un player, cridar a player.Damage(dany)  */

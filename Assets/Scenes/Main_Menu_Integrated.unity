@@ -5625,6 +5625,7 @@ MonoBehaviour:
   playersTeam: {fileID: 205955367}
   f1_place: {fileID: 1169957997}
   f2_place: {fileID: 140763998}
+  audioVolume: {fileID: 854680032}
 --- !u!1 &1219937319
 GameObject:
   m_ObjectHideFlags: 0
