@@ -425,6 +425,9 @@ public class GameController : MonoBehaviour {
 
             // activar pantalla GameOver
 			completeLevelUI.SetActive(true);
+			foreach (GameObject g in UI) {
+				g.SetActive (false);
+			}
 
             //set player who wins
             UI_winnerplayer.text = "Player " + winner;
@@ -581,13 +584,19 @@ public class GameController : MonoBehaviour {
 
 
 
-        if (Input.GetKeyDown (KeyCode.Escape)) {
+		if (Input.GetKeyDown (KeyCode.Escape) && current!=gameStates.gameOver) {
 			if (current == gameStates.pause) {
 				pauseScreenUI.SetActive(false);
+				foreach (GameObject g in UI) {
+					g.SetActive (true);
+				}
 				current = gameStates.gameOn;
 				Time.timeScale = 1;
 			} else {
 				pauseScreenUI.SetActive(true);
+				foreach (GameObject g in UI) {
+					g.SetActive (false);
+				}
 				current = gameStates.pause;
 				Time.timeScale = 0;
 			}
