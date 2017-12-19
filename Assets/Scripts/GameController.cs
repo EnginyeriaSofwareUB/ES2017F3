@@ -406,40 +406,43 @@ public class GameController : MonoBehaviour {
     }
 		
     void OnDeath(int playerId) {
-        bool isCurrentPlayer = activePlayer.GetComponent<PlayerController>().playerId == playerId; //ALERT: Si moren els dos alhora peta aqui
-        // Debug.Log("suicide! " + isCurrentPlayer);
+		if (gameStates.gameOver != current) {
+			bool isCurrentPlayer = activePlayer.GetComponent<PlayerController> ().playerId == playerId; //ALERT: Si moren els dos alhora peta aqui
+			// Debug.Log("suicide! " + isCurrentPlayer);
 
-        // Delete from players dead player
-        players.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
-        team1.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
-        team2.RemoveAll(player => player.GetComponent<PlayerController>().playerId == playerId);
+			// Delete from players dead player
+			players.RemoveAll (player => player.GetComponent<PlayerController> ().playerId == playerId);
+			team1.RemoveAll (player => player.GetComponent<PlayerController> ().playerId == playerId);
+			team2.RemoveAll (player => player.GetComponent<PlayerController> ().playerId == playerId);
 
-        // Game over
-        bool isTeam1Alive = team1.Count > 0;
-        bool isTeam2Alive = team2.Count > 0;
-        if (!isTeam1Alive || !isTeam2Alive) {
-            Debug.Log("Game has ended!");
+			// Game over
+			bool isTeam1Alive = team1.Count > 0;
+			bool isTeam2Alive = team2.Count > 0;
+			if (!isTeam1Alive || !isTeam2Alive) {
+				Debug.Log ("Game has ended!");
 
-            current = gameStates.gameOver; //important
-            winner = isTeam1Alive ? 1 : 2;
+				current = gameStates.gameOver; //important
+				winner = isTeam1Alive ? 1 : 2;
 
-            // activar pantalla GameOver
-			completeLevelUI.SetActive(true);
-			foreach (GameObject g in UI) {
-				g.SetActive (false);
+				// activar pantalla GameOver
+				completeLevelUI.SetActive (true);
+				foreach (GameObject g in UI) {
+					g.SetActive (false);
+				}
+
+				//set player who wins
+				UI_winnerplayer.text = "Player " + winner;
+
+				GameObject.FindGameObjectWithTag ("AudioManager").GetComponent<AudioManager> ().PlayGameOverSound ();
+
+				//Return to main menu
+				//SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
+			} else {
+				// suicide
+				if (isCurrentPlayer)
+					changeTurn ();
 			}
-
-            //set player who wins
-            UI_winnerplayer.text = "Player " + winner;
-
-            GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioManager>().PlayGameOverSound();
-
-            //Return to main menu
-            //SceneManager.LoadScene("Main_Menu", LoadSceneMode.Single);
-        } else {
-            // suicide
-            if (isCurrentPlayer) changeTurn();
-        }
+		}
     }
 
 	public int GetGunUsagesLeft(int team, int index) {
