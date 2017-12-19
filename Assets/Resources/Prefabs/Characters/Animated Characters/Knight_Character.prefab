@@ -1269,7 +1269,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db18a323e35375641ac44f1f8919905e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  show: 0
+  color: 0
   TEAM: 0
+  player1: {r: 0.79607844, g: 0.09803922, b: 0.09803922, a: 1}
+  player2: {r: 0.19215687, g: 0.50980395, b: 0.8235294, a: 1}
+  isViking: 0
   torso: {fileID: 1736397928624512}
   head: {fileID: 1203437455990264}
   t: {fileID: 0}

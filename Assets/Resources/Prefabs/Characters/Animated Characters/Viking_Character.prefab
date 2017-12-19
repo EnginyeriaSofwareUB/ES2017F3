@@ -1034,6 +1034,8 @@ MonoBehaviour:
   show: 0
   color: 0
   TEAM: 0
+  player1: {r: 0.79607844, g: 0.09803922, b: 0.09803922, a: 1}
+  player2: {r: 0.19215687, g: 0.50980395, b: 0.8235294, a: 1}
   isViking: 1
   torso: {fileID: 1939469296772294}
   head: {fileID: 1715257309544074}
