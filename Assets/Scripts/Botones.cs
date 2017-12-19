@@ -55,6 +55,10 @@ public class Botones : MonoBehaviour
 		sceneToLoad = "Test_Game_Level2";
 	}
 
+	public void LoadScene2(){
+		SceneManager.LoadScene("Test_Game_Level2", LoadSceneMode.Single);
+	}
+
 	public void setSudden(bool sudden){
 		GamePreferences.sudden_death_activated = sudden;
 	}
