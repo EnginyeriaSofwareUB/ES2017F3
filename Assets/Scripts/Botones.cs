@@ -326,6 +326,5 @@ public class Botones : MonoBehaviour
 
         }
     }
-
 }
 
